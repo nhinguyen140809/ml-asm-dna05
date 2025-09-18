@@ -24,9 +24,9 @@ GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhi
 ```
 ml-asm-dna05/
 |-- notebooks/      # Notebook Google Colab
-|   |-- asm1.ipynb                 
+|   |-- 1-heart-disease.ipynb                 
 |-- reports/        # Báo cáo
-|   |-- asm1.pdf
+|   |-- 1-heart-disease.pdf
 |-- features/       # File đặc trưng được trích xuất
 |-- modules/        # Các module hỗ trợ
 |-- README.md       # Tài liệu hướng dẫn
@@ -39,6 +39,8 @@ Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` dạng bảng 
 Dataset: [Heart Disease](https://www.kaggle.com/datasets/oktayrdeki/heart-disease) 
 
 Report: [Cập nhật sau]()
+
+Notebook: [Cập nhật sau]()
 
 ### Hướng dẫn chạy notebook
 /////////
