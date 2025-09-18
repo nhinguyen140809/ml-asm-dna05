@@ -48,3 +48,7 @@ Report: [Cập nhật sau]()
 ## Bài tập lớn 3 (Cập nhật sau)
 
 ## Bài tập lớn Mở rộng (Cập nhật sau)
+
+## Tài liệu tham khảo
+
+- [Heart Disease Prediction with 83.8% Accuracy - Kaggle Notebook](https://www.kaggle.com/code/hossainhedayati/heart-disease-prediction-with-83-8-accuracy)
