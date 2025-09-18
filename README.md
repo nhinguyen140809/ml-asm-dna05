@@ -40,7 +40,7 @@ Dataset: [Heart Disease](https://www.kaggle.com/datasets/oktayrdeki/heart-diseas
 
 Report: [Cập nhật sau]()
 
-Notebook: [Cập nhật sau]()
+Notebook: [Cập nhật sau](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
 
 ### Hướng dẫn chạy notebook
 /////////
