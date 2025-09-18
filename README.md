@@ -17,6 +17,14 @@ Nhóm: DNA05
 |2310167| Tăng Hồng Ái| ai.tangmeo200922@hcmut.edu.vn|
 |2312506| Nguyễn Trần Yến Nhi| nhi.nguyen140809@hcmut.edu.vn|
 
+## Mục tiêu của bài tập lớn
+
+Bài tập lớn được thiết kế với các mục tiêu cụ thể sau:
+
+- Hiểu và áp dụng được quy trình **pipeline học máy truyền thống**, bao gồm: tiền xử lý dữ liệu, trích xuất đặc trưng, huấn luyện và đánh giá mô hình.
+- Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng, văn bản, và ảnh.
+- Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy thông qua các chỉ số đo lường (Accuracy, Precision, Recall, F1-score).
+- Rèn luyện kỹ năng lập trình, thử nghiệm, và tổ chức báo cáo khoa học.
 ## Đường link và cấu trúc thư mục của dự án
 
 GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhinguyen140809/ml-asm-dna05)
@@ -32,18 +40,58 @@ ml-asm-dna05/
 |-- README.md       # Tài liệu hướng dẫn
 ```
 
+## Usage
+
+Để sử dụng repository và chạy các notebook:
+
+1. **Clone repository về máy:**
+
+```bash
+git clone https://github.com/nhinguyen140809/ml-asm-dna05.git
+cd ml-asm-dna05
+```
+
+2. **(Tuỳ chọn) Tạo môi trường ảo để quản lý thư viện:**
+```bash
+# Tạo môi trường ảo
+python -m venv venv
+
+# Kích hoạt môi trường
+source venv/bin/activate   # Linux / Mac
+# venv\Scripts\activate    # Windows
+```
+
+3. **Cài đặt các dependencies cần thiết:**
+
+```bash
+pip install -r requirements.txt
+```
+
+4. **Mở và chạy notebook:**
+
+- Sử dụng Google Colab hoặc Jupyter Notebook.
+
+- Ví dụ: mở notebook notebooks/DNA05-BTL1.ipynb và chạy từng cell.
+
 ## Bài tập lớn 1 - Dự đoán bệnh tim mạch (Heart Disease Prediction)
 
-Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` dạng bảng với 10.000 mẫu, chứa thông tin về sức khỏe và các chỉ số sinh học. Nhóm áp dụng nhiều mô hình học máy (Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision Tree) để phân tích, qua đó khám phá mối liên hệ giữa các yếu tố sức khỏe và nguy cơ mắc bệnh tim.
+Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, dạng bảng với ~10.000 mẫu, chứa các thông tin về sức khỏe và các chỉ số sinh học. Nhóm triển khai pipeline học máy đầy đủ, bao gồm:
 
-Dataset: [Heart Disease](https://www.kaggle.com/datasets/oktayrdeki/heart-disease) 
+1. Phân tích dữ liệu (EDA)  
+2. Tiền xử lý dữ liệu (missing values, scaling, xử lý mất cân bằng)  
+3. Trích xuất & giảm chiều dữ liệu bằng PCA  
+4. Huấn luyện nhiều mô hình phân loại (Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision Tree)  
+5. Đánh giá mô hình bằng các metric: Accuracy, Precision, Recall, F1-score  
+6. Trực quan hóa kết quả và Confusion Matrix  
 
-Report: [DNA05-BTL1-Report](https://drive.google.com/drive/folders/1vO1XTIwr_7HL0B5DzbNa0C91_C29AWLr?usp=sharing)
+### Dataset
 
-Notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+- [Heart Disease Dataset – Oktay Rdeki](https://www.kaggle.com/datasets/oktayrdeki/heart-disease)  
 
-### Hướng dẫn chạy notebook
-/////////
+### Report và Notebook
+
+- Report PDF: [DNA05-BTL1-Report](https://drive.google.com/drive/folders/1vO1XTIwr_7HL0B5DzbNa0C91_C29AWLr?usp=sharing)  
+- Colab Notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)  
 
 ## Bài tập lớn 2 (Cập nhật sau)
 
