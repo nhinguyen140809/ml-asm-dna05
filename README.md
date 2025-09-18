@@ -19,26 +19,26 @@ Nhóm: DNA05
 
 ## Đường link và cấu trúc thư mục của dự án
 
-Github: https://github.com/nhinguyen140809/ml-asm-dna05 
+GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhinguyen140809/ml-asm-dna05)
 
 ```
 ml-asm-dna05/
-|-- notebooks/                  # Notebook Google Colab
-|   |-- asm1                 
-|-- reports/                    # Báo cáo
-|   |-- asm1
-|-- features/                   # File đặc trưng được trích xuất
-|-- modules/                    # Các module hỗ trợ
-|-- README.md                   # Tài liệu hướng dẫn
+|-- notebooks/      # Notebook Google Colab
+|   |-- asm1.ipynb                 
+|-- reports/        # Báo cáo
+|   |-- asm1.pdf
+|-- features/       # File đặc trưng được trích xuất
+|-- modules/        # Các module hỗ trợ
+|-- README.md       # Tài liệu hướng dẫn
 ```
 
 ## Bài tập lớn 1 - Dự đoán bệnh tim mạch (Heart Disease Prediction)
 
 Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` dạng bảng với 10.000 mẫu, chứa thông tin về sức khỏe và các chỉ số sinh học. Nhóm áp dụng nhiều mô hình học máy (Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision Tree) để phân tích, qua đó khám phá mối liên hệ giữa các yếu tố sức khỏe và nguy cơ mắc bệnh tim.
 
-Dataset: https://www.kaggle.com/datasets/oktayrdeki/heart-disease
+Dataset: [Heart Disease](https://www.kaggle.com/datasets/oktayrdeki/heart-disease) 
 
-Report: 
+Report: [Cập nhật sau]()
 
 ### Hướng dẫn chạy notebook
 /////////
