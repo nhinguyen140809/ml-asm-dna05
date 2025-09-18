@@ -38,9 +38,9 @@ Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` dạng bảng 
 
 Dataset: [Heart Disease](https://www.kaggle.com/datasets/oktayrdeki/heart-disease) 
 
-Report: [Cập nhật sau]()
+Report: [DNA05-BTL1-Report](https://drive.google.com/drive/folders/1vO1XTIwr_7HL0B5DzbNa0C91_C29AWLr?usp=sharing)
 
-Notebook: [Cập nhật sau](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+Notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
 
 ### Hướng dẫn chạy notebook
 /////////
