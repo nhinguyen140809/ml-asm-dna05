@@ -32,9 +32,9 @@ GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhi
 ```
 ml-asm-dna05/
 |-- notebooks/      # Notebook Google Colab
-|   |-- 1-heart-disease.ipynb                 
+|   |-- DNA05_BTL1.ipynb                 
 |-- reports/        # Báo cáo
-|   |-- 1-heart-disease.pdf
+|   |-- DNA05_BTL1_Report.pdf
 |-- features/       # File đặc trưng được trích xuất
 |-- modules/        # Các module hỗ trợ
 |-- README.md       # Tài liệu hướng dẫn
