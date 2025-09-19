@@ -45,3 +45,23 @@ def search_best_model(X_train, y_train, model, param_grid=None, scoring_metric="
         "best_params": grid_search.best_params_,
         "best_score": grid_search.best_score_
     }
+
+def download_kaggle_dataset(dataset_name: str, file_extension: str = ".csv") -> str:
+    """
+    Tải dataset từ Kaggle và trả về đường dẫn file dữ liệu.
+
+    Args:
+        dataset_name (str): Tên dataset trên Kaggle (ví dụ: "oktayrdeki/heart-disease")
+        file_extension (str): Loại file cần lấy (.csv, .xlsx,...)
+
+    Returns:
+        str: Đường dẫn file dữ liệu
+    """
+    path = kagglehub.dataset_download(dataset_name)
+    print(f"Dataset downloaded to: {path}")
+
+    for f in os.listdir(path):
+        if f.endswith(file_extension):
+            return os.path.join(path, f)
+
+    raise FileNotFoundError(f"Không tìm thấy file {file_extension} trong dataset!")
