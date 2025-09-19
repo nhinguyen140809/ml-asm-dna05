@@ -17,7 +17,7 @@ Nhóm: DNA05
 |2310167| Tăng Hồng Ái| ai.tangmeo200922@hcmut.edu.vn|
 |2312506| Nguyễn Trần Yến Nhi| nhi.nguyen140809@hcmut.edu.vn|
 
-## Projects Overview  
+## Tổng quan về dự án
 
 Trong khuôn khổ môn học **Học Máy – CO3117**, có 4 dự án:
 
