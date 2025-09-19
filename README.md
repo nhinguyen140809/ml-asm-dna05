@@ -69,19 +69,19 @@ source venv/bin/activate   # Linux / Mac
 python -m pip install --upgrade pip
 ```
 
-1. **Cài đặt các dependencies cần thiết:**
+4. **Cài đặt các dependencies cần thiết:**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Launch notebook:**
+5. **Launch notebook:**
 
 ```bash
 jupyter notebook
 ```
 
-1. **Mở và chạy notebook cụ thể**
+6. **Mở và chạy notebook cụ thể**
 
 Ví dụ, `notebook/DNA05-BTL1.ipynb`.
 
