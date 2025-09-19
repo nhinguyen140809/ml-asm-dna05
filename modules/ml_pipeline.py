@@ -3,6 +3,8 @@
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from sklearn.decomposition import PCA
+
+import os
 import kagglehub
 
 def search_best_model(X_train, y_train, model, param_grid=None, scoring_metric="recall", n_jobs=-1, use_pca=True):
@@ -47,7 +49,7 @@ def search_best_model(X_train, y_train, model, param_grid=None, scoring_metric="
         "best_score": grid_search.best_score_
     }
 
-def download_kaggle_dataset(dataset_name: str, file_extension: str = ".csv") -> str:
+def download_kaggle_dataset(dataset_name: str, file_extension: str = ".csv"):
     """
     Tải dataset từ Kaggle và trả về đường dẫn file dữ liệu.
 
