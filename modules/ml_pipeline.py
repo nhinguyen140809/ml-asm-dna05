@@ -3,6 +3,7 @@
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from sklearn.decomposition import PCA
+import kagglehub
 
 def search_best_model(X_train, y_train, model, param_grid=None, scoring_metric="recall", n_jobs=-1, use_pca=True):
     """
