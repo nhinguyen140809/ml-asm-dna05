@@ -32,13 +32,19 @@ GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhi
 
 ```
 ml-asm-dna05/
-|-- notebooks/      # Notebook Google Colab
+|-- notebooks/                                # Notebook Google Colab
 |   |-- DNA05_BTL1.ipynb                 
-|-- reports/        # Báo cáo
+|-- reports/                                  # Báo cáo
 |   |-- DNA05_BTL1_Report.pdf
-|-- features/       # File đặc trưng được trích xuất
-|-- modules/        # Các module hỗ trợ
-|-- README.md       # Tài liệu hướng dẫn
+|-- features/                                 # File đặc trưng được trích xuất
+|   |-- features_{PCA level}_X_train.npy
+|   |-- features_{PCA level}_X_test.npy
+|   |-- features_{PCA level}_y_train.npy
+|   |-- features_{PCA level}_y_test.npy       # Trong đó, PCA level = 70%, 80%, 90%, 99% và None
+|-- modules/                                  # Các module hỗ trợ
+|   |-- ml_pipeline.py
+|-- README.md                                 # Tài liệu hướng dẫn
+|-- requirements.txt                          # Các thư viện cần tải
 ```
 
 ## Usage
@@ -63,7 +69,7 @@ ml-asm-dna05/
     # venv\Scripts\activate    # Windows
     ```
 
-3. Cập nhật pip (nếu cần)
+3. **Cập nhật pip (nếu cần)**
 
     ```bash
     python -m pip install --upgrade pip
