@@ -17,6 +17,17 @@ Nhóm: DNA05
 |2310167| Tăng Hồng Ái| ai.tangmeo200922@hcmut.edu.vn|
 |2312506| Nguyễn Trần Yến Nhi| nhi.nguyen140809@hcmut.edu.vn|
 
+## Projects Overview  
+
+Trong khuôn khổ môn học **Học Máy – CO3117**, có 4 dự án:
+
+| Dự án                         | Dạng dữ liệu                                                  | Trạng thái      | Trang Github   | Colab       |
+|---------------------------------|---------------------------------------------------------|---------------------------------|----------------|-------------|
+| **BTL1**                          | Tabular Data                                            | ✅ Hoàn thành | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/)   | [Open In Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
+| **BTL2**                          | Text Data                                               | 🕐 Chưa có | Chưa            | Unavailable |
+| **BTL3**                          | Image Data                                              | 🕐 Chưa có | TBD            | Unavailable |
+| **Mở rộng** | (HMM / Bayesian Network / Conditional Random Field)     | 🕐 Chưa có | TBD            | Unavailable |
+
 ## Mục tiêu của bài tập lớn
 
 Bài tập lớn được thiết kế với các mục tiêu cụ thể sau:
@@ -40,7 +51,7 @@ ml-asm-dna05/
 |   |-- features_{PCA level}_X_train.npy
 |   |-- features_{PCA level}_X_test.npy
 |   |-- features_{PCA level}_y_train.npy
-|   |-- features_{PCA level}_y_test.npy       # Trong đó, PCA level = 70%, 80%, 90%, 99% và None
+|   |-- features_{PCA level}_y_test.npy       # Trong đó, PCA level có thể là 70%, 80%, 90%, 99% và None
 |-- modules/                                  # Các module hỗ trợ
 |   |-- ml_pipeline.py
 |-- README.md                                 # Tài liệu hướng dẫn
