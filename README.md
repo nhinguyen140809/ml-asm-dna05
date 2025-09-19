@@ -47,39 +47,39 @@ ml-asm-dna05/
 ### Local
 1. **Clone repository về máy:**
 
-```bash
-git clone https://github.com/nhinguyen140809/ml-asm-dna05.git
-cd ml-asm-dna05
-```
+    ```bash
+    git clone https://github.com/nhinguyen140809/ml-asm-dna05.git
+    cd ml-asm-dna05
+    ```
 
 2. **(Tuỳ chọn) Tạo môi trường ảo để quản lý thư viện:**
 
-```bash
-# Tạo môi trường ảo
-python -m venv venv
+    ```bash
+    # Tạo môi trường ảo
+    python -m venv venv
 
-# Kích hoạt môi trường
-source venv/bin/activate   # Linux / Mac
-# venv\Scripts\activate    # Windows
-```
+    # Kích hoạt môi trường
+    source venv/bin/activate   # Linux / Mac
+    # venv\Scripts\activate    # Windows
+    ```
 
 3. Cập nhật pip (nếu cần)
 
-```bash
-python -m pip install --upgrade pip
-```
+    ```bash
+    python -m pip install --upgrade pip
+    ```
 
 4. **Cài đặt các dependencies cần thiết:**
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 5. **Launch notebook:**
 
-```bash
-jupyter notebook
-```
+    ```bash
+    jupyter notebook
+    ```
 
 6. **Mở và chạy notebook cụ thể**
 
