@@ -89,7 +89,7 @@ ml-asm-dna05/
 
 6. **Mở và chạy notebook cụ thể**
 
-Ví dụ, `notebook/DNA05-BTL1.ipynb`.
+Ví dụ, `notebooks/DNA05-BTL1.ipynb`.
 
 ### Google Colab
 
