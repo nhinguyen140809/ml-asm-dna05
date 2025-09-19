@@ -25,6 +25,7 @@ Bài tập lớn được thiết kế với các mục tiêu cụ thể sau:
 - Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng, văn bản, và ảnh.
 - Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy thông qua các chỉ số đo lường (Accuracy, Precision, Recall, F1-score).
 - Rèn luyện kỹ năng lập trình, thử nghiệm, và tổ chức báo cáo khoa học.
+
 ## Đường link và cấu trúc thư mục của dự án
 
 GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhinguyen140809/ml-asm-dna05)
@@ -52,6 +53,7 @@ cd ml-asm-dna05
 ```
 
 2. **(Tuỳ chọn) Tạo môi trường ảo để quản lý thư viện:**
+
 ```bash
 # Tạo môi trường ảo
 python -m venv venv
@@ -62,24 +64,26 @@ source venv/bin/activate   # Linux / Mac
 ```
 
 3. Cập nhật pip (nếu cần)
+
 ```bash
 python -m pip install --upgrade pip
 ```
 
-4. **Cài đặt các dependencies cần thiết:**
+1. **Cài đặt các dependencies cần thiết:**
 
 ```bash
 pip install -r requirements.txt
 ```
 
 4. **Launch notebook:**
+
 ```bash
 jupyter notebook
 ```
 
-5. **Mở và chạy notebook cụ thể**
+1. **Mở và chạy notebook cụ thể**
 
-Ví dụ, notebook/DNA05-BTL1.ipynb.
+Ví dụ, `notebook/DNA05-BTL1.ipynb`.
 
 ### Google Colab
 
@@ -104,7 +108,7 @@ Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, d
 
 ### Report và Notebook
 
-- Report PDF: [DNA05-BTL1-Report](https://drive.google.com/drive/folders/1vO1XTIwr_7HL0B5DzbNa0C91_C29AWLr?usp=sharing)  
+- Report PDF: [DNA05-BTL1-Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL1_Report.pdf)  
 - Colab Notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)  
 
 ## Bài tập lớn 2 (Cập nhật sau)
