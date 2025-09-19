@@ -72,10 +72,14 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-4. **Mở và chạy notebook:**
+4. **Launch notebook:**
 ```bash
 jupyter notebook
 ```
+
+5. **Mở và chạy notebook cụ thể**
+
+Ví dụ, notebook/DNA05-BTL1.ipynb.
 
 ### Google Colab
 
