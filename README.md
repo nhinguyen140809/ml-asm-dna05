@@ -4,7 +4,7 @@
 
 - Môn học: Học máy (Machine Learning) 
 - Mã môn học: CO3117.
-- Học kỳ: Học kỳ 1, năm học 2025 - 2026.
+- Học kỳ: 251, năm học 2025 - 2026.
 - Giảng viên hướng dẫn: TS. Lê Thành Sách.
 
 ## Thành viên nhóm
@@ -43,7 +43,7 @@ ml-asm-dna05/
 ## Usage
 
 Để sử dụng repository và chạy các notebook:
-
+### Local
 1. **Clone repository về máy:**
 
 ```bash
@@ -68,10 +68,15 @@ pip install -r requirements.txt
 ```
 
 4. **Mở và chạy notebook:**
+```bash
+jupyter notebook
+```
 
-- Sử dụng Google Colab hoặc Jupyter Notebook.
+### Google Colab
 
-- Ví dụ: mở notebook notebooks/DNA05-BTL1.ipynb và chạy từng cell.
+- Click vào link Colab notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+
+- Chạy tất cả các cell để thực hiện pipeline trên đám mây, không cần cài đặt thêm gì.
 
 ## Bài tập lớn 1 - Dự đoán bệnh tim mạch (Heart Disease Prediction)
 
