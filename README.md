@@ -61,7 +61,12 @@ source venv/bin/activate   # Linux / Mac
 # venv\Scripts\activate    # Windows
 ```
 
-3. **Cài đặt các dependencies cần thiết:**
+3. Cập nhật pip (nếu cần)
+```bash
+python -m pip install --upgrade pip
+```
+
+4. **Cài đặt các dependencies cần thiết:**
 
 ```bash
 pip install -r requirements.txt
@@ -76,7 +81,7 @@ jupyter notebook
 
 - Click vào link Colab notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
 
-- Chạy tất cả các cell để thực hiện pipeline trên đám mây, không cần cài đặt thêm gì.
+- Chạy tất cả các cell để thực hiện pipeline trực tuyến mà không cần cài đặt thêm trên máy. Có thể dùng **Run all** để chạy toàn bộ cell tự động.
 
 ## Bài tập lớn 1 - Dự đoán bệnh tim mạch (Heart Disease Prediction)
 
