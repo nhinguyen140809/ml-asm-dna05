@@ -34,7 +34,7 @@ Bài tập lớn được thiết kế với các mục tiêu cụ thể sau:
 
 - Hiểu và áp dụng được quy trình **pipeline học máy truyền thống**, bao gồm: tiền xử lý dữ liệu, trích xuất đặc trưng, huấn luyện và đánh giá mô hình.
 - Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng, văn bản, và ảnh.
-- Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy thông qua các chỉ số đo lường (Accuracy, Precision, Recall, F1-score).
+- Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy thông qua các chỉ số đo lường.
 - Rèn luyện kỹ năng lập trình, thử nghiệm, và tổ chức báo cáo khoa học.
 
 ## Đường link và cấu trúc thư mục của dự án
