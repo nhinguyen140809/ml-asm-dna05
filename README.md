@@ -54,6 +54,7 @@ ml-asm-dna05/
 |   |-- features_{PCA level}_y_test.npy       # Trong đó, PCA level có thể là 70%, 80%, 90%, 99% và None
 |-- modules/                                  # Các module hỗ trợ
 |   |-- ml_pipeline.py
+|-- docs/                                     # Meeting minutes và hình ảnh cuộc họp
 |-- README.md                                 # Tài liệu hướng dẫn
 |-- requirements.txt                          # Các thư viện cần tải
 ```
@@ -86,7 +87,7 @@ ml-asm-dna05/
     python -m pip install --upgrade pip
     ```
 
-4. **Cài đặt các dependencies cần thiết:**
+4. **Cài đặt các dependencies cần thiết (có thể mất nhiều thời gian):**
 
     ```bash
     pip install -r requirements.txt
