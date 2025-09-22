@@ -92,23 +92,55 @@ class HiddenMarkovModel:
         assert np.isclose(pi.sum(), 1)
         self.pi = pi
 
-    # Có thể là index của observations trong V hoặc chính giá trị trong V
-    def forward(self, observations, is_index=True):
-        """
-        Thuật toán Forward để tính P(O|λ).
-        
-        observations: list[int] - chuỗi quan sát (các chỉ số trong V)
-        
-        return: (P, alpha)
-            - P: xác suất chuỗi quan sát
-            - alpha: ma trận alpha (T x N)
-        """
+    def generate_sequence(self, T):
+        states, observations = [], []
+        state = np.random.choice(self.N, p=self.pi)
+        for _ in range(T):
+            obs = np.random.choice(self.M, p=self.B[state])
+            states.append(state)
+            observations.append(obs)
+            state = np.random.choice(self.N, p=self.A[state])
+        return [self.H[s] for s in states], [self.V[o] for o in observations]
+    
+    def check_observations(self, observations, is_index=True):
         if is_index:
             assert all(0 <= o < self.M for o in observations), "All observations must be valid indices in V."
             O = observations
         else:
             assert all(o in self.V for o in observations), "All observations must be in the observable state space V."
             O = [self.V.index(o) for o in observations]
+        return O
+
+    def forward(self, observations, is_index=True, scaled=False, log=False):
+        """
+        Forward algorithm to compute P(O|λ).
+
+        observations: list[int] - observation sequence (indices in V) or list[var] - observation sequence (elements in V)
+        is_index: bool - True if observations are indices, False if they are elements in V
+        scaled: bool - True to use scaled version to avoid underflow, False for unscaled version
+
+        return: (P, alpha) or (P, alpha, scales)
+            - P: probability of the observation sequence given the model λ
+            - alpha: alpha matrix (T x N)
+            - scales: scaling factors for each time step (T,) (only if scaled=True)
+        """
+        if scaled:
+            return self.forward_scaled(observations, is_index, log)
+        else:
+            return self.forward_unscaled(observations, is_index, log)
+
+    def forward_unscaled(self, observations, is_index=True, log=False):
+        """
+        Forward algorithm to compute P(O|λ).
+
+        observations: list[int] - observation sequence (indices in V) or list[var] - observation sequence (elements in V)
+        is_index: bool - True if observations are indices, False if they are elements in V
+
+        return: (P, alpha)
+            - P: probability of the observation sequence given the model λ
+            - alpha: alpha matrix (T x N)
+        """
+        O = self.check_observations(observations, is_index)
         
         T = len(O)
         assert T > 0, "Observation sequence must be non-empty."
@@ -126,13 +158,195 @@ class HiddenMarkovModel:
 
         # Termination: P(O|λ) = sum over all states of alpha[T-1, i]
         P = sum(alpha[T-1, i] for i in range(self.N))
-        return P, alpha
+        log_P = np.log(P) if P > 0 else float('-inf')
+        if log:
+            return log_P, alpha
+        else:
+            return P, alpha
 
-# Ví dụ: 2 trạng thái ẩn, 3 loại quan sát
-A=np.array([[0.7, 0.3], [0.4, 0.6]])
-B=np.array([[0.1, 0.3, 0.6], [0.4, 0.2, 0.4]])
-pi=np.array([0.2, 0.8])
-hmm = HiddenMarkovModel(N=2, M=3, A=A, B=B, pi=pi, H=['Black', 'White'], V=['x', 'y', 'z'])
-O = ['x', 'z']
-P, alpha = hmm.forward(O, is_index=False)
-print(f"P(O|λ) = {P:.4f}")
+    def forward_scaled(self, observations, is_index=True, log=False):
+        """
+        Scaled Forward algorithm to compute P(O|λ) and avoid underflow.
+
+        observations: list[int] - observation sequence (indices in V) or list[var] - observation sequence (elements in V)
+        is_index: bool - True if observations are indices, False if they are elements in V
+
+        return: (P, alpha, scales)
+            - P: probability of the observation sequence given the model λ
+            - alpha: scaled alpha matrix (T x N)
+            - scales: scaling factors for each time step (T,)
+
+        Reasoning: To avoid numerical underflow when dealing with long sequences, we scale the alpha values at each time step. The scaling factors are stored in the 'scales' array, and the final probability is computed using these scaling factors.
+        """
+        O = self.check_observations(observations, is_index)
+        
+        T = len(O)
+        assert T > 0, "Observation sequence must be non-empty."
+
+        # Initialize alpha and scales
+        alpha = np.zeros((T, self.N))
+        scales = np.zeros(T)
+
+        # Base case: t = 0
+        for i in range(self.N):
+            alpha[0, i] = self.pi[i] * self.B[i, O[0]]
+        scales[0] = alpha[0].sum()
+        alpha[0] /= scales[0]
+
+        # Recursive case: t > 0
+        for t in range(1, T):
+            for j in range(self.N):
+                alpha[t, j] = sum(alpha[t-1, i] * self.A[i, j] for i in range(self.N)) * self.B[j, O[t]]
+            scales[t] = alpha[t].sum()
+            alpha[t] /= scales[t]
+
+        # Compute log probability to avoid underflow
+        log_P = np.sum(np.log(scales))
+        P = np.exp(log_P)
+        if log:
+            return log_P, alpha, scales
+        else:
+            return P, alpha, scales
+
+    def Viterbi(self, observations, is_index=True):
+        """
+        Viterbi algorithm to find the most likely hidden state sequence Q*.
+        observations: list[int] - observation sequence (indices in V)
+        return: (Q_star, delta, phi)
+            - Q_star: most likely hidden state sequence
+            - delta: delta matrix (T x N)
+            - phi: phi matrix (T x N)
+        """
+        O = self.check_observations(observations, is_index)
+        
+        T = len(O)
+        assert T > 0, "Observation sequence must be non-empty."
+
+        # Initialize delta and phi
+        delta = np.zeros((T, self.N))
+        phi = np.zeros((T, self.N), dtype=int)
+
+        # Base case: t = 0
+        for i in range(self.N):
+            delta[0, i] = self.pi[i] * self.B[i, O[0]]
+            phi[0, i] = 0
+
+        # Recursive case: t > 0
+        for t in range(1, T):
+            for j in range(self.N):
+                max_val, max_state = max((delta[t-1, i] * self.A[i, j], i) for i in range(self.N))
+                delta[t, j] = max_val * self.B[j, O[t]]
+                phi[t, j] = max_state
+
+        # Termination: find the best path
+        P_star = max(delta[T-1, i] for i in range(self.N))
+        last_state = np.argmax(delta[T-1, :])
+
+        # Backtrack to find the full path
+        Q_star = [0] * T
+        Q_star[T-1] = last_state
+        for t in range(T-2, -1, -1):
+            Q_star[t] = phi[t+1, Q_star[t+1]]
+
+        return Q_star, delta, phi
+
+    def backward(self, observations, is_index=True):
+        """
+        Backward algorithm to compute P(O|λ).
+
+        observations: list[int] - observation sequence (indices in V) or list[var] - observation sequence (elements in V)
+        is_index: bool - True if observations are indices, False if they are elements in V
+        scaled: bool - True to use scaled version to avoid underflow, False for unscaled version
+
+        return: beta matrix (T x N)
+        """
+        if is_index:
+            assert all(0 <= o < self.M for o in observations), "All observations must be valid indices in V."
+            O = observations
+        else:
+            assert all(o in self.V for o in observations), "All observations must be in the observable state space V."
+            O = [self.V.index(o) for o in observations]
+        
+        T = len(O)
+        assert T > 0, "Observation sequence must be non-empty."
+
+        # Initialize beta, where beta[t, i] = P(O[t+1:T] | Q[t] = i, λ)
+        beta = np.zeros((T, self.N))
+        # Base case: t = T-1
+        for i in range(self.N):
+            beta[T-1, i] = 1
+        
+        # Recursive case: t < T-1
+        for t in range(T-2, -1, -1):
+            for i in range(self.N):
+                beta[t, i] = sum(self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j] for j in range(self.N))
+
+        return beta
+    
+    def BaumWelch(self, observations, is_index=True, max_iter=100, tol=1e-6):
+        """
+        Baum-Welch algorithm to train the HMM parameters using the given observation sequence.
+
+        observations: list[int] - observation sequence (indices in V) or list[var] - observation sequence (elements in V)
+        is_index: bool - True if observations are indices, False if they are elements in V
+        max_iter: int - maximum number of iterations
+        tol: float - tolerance for convergence
+
+        return: log likelihood of the observation sequence given the model λ
+        """
+        
+        if is_index:
+            assert all(0 <= o < self.M for o in observations), "All observations must be valid indices in V."
+            O = observations
+        else:
+            assert all(o in self.V for o in observations), "All observations must be in the observable state space V."
+            O = [self.V.index(o) for o in observations]
+        
+        T = len(O)
+        assert T > 0, "Observation sequence must be non-empty."
+
+        for _ in range(max_iter):
+            # E-step: compute alpha, beta, gamma, xi
+            _, alpha, _ = self.forward(O, is_index=True, scaled=False)
+            beta = self.backward(O, is_index=True)
+            
+            gamma = np.zeros((T, self.N))
+            xi = np.zeros((T-1, self.N, self.N))
+
+            for t in range(T):
+                denom = sum(alpha[t, i] * beta[t, i] for i in range(self.N))
+                for i in range(self.N):
+                    gamma[t, i] = (alpha[t, i] * beta[t, i]) / denom if denom > 0 else 0
+
+            for t in range(T-1):
+                denom = sum(alpha[t, i] * self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j] for i in range(self.N) for j in range(self.N))
+                for i in range(self.N):
+                    for j in range(self.N):
+                        xi[t, i, j] = (alpha[t, i] * self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j]) / denom if denom > 0 else 0
+            
+            # M-step: re-estimate A, B, pi
+            for i in range(self.N):
+                self.pi[i] = gamma[0, i]
+                for j in range(self.N):
+                    numer = sum(xi[t, i, j] for t in range(T-1))
+                    denom = sum(gamma[t, i] for t in range(T-1))
+                    self.A[i, j] = numer / denom if denom > 0 else 0
+
+                for k in range(self.M):
+                    numer = sum(gamma[t, i] for t in range(T) if O[t] == k)
+                    denom = sum(gamma[t, i] for t in range(T))
+                    self.B[i, k] = numer / denom if denom > 0 else 0
+
+if __name__ == "__main__":
+    # Example usage
+    A=np.array([[0.7, 0.3], [0.4, 0.6]])
+    B=np.array([[0.1, 0.3, 0.6], [0.4, 0.2, 0.4]])
+    pi=np.array([0.2, 0.8])
+    hmm = HiddenMarkovModel(N=2, M=3, A=A, B=B, pi=pi, H=['Black', 'White'], V=['x', 'y', 'z'])
+    _, O = hmm.generate_sequence(20)
+    print("Generated observations:", O)
+
+    P, alpha = hmm.forward(O, is_index=False)
+    print("Forward algorithm P(O|λ):", P)
+    Q_star, delta, phi = hmm.Viterbi(O, is_index=False)
+    print("Viterbi most likely states:", [hmm.H[q] for q in Q_star])
