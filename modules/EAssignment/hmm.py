@@ -1,4 +1,8 @@
 import numpy as np
+import re
+from collections import defaultdict, Counter
+import nltk
+import random
 
 class HiddenMarkovModel:
     def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None):
@@ -208,7 +212,7 @@ class HiddenMarkovModel:
         else:
             return P, alpha, scales
 
-    def Viterbi(self, observations, is_index=True):
+    def Viterbi(self, observations, is_index=True, ret_tags=False):
         """
         Viterbi algorithm to find the most likely hidden state sequence Q*.
         observations: list[int] - observation sequence (indices in V)
@@ -248,6 +252,8 @@ class HiddenMarkovModel:
         for t in range(T-2, -1, -1):
             Q_star[t] = phi[t+1, Q_star[t+1]]
 
+        if ret_tags:
+            return [self.H[i] for i in Q_star], delta, phi
         return Q_star, delta, phi
 
     def backward(self, observations, is_index=True):
@@ -307,7 +313,7 @@ class HiddenMarkovModel:
 
         for _ in range(max_iter):
             # E-step: compute alpha, beta, gamma, xi
-            _, alpha, _ = self.forward(O, is_index=True, scaled=False)
+            _, alpha = self.forward(O, is_index=True, scaled=False)
             beta = self.backward(O, is_index=True)
             
             gamma = np.zeros((T, self.N))
@@ -337,16 +343,277 @@ class HiddenMarkovModel:
                     denom = sum(gamma[t, i] for t in range(T))
                     self.B[i, k] = numer / denom if denom > 0 else 0
 
-if __name__ == "__main__":
-    # Example usage
-    A=np.array([[0.7, 0.3], [0.4, 0.6]])
-    B=np.array([[0.1, 0.3, 0.6], [0.4, 0.2, 0.4]])
-    pi=np.array([0.2, 0.8])
-    hmm = HiddenMarkovModel(N=2, M=3, A=A, B=B, pi=pi, H=['Black', 'White'], V=['x', 'y', 'z'])
-    _, O = hmm.generate_sequence(20)
-    print("Generated observations:", O)
+    @staticmethod
+    def get_pseudo_list():
+        """
+        Return a list of predefined pseudo-words for rare word handling.
+        """
+        return [
+            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
+            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
+            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
+            "<ALLCAPS>", "<capPeriod>", "<initCap>",
+            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
+            "<lowercase>", "<other>"
+        ]
 
-    P, alpha = hmm.forward(O, is_index=False)
-    print("Forward algorithm P(O|λ):", P)
-    Q_star, delta, phi = hmm.Viterbi(O, is_index=False)
-    print("Viterbi most likely states:", [hmm.H[q] for q in Q_star])
+    @staticmethod
+    def pseudo_word(token):
+        """
+        Map a raw token (string, original casing) to a pseudo-word class.
+        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...)
+        Order matters: more specific patterns first.
+        """
+        assert token is not None and len(token) > 0, "Token must be a non-empty string."
+        t = token
+
+        # punctuation / punctuation-like
+        if all(ch in ".,;:!?\"'()[]" for ch in t):
+            return "<PUNCT>"
+
+        # digits-only
+        if re.fullmatch(r'\d{4}', t):
+            return "<fourDigitNum>"
+        if re.fullmatch(r'\d{2}', t):
+            return "<twoDigitNum>"
+        if re.fullmatch(r'\d+', t):
+            return "<othernum>"
+
+        # contains both digit and letter
+        if re.search(r'\d', t) and re.search(r'[A-Za-z]', t):
+            return "<containsDigitAndAlpha>"
+
+        # dates / slashes
+        if re.search(r'\d+/\d+(/\d+)?', t):
+            return "<containsDigitAndSlash>"
+
+        # dashed numbers / codes
+        if re.search(r'\d+-\d+', t):
+            return "<containsDigitAndDash>"
+
+        # numbers with commas or periods (1,000 or 1.00)
+        if re.search(r'\d+,\d+', t):
+            return "<containsDigitAndComma>"
+        if re.search(r'\d+\.\d+', t):
+            return "<containsDigitAndPeriod>"
+
+        # capitalized variants
+        if t.isupper():
+            # all-caps (acronyms)
+            return "<ALLCAPS>"
+        if re.fullmatch(r'[A-Z]\.', t):
+            # single capital + period, e.g. "M."
+            return "<capPeriod>"
+        if t[0].isupper() and t[1:].islower():
+            # first cap, rest lower: likely proper noun or sentence-initial
+            return "<initCap>"
+
+        # suffix heuristics (helpful for POS)
+        if len(t) >= 4 and t.lower().endswith("ing"):
+            return "<suffix_ing>"
+        if len(t) >= 3 and t.lower().endswith("ed"):
+            return "<suffix_ed>"
+        if len(t) >= 3 and t.lower().endswith("ly"):
+            return "<suffix_ly>"
+
+        # lowercase words
+        if t.islower():
+            return "<lowercase>"
+
+        # fallback
+        return "<other>"
+
+    def train_supervised_MLE(self, state_sequences, observation_sequences, gamma=None, word_counts=None):
+        """
+        Supervised MLE training for HMM using counts from labeled sequences.
+
+        state_sequences: list of lists of hidden states (tags)
+        observation_sequences: list of lists of observed tokens (words)
+        gamma: int, cutoff for rare words → pseudo-word (optional)
+        word_counts: Counter, frequency of words in training (required if gamma is set)
+
+        After this, self.pi, self.A, self.B are updated.
+        """
+        assert len(state_sequences) == len(observation_sequences), "Mismatch in number of sequences between states and observations."
+
+        # Map observations to indices (apply pseudo-word mapping if gamma is set)
+        if gamma is None:
+            gamma = 1
+
+        mapped_sequences = []
+        for obs_seq in observation_sequences:
+            mapped_seq = []
+            for w in obs_seq:
+                if gamma is not None and word_counts is not None and word_counts.get(w,0) < gamma:
+                    pw = self.pseudo_word(w)
+                else:
+                    pw = w
+                if pw not in self.V:
+                    raise ValueError(f"Observation '{pw}' not in HMM observable space V")
+                mapped_seq.append(self.V.index(pw))
+            mapped_sequences.append(mapped_seq)
+
+        # Map states to indices
+        state_indices_sequences = []
+        for seq in state_sequences:
+            idx_seq = [self.H.index(s) for s in seq]
+            state_indices_sequences.append(idx_seq)
+
+        # Initialize counts
+        N = self.N
+        M = self.M
+        pi_counts = np.zeros(N, dtype=float)
+        A_counts = np.zeros((N, N), dtype=float)
+        B_counts = np.zeros((N, M), dtype=float)
+
+        for s_seq, o_seq in zip(state_indices_sequences, mapped_sequences):
+            if len(s_seq) == 0:
+                continue
+            # initial state
+            pi_counts[s_seq[0]] += 1
+            for t in range(len(s_seq)):
+                B_counts[s_seq[t], o_seq[t]] += 1
+                if t < len(s_seq)-1:
+                    A_counts[s_seq[t], s_seq[t+1]] += 1
+
+        # Normalize to probabilities (add small smoothing)
+        eps = 1e-12
+        self.pi = (pi_counts + eps) / (pi_counts.sum() + eps * N)
+
+        self.A = np.zeros_like(A_counts)
+        for i in range(N):
+            denom = A_counts[i].sum()
+            if denom > 0:
+                self.A[i] = (A_counts[i] + eps) / (denom + eps * N)
+            else:
+                self.A[i] = np.ones(N) / N
+
+        self.B = np.zeros_like(B_counts)
+        for i in range(N):
+            denom = B_counts[i].sum()
+            if denom > 0:
+                self.B[i] = (B_counts[i] + eps) / (denom + eps * M)
+            else:
+                self.B[i] = np.ones(M) / M
+
+class POS_HMM:
+    """ Wrapper for creating a POS tagging HMM from training data. """
+    def __init__(self):
+        self.hmm = None
+        self.gamma = None
+
+    def train(self, train_data, gamma=None, tagset=None):
+        """
+        Train the POS tagging HMM from training data.
+        train_data: list of (sentence, tags) pairs
+            - sentence: list of words (tokens)
+            - tags: list of corresponding POS tags
+        gamma: int, cutoff for rare words → pseudo-word
+        tagset: list or set of all possible tags (optional)
+        """
+        self.gamma = gamma if gamma is not None else 1
+
+        assert all(len(s) == len(t) for s, t in train_data), "Each sentence and tag sequence must be of the same length."
+        
+        # Collect unique tags and words
+        if tagset is not None:
+            assert isinstance(tagset, (list, set)), "tagset must be a list or set of tags."
+            all_tags = set(tagset)
+        else:
+            all_tags = set()
+            for _, tags in train_data:
+                all_tags.update(tags)
+        assert len(all_tags) > 0, "No tags found in training data."
+
+        # Build vocabulary with pseudo-words for rare words
+        word_counts = Counter()
+        for sentence, _ in train_data:
+            word_counts.update(sentence)
+
+        vocab = set()
+        for word, count in word_counts.items():
+            if count >= self.gamma:
+                vocab.add(word)
+            else:
+                vocab.add(HiddenMarkovModel.pseudo_word(word))
+
+        vocab.update(HiddenMarkovModel.get_pseudo_list())
+
+        V = sorted(vocab)
+        H = sorted(all_tags)
+        N = len(H)
+        M = len(V)
+
+        print(f"Start training HMM for POS tagging with {len(train_data)} samples...")
+        
+        self.hmm = HiddenMarkovModel(N=N, M=M, H=H, V=V)
+
+        state_sequences = [tags for _, tags in train_data]
+        observation_sequences = [sentence for sentence, _ in train_data]
+
+        self.hmm.train_supervised_MLE(
+            state_sequences=state_sequences,
+            observation_sequences=observation_sequences,
+            gamma=self.gamma,
+            word_counts=word_counts
+        )
+
+        print("Training complete successfully.")
+
+    def __repr__(self):
+        return f"POS_HMM with {self.hmm.N} states and {self.hmm.M} observations."
+
+    def predict_sentence(self, sentence):
+        """
+        Predict POS tags for a given sentence.
+        sentence: list of words (tokens)
+        return: list of predicted tags
+        """
+        assert self.hmm is not None, "HMM model is not trained yet."
+
+        mapped_sentence = []
+        for w in sentence:
+            mapped_sentence.append(HiddenMarkovModel.pseudo_word(w) if w not in self.hmm.V else w)
+
+        predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
+
+        return predicted_tags
+    
+    def predict_batch(self, sentences):
+        """
+        Predict POS tags for a batch of sentences.
+        sentences: list of sentences, where each sentence is a list of words (tokens)
+        return: list of lists of predicted tags
+        """
+        return [self.predict_sentence(sentence) for sentence in sentences]
+    
+    def predict(self, X):
+        """
+        Predict POS tags for input data X.
+        X: list of sentences, where each sentence is a list of words (tokens)
+        return: list of lists of predicted tags
+        """
+        assert self.hmm is not None, "HMM model is not trained yet."
+        assert isinstance(X, list), "Input X must be a list of sentences."
+
+        if all(isinstance(s, list) for s in X):
+            print("Predicting in batch mode...")
+            return self.predict_batch(X)
+        else:
+            print("Predicting single sentence...")
+            return self.predict_sentence(X)
+
+    def accuracy_score(self, true_tags, pred_tags):
+        """ 
+        Compute accuracy given true and predicted tags
+        true_tags: list of true tags of all samples
+        pred_tags: list of predicted tags of all samples
+        return: float, accuracy score
+        """
+        assert len(true_tags) == len(pred_tags), "Length of true_tags and pred_tags must be the same."
+        for t, p in zip(true_tags, pred_tags):
+            assert len(t) == len(p), "Each pair of true and predicted tag sequences must be of the same length."
+        correct = sum(ti == pi for t, p in zip(true_tags, pred_tags) for ti, pi in zip(t, p))
+        total = sum(len(t) for t in true_tags)
+
+        return correct / total if total > 0 else 0.0
