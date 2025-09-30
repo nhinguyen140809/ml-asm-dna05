@@ -133,16 +133,62 @@
 
     <!-- Thông tin môn học -->
     <div
-        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        class="course-info bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition opacity-0 translate-y-10"
+    >
         <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Thông tin môn học</h2>
         <div class="text-gray-300 space-y-2">
-            <p><span class="font-semibold text-[#d4af37]">Môn học:</span> Học máy (Machine Learning)</p>
-            <p><span class="font-semibold text-[#d4af37]">Mã môn học:</span> CO3117</p>
-            <p><span class="font-semibold text-[#d4af37]">Học kỳ:</span> 251</p>
-            <p><span class="font-semibold text-[#d4af37]">Năm học:</span> 2025 - 2026</p>
-            <p><span class="font-semibold text-[#d4af37]">Giảng viên hướng dẫn:</span> TS. Lê Thành Sách</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Môn học:</span> Học máy (Machine Learning)</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Mã môn học:</span> CO3117</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Học kỳ:</span> 251</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Năm học:</span> 2025 - 2026</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Giảng viên hướng dẫn:</span> TS. Lê Thành Sách</p>
         </div>
     </div>
+
+    <style>
+    /* Hover effect từng dòng (chỉ nền) */
+    .line-info {
+        transition: all 0.3s ease;
+        padding: 2px 4px;
+        border-radius: 6px;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    .line-info:hover {
+        background: rgba(212, 175, 55, 0.1);
+        transform: translateX(3px);
+    }
+
+    /* Card animation */
+    @keyframes fadeInUp {
+        from {opacity:0; transform: translateY(20px);}
+        to {opacity:1; transform: translateY(0);}
+    }
+    </style>
+
+    <script>
+    const courseInfo = document.querySelector('.course-info');
+    const lines = document.querySelectorAll('.line-info');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                // Card fade in
+                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                // Staggered animation từng dòng
+                lines.forEach((line, i) => {
+                    setTimeout(() => {
+                        line.style.opacity = '1';
+                        line.style.transform = 'translateY(0)';
+                    }, i * 150);
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(courseInfo);
+    </script>
+
 
     <!-- Thành viên nhóm -->
     <div
