@@ -193,25 +193,34 @@
     const star = document.getElementById('hcmut-star');
     const closeBtn = document.getElementById('hcmut-close');
 
-    // Click vào ngôi sao để hiện widget
+    // Toggle widget khi click ngôi sao
     star.addEventListener('click', ()=>{
-        widget.style.display = 'flex';
-        widget.style.transform = 'translateX(150%)';
-        widget.style.opacity = 0;
-        setTimeout(()=>{
-            widget.style.transition = 'all 0.5s ease';
-            widget.style.transform = 'translateX(0)';
-            widget.style.opacity = 1;
-        }, 50);
+        if(widget.style.display === 'flex'){
+            // ẩn đi
+            widget.style.transform = 'translateX(150%)';
+            widget.style.opacity = 0;
+            setTimeout(()=>widget.style.display='none', 500);
+        } else {
+            // hiện lên
+            widget.style.display = 'flex';
+            widget.style.transform = 'translateX(150%)';
+            widget.style.opacity = 0;
+            setTimeout(()=>{
+                widget.style.transition = 'all 0.5s ease';
+                widget.style.transform = 'translateX(0)';
+                widget.style.opacity = 1;
+            }, 50);
+        }
     });
 
-    // Đóng widget
+    // Đóng widget bằng nút ×
     closeBtn.addEventListener('click', ()=>{
         widget.style.transform = 'translateX(150%)';
         widget.style.opacity = 0;
         setTimeout(()=>widget.style.display='none', 500);
     });
     </script>
+
 
 
 
