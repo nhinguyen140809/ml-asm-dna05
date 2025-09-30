@@ -193,39 +193,115 @@
 
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
-        <a href="btl1.html"
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
-            <p
-                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
-                <i class="fas fa-check-circle"></i> Completed
-            </p>
-        </a>
-        <a href="btl2.html"
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
-            <p
-                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-                <i class="fas fa-sync-alt"></i> Updating
-            </p>
-        </a>
-        <a href="btl3.html"
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
-            <p
-                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-                <i class="fas fa-sync-alt"></i> Updating
-            </p>
-        </a>
-        <a href="btmr.html"
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-            <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
-            <p
-                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-                <i class="fas fa-sync-alt"></i> Updating
-            </p>
-        </a>
+
+    <!-- Card 1 -->
+    <a href="btl1.html"
+        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 1</p>
+        <!-- Circular Progress -->
+        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
+            <circle id="progress1" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count1">0%</div>
+        </div>
+        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+        <i class="fas fa-check-circle"></i> Completed
+        </p>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="btl2.html"
+        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 2</p>
+        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
+            <circle id="progress2" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count2">0%</div>
+        </div>
+        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
+        <i class="fas fa-sync-alt"></i> Updating
+        </p>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="btl3.html"
+        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 3</p>
+        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
+            <circle id="progress3" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count3">0%</div>
+        </div>
+        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
+        <i class="fas fa-sync-alt"></i> Updating
+        </p>
+    </a>
+
+    <!-- Card 4 -->
+    <a href="btmr.html"
+        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập mở rộng</p>
+        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
+            <circle id="progress4" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count4">0%</div>
+        </div>
+        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
+        <i class="fas fa-sync-alt"></i> Updating
+        </p>
+    </a>
+
     </div>
+
+    <script>
+    const assignments = [
+    {id:1, percent:100},
+    {id:2, percent:20},
+    {id:3, percent:0},
+    {id:4, percent:50},
+    ];
+
+    assignments.forEach(a=>{
+    const progress = document.getElementById('progress'+a.id);
+    const count = document.getElementById('count'+a.id);
+    const radius = 32;
+    const circumference = 2 * Math.PI * radius;
+    progress.style.strokeDasharray = circumference;
+    progress.style.strokeDashoffset = circumference;
+
+    const observer = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            let start=null;
+            function step(timestamp){
+            if(!start) start=timestamp;
+            const progressRatio=Math.min((timestamp-start)/1500,1);
+            const currentPercent=Math.floor(progressRatio*a.percent);
+            count.textContent=currentPercent+'%';
+            progress.style.strokeDashoffset=circumference*(1-currentPercent/100);
+            if(progressRatio<1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+            observer.unobserve(entry.target);
+        }
+        });
+    }, {threshold:0.5});
+
+    observer.observe(document.getElementById('progress'+a.id).closest('a'));
+    });
+    </script>
 
     <!-- Thông tin môn học -->
     <div
