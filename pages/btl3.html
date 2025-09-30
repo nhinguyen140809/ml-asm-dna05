@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Lớn 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex flex-col items-center text-gray-700">
+
+    <!-- Header -->
+    <div class="bg-white rounded-2xl shadow-xl mt-8 p-6 w-11/12 md:w-3/4 text-center">
+        <h1 class="text-4xl font-extrabold text-purple-600">Bài Tập Lớn 3</h1>
+        <p class="text-gray-500 mt-2 text-lg font-semibold">Team DNA05</p>
+
+        <!-- Icons -->
+        <div class="flex justify-center gap-6 mt-4 text-lg">
+            <a href="" target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                <i class="fab fa-google"></i> Colab
+            </a>
+            <a href="" target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                <i class="fas fa-file-alt"></i> Report
+            </a>
+            <a href="https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste?select=Corals&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExTUtjbm44dkQ0NWdxNEJYbQEeUvewQoplcvh0-7v13JDfv7kejQexA-Amlef8Lx4hC1ArYtaUogy347UbfTI_aem_kLlLLYUQGPbLK54WU2TnHw"
+                target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                <i class="fas fa-database"></i> Dataset
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats Section (Assignments) -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
+        <a href="index.html"
+            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
+            <p class="text-xl font-bold text-blue-600">Machine Learning Project</p>
+        </a>
+        <a href="btl1.html"
+            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-purple-400 transition border border-transparent">
+            <p class="text-xl font-bold text-purple-600">Bài tập lớn 1</p>
+            <p class="text-gray-500">completed</p>
+        </a>
+        <a href="btl2.html"
+            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
+            <p class="text-xl font-bold text-blue-600">Bài tập lớn 2</p>
+            <p class="text-gray-500">updating</p>
+        </a>
+        <a href="btmr.html"
+            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-green-400 transition border border-transparent">
+            <p class="text-xl font-bold text-green-600">Bài tập mở rộng</p>
+            <p class="text-gray-500">updating</p>
+        </a>
+    </div>
+
+    <!-- Tổng quan dataset -->
+    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
+        <h2 class="text-xl font-bold text-purple-600 mb-4">Tổng quan dataset</h2>
+        <p class="text-gray-600 mb-4">
+            Bộ dữ liệu <span class="font-semibold text-purple-600">Sea Animals Image – Raijin</span> có khoảng 13.700
+            hình ảnh ở định dạng .jpg và .png, được phân loại thành 23 lớp động vật
+            biển như cá voi, cá heo, bạch tuộc, sứa, sao biển, cua, tôm... phục vụ cho các bài toán nhận dạng và phân
+            loại sinh vật biển.
+        </p>
+    </div>
+
+    <!-- Pipeline (timeline) -->
+    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
+        <h2 class="text-xl font-bold text-purple-600 mb-6">Pipeline chi tiết</h2>
+        <ol class="relative border-l border-gray-300 space-y-6 ml-3">
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">1</span>
+                <h3 class="font-semibold text-purple-600">Phân tích dữ liệu (EDA)</h3>
+                <p class="text-gray-500">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">2</span>
+                <h3 class="font-semibold text-purple-600">Tiền xử lý dữ liệu</h3>
+                <p class="text-gray-500"></p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">3</span>
+                <h3 class="font-semibold text-purple-600">Trích xuất & giảm chiều</h3>
+                <p class="text-gray-500"></p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">4</span>
+                <h3 class="font-semibold text-purple-600">Huấn luyện mô hình</h3>
+                <p class="text-gray-500"></p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">5</span>
+                <h3 class="font-semibold text-purple-600">Đánh giá mô hình</h3>
+                <p class="text-gray-500">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">6</span>
+                <h3 class="font-semibold text-purple-600">Trực quan hóa kết quả</h3>
+                <p class="text-gray-500">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
+            </li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 mb-6 text-center text-gray-200">
+        <p>© 2025 <span class="font-bold">Team DNA05</span> -
+            <span class="text-white-400">Machine Learning Project</span>
+        </p>
+    </footer>
+
+</body>
+
+</html>
