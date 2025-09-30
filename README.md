@@ -48,13 +48,19 @@ ml-asm-dna05/
 |-- reports/                                  # Báo cáo
 |   |-- DNA05_BTL1_Report.pdf
 |-- features/                                 # File đặc trưng được trích xuất
-|   |-- features_{PCA level}_X_train.npy
-|   |-- features_{PCA level}_X_test.npy
-|   |-- features_{PCA level}_y_train.npy
-|   |-- features_{PCA level}_y_test.npy       # Trong đó, PCA level có thể là 70%, 80%, 90%, 99% và None
+|   |-- BTL1
+|   |-- BTL2
+|   |-- BTL3
+|   |-- BTL_MR
 |-- modules/                                  # Các module hỗ trợ
 |   |-- ml_pipeline.py
-|-- docs/                                     # Meeting minutes và hình ảnh cuộc họp
+|   |-- hmm.py
+|-- docs/                                     
+|   |-- meeting_evidence                      # Meeting minutes và hình ảnh cuộc họp
+|      |-- BTL1
+|      |-- BTL2
+|      |-- BTL3
+|      |-- BTL_MR
 |-- README.md                                 # Tài liệu hướng dẫn
 |-- requirements.txt                          # Các thư viện cần tải
 ```
