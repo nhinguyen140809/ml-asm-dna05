@@ -171,6 +171,45 @@
     animate();
     </script>
 
+<!-- Star Icon Trigger -->
+<div id="hcmut-star" class="fixed bottom-6 right-6 z-50 cursor-pointer text-yellow-400 text-3xl hover:text-yellow-300 transition">
+    &#9733; <!-- Unicode ngôi sao -->
+</div>
+
+<!-- HCMUT Info Widget -->
+<div id="hcmut-widget" class="fixed bottom-20 right-6 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-72 text-white flex flex-col items-center z-50 hidden">
+    <img src="HCMUT_LOGO.png" 
+        alt="HCMUT Logo" class="w-16 h-auto mb-3 rounded-full border-2 border-[#d4af37]">
+    <p class="text-sm text-center mb-3">Môn học thuộc trường <strong>Đại học Bách khoa – ĐHQG TP.HCM (HCMUT)</strong>, nổi bật về Kỹ thuật & Công nghệ, nhiều chương trình học chất lượng cao.</p>
+    <a href="https://hcmut.edu.vn/" target="_blank" 
+        class="bg-[#d4af37] text-[#111827] font-semibold px-4 py-1 rounded-full hover:bg-yellow-400 transition">Truy cập trang trường</a>
+    <button id="hcmut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+</div>
+
+<script>
+const widget = document.getElementById('hcmut-widget');
+const star = document.getElementById('hcmut-star');
+const closeBtn = document.getElementById('hcmut-close');
+
+// Click vào ngôi sao để hiện widget
+star.addEventListener('click', ()=>{
+    widget.style.display = 'flex';
+    widget.style.transform = 'translateX(150%)';
+    widget.style.opacity = 0;
+    setTimeout(()=>{
+        widget.style.transition = 'all 0.5s ease';
+        widget.style.transform = 'translateX(0)';
+        widget.style.opacity = 1;
+    }, 50);
+});
+
+// Đóng widget
+closeBtn.addEventListener('click', ()=>{
+    widget.style.transform = 'translateX(150%)';
+    widget.style.opacity = 0;
+    setTimeout(()=>widget.style.display='none', 500);
+});
+</script>
 
 
     <!-- Header -->
