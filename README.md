@@ -21,12 +21,12 @@ Nhóm: DNA05
 
 Trong khuôn khổ môn học **Học Máy – CO3117**, có 4 dự án:
 
-| Dự án                         | Dạng dữ liệu                                                  | Trạng thái      | Trang Github   | Colab       |
+| Dự án                         | Nội dung                                                  | Trạng thái      | Trang Github   | Colab       |
 |---------------------------------|---------------------------------------------------------|---------------------------------|----------------|-------------|
 | **BTL1**                          | Tabular Data                                            | ✅ Hoàn thành | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/)   | [Open In Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
 | **BTL2**                          | Text Data                                               | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
 | **BTL3**                          | Image Data                                              | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
-| **Mở rộng** | (HMM / Bayesian Network / Conditional Random Field)     | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
+| **Mở rộng** | Hidden Markov Model     | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
 
 ## Mục tiêu của bài tập lớn
 
