@@ -171,6 +171,73 @@
     animate();
     </script>
 
+
+
+    <!-- Keyboard Shortcuts Help Button (PC only) -->
+    <div id="shortcut-help-btn" class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+        ?
+    </div>
+
+    <!-- Keyboard Shortcuts Popup -->
+    <div id="shortcut-popup" class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+        <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">Keyboard Shortcuts</h3>
+        <ul class="space-y-2">
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span class="text-gray-200 text-sm">Trở về trang chính</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span class="text-gray-200 text-sm">Refresh trang</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span class="text-gray-200 text-sm">Mở repository GitHub</span>
+            </li>
+        </ul>
+
+        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+    </div>
+
+    <script>
+    const shortcutBtn = document.getElementById('shortcut-help-btn');
+    const shortcutPopup = document.getElementById('shortcut-popup');
+    const shortcutClose = document.getElementById('shortcut-close');
+
+    // Bật/tắt popup khi bấm nút "?"
+    shortcutBtn.addEventListener('click', () => {
+        shortcutPopup.classList.toggle('hidden');
+    });
+
+    // Đóng popup
+    shortcutClose.addEventListener('click', () => {
+        shortcutPopup.classList.add('hidden');
+    });
+
+    // Keyboard shortcuts chung
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
+        const key = e.key.toLowerCase();
+
+        switch(key){
+            case 'h':
+                window.location.href = 'index.html'; // trang chính
+                break;
+            case 'r':
+                location.reload(); // reload trang
+                break;
+            case 'g':
+                window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
+                break;
+            default:
+                break;
+        }
+    });
+    </script>
+
+
+
+
     <!-- Header -->
     <div
         class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">

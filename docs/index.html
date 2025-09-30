@@ -171,47 +171,113 @@
     animate();
     </script>
 
-<!-- Star Icon Trigger -->
-<div id="hcmut-star" class="fixed bottom-6 right-6 z-50 cursor-pointer text-yellow-400 text-3xl hover:text-yellow-300 transition">
-    &#9733; <!-- Unicode ngôi sao -->
-</div>
+    <!-- Star Icon Trigger -->
+    <div id="hcmut-star" class="fixed bottom-6 right-6 z-50 cursor-pointer text-yellow-400 text-3xl hover:text-yellow-300 transition">
+        &#9733; <!-- Unicode ngôi sao -->
+    </div>
 
-<!-- HCMUT Info Widget -->
-<div id="hcmut-widget" class="fixed bottom-20 right-6 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-72 text-white flex flex-col items-center z-50 hidden">
-    <img src="HCMUT_LOGO.png" 
-        alt="HCMUT Logo" class="w-16 h-auto mb-3 rounded-full border-2 border-[#d4af37]">
-    <p class="text-sm text-center mb-3">Môn học thuộc trường <strong>Đại học Bách khoa – ĐHQG TP.HCM (HCMUT)</strong>, nổi bật về Kỹ thuật & Công nghệ, nhiều chương trình học chất lượng cao.</p>
-    <a href="https://hcmut.edu.vn/" target="_blank" 
-        class="bg-[#d4af37] text-[#111827] font-semibold px-5 py-1.5 text-xs rounded-full hover:bg-yellow-400 transition">
-        Truy cập trang trường
-        </a>
-    <button id="hcmut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
-</div>
+    <!-- HCMUT Info Widget -->
+    <div id="hcmut-widget" class="fixed bottom-20 right-6 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-72 text-white flex flex-col items-center z-50 hidden">
+        <img src="HCMUT_LOGO.png" 
+            alt="HCMUT Logo" class="w-16 h-auto mb-3 rounded-full border-2 border-[#d4af37]">
+        <p class="text-sm text-center mb-3">Môn học thuộc trường <strong>Đại học Bách khoa – ĐHQG TP.HCM (HCMUT)</strong>, nổi bật về Kỹ thuật & Công nghệ, nhiều chương trình học chất lượng cao.</p>
+        <a href="https://hcmut.edu.vn/" target="_blank" 
+            class="bg-[#d4af37] text-[#111827] font-semibold px-5 py-1.5 text-xs rounded-full hover:bg-yellow-400 transition">
+            Truy cập trang trường
+            </a>
+        <button id="hcmut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+    </div>
 
-<script>
-const widget = document.getElementById('hcmut-widget');
-const star = document.getElementById('hcmut-star');
-const closeBtn = document.getElementById('hcmut-close');
+    <script>
+    const widget = document.getElementById('hcmut-widget');
+    const star = document.getElementById('hcmut-star');
+    const closeBtn = document.getElementById('hcmut-close');
 
-// Click vào ngôi sao để hiện widget
-star.addEventListener('click', ()=>{
-    widget.style.display = 'flex';
-    widget.style.transform = 'translateX(150%)';
-    widget.style.opacity = 0;
-    setTimeout(()=>{
-        widget.style.transition = 'all 0.5s ease';
-        widget.style.transform = 'translateX(0)';
-        widget.style.opacity = 1;
-    }, 50);
-});
+    // Click vào ngôi sao để hiện widget
+    star.addEventListener('click', ()=>{
+        widget.style.display = 'flex';
+        widget.style.transform = 'translateX(150%)';
+        widget.style.opacity = 0;
+        setTimeout(()=>{
+            widget.style.transition = 'all 0.5s ease';
+            widget.style.transform = 'translateX(0)';
+            widget.style.opacity = 1;
+        }, 50);
+    });
 
-// Đóng widget
-closeBtn.addEventListener('click', ()=>{
-    widget.style.transform = 'translateX(150%)';
-    widget.style.opacity = 0;
-    setTimeout(()=>widget.style.display='none', 500);
-});
-</script>
+    // Đóng widget
+    closeBtn.addEventListener('click', ()=>{
+        widget.style.transform = 'translateX(150%)';
+        widget.style.opacity = 0;
+        setTimeout(()=>widget.style.display='none', 500);
+    });
+    </script>
+
+
+
+    <!-- Keyboard Shortcuts Help Button (PC only) -->
+    <div id="shortcut-help-btn" class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+        ?
+    </div>
+
+    <!-- Keyboard Shortcuts Popup -->
+    <div id="shortcut-popup" class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+        <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">Keyboard Shortcuts</h3>
+        <ul class="space-y-2">
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span class="text-gray-200 text-sm">Trở về trang chính</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span class="text-gray-200 text-sm">Refresh trang</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span class="text-gray-200 text-sm">Mở repository GitHub</span>
+            </li>
+        </ul>
+
+        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+    </div>
+
+    <script>
+    const shortcutBtn = document.getElementById('shortcut-help-btn');
+    const shortcutPopup = document.getElementById('shortcut-popup');
+    const shortcutClose = document.getElementById('shortcut-close');
+
+    // Bật/tắt popup khi bấm nút "?"
+    shortcutBtn.addEventListener('click', () => {
+        shortcutPopup.classList.toggle('hidden');
+    });
+
+    // Đóng popup
+    shortcutClose.addEventListener('click', () => {
+        shortcutPopup.classList.add('hidden');
+    });
+
+    // Keyboard shortcuts chung
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
+        const key = e.key.toLowerCase();
+
+        switch(key){
+            case 'h':
+                window.location.href = 'index.html'; // trang chính
+                break;
+            case 'r':
+                location.reload(); // reload trang
+                break;
+            case 'g':
+                window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
+                break;
+            default:
+                break;
+        }
+    });
+    </script>
+
+
 
 
     <!-- Header -->
