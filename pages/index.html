@@ -11,6 +11,60 @@
 
 <body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex flex-col items-center text-gray-700">
 
+    <style>
+    /* Thanh chính */
+    #progress-bar {
+        height: 2px; /* mỏng hơn */
+        border-radius: 9999px; /* bo tròn */
+        background: linear-gradient(90deg, #0f172a, #1e1b4b, #312e81, #4338ca, #1e3a8a);
+        background-size: 200% 100%;
+        animation: shimmer 5s linear infinite;
+        transition: width 0.2s ease-out;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        overflow: hidden; /* giữ năng lượng sáng trong thanh */
+    }
+
+    /* Hiệu ứng năng lượng sáng chạy qua */
+    #progress-bar::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 30%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: energy 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+        0%   { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    @keyframes energy {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(400%); }
+    }
+    </style>
+
+    <!-- Thanh progress -->
+    <div id="progress-bar" style="width: 0%;"></div>
+
+    <script>
+    const progressBar = document.getElementById("progress-bar");
+    window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + "%";
+    });
+    </script>
+
+
     <!-- Header -->
     <div class="bg-white rounded-2xl shadow-xl mt-8 p-6 w-11/12 md:w-3/4 text-center border border-purple-200">
         <h1 class="text-4xl font-extrabold text-purple-600">Machine Learning Project</h1>
