@@ -12,16 +12,17 @@
 
 <body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-300">
 
-        <canvas id="background-canvas"></canvas>
+    <canvas id="background-canvas"></canvas>
 
     <style>
     html, body {
         margin: 0;
-        height: 100%;
+        padding: 0;
+        height: auto;
         overflow-x: hidden;
     }
     #background-canvas {
-        position: fixed;
+        position: fixed; /* luôn phủ full màn hình */
         top: 0;
         left: 0;
         width: 100%;
@@ -33,43 +34,76 @@
     <script>
     const canvas = document.getElementById('background-canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     const particles = [];
-    for(let i=0;i<100;i++){
+    const particleCount = 150;
+    for (let i = 0; i < particleCount; i++) {
         particles.push({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            r: Math.random()*1+0.5, // giảm size ngôi sao
-            dx: (Math.random()-0.5)*0.5,
-            dy: (Math.random()-0.5)*0.5
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.2 + 0.3,
+            dx: (Math.random() - 0.5) * 0.3,
+            dy: (Math.random() - 0.5) * 0.3
         });
     }
 
-    function animate(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+    const mouse = { x: null, y: null };
+    window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         particles.forEach(p => {
             p.x += p.dx;
             p.y += p.dy;
-            if(p.x<0) p.x=canvas.width;
-            if(p.x>canvas.width) p.x=0;
-            if(p.y<0) p.y=canvas.height;
-            if(p.y>canvas.height) p.y=0;
+
+            // wrap-around
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
 
             ctx.beginPath();
-            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-            ctx.fillStyle = 'rgba(212,175,55,0.3)';
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fillStyle = 'rgba(212,175,55,0.4)';
             ctx.fill();
         });
+
+        // line to mouse
+        if(mouse.x && mouse.y){
+            particles.forEach(p => {
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if(dist < 120){
+                    ctx.beginPath();
+                    ctx.moveTo(p.x,p.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.strokeStyle = `rgba(212,175,55,${0.3*(1-dist/120)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            });
+        }
+
         requestAnimationFrame(animate);
     }
-    animate();
 
-    window.addEventListener('resize', ()=>{
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
+    animate();
     </script>
 
     <!-- Header -->
