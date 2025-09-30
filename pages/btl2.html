@@ -7,77 +7,91 @@
     <title>Bài Tập Lớn 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="crown.png">
 </head>
 
-<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex flex-col items-center text-gray-700">
+<body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-200">
+
+    <!-- Tổng style cho progress -->
     <style>
-    /* Thanh chính */
-    #progress-bar {
-        height: 2px; /* mỏng hơn */
-        border-radius: 9999px; /* bo tròn */
-        background: linear-gradient(90deg, #0f172a, #1e1b4b, #312e81, #4338ca, #1e3a8a);
-        background-size: 200% 100%;
-        animation: shimmer 5s linear infinite;
-        transition: width 0.2s ease-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 50;
-        overflow: hidden; /* giữ năng lượng sáng trong thanh */
-    }
+        #progress-bar {
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #d4af37, #facc15, #fbbf24);
+            background-size: 200% 100%;
+            animation: shimmer 5s linear infinite;
+            transition: width 0.2s ease-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
 
-    /* Hiệu ứng năng lượng sáng chạy qua */
-    #progress-bar::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 30%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-        animation: energy 2s linear infinite;
-    }
+        #progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: energy 2s linear infinite;
+        }
 
-    @keyframes shimmer {
-        0%   { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
 
-    @keyframes energy {
-        0%   { transform: translateX(-100%); }
-        100% { transform: translateX(400%); }
-    }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes energy {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(400%);
+            }
+        }
     </style>
 
     <!-- Thanh progress -->
     <div id="progress-bar" style="width: 0%;"></div>
-
     <script>
-    const progressBar = document.getElementById("progress-bar");
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / docHeight) * 100;
-        progressBar.style.width = progress + "%";
-    });
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + "%";
+        });
     </script>
-    
+
     <!-- Header -->
-    <div class="bg-white rounded-2xl shadow-xl mt-8 p-6 w-11/12 md:w-3/4 text-center">
-        <h1 class="text-4xl font-extrabold text-purple-600">Bài Tập Lớn 2</h1>
-        <p class="text-gray-500 mt-2 text-lg font-semibold">Team DNA05</p>
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">
+        <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">Bài Tập Lớn 2</h1>
+        <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
 
         <!-- Icons -->
-        <div class="flex justify-center gap-6 mt-4 text-lg">
-            <a href="" target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+        <div class="flex justify-center gap-8 mt-4 text-lg">
+            <a href="" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fab fa-google"></i> Colab
             </a>
-            <a href="" target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+            <a href="" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-file-alt"></i> Report
             </a>
             <a href="https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data?fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExTUtjbm44dkQ0NWdxNEJYbQEeHUYMfYAqr_6sCK9h3qwEtLDjHSMyWDEhn_D9T4Yxh69TpsN0ZPvD1MI3X1M_aem_v_XbLeENC_40lDYJNBt1NQ"
-                target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-database"></i> Dataset
             </a>
         </div>
@@ -86,96 +100,98 @@
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
         <a href="index.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
-            <p class="text-xl font-bold text-blue-600">Machine Learning Project</p>
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Machine Learning Project</p>
         </a>
         <a href="btl1.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-purple-400 transition border border-transparent">
-            <p class="text-xl font-bold text-purple-600">Bài tập lớn 1</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-700">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
                 <i class="fas fa-check-circle"></i> Completed
             </p>
         </a>
-        </a>
         <a href="btl3.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-indigo-400 transition border border-transparent">
-            <p class="text-xl font-bold text-indigo-600">Bài tập lớn 3</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
         <a href="btmr.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-green-400 transition border border-transparent">
-            <p class="text-xl font-bold text-green-600">Bài tập mở rộng</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
     </div>
 
     <!-- Tổng quan dataset -->
-    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
-        <h2 class="text-xl font-bold text-purple-600 mb-4">Tổng quan dataset</h2>
-        <p class="text-gray-600 mb-4">
-            Bộ dữ liệu <span class="font-semibold text-purple-600">Students-questions – Ultron</span> có khoảng 12.0000
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Tổng quan dataset</h2>
+        <p class="text-gray-300 mb-4">
+            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">Students-questions – Ultron</span> có khoảng 12.000
             mẫu. Mỗi
             mẫu gồm các câu hỏi và thắc mắc của học sinh Ấn Độ trong quá trình ôn luyện cho những kỳ thi cạnh tranh hàng
-            đầu
-            như JEE, NEET, AIIMS. Dữ liệu được lưu trong tệp CSV với hai cột: eng (nội dung câu hỏi bằng tiếng Anh) và
-            Subject (4 môn học tương ứng: Vật lý, Hóa học, Sinh học hoặc Toán học). Đây là một bài toán phân loại văn
-            bản để dự đoán môn học dựa trên mô tả câu hỏi.
-
+            đầu như JEE, NEET, AIIMS. Dữ liệu được lưu trong tệp CSV với hai cột: <span
+                class="font-semibold text-[#d4af37]">eng</span> (nội dung câu hỏi bằng tiếng Anh) và <span
+                class="font-semibold text-[#d4af37]">Subject</span> (môn học: Vật lý, Hóa học, Sinh học, Toán). Đây là
+            bài toán phân loại văn bản để dự đoán môn học dựa trên mô tả câu hỏi.
         </p>
     </div>
 
     <!-- Pipeline (timeline) -->
-    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
-        <h2 class="text-xl font-bold text-purple-600 mb-6">Pipeline chi tiết</h2>
-        <ol class="relative border-l border-gray-300 space-y-6 ml-3">
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
+        <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">1</span>
-                <h3 class="font-semibold text-purple-600">Phân tích dữ liệu (EDA)</h3>
-                <p class="text-gray-500">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
+                <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
+                <p class="text-gray-300">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">2</span>
-                <h3 class="font-semibold text-purple-600">Tiền xử lý dữ liệu</h3>
-                <p class="text-gray-500"></p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
+                <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
+                <p class="text-gray-300"></p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">3</span>
-                <h3 class="font-semibold text-purple-600">Trích xuất & giảm chiều</h3>
-                <p class="text-gray-500"></p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
+                <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
+                <p class="text-gray-300"></p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">4</span>
-                <h3 class="font-semibold text-purple-600">Huấn luyện mô hình</h3>
-                <p class="text-gray-500"></p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
+                <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
+                <p class="text-gray-300"></p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">5</span>
-                <h3 class="font-semibold text-purple-600">Đánh giá mô hình</h3>
-                <p class="text-gray-500">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
+                <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
+                <p class="text-gray-300">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">6</span>
-                <h3 class="font-semibold text-purple-600">Trực quan hóa kết quả</h3>
-                <p class="text-gray-500">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
+                <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
+                <p class="text-gray-300">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
             </li>
         </ol>
     </div>
 
     <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-200">
-        <p>© 2025 <span class="font-bold">Team DNA05</span> -
-            <span class="text-white-400">Machine Learning Project</span>
-        </p>
+    <footer class="mt-12 mb-6 text-center text-gray-400">
+        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                Learning Project</span></p>
     </footer>
 
 </body>

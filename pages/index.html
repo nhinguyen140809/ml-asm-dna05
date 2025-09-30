@@ -7,76 +7,89 @@
     <title>Machine Learning Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="crown.png">
 </head>
 
-<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex flex-col items-center text-gray-700">
+<body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-200">
 
     <style>
-    /* Thanh chính */
-    #progress-bar {
-        height: 2px; /* mỏng hơn */
-        border-radius: 9999px; /* bo tròn */
-        background: linear-gradient(90deg, #0f172a, #1e1b4b, #312e81, #4338ca, #1e3a8a);
-        background-size: 200% 100%;
-        animation: shimmer 5s linear infinite;
-        transition: width 0.2s ease-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 50;
-        overflow: hidden; /* giữ năng lượng sáng trong thanh */
-    }
+        /* Thanh chính */
+        #progress-bar {
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #d4af37, #facc15, #fbbf24);
+            background-size: 200% 100%;
+            animation: shimmer 5s linear infinite;
+            transition: width 0.2s ease-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
 
-    /* Hiệu ứng năng lượng sáng chạy qua */
-    #progress-bar::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 30%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-        animation: energy 2s linear infinite;
-    }
+        #progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: energy 2s linear infinite;
+        }
 
-    @keyframes shimmer {
-        0%   { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
 
-    @keyframes energy {
-        0%   { transform: translateX(-100%); }
-        100% { transform: translateX(400%); }
-    }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes energy {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(400%);
+            }
+        }
     </style>
 
     <!-- Thanh progress -->
     <div id="progress-bar" style="width: 0%;"></div>
 
     <script>
-    const progressBar = document.getElementById("progress-bar");
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / docHeight) * 100;
-        progressBar.style.width = progress + "%";
-    });
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + "%";
+        });
     </script>
 
-
     <!-- Header -->
-    <div class="bg-white rounded-2xl shadow-xl mt-8 p-6 w-11/12 md:w-3/4 text-center border border-purple-200">
-        <h1 class="text-4xl font-extrabold text-purple-600">Machine Learning Project</h1>
-        <p class="text-gray-500 mt-2 text-lg font-semibold">Team DNA05</p>
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">
+        <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">Machine Learning Project</h1>
+        <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
 
         <!-- Icons -->
         <div class="flex justify-center gap-8 mt-4 text-lg">
             <a href="https://github.com/nhinguyen140809/ml-asm-dna05?tab=readme-ov-file" target="_blank"
-                class="text-gray-600 hover:text-purple-700 hover:scale-110 transition">
+                class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fab fa-github"></i> Github
             </a>
-            <a href="" target="_blank" class="text-gray-600 hover:text-purple-700 hover:scale-110 transition">
+            <a href="" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-file-alt"></i> Report
             </a>
         </div>
@@ -85,107 +98,118 @@
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
         <a href="btl1.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-purple-400 transition border border-transparent">
-            <p class="text-xl font-bold text-purple-600">Bài tập lớn 1</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-700">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
                 <i class="fas fa-check-circle"></i> Completed
             </p>
         </a>
         <a href="btl2.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
-            <p class="text-xl font-bold text-blue-600">Bài tập lớn 2</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
         <a href="btl3.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-indigo-400 transition border border-transparent">
-            <p class="text-xl font-bold text-indigo-600">Bài tập lớn 3</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
         <a href="btmr.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-green-400 transition border border-transparent">
-            <p class="text-xl font-bold text-green-600">Bài tập mở rộng</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
     </div>
 
     <!-- Thông tin môn học -->
-    <div class="bg-white shadow-xl rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-purple-200">
-        <h2 class="text-2xl font-bold text-purple-600 mb-4">Thông tin môn học</h2>
-        <div class="text-gray-600 space-y-2">
-            <p><span class="font-semibold text-purple-600">Môn học:</span> Học máy (Machine Learning)</p>
-            <p><span class="font-semibold text-purple-600">Mã môn học:</span> CO3117</p>
-            <p><span class="font-semibold text-purple-600">Học kỳ:</span> 251</p>
-            <p><span class="font-semibold text-purple-600">Năm học:</span> 2025 - 2026</p>
-            <p><span class="font-semibold text-purple-600">Giảng viên hướng dẫn:</span> TS. Lê Thành Sách</p>
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Thông tin môn học</h2>
+        <div class="text-gray-300 space-y-2">
+            <p><span class="font-semibold text-[#d4af37]">Môn học:</span> Học máy (Machine Learning)</p>
+            <p><span class="font-semibold text-[#d4af37]">Mã môn học:</span> CO3117</p>
+            <p><span class="font-semibold text-[#d4af37]">Học kỳ:</span> 251</p>
+            <p><span class="font-semibold text-[#d4af37]">Năm học:</span> 2025 - 2026</p>
+            <p><span class="font-semibold text-[#d4af37]">Giảng viên hướng dẫn:</span> TS. Lê Thành Sách</p>
         </div>
     </div>
 
-    <!-- Thành viên nhóm  -->
-    <div class="bg-white shadow-xl rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-purple-200">
-    <h2 class="text-2xl font-bold text-purple-600 mb-6">Thành viên nhóm</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Thành viên 1: Phạm Khánh Duy -->
-        <div class="bg-gradient-to-br from-green-100 to-green-50 rounded-2xl p-6 text-center border border-green-200 hover:shadow-lg hover:-translate-y-1 transition">
-        <img src="https://avatars.githubusercontent.com/giantkduy84210" alt="Avatar Duy"
-            class="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4 object-cover">
-        <p class="text-xl font-semibold text-green-800">Phạm Khánh Duy</p>
-        <p class="text-gray-700">MSSV: 2310510</p>
-        <div class="flex justify-center items-center gap-4 mt-4 text-green-700">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=duy.pham84210@hcmut.edu.vn" class="hover:text-green-900" title="Gửi Email">
-            <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/giantkduy84210" target="_blank" class="hover:text-green-900" title="GitHub">
-            <i class="fab fa-github"></i>
-            </a>
-        </div>
-        </div>
+    <!-- Thành viên nhóm -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Thành viên nhóm</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Thành viên 1 -->
+            <div
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
+                <img src="https://avatars.githubusercontent.com/giantkduy84210" alt="Avatar Duy"
+                    class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
+                <p class="text-xl font-semibold text-[#d4af37]">Phạm Khánh Duy</p>
+                <p class="text-gray-300">MSSV: 2310510</p>
+                <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=duy.pham84210@hcmut.edu.vn"
+                        class="hover:text-[#d4af37]">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/giantkduy84210" target="_blank" class="hover:text-[#d4af37]">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
 
-        <!-- Thành viên 2: Tăng Hồng Ái -->
-        <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-6 text-center border border-blue-200 hover:shadow-lg hover:-translate-y-1 transition">
-        <img src="https://avatars.githubusercontent.com/tanghongai1704" alt="Avatar Ái"
-            class="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4 object-cover">
-        <p class="text-xl font-semibold text-blue-800">Tăng Hồng Ái</p>
-        <p class="text-gray-700">MSSV: 2310167</p>
-        <div class="flex justify-center items-center gap-4 mt-4 text-blue-700">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ai.tangmeo200922@hcmut.edu.vn" 
-            target="_blank" class="hover:text-purple-900" title="Gửi Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/tanghongai1704" target="_blank" class="hover:text-blue-900" title="GitHub">
-            <i class="fab fa-github"></i>
-            </a>
-        </div>
-        </div>
+            <!-- Thành viên 2 -->
+            <div
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
+                <img src="https://avatars.githubusercontent.com/tanghongai1704" alt="Avatar Ái"
+                    class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
+                <p class="text-xl font-semibold text-[#d4af37]">Tăng Hồng Ái</p>
+                <p class="text-gray-300">MSSV: 2310167</p>
+                <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ai.tangmeo200922@hcmut.edu.vn"
+                        target="_blank" class="hover:text-[#d4af37]">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/tanghongai1704" target="_blank" class="hover:text-[#d4af37]">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
 
-        <!-- Thành viên 3: Nguyễn Trần Yến Nhi -->
-        <div class="bg-gradient-to-br from-purple-100 to-purple-50 rounded-2xl p-6 text-center border border-purple-200 hover:shadow-lg hover:-translate-y-1 transition">
-        <img src="https://avatars.githubusercontent.com/nhinguyen140809" alt="Avatar Nhi"
-            class="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4 object-cover">
-        <p class="text-xl font-semibold text-purple-800">Nguyễn Trần Yến Nhi</p>
-        <p class="text-gray-700">MSSV: 2312506</p>
-        <div class="flex justify-center items-center gap-4 mt-4 text-purple-700">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nhi.nguyen140809@hcmut.edu.vn" 
-            target="_blank" class="hover:text-purple-900" title="Gửi Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/nhinguyen140809" target="_blank" class="hover:text-purple-900" title="GitHub">
-            <i class="fab fa-github"></i>
-            </a>
-        </div>
+            <!-- Thành viên 3 -->
+            <div
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
+                <img src="https://avatars.githubusercontent.com/nhinguyen140809" alt="Avatar Nhi"
+                    class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
+                <p class="text-xl font-semibold text-[#d4af37]">Nguyễn Trần Yến Nhi</p>
+                <p class="text-gray-300">MSSV: 2312506</p>
+                <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nhi.nguyen140809@hcmut.edu.vn"
+                        target="_blank" class="hover:text-[#d4af37]">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/nhinguyen140809" target="_blank" class="hover:text-[#d4af37]">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
 
-    <!-- Mục tiêu bài tập lớn -->
-    <div class="bg-white shadow-xl rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-purple-200">
-        <h2 class="text-2xl font-bold text-purple-600 mb-4">Mục tiêu của bài tập lớn</h2>
-        <ul class="list-disc list-inside text-gray-600 space-y-2">
+    <!-- Mục tiêu -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Mục tiêu của bài tập lớn</h2>
+        <ul class="list-disc list-inside text-gray-300 space-y-2">
             <li>Hiểu và áp dụng được quy trình pipeline học máy truyền thống, bao gồm: tiền xử lý dữ liệu, trích xuất
                 đặc trưng, huấn luyện và đánh giá mô hình.</li>
             <li>Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng, văn bản, và ảnh.
@@ -195,10 +219,11 @@
             <li>Rèn luyện kỹ năng lập trình, thử nghiệm, và tổ chức báo cáo khoa học.</li>
         </ul>
     </div>
+
     <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-200">
-        <p>© 2025 <span class="font-bold">Team DNA05</span> -
-            <span class="text-white-400">Machine Learning Project</span>
+    <footer class="mt-12 mb-6 text-center text-gray-400">
+        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> -
+            <span class="text-gray-200">Machine Learning Project</span>
         </p>
     </footer>
 

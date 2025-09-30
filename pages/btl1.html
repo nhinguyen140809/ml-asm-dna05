@@ -4,83 +4,97 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bài Tập Lớn 1</title>
+    <title>Machine Learning Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="crown.png">
 </head>
 
-<body class="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen flex flex-col items-center text-gray-700">
+<body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-200">
 
-        <style>
-    /* Thanh chính */
-    #progress-bar {
-        height: 2px; /* mỏng hơn */
-        border-radius: 9999px; /* bo tròn */
-        background: linear-gradient(90deg, #0f172a, #1e1b4b, #312e81, #4338ca, #1e3a8a);
-        background-size: 200% 100%;
-        animation: shimmer 5s linear infinite;
-        transition: width 0.2s ease-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 50;
-        overflow: hidden; /* giữ năng lượng sáng trong thanh */
-    }
+    <style>
+        /* Thanh chính */
+        #progress-bar {
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #d4af37, #facc15, #fbbf24);
+            background-size: 200% 100%;
+            animation: shimmer 5s linear infinite;
+            transition: width 0.2s ease-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
 
-    /* Hiệu ứng năng lượng sáng chạy qua */
-    #progress-bar::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 30%;
-        border-radius: inherit;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-        animation: energy 2s linear infinite;
-    }
+        #progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: energy 2s linear infinite;
+        }
 
-    @keyframes shimmer {
-        0%   { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
 
-    @keyframes energy {
-        0%   { transform: translateX(-100%); }
-        100% { transform: translateX(400%); }
-    }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes energy {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(400%);
+            }
+        }
     </style>
 
     <!-- Thanh progress -->
     <div id="progress-bar" style="width: 0%;"></div>
 
     <script>
-    const progressBar = document.getElementById("progress-bar");
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / docHeight) * 100;
-        progressBar.style.width = progress + "%";
-    });
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + "%";
+        });
     </script>
-    
+
     <!-- Header -->
-    <div class="bg-white rounded-2xl shadow-xl mt-8 p-6 w-11/12 md:w-3/4 text-center">
-        <h1 class="text-4xl font-extrabold text-purple-600">Bài Tập Lớn 1</h1>
-        <p class="text-gray-500 mt-2 text-lg font-semibold">Team DNA05</p>
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">
+        <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">Bài Tập Lớn 1</h1>
+        <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
 
         <!-- Icons -->
         <div class="flex justify-center gap-6 mt-4 text-lg">
             <a href="https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing"
-                target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fab fa-google"></i> Colab
             </a>
             <a href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL1_Report.pdf"
-                target="_blank" class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-file-alt"></i> Report
             </a>
             <a href="https://www.kaggle.com/datasets/oktayrdeki/heart-disease" target="_blank"
-                class="text-gray-600 hover:text-purple-600 hover:scale-110 transition">
+                class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-database"></i> Dataset
             </a>
         </div>
@@ -89,178 +103,180 @@
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
         <a href="index.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
-            <p class="text-xl font-bold text-blue-600">Machine Learning Project</p>
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Machine Learning Project</p>
         </a>
         <a href="btl2.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-blue-400 transition border border-transparent">
-            <p class="text-xl font-bold text-blue-600">Bài tập lớn 2</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
         <a href="btl3.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-indigo-400 transition border border-transparent">
-            <p class="text-xl font-bold text-indigo-600">Bài tập lớn 3</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
         <a href="btmr.html"
-            class="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-green-400 transition border border-transparent">
-            <p class="text-xl font-bold text-green-600">Bài tập mở rộng</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-blue-100 text-blue-700 animate-pulse">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/40 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
     </div>
 
     <!-- Tổng quan dataset -->
-    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
-        <h2 class="text-xl font-bold text-purple-600 mb-4">Tổng quan dataset</h2>
-        <p class="text-gray-600 mb-4">
-            Bộ dữ liệu <span class="font-semibold text-purple-600">Heart Disease Dataset – Oktay Rdeki</span> có 10.000
-            mẫu, mỗi mẫu
-            đại
-            diện cho một người.
-            Dữ liệu ghi lại các thông tin về sức khỏe, chỉ số sinh học và thói quen sinh hoạt, kèm theo thông tin cho
-            biết
-            người đó có mắc bệnh tim mạch hay không. Dưới đây là các thuộc tính quan trọng:
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Tổng quan dataset</h2>
+        <p class="text-gray-300 mb-4">
+            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">Heart Disease Dataset – Oktay Rdeki</span> có 10.000
+            mẫu, mỗi mẫu đại diện cho một người. Dữ liệu ghi lại các thông tin về sức khỏe, chỉ số sinh học và thói quen
+            sinh hoạt, kèm theo thông tin cho biết người đó có mắc bệnh tim mạch hay không. Dưới đây là các thuộc tính
+            quan trọng:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-user text-blue-500 mt-1"></i>
-                <p class="text-gray-600">Age (float): tuổi của cá nhân</p>
+                <p class="text-gray-300">Age (float): tuổi của cá nhân</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-venus-mars text-pink-500 mt-1"></i>
-                <p class="text-gray-600">Gender (Male/Female): giới tính</p>
+                <p class="text-gray-300">Gender (Male/Female): giới tính</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-heartbeat text-red-500 mt-1"></i>
-                <p class="text-gray-600">Blood Pressure (float): chỉ số huyết áp (mmHg)</p>
+                <p class="text-gray-300">Blood Pressure (float): chỉ số huyết áp (mmHg)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-vials text-yellow-500 mt-1"></i>
-                <p class="text-gray-600">Cholesterol Level (float): nồng độ cholesterol (mg/dL)</p>
+                <p class="text-gray-300">Cholesterol Level (float): nồng độ cholesterol (mg/dL)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-dumbbell text-green-500 mt-1"></i>
-                <p class="text-gray-600">Exercise Habits: mức độ tập luyện</p>
+                <p class="text-gray-300">Exercise Habits: mức độ tập luyện</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-smoking text-gray-500 mt-1"></i>
-                <p class="text-gray-600">Smoking: tình trạng hút thuốc</p>
+                <p class="text-gray-300">Smoking: tình trạng hút thuốc</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-users text-purple-500 mt-1"></i>
-                <p class="text-gray-600">Family Heart Disease: tiền sử gia đình</p>
+                <p class="text-gray-300">Family Heart Disease: tiền sử gia đình</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-syringe text-red-400 mt-1"></i>
-                <p class="text-gray-600">Diabetes: tình trạng tiểu đường</p>
+                <p class="text-gray-300">Diabetes: tình trạng tiểu đường</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-weight text-orange-500 mt-1"></i>
-                <p class="text-gray-600">BMI (float): chỉ số khối cơ thể</p>
+                <p class="text-gray-300">BMI (float): chỉ số khối cơ thể</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-stethoscope text-red-500 mt-1"></i>
-                <p class="text-gray-600">High Blood Pressure (Yes/No): tình trạng tăng huyết áp</p>
+                <p class="text-gray-300">High Blood Pressure (Yes/No): tình trạng tăng huyết áp</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-vial text-yellow-600 mt-1"></i>
-                <p class="text-gray-600">High LDL Cholesterol (Yes/No): mức LDL cao</p>
+                <p class="text-gray-300">High LDL Cholesterol (Yes/No): mức LDL cao</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-wine-bottle text-pink-500 mt-1"></i>
-                <p class="text-gray-600">Alcohol Consumption (None/Low/Medium/High)</p>
+                <p class="text-gray-300">Alcohol Consumption (None/Low/Medium/High)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-brain text-indigo-500 mt-1"></i>
-                <p class="text-gray-600">Stress Level (Low/Medium/High)</p>
+                <p class="text-gray-300">Stress Level (Low/Medium/High)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-bed text-blue-400 mt-1"></i>
-                <p class="text-gray-600">Sleep Hours (float): số giờ ngủ trung bình/ngày</p>
+                <p class="text-gray-300">Sleep Hours (float): số giờ ngủ trung bình/ngày</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-candy-cane text-red-400 mt-1"></i>
-                <p class="text-gray-600">Sugar Consumption (Low/Medium/High)</p>
+                <p class="text-gray-300">Sugar Consumption (Low/Medium/High)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-flask text-teal-500 mt-1"></i>
-                <p class="text-gray-600">Triglyceride Level (float): nồng độ triglyceride</p>
+                <p class="text-gray-300">Triglyceride Level (float): nồng độ triglyceride</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-tint text-indigo-500 mt-1"></i>
-                <p class="text-gray-600">Fasting Blood Sugar (float): đường huyết lúc đói</p>
+                <p class="text-gray-300">Fasting Blood Sugar (float): đường huyết lúc đói</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-vial-circle-check text-green-500 mt-1"></i>
-                <p class="text-gray-600">CRP Level (float): nồng độ protein phản ứng C</p>
+                <p class="text-gray-300">CRP Level (float): nồng độ protein phản ứng C</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-dna text-purple-400 mt-1"></i>
-                <p class="text-gray-600">Homocysteine Level (float)</p>
+                <p class="text-gray-300">Homocysteine Level (float)</p>
             </div>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-3 flex items-start gap-2">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-heart text-red-600 mt-1"></i>
-                <p class="text-gray-600">Heart Disease Status (Yes/No): tình trạng bệnh tim</p>
+                <p class="text-gray-300">Heart Disease Status (Yes/No): tình trạng bệnh tim</p>
             </div>
         </div>
     </div>
 
+
+
     <!-- Pipeline (timeline) -->
-    <div class="bg-white shadow-xl rounded-2xl mt-8 p-6 w-11/12 md:w-3/4">
-        <h2 class="text-xl font-bold text-purple-600 mb-6">Pipeline chi tiết</h2>
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
         <ol class="relative border-l border-gray-300 space-y-6 ml-3">
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">1</span>
-                <h3 class="font-semibold text-purple-600">Phân tích dữ liệu (EDA)</h3>
-                <p class="text-gray-500">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">1</span>
+                <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
+                <p class="text-gray-300">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">2</span>
-                <h3 class="font-semibold text-purple-600">Tiền xử lý dữ liệu</h3>
-                <p class="text-gray-500">Xử lý missing values, scaling và mất cân bằng.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">2</span>
+                <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
+                <p class="text-gray-300">Xử lý missing values, scaling và mất cân bằng.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">3</span>
-                <h3 class="font-semibold text-purple-600">Trích xuất & giảm chiều</h3>
-                <p class="text-gray-500">Áp dụng PCA để giảm chiều dữ liệu.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">3</span>
+                <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
+                <p class="text-gray-300">Áp dụng PCA để giảm chiều dữ liệu.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">4</span>
-                <h3 class="font-semibold text-purple-600">Huấn luyện mô hình</h3>
-                <p class="text-gray-500">Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision
-                    Tree.
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">4</span>
+                <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
+                <p class="text-gray-300">Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision Tree.
                 </p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">5</span>
-                <h3 class="font-semibold text-purple-600">Đánh giá mô hình</h3>
-                <p class="text-gray-500">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">5</span>
+                <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
+                <p class="text-gray-300">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
             </li>
             <li class="ml-6">
                 <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-500 rounded-full text-white">6</span>
-                <h3 class="font-semibold text-purple-600">Trực quan hóa kết quả</h3>
-                <p class="text-gray-500">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black font-bold">6</span>
+                <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
+                <p class="text-gray-300">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
             </li>
         </ol>
     </div>
 
     <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-200">
-        <p>© 2025 <span class="font-bold">Team DNA05</span> -
-            <span class="text-white-400">Machine Learning Project</span>
-        </p>
+    <footer class="mt-12 mb-6 text-center text-gray-400">
+        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                Learning Project</span></p>
     </footer>
 
 </body>
