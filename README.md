@@ -20,11 +20,12 @@ Nhóm: DNA05
 ## Tổng quan về dự án
 
 Trong khuôn khổ môn học **Học Máy – CO3117**, có 4 dự án:
+- Trang chung cho toàn dự án: [Github Page](https://nhinguyen140809.github.io/ml-asm-dna05/index.html)
 
 | Dự án                         | Nội dung                                                  | Trạng thái      | Trang Github   | Colab       |
 |---------------------------------|---------------------------------------------------------|---------------------------------|----------------|-------------|
-| **BTL1**                          | Tabular Data                                            | ✅ Hoàn thành | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/)   | [Open In Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
-| **BTL2**                          | Text Data                                               | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
+| **BTL1**                          | Tabular Data                                            | ✅ Hoàn thành | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl1.html)   | [Open In Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
+| **BTL2**                          | Text Data                                               | ✅ Hoàn thành | [Text Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl2.html)   | [Open In Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing) |
 | **BTL3**                          | Image Data                                              | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
 | **Mở rộng** | Hidden Markov Model     | 🕐 Cập nhật sau | 🕐 Cập nhật sau            | 🕐 Cập nhật sau |
 
@@ -45,8 +46,10 @@ GitHub: [https://github.com/nhinguyen140809/ml-asm-dna05](https://github.com/nhi
 ml-asm-dna05/
 |-- notebooks/                                # Notebook Google Colab
 |   |-- DNA05_BTL1.ipynb                 
+|   |-- DNA05_BTL2ipynb                 
 |-- reports/                                  # Báo cáo
 |   |-- DNA05_BTL1_Report.pdf
+|   |-- DNA05_BTL2_Report.pdf
 |-- features/                                 # File đặc trưng được trích xuất
 |   |-- BTL1
 |   |-- BTL2
@@ -120,14 +123,7 @@ Ví dụ, `notebooks/DNA05-BTL1.ipynb`.
 
 ## Bài tập lớn 1 - Dự đoán bệnh tim mạch (Heart Disease Prediction)
 
-Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, dạng bảng với ~10.000 mẫu, chứa các thông tin về sức khỏe và các chỉ số sinh học. Nhóm triển khai pipeline học máy đầy đủ, bao gồm:
-
-1. Phân tích dữ liệu (EDA)  
-2. Tiền xử lý dữ liệu (missing values, scaling, xử lý mất cân bằng)  
-3. Trích xuất & giảm chiều dữ liệu bằng PCA  
-4. Huấn luyện nhiều mô hình phân loại (Logistic Regression, Random Forest, SVM, KNN, Naive Bayes, Decision Tree)  
-5. Đánh giá mô hình bằng các metric: Accuracy, Precision, Recall, F1-score  
-6. Trực quan hóa kết quả và Confusion Matrix  
+Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, dạng bảng với ~10.000 mẫu, chứa các thông tin về sức khỏe và các chỉ số sinh học.
 
 ### Dataset
 
@@ -138,7 +134,19 @@ Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, d
 - Report PDF: [DNA05-BTL1-Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL1_Report.pdf)  
 - Colab Notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)  
 
-## Bài tập lớn 2 (Cập nhật sau)
+## Bài tập lớn 2 - Phân loại câu hỏi học tập (Student Questions Classification)
+
+Bài tập lớn sử dụng bộ dữ liệu `Students-questions.csv` từ Kaggle, dạng văn bản với 121.679 mẫu, chứa các câu hỏi do học sinh đặt ra trong quá trình chuẩn bị các kỳ thi JEE Advanced, JEE Mains, NEET, AIMs. Mỗi câu hỏi được gán nhãn môn học tương ứng: `Physics`, `Chemistry`, `Biology`, hoặc `Mathematics`. 
+
+### Dataset
+
+- [Students Questions Dataset – Kaggle](https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data)  
+
+### Report và Notebook
+
+- Report PDF: [DNA05-BTL2-Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf)
+- Colab Notebook: [DNA05-BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
+
 
 ## Bài tập lớn 3 (Cập nhật sau)
 
