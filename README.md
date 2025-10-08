@@ -111,7 +111,9 @@ Ví dụ, `notebooks/DNA05-BTL1.ipynb`.
 
 ### Google Colab
 
-- Click vào link Colab notebook: [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+- Click vào link Colab notebook:
+    - [DNA05-BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+    - [DNA05-BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
 
 - Chạy tất cả các cell để thực hiện pipeline trực tuyến mà không cần cài đặt thêm trên máy. Có thể dùng **Run all** để chạy toàn bộ cell tự động.
 
