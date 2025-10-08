@@ -136,7 +136,7 @@ Bài tập lớn sử dụng bộ dữ liệu `heart_disease.csv` từ Kaggle, d
 
 ## Bài tập lớn 2 - Phân loại câu hỏi học tập (Student Questions Classification)
 
-Bài tập lớn sử dụng bộ dữ liệu `Students-questions.csv` từ Kaggle, dạng văn bản với 121.679 mẫu, chứa các câu hỏi do học sinh đặt ra trong quá trình chuẩn bị các kỳ thi JEE Advanced, JEE Mains, NEET, AIMs. Mỗi câu hỏi được gán nhãn môn học tương ứng: `Physics`, `Chemistry`, `Biology`, hoặc `Mathematics`. 
+Bài tập lớn sử dụng bộ dữ liệu `subjects-questions` dạng bảng với 121.679 mẫu, chứa các câu hỏi do học sinh đặt ra trong quá trình chuẩn bị các kỳ thi JEE Advanced, JEE Mains, NEET, AIMs. Mỗi câu hỏi được gán nhãn môn học tương ứng: `Physics`, `Chemistry`, `Biology`, hoặc `Mathematics`. 
 
 ### Dataset
 
