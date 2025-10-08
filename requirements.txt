@@ -3,6 +3,13 @@ numpy
 scikit-learn
 imbalanced-learn
 matplotlib
-kagglehub
 plotly
 jupyter
+
+nltk
+transformers
+torch
+
+tqdm
+seaborn
+joblib
