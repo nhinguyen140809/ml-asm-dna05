@@ -86,7 +86,17 @@ ml-asm-dna05/
 
 ## 🚀 Cách sử dụng
 
-### 1️⃣ Cài đặt Local
+### 1️⃣ Google Colab
+
+* Mở trực tiếp các notebook:
+
+  * [BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
+  * [BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
+
+Nhấn **Run all** để thực hiện pipeline trực tuyến mà không cần cài đặt.
+
+### 2️⃣ Cài đặt Local
+* Chỉ áp dụng cho BTL1
 
 ```bash
 # Clone repository
@@ -109,15 +119,6 @@ jupyter notebook
 ```
 
 Mở notebook cụ thể (ví dụ `DNA05_BTL1.ipynb`) và chạy.
-
-### 2️⃣ Google Colab
-
-* Mở trực tiếp các notebook:
-
-  * [BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
-  * [BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
-
-Nhấn **Run all** để thực hiện pipeline trực tuyến mà không cần cài đặt.
 
 ---
 
