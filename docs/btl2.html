@@ -294,64 +294,103 @@
         </a>
     </div>
 
-    <!-- Tổng quan dataset -->
-    <div
-        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+    <!-- Tổng quan dataset BTL2 -->
+    <div class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
         <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Tổng quan dataset</h2>
         <p class="text-gray-300 mb-4">
-            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">Students-questions – Ultron</span> có khoảng 12.000
-            mẫu. Mỗi
-            mẫu gồm các câu hỏi và thắc mắc của học sinh Ấn Độ trong quá trình ôn luyện cho những kỳ thi cạnh tranh hàng
-            đầu như JEE, NEET, AIIMS. Dữ liệu được lưu trong tệp CSV với hai cột: <span
-                class="font-semibold text-[#d4af37]">eng</span> (nội dung câu hỏi bằng tiếng Anh) và <span
-                class="font-semibold text-[#d4af37]">Subject</span> (môn học: Vật lý, Hóa học, Sinh học, Toán). Đây là
-            bài toán phân loại văn bản để dự đoán môn học dựa trên mô tả câu hỏi.
+            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">IITJEE NEET AIIMS Students Questions Data</span> gồm 122,519 mẫu, mỗi mẫu là một câu hỏi bằng tiếng Anh của học sinh chuẩn bị cho các kỳ thi <strong>IIT-JEE, NEET, AIIMS</strong>. Mỗi câu hỏi được gán nhãn môn học tương ứng: <strong>Physics, Chemistry, Maths, Biology</strong>.
         </p>
+
+        <p class="text-gray-300 mb-4">Bộ dữ liệu có 2 cột chính:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-question text-blue-500 mt-1"></i>
+                <p class="text-gray-300"><strong>eng</strong> (object): nội dung câu hỏi bằng tiếng Anh</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-book text-yellow-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Subject</strong> (object): môn học câu hỏi thuộc về (Physics, Chemistry, Maths, Biology)</p>
+            </div>
+        </div>
+
+        <p class="text-gray-300 mb-4">Bộ dữ liệu hoàn toàn đầy đủ, không có giá trị missing.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-circle-check text-green-500 mt-1"></i>
+                <p class="text-gray-300"><strong>eng:</strong> 0 giá trị missing</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-circle-check text-green-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Subject:</strong> 0 giá trị missing</p>
+            </div>
+        </div>
+
+        <p class="text-gray-300 mb-4">Phân bố câu hỏi theo môn học:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-atom text-red-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Physics:</strong> 31.37%</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-flask text-green-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Chemistry:</strong> 30.83%</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-square-root-alt text-orange-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Maths:</strong> 27.09%</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-dna text-purple-500 mt-1"></i>
+                <p class="text-gray-300"><strong>Biology:</strong> 10.71%</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Pipeline (timeline) -->
-    <div
-        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
-        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
-        <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
-                <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
-                <p class="text-gray-300">Khám phá đặc trưng dữ liệu, thống kê mô tả và mối quan hệ.</p>
-            </li>
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
-                <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
-                <p class="text-gray-300"></p>
-            </li>
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
-                <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
-                <p class="text-gray-300"></p>
-            </li>
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
-                <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
-                <p class="text-gray-300"></p>
-            </li>
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
-                <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
-                <p class="text-gray-300">Sử dụng Accuracy, Precision, Recall, F1-score.</p>
-            </li>
-            <li class="ml-6">
-                <span
-                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
-                <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
-                <p class="text-gray-300">Biểu đồ, Confusion Matrix, so sánh mô hình.</p>
-            </li>
-        </ol>
-    </div>
+
+<!-- Pipeline (timeline) BTL2 -->
+<div
+    class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+    <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
+    <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
+            <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
+            <p class="text-gray-300">Khám phá dữ liệu, thống kê nhãn, phân bố câu hỏi theo môn học, kiểm tra missing value và imbalance trong dữ liệu.</p>
+        </li>
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
+            <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
+            <p class="text-gray-300">Xử lý text: loại bỏ trùng lặp, loại bỏ ký tự đặc biệt, punctuation, khoảng trắng; chuẩn hóa chữ hoa/thường, tokenization, xử lý stopwords,... cũng như chuẩn hóa nhãn môn học.</p>
+        </li>
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
+            <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
+            <p class="text-gray-300">Chuyển văn bản sang feature: BoW, TF-IDF, n-gram, GloVe embeddings, DistilBERT embeddings.</p>
+        </li>
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
+            <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
+            <p class="text-gray-300">Áp dụng các mô hình Machine Learning: Logistic Regression, Random Forest, Decision Tree, MultinomialNB; hoặc mô hình Deep Learning: LSTM end-to-end.</p>
+        </li>
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
+            <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
+            <p class="text-gray-300">Sử dụng các chỉ số: Accuracy, Precision, Recall, F1-score, kiểm tra khả năng phân loại cân bằng giữa các lớp môn học.</p>
+        </li>
+        <li class="ml-6">
+            <span
+                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
+            <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
+            <p class="text-gray-300">Vẽ biểu đồ tần suất nhãn, confusion matrix, so sánh hiệu quả các mô hình trong việc dự đoán môn học theo câu hỏi học thuật.</p>
+        </li>
+    </ol>
+</div>
+
 
     <!-- Footer -->
     <footer class="mt-12 mb-6 text-center text-gray-400">
