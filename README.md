@@ -54,7 +54,8 @@ ml-asm-dna05/
 |   |-- BTL_MR
 |-- modules/                                  # Các module hỗ trợ
 |   |-- ml_pipeline.py
-|   |-- hmm.py
+|   |-- EAssignment/
+|       |-- hmm.py    
 |-- docs/                                     
 |   |-- meeting_evidence                      # Meeting minutes và hình ảnh cuộc họp
 |      |-- BTL1
