@@ -5,11 +5,6 @@ imbalanced-learn
 matplotlib
 plotly
 jupyter
-
-nltk
-transformers
-torch
-
 tqdm
-seaborn
 joblib
+
