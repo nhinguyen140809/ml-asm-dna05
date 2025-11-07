@@ -80,210 +80,222 @@
     <canvas id="background-canvas"></canvas>
 
     <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: auto;
-        overflow-x: hidden;
-    }
-    #background-canvas {
-        position: fixed; /* luôn phủ full màn hình */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        #background-canvas {
+            position: fixed;
+            /* luôn phủ full màn hình */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
     </style>
 
     <script>
-    const canvas = document.getElementById('background-canvas');
-    const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    const particles = [];
-    const particleCount = 150;
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.2 + 0.3,
-            dx: (Math.random() - 0.5) * 0.3,
-            dy: (Math.random() - 0.5) * 0.3
-        });
-    }
-
-    const mouse = { x: null, y: null };
-    window.addEventListener('mousemove', e => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.x += p.dx;
-            p.y += p.dy;
-
-            // wrap-around
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-            ctx.fillStyle = 'rgba(212,175,55,0.4)';
-            ctx.fill();
-        });
-
-        // line to mouse
-        if(mouse.x && mouse.y){
-            particles.forEach(p => {
-                const dx = p.x - mouse.x;
-                const dy = p.y - mouse.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if(dist < 120){
-                    ctx.beginPath();
-                    ctx.moveTo(p.x,p.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(212,175,55,${0.3*(1-dist/120)})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                }
+        const particles = [];
+        const particleCount = 150;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.2 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3
             });
         }
 
-        requestAnimationFrame(animate);
-    }
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-    animate();
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // wrap-around
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(212,175,55,0.4)';
+                ctx.fill();
+            });
+
+            // line to mouse
+            if (mouse.x && mouse.y) {
+                particles.forEach(p => {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(212,175,55,${0.3 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                });
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 
     <!-- Star Icon Trigger -->
-    <div id="hcmut-star" class="fixed bottom-6 right-6 z-50 cursor-pointer text-yellow-400 text-3xl hover:text-yellow-300 transition">
+    <div id="hcmut-star"
+        class="fixed bottom-6 right-6 z-50 cursor-pointer text-yellow-400 text-3xl hover:text-yellow-300 transition">
         &#9733; <!-- Unicode ngôi sao -->
     </div>
 
     <!-- HCMUT Info Widget -->
-    <div id="hcmut-widget" class="fixed bottom-20 right-6 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-72 text-white flex flex-col items-center z-50 hidden">
-        <img src="HCMUT_LOGO.png" 
-            alt="HCMUT Logo" class="w-16 h-auto mb-3 rounded-full border-2 border-[#d4af37]">
-        <p class="text-sm text-center mb-3">Môn học thuộc trường <strong>Đại học Bách khoa – ĐHQG TP.HCM (HCMUT)</strong>, nổi bật về Kỹ thuật & Công nghệ, nhiều chương trình học chất lượng cao.</p>
-        <a href="https://hcmut.edu.vn/" target="_blank" 
+    <div id="hcmut-widget"
+        class="fixed bottom-20 right-6 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-72 text-white flex flex-col items-center z-50 hidden">
+        <img src="HCMUT_LOGO.png" alt="HCMUT Logo" class="w-16 h-auto mb-3 rounded-full border-2 border-[#d4af37]">
+        <p class="text-sm text-center mb-3">Môn học thuộc trường <strong>Đại học Bách khoa – ĐHQG TP.HCM
+                (HCMUT)</strong>, nổi bật về Kỹ thuật & Công nghệ, nhiều chương trình học chất lượng cao.</p>
+        <a href="https://hcmut.edu.vn/" target="_blank"
             class="bg-[#d4af37] text-[#111827] font-semibold px-5 py-1.5 text-xs rounded-full hover:bg-yellow-400 transition">
             Truy cập trang trường
-            </a>
-        <button id="hcmut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+        </a>
+        <button id="hcmut-close"
+            class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
     </div>
 
     <script>
-    const widget = document.getElementById('hcmut-widget');
-    const star = document.getElementById('hcmut-star');
-    const closeBtn = document.getElementById('hcmut-close');
+        const widget = document.getElementById('hcmut-widget');
+        const star = document.getElementById('hcmut-star');
+        const closeBtn = document.getElementById('hcmut-close');
 
-    // Toggle widget khi click ngôi sao
-    star.addEventListener('click', ()=>{
-        if(widget.style.display === 'flex'){
-            // ẩn đi
+        // Toggle widget khi click ngôi sao
+        star.addEventListener('click', () => {
+            if (widget.style.display === 'flex') {
+                // ẩn đi
+                widget.style.transform = 'translateX(150%)';
+                widget.style.opacity = 0;
+                setTimeout(() => widget.style.display = 'none', 500);
+            } else {
+                // hiện lên
+                widget.style.display = 'flex';
+                widget.style.transform = 'translateX(150%)';
+                widget.style.opacity = 0;
+                setTimeout(() => {
+                    widget.style.transition = 'all 0.5s ease';
+                    widget.style.transform = 'translateX(0)';
+                    widget.style.opacity = 1;
+                }, 50);
+            }
+        });
+
+        // Đóng widget bằng nút ×
+        closeBtn.addEventListener('click', () => {
             widget.style.transform = 'translateX(150%)';
             widget.style.opacity = 0;
-            setTimeout(()=>widget.style.display='none', 500);
-        } else {
-            // hiện lên
-            widget.style.display = 'flex';
-            widget.style.transform = 'translateX(150%)';
-            widget.style.opacity = 0;
-            setTimeout(()=>{
-                widget.style.transition = 'all 0.5s ease';
-                widget.style.transform = 'translateX(0)';
-                widget.style.opacity = 1;
-            }, 50);
-        }
-    });
-
-    // Đóng widget bằng nút ×
-    closeBtn.addEventListener('click', ()=>{
-        widget.style.transform = 'translateX(150%)';
-        widget.style.opacity = 0;
-        setTimeout(()=>widget.style.display='none', 500);
-    });
+            setTimeout(() => widget.style.display = 'none', 500);
+        });
     </script>
 
 
 
 
     <!-- Keyboard Shortcuts Help Button (PC only) -->
-    <div id="shortcut-help-btn" class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+    <div id="shortcut-help-btn"
+        class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
         ?
     </div>
 
     <!-- Keyboard Shortcuts Popup -->
-    <div id="shortcut-popup" class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+    <div id="shortcut-popup"
+        class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
         <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">Keyboard Shortcuts</h3>
         <ul class="space-y-2">
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
                 <span class="text-gray-200 text-sm">Trở về trang chính</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
                 <span class="text-gray-200 text-sm">Refresh trang</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
                 <span class="text-gray-200 text-sm">Mở repository GitHub</span>
             </li>
         </ul>
 
-        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+        <button id="shortcut-close"
+            class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
     </div>
 
     <script>
-    const shortcutBtn = document.getElementById('shortcut-help-btn');
-    const shortcutPopup = document.getElementById('shortcut-popup');
-    const shortcutClose = document.getElementById('shortcut-close');
+        const shortcutBtn = document.getElementById('shortcut-help-btn');
+        const shortcutPopup = document.getElementById('shortcut-popup');
+        const shortcutClose = document.getElementById('shortcut-close');
 
-    // Bật/tắt popup khi bấm nút "?"
-    shortcutBtn.addEventListener('click', () => {
-        shortcutPopup.classList.toggle('hidden');
-    });
+        // Bật/tắt popup khi bấm nút "?"
+        shortcutBtn.addEventListener('click', () => {
+            shortcutPopup.classList.toggle('hidden');
+        });
 
-    // Đóng popup
-    shortcutClose.addEventListener('click', () => {
-        shortcutPopup.classList.add('hidden');
-    });
+        // Đóng popup
+        shortcutClose.addEventListener('click', () => {
+            shortcutPopup.classList.add('hidden');
+        });
 
-    // Keyboard shortcuts chung
-    document.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
-        const key = e.key.toLowerCase();
+        // Keyboard shortcuts chung
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
+            const key = e.key.toLowerCase();
 
-        switch(key){
-            case 'h':
-                window.location.href = 'index.html'; // trang chính
-                break;
-            case 'r':
-                location.reload(); // reload trang
-                break;
-            case 'g':
-                window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
-                break;
-            default:
-                break;
-        }
-    });
+            switch (key) {
+                case 'h':
+                    window.location.href = 'index.html'; // trang chính
+                    break;
+                case 'r':
+                    location.reload(); // reload trang
+                    break;
+                case 'g':
+                    window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
+                    break;
+                default:
+                    break;
+            }
+        });
     </script>
 
 
@@ -301,7 +313,8 @@
                 class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fab fa-github"></i> Github
             </a>
-            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/tree/main/reports" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
+            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/tree/main/reports" target="_blank"
+                class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-file-alt"></i> Report
             </a>
         </div>
@@ -310,190 +323,207 @@
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10 w-11/12 md:w-3/4">
 
-    <!-- Card 1 -->
-    <a href="btl1.html"
-        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 1</p>
-        <!-- Circular Progress -->
-        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
-        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
-            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
-            <circle id="progress1" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
-            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count1">0%</div>
-        </div>
-        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
-        <i class="fas fa-check-circle"></i> Completed
-        </p>
-    </a>
+        <!-- Card 1 -->
+        <a href="btl1.html"
+            class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 1</p>
+            <!-- Circular Progress -->
+            <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+                <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+                    <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none" />
+                    <circle id="progress1" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+                        stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none"
+                    id="count1">0%</div>
+            </div>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
 
-    <!-- Card 2 -->
-    <a href="btl2.html"
-        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 2</p>
-        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
-        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
-            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
-            <circle id="progress2" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
-            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count2">0%</div>
-        </div>
-        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
-        <i class="fas fa-check-circle"></i> Completed
-        </p>
-    </a>
+        <!-- Card 2 -->
+        <a href="btl2.html"
+            class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 2</p>
+            <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+                <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+                    <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none" />
+                    <circle id="progress2" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+                        stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none"
+                    id="count2">0%</div>
+            </div>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
 
-    <!-- Card 3 -->
-    <a href="btl3.html"
-        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 3</p>
-        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
-        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
-            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
-            <circle id="progress3" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
-            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count3">0%</div>
-        </div>
-        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-        <i class="fas fa-sync-alt"></i> Updating
-        </p>
-    </a>
+        <!-- Card 3 -->
+        <a href="btl3.html"
+            class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập lớn 3</p>
+            <!-- Circular Progress -->
+            <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+                <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+                    <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none" />
+                    <circle id="progress3" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+                        stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none"
+                    id="count3">0%</div>
+            </div>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
 
-    <!-- Card 4 -->
-    <a href="btmr.html"
-        class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
-        <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập mở rộng</p>
-        <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
-        <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
-            <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none"/>
-            <circle id="progress4" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
-            stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
-        </svg>
-        <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none" id="count4">0%</div>
-        </div>
-        <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-        <i class="fas fa-sync-alt"></i> Updating
-        </p>
-    </a>
+        <!-- Card 4 -->
+        <a href="btmr.html"
+            class="assignment-card bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37] mb-4">Bài tập mở rộng</p>
+            <div class="relative w-20 h-20 mx-auto mb-4 pointer-events-none">
+                <svg class="w-20 h-20 transform -rotate-90 pointer-events-none">
+                    <circle cx="50%" cy="50%" r="40%" stroke="#333" stroke-width="6" fill="none" />
+                    <circle id="progress4" cx="50%" cy="50%" r="40%" stroke="#d4af37" stroke-width="6" fill="none"
+                        stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center text-[#d4af37] font-bold text-base pointer-events-none"
+                    id="count4">0%</div>
+            </div>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
+                <i class="fas fa-sync-alt"></i> Updating
+            </p>
+        </a>
 
     </div>
 
     <script>
-    const assignments = [
-    {id:1, percent:100},
-    {id:2, percent:100},
-    {id:3, percent:0},
-    {id:4, percent:50},
-    ];
+        const assignments = [
+            { id: 1, percent: 100 },
+            { id: 2, percent: 100 },
+            { id: 3, percent: 100 },
+            { id: 4, percent: 50 },
+        ];
 
-    assignments.forEach(a=>{
-    const progress = document.getElementById('progress'+a.id);
-    const count = document.getElementById('count'+a.id);
-    const radius = 32;
-    const circumference = 2 * Math.PI * radius;
-    progress.style.strokeDasharray = circumference;
-    progress.style.strokeDashoffset = circumference;
+        assignments.forEach(a => {
+            const progress = document.getElementById('progress' + a.id);
+            const count = document.getElementById('count' + a.id);
+            const radius = 32;
+            const circumference = 2 * Math.PI * radius;
+            progress.style.strokeDasharray = circumference;
+            progress.style.strokeDashoffset = circumference;
 
-    const observer = new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            let start=null;
-            function step(timestamp){
-            if(!start) start=timestamp;
-            const progressRatio=Math.min((timestamp-start)/1500,1);
-            const currentPercent=Math.floor(progressRatio*a.percent);
-            count.textContent=currentPercent+'%';
-            progress.style.strokeDashoffset=circumference*(1-currentPercent/100);
-            if(progressRatio<1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-            observer.unobserve(entry.target);
-        }
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let start = null;
+                        function step(timestamp) {
+                            if (!start) start = timestamp;
+                            const progressRatio = Math.min((timestamp - start) / 1500, 1);
+                            const currentPercent = Math.floor(progressRatio * a.percent);
+                            count.textContent = currentPercent + '%';
+                            progress.style.strokeDashoffset = circumference * (1 - currentPercent / 100);
+                            if (progressRatio < 1) requestAnimationFrame(step);
+                        }
+                        requestAnimationFrame(step);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.getElementById('progress' + a.id).closest('a'));
         });
-    }, {threshold:0.5});
-
-    observer.observe(document.getElementById('progress'+a.id).closest('a'));
-    });
     </script>
 
     <!-- Thông tin môn học -->
     <div
-        class="course-info bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition opacity-0 translate-y-10"
-    >
+        class="course-info bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition opacity-0 translate-y-10">
         <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Thông tin môn học</h2>
         <div class="text-gray-300 space-y-2">
-            <p class="line-info"><span class="font-semibold text-[#d4af37]">Môn học:</span> Học máy (Machine Learning)</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Môn học:</span> Học máy (Machine Learning)
+            </p>
             <p class="line-info"><span class="font-semibold text-[#d4af37]">Mã môn học:</span> CO3117</p>
             <p class="line-info"><span class="font-semibold text-[#d4af37]">Học kỳ:</span> 251</p>
             <p class="line-info"><span class="font-semibold text-[#d4af37]">Năm học:</span> 2025 - 2026</p>
-            <p class="line-info"><span class="font-semibold text-[#d4af37]">Giảng viên hướng dẫn:</span> TS. Lê Thành Sách</p>
+            <p class="line-info"><span class="font-semibold text-[#d4af37]">Giảng viên hướng dẫn:</span> TS. Lê Thành
+                Sách</p>
         </div>
     </div>
 
     <style>
-    /* Hover effect từng dòng (chỉ nền) */
-    .line-info {
-        transition: all 0.3s ease;
-        padding: 2px 4px;
-        border-radius: 6px;
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    .line-info:hover {
-        background: rgba(212, 175, 55, 0.1);
-        transform: translateX(3px);
-    }
+        /* Hover effect từng dòng (chỉ nền) */
+        .line-info {
+            transition: all 0.3s ease;
+            padding: 2px 4px;
+            border-radius: 6px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
 
-    /* Card animation */
-    @keyframes fadeInUp {
-        from {opacity:0; transform: translateY(20px);}
-        to {opacity:1; transform: translateY(0);}
-    }
+        .line-info:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(3px);
+        }
+
+        /* Card animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 
     <script>
-    const courseInfo = document.querySelector('.course-info');
-    const lines = document.querySelectorAll('.line-info');
+        const courseInfo = document.querySelector('.course-info');
+        const lines = document.querySelectorAll('.line-info');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                // Card fade in
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                // Staggered animation từng dòng
-                lines.forEach((line, i) => {
-                    setTimeout(() => {
-                        line.style.opacity = '1';
-                        line.style.transform = 'translateY(0)';
-                    }, i * 150);
-                });
-            }
-        });
-    }, { threshold: 0.2 });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Card fade in
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                    // Staggered animation từng dòng
+                    lines.forEach((line, i) => {
+                        setTimeout(() => {
+                            line.style.opacity = '1';
+                            line.style.transform = 'translateY(0)';
+                        }, i * 150);
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
 
-    observer.observe(courseInfo);
+        observer.observe(courseInfo);
     </script>
 
 
     <!-- Thành viên nhóm -->
     <div
-        class="team-info bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition opacity-0 translate-y-10"
-    >
+        class="team-info bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition opacity-0 translate-y-10">
         <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Thành viên nhóm</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Thành viên 1 -->
             <div
-                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition"
-            >
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
                 <img src="https://avatars.githubusercontent.com/giantkduy84210" alt="Avatar Duy"
                     class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
                 <p class="text-xl font-semibold text-[#d4af37]">Phạm Khánh Duy</p>
                 <p class="text-gray-300">MSSV: 2310510</p>
                 <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=duy.pham84210@hcmut.edu.vn" class="hover:text-[#d4af37]">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=duy.pham84210@hcmut.edu.vn"
+                        class="hover:text-[#d4af37]">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <a href="https://github.com/giantkduy84210" target="_blank" class="hover:text-[#d4af37]">
@@ -504,14 +534,14 @@
 
             <!-- Thành viên 2 -->
             <div
-                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition"
-            >
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
                 <img src="https://avatars.githubusercontent.com/tanghongai1704" alt="Avatar Ái"
                     class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
                 <p class="text-xl font-semibold text-[#d4af37]">Tăng Hồng Ái</p>
                 <p class="text-gray-300">MSSV: 2310167</p>
                 <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ai.tangmeo200922@hcmut.edu.vn" class="hover:text-[#d4af37]">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ai.tangmeo200922@hcmut.edu.vn"
+                        class="hover:text-[#d4af37]">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <a href="https://github.com/tanghongai1704" target="_blank" class="hover:text-[#d4af37]">
@@ -522,14 +552,14 @@
 
             <!-- Thành viên 3 -->
             <div
-                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition"
-            >
+                class="bg-[#1f2937]/95 backdrop-blur-sm rounded-2xl p-6 text-center border border-[#d4af37]/30 shadow-md shadow-black/40 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02] transition">
                 <img src="https://avatars.githubusercontent.com/nhinguyen140809" alt="Avatar Nhi"
                     class="w-24 h-24 mx-auto rounded-full border-4 border-[#d4af37] shadow-lg mb-4 object-cover">
                 <p class="text-xl font-semibold text-[#d4af37]">Nguyễn Trần Yến Nhi</p>
                 <p class="text-gray-300">MSSV: 2312506</p>
                 <div class="flex justify-center items-center gap-4 mt-4 text-gray-300">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nhi.nguyen140809@hcmut.edu.vn" class="hover:text-[#d4af37]">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nhi.nguyen140809@hcmut.edu.vn"
+                        class="hover:text-[#d4af37]">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <a href="https://github.com/nhinguyen140809" target="_blank" class="hover:text-[#d4af37]">
@@ -541,81 +571,100 @@
     </div>
 
     <style>
-    /* Animation fade + slide up cho team-info */
-    @keyframes fadeInUp {
-        from {opacity: 0; transform: translateY(20px);}
-        to {opacity: 1; transform: translateY(0);}
-    }
-    .team-info {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.5s ease;
-    }
+        /* Animation fade + slide up cho team-info */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-info {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
     </style>
 
     <script>
-    // Scroll animation cho toàn bộ team-info
-    const teamCard = document.querySelector('.team-info');
+        // Scroll animation cho toàn bộ team-info
+        const teamCard = document.querySelector('.team-info');
 
-    const observerTeam = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-            }
-        });
-    }, { threshold: 0.2 });
+        const observerTeam = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, { threshold: 0.2 });
 
-    observerTeam.observe(teamCard);
+        observerTeam.observe(teamCard);
     </script>
 
 
     <!-- Mục tiêu -->
     <div
-        class="goals bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 opacity-0 translate-y-10 transition-all"
-    >
+        class="goals bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-10 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 opacity-0 translate-y-10 transition-all">
         <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Mục tiêu của bài tập lớn</h2>
         <ul class="list-disc list-inside text-gray-300 space-y-2">
-            <li class="goal-line">Hiểu và áp dụng được quy trình pipeline học máy truyền thống, bao gồm: tiền xử lý dữ liệu, trích xuất đặc trưng, huấn luyện và đánh giá mô hình.</li>
-            <li class="goal-line">Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng, văn bản, và ảnh.</li>
-            <li class="goal-line">Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy thông qua các chỉ số đo lường.</li>
+            <li class="goal-line">Hiểu và áp dụng được quy trình pipeline học máy truyền thống, bao gồm: tiền xử lý dữ
+                liệu, trích xuất đặc trưng, huấn luyện và đánh giá mô hình.</li>
+            <li class="goal-line">Rèn luyện kỹ năng triển khai mô hình học máy trên các loại dữ liệu khác nhau: bảng,
+                văn bản, và ảnh.</li>
+            <li class="goal-line">Phát triển khả năng phân tích, so sánh, và đánh giá hiệu quả của các mô hình học máy
+                thông qua các chỉ số đo lường.</li>
             <li class="goal-line">Rèn luyện kỹ năng lập trình, thử nghiệm, và tổ chức báo cáo khoa học.</li>
         </ul>
     </div>
 
     <style>
-    /* Fade + slide up khi scroll */
-    @keyframes fadeInUp {
-        from {opacity:0; transform: translateY(20px);}
-        to {opacity:1; transform: translateY(0);}
-    }
-    .goals {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+        /* Fade + slide up khi scroll */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-    /* Hover nền cho từng dòng */
-    .goal-line {
-        transition: background 0.3s ease, transform 0.3s ease;
-        padding: 2px 4px;
-        border-radius: 6px;
-    }
-    .goal-line:hover {
-        background: rgba(212, 175, 55, 0.1);
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .goals {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Hover nền cho từng dòng */
+        .goal-line {
+            transition: background 0.3s ease, transform 0.3s ease;
+            padding: 2px 4px;
+            border-radius: 6px;
+        }
+
+        .goal-line:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
     </style>
 
     <script>
-    // Scroll animation cho Mục tiêu
-    const goals = document.querySelector('.goals');
-    const observerGoals = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-            }
-        });
-    }, { threshold: 0.2 });
+        // Scroll animation cho Mục tiêu
+        const goals = document.querySelector('.goals');
+        const observerGoals = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, { threshold: 0.2 });
 
-    observerGoals.observe(goals);
+        observerGoals.observe(goals);
     </script>
 
 
@@ -626,7 +675,7 @@
         </p>
     </footer>
 
-    
+
 </body>
 
 </html>

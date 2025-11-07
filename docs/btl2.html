@@ -79,159 +79,168 @@
     <canvas id="background-canvas"></canvas>
 
     <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: auto;
-        overflow-x: hidden;
-    }
-    #background-canvas {
-        position: fixed; /* luôn phủ full màn hình */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        #background-canvas {
+            position: fixed;
+            /* luôn phủ full màn hình */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
     </style>
 
     <script>
-    const canvas = document.getElementById('background-canvas');
-    const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    const particles = [];
-    const particleCount = 150;
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.2 + 0.3,
-            dx: (Math.random() - 0.5) * 0.3,
-            dy: (Math.random() - 0.5) * 0.3
-        });
-    }
-
-    const mouse = { x: null, y: null };
-    window.addEventListener('mousemove', e => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.x += p.dx;
-            p.y += p.dy;
-
-            // wrap-around
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-            ctx.fillStyle = 'rgba(212,175,55,0.4)';
-            ctx.fill();
-        });
-
-        // line to mouse
-        if(mouse.x && mouse.y){
-            particles.forEach(p => {
-                const dx = p.x - mouse.x;
-                const dy = p.y - mouse.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if(dist < 120){
-                    ctx.beginPath();
-                    ctx.moveTo(p.x,p.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(212,175,55,${0.3*(1-dist/120)})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                }
+        const particles = [];
+        const particleCount = 150;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.2 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3
             });
         }
 
-        requestAnimationFrame(animate);
-    }
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-    animate();
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // wrap-around
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(212,175,55,0.4)';
+                ctx.fill();
+            });
+
+            // line to mouse
+            if (mouse.x && mouse.y) {
+                particles.forEach(p => {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(212,175,55,${0.3 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                });
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 
 
 
     <!-- Keyboard Shortcuts Help Button (PC only) -->
-    <div id="shortcut-help-btn" class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+    <div id="shortcut-help-btn"
+        class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
         ?
     </div>
 
     <!-- Keyboard Shortcuts Popup -->
-    <div id="shortcut-popup" class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+    <div id="shortcut-popup"
+        class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
         <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">Keyboard Shortcuts</h3>
         <ul class="space-y-2">
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
                 <span class="text-gray-200 text-sm">Trở về trang chính</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
                 <span class="text-gray-200 text-sm">Refresh trang</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
                 <span class="text-gray-200 text-sm">Mở repository GitHub</span>
             </li>
         </ul>
 
-        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+        <button id="shortcut-close"
+            class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
     </div>
 
     <script>
-    const shortcutBtn = document.getElementById('shortcut-help-btn');
-    const shortcutPopup = document.getElementById('shortcut-popup');
-    const shortcutClose = document.getElementById('shortcut-close');
+        const shortcutBtn = document.getElementById('shortcut-help-btn');
+        const shortcutPopup = document.getElementById('shortcut-popup');
+        const shortcutClose = document.getElementById('shortcut-close');
 
-    // Bật/tắt popup khi bấm nút "?"
-    shortcutBtn.addEventListener('click', () => {
-        shortcutPopup.classList.toggle('hidden');
-    });
+        // Bật/tắt popup khi bấm nút "?"
+        shortcutBtn.addEventListener('click', () => {
+            shortcutPopup.classList.toggle('hidden');
+        });
 
-    // Đóng popup
-    shortcutClose.addEventListener('click', () => {
-        shortcutPopup.classList.add('hidden');
-    });
+        // Đóng popup
+        shortcutClose.addEventListener('click', () => {
+            shortcutPopup.classList.add('hidden');
+        });
 
-    // Keyboard shortcuts chung
-    document.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
-        const key = e.key.toLowerCase();
+        // Keyboard shortcuts chung
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
+            const key = e.key.toLowerCase();
 
-        switch(key){
-            case 'h':
-                window.location.href = 'index.html'; // trang chính
-                break;
-            case 'r':
-                location.reload(); // reload trang
-                break;
-            case 'g':
-                window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
-                break;
-            default:
-                break;
-        }
-    });
+            switch (key) {
+                case 'h':
+                    window.location.href = 'index.html'; // trang chính
+                    break;
+                case 'r':
+                    location.reload(); // reload trang
+                    break;
+                case 'g':
+                    window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
+                    break;
+                default:
+                    break;
+            }
+        });
     </script>
 
 
@@ -245,10 +254,12 @@
 
         <!-- Icons -->
         <div class="flex justify-center gap-8 mt-4 text-lg">
-            <a href="https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
+            <a href="https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing"
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fab fa-google"></i> Colab
             </a>
-            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf" target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
+            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf"
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] hover:scale-110 transition">
                 <i class="fas fa-file-alt"></i> Report
             </a>
             <a href="https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data?fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExTUtjbm44dkQ0NWdxNEJYbQEeHUYMfYAqr_6sCK9h3qwEtLDjHSMyWDEhn_D9T4Yxh69TpsN0ZPvD1MI3X1M_aem_v_XbLeENC_40lDYJNBt1NQ"
@@ -258,11 +269,11 @@
         </div>
     </div>
 
-    
+
     <!-- Floating Back Button (Top-Left) -->
     <a href="index.html"
-    class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
-    <i class="fas fa-home"></i> Trang chính
+        class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
+        <i class="fas fa-home"></i> Trang chính
     </a>
 
 
@@ -280,8 +291,8 @@
             class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
             <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
             <p
-                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-                <i class="fas fa-sync-alt"></i> Updating
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
             </p>
         </a>
         <a href="btmr.html"
@@ -295,10 +306,14 @@
     </div>
 
     <!-- Tổng quan dataset BTL2 -->
-    <div class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
         <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">Tổng quan dataset</h2>
         <p class="text-gray-300 mb-4">
-            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">IITJEE NEET AIIMS Students Questions Data</span> gồm 122,519 mẫu, mỗi mẫu là một câu hỏi bằng tiếng Anh của học sinh chuẩn bị cho các kỳ thi <strong>IIT-JEE, NEET, AIIMS</strong>. Mỗi câu hỏi được gán nhãn môn học tương ứng: <strong>Physics, Chemistry, Maths, Biology</strong>.
+            Bộ dữ liệu <span class="font-semibold text-[#d4af37]">IITJEE NEET AIIMS Students Questions Data</span> gồm
+            122,519 mẫu, mỗi mẫu là một câu hỏi bằng tiếng Anh của học sinh chuẩn bị cho các kỳ thi <strong>IIT-JEE,
+                NEET, AIIMS</strong>. Mỗi câu hỏi được gán nhãn môn học tương ứng: <strong>Physics, Chemistry, Maths,
+                Biology</strong>.
         </p>
 
         <p class="text-gray-300 mb-4">Bộ dữ liệu có 2 cột chính:</p>
@@ -309,7 +324,8 @@
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-book text-yellow-500 mt-1"></i>
-                <p class="text-gray-300"><strong>Subject</strong> (object): môn học câu hỏi thuộc về (Physics, Chemistry, Maths, Biology)</p>
+                <p class="text-gray-300"><strong>Subject</strong> (object): môn học câu hỏi thuộc về (Physics,
+                    Chemistry, Maths, Biology)</p>
             </div>
         </div>
 
@@ -347,49 +363,56 @@
     </div>
 
 
-<!-- Pipeline (timeline) BTL2 -->
-<div
-    class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
-    <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
-    <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
-            <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
-            <p class="text-gray-300">Khám phá dữ liệu, thống kê nhãn, phân bố câu hỏi theo môn học, kiểm tra missing value và imbalance trong dữ liệu.</p>
-        </li>
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
-            <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
-            <p class="text-gray-300">Xử lý text: loại bỏ trùng lặp, loại bỏ ký tự đặc biệt, punctuation, khoảng trắng; chuẩn hóa chữ hoa/thường, tokenization, xử lý stopwords,... cũng như chuẩn hóa nhãn môn học.</p>
-        </li>
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
-            <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
-            <p class="text-gray-300">Chuyển văn bản sang feature: BoW, TF-IDF, n-gram, GloVe embeddings, DistilBERT embeddings.</p>
-        </li>
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
-            <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
-            <p class="text-gray-300">Áp dụng các mô hình Machine Learning: Logistic Regression, Random Forest, Decision Tree, MultinomialNB; hoặc mô hình Deep Learning: LSTM end-to-end.</p>
-        </li>
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
-            <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
-            <p class="text-gray-300">Sử dụng các chỉ số: Accuracy, Precision, Recall, F1-score, kiểm tra khả năng phân loại cân bằng giữa các lớp môn học.</p>
-        </li>
-        <li class="ml-6">
-            <span
-                class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
-            <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
-            <p class="text-gray-300">Vẽ biểu đồ tần suất nhãn, confusion matrix, so sánh hiệu quả các mô hình trong việc dự đoán môn học theo câu hỏi học thuật.</p>
-        </li>
-    </ol>
-</div>
+    <!-- Pipeline (timeline) BTL2 -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">Pipeline chi tiết</h2>
+        <ol class="relative border-l border-[#38bdf8]/50 space-y-6 ml-3">
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
+                <h3 class="font-semibold text-[#d4af37]">Phân tích dữ liệu (EDA)</h3>
+                <p class="text-gray-300">Khám phá dữ liệu, thống kê nhãn, phân bố câu hỏi theo môn học, kiểm tra missing
+                    value và imbalance trong dữ liệu.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
+                <h3 class="font-semibold text-[#d4af37]">Tiền xử lý dữ liệu</h3>
+                <p class="text-gray-300">Xử lý text: loại bỏ trùng lặp, loại bỏ ký tự đặc biệt, punctuation, khoảng
+                    trắng; chuẩn hóa chữ hoa/thường, tokenization, xử lý stopwords,... cũng như chuẩn hóa nhãn môn học.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
+                <h3 class="font-semibold text-[#d4af37]">Trích xuất & giảm chiều</h3>
+                <p class="text-gray-300">Chuyển văn bản sang feature: BoW, TF-IDF, n-gram, GloVe embeddings, DistilBERT
+                    embeddings.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
+                <h3 class="font-semibold text-[#d4af37]">Huấn luyện mô hình</h3>
+                <p class="text-gray-300">Áp dụng các mô hình Machine Learning: Logistic Regression, Random Forest,
+                    Decision Tree, MultinomialNB; hoặc mô hình Deep Learning: LSTM end-to-end.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
+                <h3 class="font-semibold text-[#d4af37]">Đánh giá mô hình</h3>
+                <p class="text-gray-300">Sử dụng các chỉ số: Accuracy, Precision, Recall, F1-score, kiểm tra khả năng
+                    phân loại cân bằng giữa các lớp môn học.</p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
+                <h3 class="font-semibold text-[#d4af37]">Trực quan hóa kết quả</h3>
+                <p class="text-gray-300">Vẽ biểu đồ tần suất nhãn, confusion matrix, so sánh hiệu quả các mô hình trong
+                    việc dự đoán môn học theo câu hỏi học thuật.</p>
+            </li>
+        </ol>
+    </div>
 
 
     <!-- Footer -->

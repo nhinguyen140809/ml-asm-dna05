@@ -80,159 +80,168 @@
     <canvas id="background-canvas"></canvas>
 
     <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: auto;
-        overflow-x: hidden;
-    }
-    #background-canvas {
-        position: fixed; /* luôn phủ full màn hình */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        #background-canvas {
+            position: fixed;
+            /* luôn phủ full màn hình */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
     </style>
 
     <script>
-    const canvas = document.getElementById('background-canvas');
-    const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
 
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-    const particles = [];
-    const particleCount = 150;
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 1.2 + 0.3,
-            dx: (Math.random() - 0.5) * 0.3,
-            dy: (Math.random() - 0.5) * 0.3
-        });
-    }
-
-    const mouse = { x: null, y: null };
-    window.addEventListener('mousemove', e => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-    });
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach(p => {
-            p.x += p.dx;
-            p.y += p.dy;
-
-            // wrap-around
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-            ctx.fillStyle = 'rgba(212,175,55,0.4)';
-            ctx.fill();
-        });
-
-        // line to mouse
-        if(mouse.x && mouse.y){
-            particles.forEach(p => {
-                const dx = p.x - mouse.x;
-                const dy = p.y - mouse.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if(dist < 120){
-                    ctx.beginPath();
-                    ctx.moveTo(p.x,p.y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(212,175,55,${0.3*(1-dist/120)})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
-                }
+        const particles = [];
+        const particleCount = 150;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.2 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3
             });
         }
 
-        requestAnimationFrame(animate);
-    }
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-    animate();
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // wrap-around
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(212,175,55,0.4)';
+                ctx.fill();
+            });
+
+            // line to mouse
+            if (mouse.x && mouse.y) {
+                particles.forEach(p => {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(212,175,55,${0.3 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                });
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 
 
 
     <!-- Keyboard Shortcuts Help Button (PC only) -->
-    <div id="shortcut-help-btn" class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+    <div id="shortcut-help-btn"
+        class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
         ?
     </div>
 
     <!-- Keyboard Shortcuts Popup -->
-    <div id="shortcut-popup" class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+    <div id="shortcut-popup"
+        class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
         <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">Keyboard Shortcuts</h3>
         <ul class="space-y-2">
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
                 <span class="text-gray-200 text-sm">Trở về trang chính</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
                 <span class="text-gray-200 text-sm">Refresh trang</span>
             </li>
             <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
-                <span class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
                 <span class="text-gray-200 text-sm">Mở repository GitHub</span>
             </li>
         </ul>
 
-        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
+        <button id="shortcut-close"
+            class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">&times;</button>
     </div>
 
     <script>
-    const shortcutBtn = document.getElementById('shortcut-help-btn');
-    const shortcutPopup = document.getElementById('shortcut-popup');
-    const shortcutClose = document.getElementById('shortcut-close');
+        const shortcutBtn = document.getElementById('shortcut-help-btn');
+        const shortcutPopup = document.getElementById('shortcut-popup');
+        const shortcutClose = document.getElementById('shortcut-close');
 
-    // Bật/tắt popup khi bấm nút "?"
-    shortcutBtn.addEventListener('click', () => {
-        shortcutPopup.classList.toggle('hidden');
-    });
+        // Bật/tắt popup khi bấm nút "?"
+        shortcutBtn.addEventListener('click', () => {
+            shortcutPopup.classList.toggle('hidden');
+        });
 
-    // Đóng popup
-    shortcutClose.addEventListener('click', () => {
-        shortcutPopup.classList.add('hidden');
-    });
+        // Đóng popup
+        shortcutClose.addEventListener('click', () => {
+            shortcutPopup.classList.add('hidden');
+        });
 
-    // Keyboard shortcuts chung
-    document.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
-        const key = e.key.toLowerCase();
+        // Keyboard shortcuts chung
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; // bỏ qua khi gõ input
+            const key = e.key.toLowerCase();
 
-        switch(key){
-            case 'h':
-                window.location.href = 'index.html'; // trang chính
-                break;
-            case 'r':
-                location.reload(); // reload trang
-                break;
-            case 'g':
-                window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
-                break;
-            default:
-                break;
-        }
-    });
+            switch (key) {
+                case 'h':
+                    window.location.href = 'index.html'; // trang chính
+                    break;
+                case 'r':
+                    location.reload(); // reload trang
+                    break;
+                case 'g':
+                    window.open('https://github.com/nhinguyen140809/ml-asm-dna05', '_blank'); // mở GitHub repo
+                    break;
+                default:
+                    break;
+            }
+        });
     </script>
 
 
@@ -263,14 +272,14 @@
 
     <!-- Floating Back Button (Top-Left) -->
     <a href="index.html"
-    class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
-    <i class="fas fa-home"></i> Trang chính
+        class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
+        <i class="fas fa-home"></i> Trang chính
     </a>
 
     <!-- Stats Section (Assignments) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 w-11/12 md:w-3/4 mx-auto">
         <a href="btl2.html"
-        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
             <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
             <p
                 class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
@@ -278,16 +287,18 @@
             </p>
         </a>
         <a href="btl3.html"
-        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
             <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
-                <i class="fas fa-sync-alt"></i> Updating
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
             </p>
         </a>
         <a href="btmr.html"
-        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
             <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
-            <p class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800 shadow-md animate-pulse">
                 <i class="fas fa-sync-alt"></i> Updating
             </p>
         </a>
