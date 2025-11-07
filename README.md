@@ -42,7 +42,7 @@ Khám phá **4 dự án lớn** trong môn học Học Máy với notebook trự
 | ----------- | ------------------- | -------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | **BTL1**    | Dữ liệu bảng        | ✅ Hoàn thành   | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl1.html) | [Mở Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
 | **BTL2**    | Dữ liệu văn bản     | ✅ Hoàn thành   | [Text Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl2.html)    | [Mở Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing) |
-| **BTL3**    | Dữ liệu ảnh         | 🕐 Sẽ cập nhật | 🕐 Sẽ cập nhật                                                           | 🕐 Sẽ cập nhật                                                                                    |
+| **BTL3**    | Dữ liệu ảnh         | ✅ Hoàn thành | [Image Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl3.html)  |  [Mở Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)  |
 | **Mở rộng** | Hidden Markov Model | 🕐 Sẽ cập nhật | 🕐 Sẽ cập nhật                                                           | 🕐 Sẽ cập nhật                                                                                    |
 
 ---
@@ -65,9 +65,11 @@ ml-asm-dna05/
 ├─ notebooks/                      # Notebook Google Colab
 │   ├─ DNA05_BTL1.ipynb
 │   └─ DNA05_BTL2.ipynb
+│   └─ DNA05_BTL3.ipynb
 ├─ reports/                        # Báo cáo PDF
 │   ├─ DNA05_BTL1_Report.pdf
 │   └─ DNA05_BTL2_Report.pdf
+│   └─ DNA05_BTL3_Report.pdf
 ├─ features/                       # File đặc trưng
 │   ├─ BTL1
 │   ├─ BTL2
@@ -92,7 +94,7 @@ ml-asm-dna05/
 
   * [BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
   * [BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
-
+  * [BTL3](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)
 Nhấn **Run all** để thực hiện pipeline trực tuyến mà không cần cài đặt.
 
 ### 2️⃣ Cài đặt Local
@@ -134,7 +136,13 @@ Mở notebook cụ thể (ví dụ `DNA05_BTL1.ipynb`) và chạy.
 * **Báo cáo PDF:** [BTL2 Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf)
 * **Notebook:** [BTL2 Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
 
-## 🕐 BTL3 & Mở rộng
+## 📚 BTL3 - Phân loại hình ảnh động vật biển
+
+* **Dataset:** [Sea Animals – Kaggle]([https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9](https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste)) (~13.700 mẫu)
+* **Báo cáo PDF:** [BTL3 Report]([https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf))
+* **Notebook:** [BTL3 Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)
+
+## 🕐 BTMR
 
 * Sẽ cập nhật sau...
 
