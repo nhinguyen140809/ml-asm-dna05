@@ -138,7 +138,7 @@ Mở notebook cụ thể (ví dụ `DNA05_BTL1.ipynb`) và chạy.
 
 ## 📚 BTL3 - Phân loại hình ảnh động vật biển
 
-* **Dataset:** [Sea Animals – Kaggle]([https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9](https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste)) (~13.700 mẫu)
+* **Dataset:** [Sea Animals – Kaggle](https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9)(https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste)) (~13.700 mẫu)
 * **Báo cáo PDF:** [BTL3 Report]([https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf))
 * **Notebook:** [BTL3 Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)
 
