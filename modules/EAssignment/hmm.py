@@ -675,7 +675,7 @@ class POS_HMM:
 
         return precision, recall, f1
 
-    def evaluate(self, test_data, average='weighted'):
+    def evaluate(self, X_test, y_test, average='weighted'):
         """
         Evaluate the HMM POS tagger on test data.
         test_data: list of (sentence, true_tags) pairs
@@ -684,7 +684,7 @@ class POS_HMM:
         assert self.hmm is not None, "HMM model is not trained yet."
         true_tags = []
         pred_tags = []
-        for sentence, tags in test_data:
+        for sentence, tags in zip(X_test, y_test):
             predicted = self.predict_sentence(sentence)
             true_tags.append(tags)
             pred_tags.append(predicted)
