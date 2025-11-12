@@ -1,8 +1,6 @@
 import numpy as np
 import re
-from collections import defaultdict, Counter
-import nltk
-import random
+from collections import Counter
 
 class HiddenMarkovModel:
     def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None):
@@ -423,7 +421,7 @@ class HiddenMarkovModel:
         # fallback
         return "<other>"
 
-    def train_supervised_MLE(self, state_sequences, observation_sequences, gamma=None, word_counts=None):
+    def train_supervised_MLE(self, state_sequences, observation_sequences):
         """
         Supervised MLE training for HMM using counts from labeled sequences.
 
@@ -436,20 +434,13 @@ class HiddenMarkovModel:
         """
         assert len(state_sequences) == len(observation_sequences), "Mismatch in number of sequences between states and observations."
 
-        # Map observations to indices (apply pseudo-word mapping if gamma is set)
-        if gamma is None:
-            gamma = 1
-
+        # Map observations to indices (apply pseudo-word mapping)
         mapped_sequences = []
         for obs_seq in observation_sequences:
             mapped_seq = []
             for w in obs_seq:
-                if gamma is not None and word_counts is not None and word_counts.get(w,0) < gamma:
-                    pw = self.pseudo_word(w)
-                else:
-                    pw = w
                 if pw not in self.V:
-                    raise ValueError(f"Observation '{pw}' not in HMM observable space V")
+                    pw = HiddenMarkovModel.pseudo_word(w)
                 mapped_seq.append(self.V.index(pw))
             mapped_sequences.append(mapped_seq)
 
@@ -502,7 +493,7 @@ class POS_HMM:
         self.hmm = None
         self.gamma = None
 
-    def train(self, train_data, gamma=None, tagset=None):
+    def train(self, train_data, gamma=1, tagset=None):
         """
         Train the POS tagging HMM from training data.
         train_data: list of (sentence, tags) pairs
@@ -511,8 +502,6 @@ class POS_HMM:
         gamma: int, cutoff for rare words → pseudo-word
         tagset: list or set of all possible tags (optional)
         """
-        self.gamma = gamma if gamma is not None else 1
-
         assert all(len(s) == len(t) for s, t in train_data), "Each sentence and tag sequence must be of the same length."
         
         # Collect unique tags and words
@@ -534,8 +523,6 @@ class POS_HMM:
         for word, count in word_counts.items():
             if count >= self.gamma:
                 vocab.add(word)
-            else:
-                vocab.add(HiddenMarkovModel.pseudo_word(word))
 
         vocab.update(HiddenMarkovModel.get_pseudo_list())
 
@@ -544,7 +531,7 @@ class POS_HMM:
         N = len(H)
         M = len(V)
 
-        print(f"Start training HMM for POS tagging with {len(train_data)} samples...")
+        print(f"[POS_HMM] Start training HMM for POS tagging...")
         
         self.hmm = HiddenMarkovModel(N=N, M=M, H=H, V=V)
 
@@ -554,11 +541,9 @@ class POS_HMM:
         self.hmm.train_supervised_MLE(
             state_sequences=state_sequences,
             observation_sequences=observation_sequences,
-            gamma=self.gamma,
-            word_counts=word_counts
         )
 
-        print("Training complete successfully.")
+        print("[POS_HMM] Training complete successfully!")
 
     def __repr__(self):
         return f"POS_HMM with {self.hmm.N} states and {self.hmm.M} observations."
@@ -597,13 +582,13 @@ class POS_HMM:
         assert isinstance(X, list), "Input X must be a list of sentences."
 
         if all(isinstance(s, list) for s in X):
-            print("Predicting in batch mode...")
+            print("[POS_HMM] Predicting in batch mode...")
             return self.predict_batch(X)
         else:
-            print("Predicting single sentence...")
+            print("[POS_HMM] Predicting single sentence...")
             return self.predict_sentence(X)
 
-    def accuracy_score(self, true_tags, pred_tags):
+    def accuracy(self, true_tags, pred_tags):
         """ 
         Compute accuracy given true and predicted tags
         true_tags: list of true tags of all samples
@@ -617,3 +602,94 @@ class POS_HMM:
         total = sum(len(t) for t in true_tags)
 
         return correct / total if total > 0 else 0.0
+
+    def precision_recall_f1(self, true_tags, pred_tags, average='weighted'):
+        """
+        Compute precision, recall, and F1 for multi-class tagging.
+        Supports 'micro', 'macro', and 'weighted' averaging.
+
+        Args:
+            true_tags: list of list of true tags
+            pred_tags: list of list of predicted tags
+            average: str, one of ['micro', 'macro', 'weighted']
+
+        Returns:
+            precision, recall, f1 (floats)
+        """
+        # Flatten all sequences
+        y_true = [ti for t in true_tags for ti in t]
+        y_pred = [pi for p in pred_tags for pi in p]
+
+        # Count true positives, false positives, false negatives per class
+        labels = sorted(set(y_true + y_pred))
+        tp = Counter()
+        fp = Counter()
+        fn = Counter()
+        support = Counter()
+
+        for yt, yp in zip(y_true, y_pred):
+            if yt == yp:
+                tp[yt] += 1
+            else:
+                fp[yp] += 1
+                fn[yt] += 1
+            support[yt] += 1
+
+        # Compute per-class precision, recall, f1
+        precisions, recalls, f1s, supports = [], [], [], []
+        for label in labels:
+            p = tp[label] / (tp[label] + fp[label]) if (tp[label] + fp[label]) > 0 else 0.0
+            r = tp[label] / (tp[label] + fn[label]) if (tp[label] + fn[label]) > 0 else 0.0
+            f1 = 2 * p * r / (p + r) if (p + r) > 0 else 0.0
+            precisions.append(p)
+            recalls.append(r)
+            f1s.append(f1)
+            supports.append(support[label])
+
+        precisions = np.array(precisions)
+        recalls = np.array(recalls)
+        f1s = np.array(f1s)
+        supports = np.array(supports)
+        total_support = supports.sum()
+
+        # Average modes
+        if average == 'micro':
+            total_tp = sum(tp.values())
+            total_fp = sum(fp.values())
+            total_fn = sum(fn.values())
+            precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0.0
+            recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0.0
+            f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
+
+        elif average == 'macro':
+            precision = precisions.mean()
+            recall = recalls.mean()
+            f1 = f1s.mean()
+
+        elif average == 'weighted':
+            precision = np.average(precisions, weights=supports)
+            recall = np.average(recalls, weights=supports)
+            f1 = np.average(f1s, weights=supports)
+
+        else:
+            raise ValueError("average must be one of ['micro', 'macro', 'weighted']")
+
+        return precision, recall, f1
+
+    def evaluate(self, test_data, average='weighted'):
+        """
+        Evaluate the HMM POS tagger on test data.
+        test_data: list of (sentence, true_tags) pairs
+        return: float, accuracy score
+        """
+        assert self.hmm is not None, "HMM model is not trained yet."
+        true_tags = []
+        pred_tags = []
+        for sentence, tags in test_data:
+            predicted = self.predict_sentence(sentence)
+            true_tags.append(tags)
+            pred_tags.append(predicted)
+        
+        accuracy = self.accuracy(true_tags, pred_tags)
+        precision, recall, f1 = self.precision_recall_f1(true_tags, pred_tags, average=average)
+        return accuracy, precision, recall, f1
