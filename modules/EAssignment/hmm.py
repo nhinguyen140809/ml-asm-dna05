@@ -439,9 +439,9 @@ class HiddenMarkovModel:
         for obs_seq in observation_sequences:
             mapped_seq = []
             for w in obs_seq:
-                if pw not in self.V:
-                    pw = HiddenMarkovModel.pseudo_word(w)
-                mapped_seq.append(self.V.index(pw))
+                if w not in self.V:
+                    w = HiddenMarkovModel.pseudo_word(w)
+                mapped_seq.append(self.V.index(w))
             mapped_sequences.append(mapped_seq)
 
         # Map states to indices
@@ -489,20 +489,19 @@ class HiddenMarkovModel:
 
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
-    def __init__(self):
+    def __init__(self, gamma=1):
         self.hmm = None
-        self.gamma = None
+        self.gamma = gamma
 
-    def train(self, train_data, gamma=1, tagset=None):
+    def train(self, X_train, y_train, tagset=None):
         """
         Train the POS tagging HMM from training data.
         train_data: list of (sentence, tags) pairs
             - sentence: list of words (tokens)
             - tags: list of corresponding POS tags
-        gamma: int, cutoff for rare words → pseudo-word
         tagset: list or set of all possible tags (optional)
         """
-        assert all(len(s) == len(t) for s, t in train_data), "Each sentence and tag sequence must be of the same length."
+        assert all(len(s) == len(t) for s, t in zip(X_train, y_train)), "Each sentence and tag sequence must be of the same length."
         
         # Collect unique tags and words
         if tagset is not None:
@@ -510,13 +509,13 @@ class POS_HMM:
             all_tags = set(tagset)
         else:
             all_tags = set()
-            for _, tags in train_data:
+            for tags in y_train:
                 all_tags.update(tags)
         assert len(all_tags) > 0, "No tags found in training data."
 
         # Build vocabulary with pseudo-words for rare words
         word_counts = Counter()
-        for sentence, _ in train_data:
+        for sentence in X_train:
             word_counts.update(sentence)
 
         vocab = set()
@@ -535,12 +534,12 @@ class POS_HMM:
         
         self.hmm = HiddenMarkovModel(N=N, M=M, H=H, V=V)
 
-        state_sequences = [tags for _, tags in train_data]
-        observation_sequences = [sentence for sentence, _ in train_data]
+        state_sequences = y_train
+        observation_sequences = X_train
 
         self.hmm.train_supervised_MLE(
             state_sequences=state_sequences,
-            observation_sequences=observation_sequences,
+            observation_sequences=observation_sequences
         )
 
         print("[POS_HMM] Training complete successfully!")
