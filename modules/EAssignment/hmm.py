@@ -6,7 +6,7 @@ from collections import Counter
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class HiddenMarkovModel:
-    def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None, device=DEVICE, dtype=torch.float32):
+    def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None, device=DEVICE, dtype=torch.float64):
         """
         HMM implemented with PyTorch tensors.
 
@@ -491,7 +491,7 @@ class HMMUtils:
     
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
-    def __init__(self, gamma=1, device=DEVICE, dtype=torch.float32):
+    def __init__(self, gamma=1, device=DEVICE, dtype=torch.float64):
         self.hmm = None
         self.gamma = gamma
         self.device = device
@@ -699,45 +699,32 @@ class POS_HMM:
         accuracy = POS_HMM.accuracy(true_tags, pred_tags)
         precision, recall, f1 = POS_HMM.precision_recall_f1(true_tags, pred_tags, average=average)
         return accuracy, precision, recall, f1
-    
+
 if __name__ == "__main__":
-    import nltk
-    from nltk.corpus import brown
-    # ============================================================
-    # Tải Brown corpus và universal tagset
-    # ============================================================
-    nltk.download('brown')            # Tải Brown corpus
-    nltk.download('universal_tagset') # Tải tagset chuẩn hóa nhãn POS
-
-    # ============================================================
-    # Load toàn bộ Brown corpus với nhãn POS chuẩn
-    # ============================================================
-    nltk_data_full = list(brown.tagged_sents(tagset='universal'))
-    nltk_data_full = nltk_data_full[:5000]  # Giới hạn số câu để tiết kiệm thời gian
-
-        
-    X_train = [[word for word, tag in sent] for sent in nltk_data_full]
-    y_train = [[tag for word, tag in sent] for sent in nltk_data_full]
-
-    # ============================================================
-    # Cấu hình tham số huấn luyện
-    # ============================================================
-    CONFIG = {
-        "GAMMA_LIST": [2, 3, 5, 7],       # danh sách giá trị gamma thử nghiệm
-        "AVERAGE_MODE": "weighted"     # cách tính trung bình precision/recall/F1
-    }
-
-    # ============================================================
-    # Danh sách lưu kết quả
-    # ============================================================
-    results = []
-
-    # ============================================================
-    # Huấn luyện và đánh giá với từng giá trị gamma
-    # ============================================================
-    for gamma in CONFIG["GAMMA_LIST"]:
-        print(f"🔹 Training POS_HMM with gamma={gamma} ...")
-
-        # Khởi tạo và huấn luyện mô hình
-        pos_hmm = POS_HMM(gamma=gamma)
-        pos_hmm.train(X_train, y_train)
+    # Example usage
+    test_hmm = HiddenMarkovModel(N=5, M=6)
+    import numpy as np
+    A = np.array([[0.7, 0.2, 0.05, 0.025, 0.025],
+                  [0.1, 0.6, 0.2, 0.05, 0.05],
+                  [0.2, 0.3, 0.4, 0.05, 0.05],
+                  [0.25, 0.25, 0.25, 0.15, 0.10],
+                  [0.3, 0.2, 0.2, 0.2, 0.1]])
+    B = np.array([[0.1, 0.4, 0.2, 0.2, 0.05, 0.05],
+                  [0.3, 0.2, 0.2, 0.1, 0.1, 0.1],
+                  [0.25, 0.25, 0.25, 0.15, 0.05, 0.05],
+                  [0.2, 0.3, 0.3, 0.1, 0.05, 0.05],
+                  [0.15, 0.35, 0.25, 0.15, 0.05, 0.05]])
+    pi = np.array([0.2, 0.3, 0.25, 0.15, 0.1])
+    A = torch.tensor(A, dtype=torch.float64, device=DEVICE)
+    B = torch.tensor(B, dtype=torch.float64, device=DEVICE)
+    pi = torch.tensor(pi, dtype=torch.float64, device=DEVICE)
+    test_hmm.set_A(A)
+    test_hmm.set_B(B)
+    test_hmm.set_pi(pi)
+    # Forward algorithm test
+    observations = [0, 1, 2, 2, 3, 2, 4]
+    P, alpha = test_hmm.forward(observations, is_index=True, scaled=False)
+    print(f"Forward algorithm P(O|λ): {P}")
+    # Viterbi algorithm test
+    Q_star, delta, phi = test_hmm.Viterbi(observations, is_index=True)
+    print(f"Viterbi most likely states Q*: {Q_star}")

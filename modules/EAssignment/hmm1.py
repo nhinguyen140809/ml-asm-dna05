@@ -782,3 +782,28 @@ class POS_HMM:
         accuracy = self.accuracy(true_tags, pred_tags)
         precision, recall, f1 = self.precision_recall_f1(true_tags, pred_tags, average=average)
         return accuracy, precision, recall, f1
+
+if __name__ == "__main__":
+    # Example usage
+    test_hmm = HiddenMarkovModel(N=5, M=6)
+    A = np.array([[0.7, 0.2, 0.05, 0.025, 0.025],
+                  [0.1, 0.6, 0.2, 0.05, 0.05],
+                  [0.2, 0.3, 0.4, 0.05, 0.05],
+                  [0.25, 0.25, 0.25, 0.15, 0.10],
+                  [0.3, 0.2, 0.2, 0.2, 0.1]])
+    B = np.array([[0.1, 0.4, 0.2, 0.2, 0.05, 0.05],
+                  [0.3, 0.2, 0.2, 0.1, 0.1, 0.1],
+                  [0.25, 0.25, 0.25, 0.15, 0.05, 0.05],
+                  [0.2, 0.3, 0.3, 0.1, 0.05, 0.05],
+                  [0.15, 0.35, 0.25, 0.15, 0.05, 0.05]])
+    pi = np.array([0.2, 0.3, 0.25, 0.15, 0.1])
+    test_hmm.set_A(A)
+    test_hmm.set_B(B)
+    test_hmm.set_pi(pi)
+    # Forward algorithm test
+    observations = [0, 1, 2, 2, 3, 2, 4]
+    P, alpha = test_hmm.forward(observations, is_index=True, scaled=False)
+    print(f"Forward algorithm P(O|λ): {P}")
+    # Viterbi algorithm test
+    Q_star, delta, phi = test_hmm.Viterbi(observations, is_index=True)
+    print(f"Viterbi most likely states Q*: {Q_star}")
