@@ -347,7 +347,6 @@ class HiddenMarkovModel:
         print("[HMM] Starting supervised MLE training with (N, M)=({}, {})...".format(self.N, self.M))
 
         # Map states and observations to indices using dictionary lookup for speed
-        print("[HMM] Mapping states and observations to indices...", flush=True)
         state2idx = {s: i for i, s in enumerate(self.H)}
         obs2idx = {v: i for i, v in enumerate(self.V)}
 
@@ -355,14 +354,10 @@ class HiddenMarkovModel:
         mapped_states = []
         mapped_obs = []
 
-        progress_i = 0
         progress_total = len(state_sequences)
         for s_seq, o_seq in zip(state_sequences, observation_sequences):
             if len(s_seq) == 0:
                 continue
-            progress_i += 1
-            if progress_i % 100 == 0 or progress_i == progress_total:
-                print(f"[HMM] Processed {progress_i}/{progress_total} raw sequences...", end='\r', flush=True)
             mapped_s = torch.tensor([state2idx[s] for s in s_seq], device=self.device)
             mapped_o = torch.tensor([obs2idx.get(w, obs2idx[HMMUtils.pseudo_word(w)]) for w in o_seq], device=self.device)
             mapped_states.append(mapped_s)
@@ -374,13 +369,7 @@ class HiddenMarkovModel:
         B_counts = torch.zeros((self.N, self.M), dtype=self.dtype, device=self.device)
 
         # Update counts using vectorized index_put_
-        progress_i = 0
-        progress_total = len(mapped_states)
         for s_seq, o_seq in zip(mapped_states, mapped_obs):
-            # Progress display
-            progress_i += 1
-            if progress_i % 100 == 0 or progress_i == progress_total:
-                print(f"[HMM] Processed {progress_i}/{progress_total} sequences...", end='\r', flush=True)
             # Initial state
             pi_counts[s_seq[0]] += 1
             # Transitions
@@ -569,9 +558,9 @@ class POS_HMM:
         mapped_sentence = []
         for w in sentence:
             mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
-
+        print(f"[POS_HMM] Predicting for sentence: {' '.join(sentence)}")
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
-
+        print(f"[POS_HMM] Predicted tags: {' '.join(predicted_tags)}")
         return predicted_tags
     
     def predict_batch(self, sentences):
