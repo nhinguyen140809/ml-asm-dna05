@@ -382,9 +382,8 @@ class HiddenMarkovModel:
         progress_total = len(mapped_states)
         for s_seq, o_seq in zip(mapped_states, mapped_obs):
             # Progress display
+            print(f"\r[HMM] Processing sequence {progress_i + 1}...", end='', flush=True)
             progress_i += 1
-            if progress_i % 10 == 0 or progress_i == progress_total:
-                print(f"[HMM] Processing sequence {progress_i}/{progress_total}...", end='\r')
             # Initial state
             pi_counts[s_seq[0]] += 1
             # Transitions
