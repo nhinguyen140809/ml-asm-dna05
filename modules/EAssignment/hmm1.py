@@ -341,86 +341,6 @@ class HiddenMarkovModel:
                     denom = sum(gamma[t, i] for t in range(T))
                     self.B[i, k] = numer / denom if denom > 0 else 0
 
-    @staticmethod
-    def get_pseudo_list():
-        """
-        Return a list of predefined pseudo-words for rare word handling.
-        """
-        return [
-            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
-            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
-            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
-            "<ALLCAPS>", "<capPeriod>", "<initCap>",
-            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
-            "<lowercase>", "<other>"
-        ]
-
-    @staticmethod
-    def pseudo_word(token):
-        """
-        Map a raw token (string, original casing) to a pseudo-word class.
-        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...)
-        Order matters: more specific patterns first.
-        """
-        assert token is not None and len(token) > 0, "Token must be a non-empty string."
-        t = token
-
-        # punctuation / punctuation-like
-        if all(ch in ".,;:!?\"'()[]" for ch in t):
-            return "<PUNCT>"
-
-        # digits-only
-        if re.fullmatch(r'\d{4}', t):
-            return "<fourDigitNum>"
-        if re.fullmatch(r'\d{2}', t):
-            return "<twoDigitNum>"
-        if re.fullmatch(r'\d+', t):
-            return "<othernum>"
-
-        # contains both digit and letter
-        if re.search(r'\d', t) and re.search(r'[A-Za-z]', t):
-            return "<containsDigitAndAlpha>"
-
-        # dates / slashes
-        if re.search(r'\d+/\d+(/\d+)?', t):
-            return "<containsDigitAndSlash>"
-
-        # dashed numbers / codes
-        if re.search(r'\d+-\d+', t):
-            return "<containsDigitAndDash>"
-
-        # numbers with commas or periods (1,000 or 1.00)
-        if re.search(r'\d+,\d+', t):
-            return "<containsDigitAndComma>"
-        if re.search(r'\d+\.\d+', t):
-            return "<containsDigitAndPeriod>"
-
-        # capitalized variants
-        if t.isupper():
-            # all-caps (acronyms)
-            return "<ALLCAPS>"
-        if re.fullmatch(r'[A-Z]\.', t):
-            # single capital + period, e.g. "M."
-            return "<capPeriod>"
-        if t[0].isupper() and t[1:].islower():
-            # first cap, rest lower: likely proper noun or sentence-initial
-            return "<initCap>"
-
-        # suffix heuristics (helpful for POS)
-        if len(t) >= 4 and t.lower().endswith("ing"):
-            return "<suffix_ing>"
-        if len(t) >= 3 and t.lower().endswith("ed"):
-            return "<suffix_ed>"
-        if len(t) >= 3 and t.lower().endswith("ly"):
-            return "<suffix_ly>"
-
-        # lowercase words
-        if t.islower():
-            return "<lowercase>"
-
-        # fallback
-        return "<other>"
-
     def train_supervised_MLE(self, state_sequences, observation_sequences):
         """
         Supervised MLE training for HMM using counts from labeled sequences.
@@ -440,8 +360,7 @@ class HiddenMarkovModel:
             mapped_seq = []
             for w in obs_seq:
                 if w not in self.V:
-                    w = HiddenMarkovModel.pseudo_word(w)
-                mapped_seq.append(self.V.index(w))
+                    w = HMMUtils.pseudo_word(w)
             mapped_sequences.append(mapped_seq)
 
         # Map states to indices
@@ -487,6 +406,84 @@ class HiddenMarkovModel:
             else:
                 self.B[i] = np.ones(M) / M
 
+
+class HMMUtils:
+
+    # Compile regex patterns for efficiency
+    DIGIT_4_RE = re.compile(r'^\d{4}$')
+    DIGIT_2_RE = re.compile(r'^\d{2}$')
+    DIGIT_RE = re.compile(r'^\d+$')
+    DIGIT_ALPHA_RE = re.compile(r'(?=.*\d)(?=.*[A-Za-z])') 
+    SLASH_RE = re.compile(r'\d+/\d+(/\d+)?') # e.g., 12/31 or 12/31/2023
+    DASH_RE = re.compile(r'\d+-\d+')         # e.g., 2023-01
+    COMMA_RE = re.compile(r'\d+,\d+')       # e.g., 1,000
+    PERIOD_RE = re.compile(r'\d+\.\d+')      # e.g., 1.23
+    CAP_PERIOD_RE = re.compile(r'^[A-Z]\.$') # M.
+
+    @staticmethod
+    def pseudo_word(token: str) -> str:
+        """
+        Map a raw token (string, original casing) to a pseudo-word class.
+        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...).
+
+        Order of checks matters: more specific patterns should be checked first.
+
+        Args:
+            token (str): raw token (non-empty string)
+        
+        Returns:
+            str: pseudo-word class corresponding to the token
+        """
+        assert token and isinstance(token, str), "Token must be a non-empty string."
+        t = token
+        t_lower = t.lower()  # for suffix checks
+
+        # Punctuation / special characters
+        if all(ch in ".,;:!?\"'()[]{}" for ch in t):
+            return "<PUNCT>"
+
+        # Number forms / containing numbers
+        if HMMUtils.SLASH_RE.search(t):
+            return "<containsDigitAndSlash>"
+        if HMMUtils.DASH_RE.search(t):
+            return "<containsDigitAndDash>"
+        if HMMUtils.COMMA_RE.search(t):
+            return "<containsDigitAndComma>"
+        if HMMUtils.PERIOD_RE.search(t):
+            return "<containsDigitAndPeriod>"
+        if HMMUtils.DIGIT_ALPHA_RE.search(t):
+            return "<containsDigitAndAlpha>"
+        if HMMUtils.DIGIT_4_RE.fullmatch(t):
+            return "<fourDigitNum>"
+        if HMMUtils.DIGIT_2_RE.fullmatch(t):
+            return "<twoDigitNum>"
+        if HMMUtils.DIGIT_RE.fullmatch(t):
+            return "<othernum>"
+
+        # Capitalized / uppercase patterns
+        if t.isupper():
+            return "<ALLCAPS>"  
+        if HMMUtils.CAP_PERIOD_RE.fullmatch(t):
+            return "<capPeriod>"
+        if t[0].isupper() and t[1:].islower():
+            return "<initCap>"
+
+        # Suffix heuristics
+        if len(t) >= 4 and t_lower.endswith("ing"):
+            return "<suffix_ing>"
+        if len(t) >= 3 and t_lower.endswith("ed"):
+            return "<suffix_ed>"
+        if len(t) >= 3 and t_lower.endswith("ly"):
+            return "<suffix_ly>"
+
+        # Lowercase words
+        if t.islower():
+            return "<lowercase>"
+
+        # Fallback
+        return "<other>"
+
+
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
     def __init__(self, gamma=1):
@@ -523,7 +520,7 @@ class POS_HMM:
             if count >= self.gamma:
                 vocab.add(word)
 
-        vocab.update(HiddenMarkovModel.get_pseudo_list())
+        vocab.update(HMMUtils.get_pseudo_list())
 
         V = sorted(vocab)
         H = sorted(all_tags)
@@ -557,7 +554,7 @@ class POS_HMM:
 
         mapped_sentence = []
         for w in sentence:
-            mapped_sentence.append(HiddenMarkovModel.pseudo_word(w) if w not in self.hmm.V else w)
+            mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
 
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
 
