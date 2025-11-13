@@ -541,6 +541,8 @@ class POS_HMM:
         state_sequences = y_train
         observation_sequences = X_train
 
+        # Device
+        print(f"[POS_HMM] Using device: {self.device}")
         self.hmm.train_supervised_MLE(
             state_sequences=state_sequences,
             observation_sequences=observation_sequences
