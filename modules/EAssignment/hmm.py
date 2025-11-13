@@ -237,11 +237,10 @@ class HiddenMarkovModel:
 
         # Recursive case: t > 0
         for t in range(1, T):
-            for j in range(self.N):
-                values = delta[t-1] * self.A[:, j]
-                max_val, max_state = torch.max(values, dim=0)
-                delta[t, j] = max_val * self.B[j, O[t]]
-                phi[t, j] = max_state
+            values = delta[t-1].unsqueeze(1) * self.A
+            max_val, max_state = torch.max(values, dim=0)
+            delta[t] = max_val * self.B[:, O[t]]
+            phi[t] = max_state
 
         # Termination: find the best path
         P_star, last_state = torch.max(delta[T-1], dim=0)
@@ -330,7 +329,7 @@ class HiddenMarkovModel:
             for i in range(self.N):
                 self.A[i, :] = xi[:, i, :].sum(dim=0) / xi[:, i, :].sum().clamp(min=1e-12)
                 for k in range(self.M):
-                    mask = (torch.tensor(O) == k).float()
+                    mask = (torch.tensor(O, device=self.device) == k).float()
                     self.B[i, k] = (gamma[:, i] * mask).sum() / gamma[:, i].sum().clamp(min=1e-12)
 
     def train_supervised_MLE(self, state_sequences, observation_sequences):
@@ -345,6 +344,15 @@ class HiddenMarkovModel:
         After this, self.pi, self.A, self.B are updated.
         """
         assert len(state_sequences) == len(observation_sequences), "Mismatch in number of sequences between states and observations."
+        print("[HMM] Starting supervised MLE training with (N, M)=({}, {})...".format(self.N, self.M))
+
+        # Map states and observations to indices using dictionary lookup for speed
+        state2idx = {s: i for i, s in enumerate(self.H)}
+        obs2idx = {v: i for i, v in enumerate(self.V)}
+
+        # Precompute mapped sequences
+        mapped_states = []
+        mapped_obs = []
 
         # Map observations to indices (apply pseudo-word mapping)
         mapped_sequences = []
@@ -356,48 +364,49 @@ class HiddenMarkovModel:
                 mapped_seq.append(self.V.index(w))
             mapped_sequences.append(mapped_seq)
 
-        # Map states to indices
-        state_indices_sequences = []
-        for seq in state_sequences:
-            idx_seq = [self.H.index(s) for s in seq]
-            state_indices_sequences.append(idx_seq)
-
-        # Initialize counts
-        N = self.N
-        M = self.M
-        pi_counts = torch.zeros(N, dtype=self.dtype, device=self.device)
-        A_counts = torch.zeros((N, N), dtype=self.dtype, device=self.device)
-        B_counts = torch.zeros((N, M), dtype=self.dtype, device=self.device)
-
-        for s_seq, o_seq in zip(state_indices_sequences, mapped_sequences):
+        for s_seq, o_seq in zip(state_sequences, observation_sequences):
             if len(s_seq) == 0:
                 continue
-            # initial state
+            mapped_s = torch.tensor([state2idx[s] for s in s_seq], device=self.device)
+            mapped_o = torch.tensor([obs2idx.get(w, obs2idx[HMMUtils.pseudo_word(w)]) for w in o_seq], device=self.device)
+            mapped_states.append(mapped_s)
+            mapped_obs.append(mapped_o)
+
+        # Initialize counts
+        pi_counts = torch.zeros(self.N, dtype=self.dtype, device=self.device)
+        A_counts = torch.zeros((self.N, self.N), dtype=self.dtype, device=self.device)
+        B_counts = torch.zeros((self.N, self.M), dtype=self.dtype, device=self.device)
+
+        # Update counts using vectorized index_put_
+        progress_i = 0
+        progress_total = len(mapped_states)
+        for s_seq, o_seq in zip(mapped_states, mapped_obs):
+            # Progress display
+            progress_i += 1
+            if progress_i % 500 == 0 or progress_i == progress_total:
+                print(f"[HMM] Processing sequence {progress_i}/{progress_total}...", end='\r')
+            # Initial state
             pi_counts[s_seq[0]] += 1
-            for t in range(len(s_seq)):
-                B_counts[s_seq[t], o_seq[t]] += 1
-                if t < len(s_seq)-1:
-                    A_counts[s_seq[t], s_seq[t+1]] += 1
+            # Transitions
+            if len(s_seq) > 1:
+                src = s_seq[:-1]
+                dst = s_seq[1:]
+                A_counts.index_put_((src, dst), torch.ones(len(src), device=self.device, dtype=self.dtype), accumulate=True)
+            # Emissions
+            B_counts.index_put_((s_seq, o_seq), torch.ones(len(s_seq), device=self.device, dtype=self.dtype), accumulate=True)
 
         # Normalize to probabilities (add small smoothing)
         eps = 1e-12
-        self.pi = (pi_counts + eps) / (pi_counts.sum() + eps * N)
 
-        self.A = torch.zeros_like(A_counts)
-        for i in range(N):
-            denom = A_counts[i].sum()
-            if denom > 0:
-                self.A[i] = (A_counts[i] + eps) / (denom + eps * N)
-            else:
-                self.A[i] = torch.ones(N, dtype=self.dtype, device=self.device) / N
+        self.pi = (pi_counts + eps) / (pi_counts.sum() + eps * self.N)
 
-        self.B = torch.zeros_like(B_counts)
-        for i in range(N):
-            denom = B_counts[i].sum()
-            if denom > 0:
-                self.B[i] = (B_counts[i] + eps) / (denom + eps * M)
-            else:
-                self.B[i] = torch.ones(M, dtype=self.dtype, device=self.device) / M
+        denom_A = A_counts.sum(dim=1, keepdim=True).clamp(min=eps)
+        self.A = (A_counts + eps) / (denom_A + eps * self.N)
+
+        denom_B = B_counts.sum(dim=1, keepdim=True).clamp(min=eps)
+        self.B = (B_counts + eps) / (denom_B + eps * self.M)
+
+        print("[HMM] Supervised MLE training completed.")
 
 class HMMUtils:
 
@@ -689,6 +698,7 @@ class POS_HMM:
         return: float, accuracy score
         """
         assert self.hmm is not None, "HMM model is not trained yet."
+        print("[POS_HMM] Evaluating on test data...")
         true_tags = []
         pred_tags = []
         for sentence, tags in zip(X_test, y_test):
@@ -704,27 +714,24 @@ if __name__ == "__main__":
     # Example usage
     test_hmm = HiddenMarkovModel(N=5, M=6)
     import numpy as np
-    A = np.array([[0.7, 0.2, 0.05, 0.025, 0.025],
+    A = torch.tensor([[0.7, 0.2, 0.05, 0.025, 0.025],
                   [0.1, 0.6, 0.2, 0.05, 0.05],
                   [0.2, 0.3, 0.4, 0.05, 0.05],
                   [0.25, 0.25, 0.25, 0.15, 0.10],
-                  [0.3, 0.2, 0.2, 0.2, 0.1]])
-    B = np.array([[0.1, 0.4, 0.2, 0.2, 0.05, 0.05],
+                  [0.3, 0.2, 0.2, 0.2, 0.1]], dtype=torch.float64, device=DEVICE)
+    B = torch.tensor([[0.1, 0.4, 0.2, 0.2, 0.05, 0.05],
                   [0.3, 0.2, 0.2, 0.1, 0.1, 0.1],
                   [0.25, 0.25, 0.25, 0.15, 0.05, 0.05],
                   [0.2, 0.3, 0.3, 0.1, 0.05, 0.05],
-                  [0.15, 0.35, 0.25, 0.15, 0.05, 0.05]])
-    pi = np.array([0.2, 0.3, 0.25, 0.15, 0.1])
-    A = torch.tensor(A, dtype=torch.float64, device=DEVICE)
-    B = torch.tensor(B, dtype=torch.float64, device=DEVICE)
-    pi = torch.tensor(pi, dtype=torch.float64, device=DEVICE)
+                  [0.15, 0.35, 0.25, 0.15, 0.05, 0.05]], dtype=torch.float64, device=DEVICE)
+    pi = torch.tensor([0.2, 0.3, 0.25, 0.15, 0.1], dtype=torch.float64, device=DEVICE)
     test_hmm.set_A(A)
     test_hmm.set_B(B)
     test_hmm.set_pi(pi)
     # Forward algorithm test
-    observations = [0, 1, 2, 2, 3, 2, 4]
+    observations = [0, 1, 2, 2, 3, 2, 4, 2, 0, 1]
     P, alpha = test_hmm.forward(observations, is_index=True, scaled=False)
     print(f"Forward algorithm P(O|λ): {P}")
     # Viterbi algorithm test
-    Q_star, delta, phi = test_hmm.Viterbi(observations, is_index=True)
+    Q_star, delta, phi = test_hmm.Viterbi_fast(observations, is_index=True)
     print(f"Viterbi most likely states Q*: {Q_star}")
