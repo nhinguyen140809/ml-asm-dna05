@@ -558,9 +558,9 @@ class POS_HMM:
         mapped_sentence = []
         for w in sentence:
             mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
-        print(f"[POS_HMM] Predicting for sentence: {' '.join(sentence)}", flush=True)
+
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
-        print(f"[POS_HMM] Predicted tags: {' '.join(predicted_tags)}", flush=True)
+    
         return predicted_tags
     
     def predict_batch(self, sentences):
@@ -569,7 +569,16 @@ class POS_HMM:
         sentences: list of sentences, where each sentence is a list of words (tokens)
         return: list of lists of predicted tags
         """
-        return [self.predict_sentence(sentence) for sentence in sentences]
+        n = len(sentences)
+        assert n > 0, "Input sentences list must be non-empty."
+        result = []
+        for i, sentence in enumerate(sentences):
+            if i % 10 == 0 or i == n - 1:
+                print(f"[POS_HMM] Predicting sentence {i+1}/{n}...", end='\r')
+            pred_tags = self.predict_sentence(sentence)
+            result.append(pred_tags)
+        print(f"[POS_HMM] Completed predicting {n} sentences.")
+        return result
     
     def predict(self, X):
         """
