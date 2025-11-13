@@ -347,6 +347,7 @@ class HiddenMarkovModel:
         print("[HMM] Starting supervised MLE training with (N, M)=({}, {})...".format(self.N, self.M))
 
         # Map states and observations to indices using dictionary lookup for speed
+        print("[HMM] Mapping states and observations to indices...")
         state2idx = {s: i for i, s in enumerate(self.H)}
         obs2idx = {v: i for i, v in enumerate(self.V)}
 
