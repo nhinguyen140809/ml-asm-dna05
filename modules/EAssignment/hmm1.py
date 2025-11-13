@@ -1,26 +1,18 @@
-import torch
+import numpy as np
 import re
 from collections import Counter
 
-# Choose device automatically
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 class HiddenMarkovModel:
-    def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None, device=DEVICE, dtype=torch.float32):
+    def __init__(self, N=0, M=0, H=None, V=None, A=None, B=None, pi=None):
         """
-        HMM implemented with PyTorch tensors.
-
         N: number of hidden states
         M: number of observable states
-        H: list of hidden state names
-        V: list of observable tokens
-        A: transition matrix (N x N) as torch tensor (rows sum to 1)
-        B: emission matrix (N x M)
-        pi: initial distribution (N,)
+        V: observable state space (optional), default: {0, 1, ..., M-1}
+        H: hidden state space (optional), default: {0, 1, ..., N-1}
+        A: state transition probability matrix (N x N), default: random
+        B: observation probability matrix (N x M), default: random
+        pi: initial state distribution (N,), default: random
         """
-        self.device = device
-        self.dtype = dtype
-
         assert N > 0 or H is not None, "At least one of N or H must be provided."
         assert M > 0 or V is not None, "At least one of M or V must be provided."
 
@@ -38,41 +30,41 @@ class HiddenMarkovModel:
         else:
             self.M = len(V)
 
-        self.V = V if V is not None else list(range(self.M))
-        self.H = H if H is not None else list(range(self.N))
+        self.V = V if V is not None else list(range(M))  # observable state space
+        self.H = H if H is not None else list(range(N))  # hidden state space
 
-        # init tensors
+        # Initialize randomly (normalize to probabilities)
         if A is not None:
-            assert isinstance(A, torch.Tensor), "Transition matrix A must be a torch Tensor."
-            assert A.shape == (self.N, self.N), "Transition matrix A must have shape (N, N)."
+            assert isinstance(A, np.ndarray), "Transition matrix A must be a numpy array."
+            assert A.shape == (N, N), "Transition matrix A must be of shape (N, N)."
             for row in A:
-                assert torch.isclose(row.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Each row of A must sum to 1."
-            self.A = A.to(device=self.device, dtype=self.dtype)
+                assert np.isclose(row.sum(), 1), "Each row of transition matrix A must sum to 1."
+            self.A = A
         else:
-            a = torch.rand((self.N, self.N), dtype=self.dtype, device=self.device)
-            self.A = a / a.sum(dim=1, keepdim=True)
+            self.A = np.random.rand(N, N)
+            self.A = self.A / self.A.sum(axis=1, keepdims=True)
 
         if B is not None:
-            assert isinstance(B, torch.Tensor), "Emission matrix B must be a torch Tensor."
-            assert B.shape == (self.N, self.M), "Emission matrix B must have shape (N, M)."
+            assert isinstance(B, np.ndarray), "Emission matrix B must be a numpy array."
+            assert B.shape == (N, M), "Emission matrix B must be of shape (N, M)."
             for row in B:
-                assert torch.isclose(row.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Each row of B must sum to 1."
-            self.B = B.to(device=self.device, dtype=self.dtype)
+                assert np.isclose(row.sum(), 1), "Each row of emission matrix B must sum to 1."
+            self.B = B
         else:
-            b = torch.rand((self.N, self.M), dtype=self.dtype, device=self.device)
-            self.B = b / b.sum(dim=1, keepdim=True)
+            self.B = np.random.rand(N, M)
+            self.B = self.B / self.B.sum(axis=1, keepdims=True)
 
         if pi is not None:
-            assert isinstance(pi, torch.Tensor), "Initial distribution pi must be a torch Tensor."
-            assert pi.shape == (self.N,), "Initial distribution pi must have shape (N,)."
-            assert torch.isclose(pi.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Initial distribution pi must sum to 1."
-            self.pi = pi.to(device=self.device, dtype=self.dtype)
+            assert isinstance(pi, np.ndarray), "Initial state distribution pi must be a numpy array."
+            assert pi.shape == (N,), "Initial state distribution pi must be of shape (N,)."
+            assert np.isclose(pi.sum(), 1), "Initial state distribution pi must sum to 1."
+            self.pi = pi
         else:
-            p = torch.rand(self.N, dtype=self.dtype, device=self.device)
-            self.pi = p / p.sum()
+            self.pi = np.random.rand(N)
+            self.pi = self.pi / self.pi.sum()
 
     def __repr__(self):
-        return f"HMM_Torch(N={self.N}, M={self.M}, device={self.device})\nVocab size: {self.M}\nStates: {self.N}"
+        return f"HMM(N = {self.N}, M = {self.M})\nObservation Space V: {self.V}\nHidden Space H: {self.H}"
 
     def set_V(self, V):
         assert len(V) == self.M, "Length of observable state space V must be equal to M."
@@ -83,35 +75,35 @@ class HiddenMarkovModel:
         self.H = H
 
     def set_A(self, A):
-        assert isinstance(A, torch.Tensor), "Transition matrix A must be a torch Tensor."
-        assert A.shape == (self.N, self.N), "Transition matrix A must have shape (N, N)."
+        assert isinstance(A, np.ndarray)
+        assert A.shape == (self.N, self.N)
         for row in A:
-            assert torch.isclose(row.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Each row of A must sum to 1."
+            assert np.isclose(row.sum(), 1)
         self.A = A
 
     def set_B(self, B):
-        assert isinstance(B, torch.Tensor), "Emission matrix B must be a torch Tensor."
-        assert B.shape == (self.N, self.M), "Emission matrix B must have shape (N, M)."
+        assert isinstance(B, np.ndarray)
+        assert B.shape == (self.N, self.M)
         for row in B:
-            assert torch.isclose(row.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Each row of B must sum to 1."
+            assert np.isclose(row.sum(), 1)
         self.B = B
 
     def set_pi(self, pi):
-        assert isinstance(pi, torch.Tensor), "Initial distribution pi must be a torch Tensor."
+        assert isinstance(pi, np.ndarray)
         assert pi.shape == (self.N,)
-        assert torch.isclose(pi.sum(), torch.tensor(1.0, device=self.device, dtype=self.dtype)), "Initial distribution pi must sum to 1."
+        assert np.isclose(pi.sum(), 1)
         self.pi = pi
 
     def generate_sequence(self, T):
         states, observations = [], []
-        state = torch.multinomial(self.pi, 1).item()
+        state = np.random.choice(self.N, p=self.pi)
         for _ in range(T):
+            obs = np.random.choice(self.M, p=self.B[state])
             states.append(state)
-            obs = torch.multinomial(self.B[state], 1).item()
             observations.append(obs)
-            state = torch.multinomial(self.A[state], 1).item()
+            state = np.random.choice(self.N, p=self.A[state])
         return [self.H[s] for s in states], [self.V[o] for o in observations]
-
+    
     def check_observations(self, observations, is_index=True):
         if is_index:
             assert all(0 <= o < self.M for o in observations), "All observations must be valid indices in V."
@@ -156,20 +148,23 @@ class HiddenMarkovModel:
         assert T > 0, "Observation sequence must be non-empty."
 
         # Initialize alpha, where alpha[t, i] = P(O[0:t], Q[t] = i | λ)
-        alpha = torch.zeros((T, self.N), dtype=self.dtype, device=self.device)
-
+        alpha = np.zeros((T, self.N))
         # Base case: t = 0
-        alpha[0] = self.pi * self.B[:, O[0]]
+        for i in range(self.N):
+            alpha[0, i] = self.pi[i] * self.B[i, O[0]]
         
         # Recursive case: t > 0
         for t in range(1, T):
-            alpha[t] = torch.matmul(alpha[t-1], self.A) * self.B[:, O[t]]
+            for j in range(self.N):
+                alpha[t, j] = sum(alpha[t-1, i] * self.A[i, j] for i in range(self.N)) * self.B[j, O[t]]
 
         # Termination: P(O|λ) = sum over all states of alpha[T-1, i]
-        P = torch.sum(alpha[T-1]).item()
-        log_P = torch.log(torch.tensor(P)) if P > 0 else float('-inf')
-        
-        return (log_P, alpha) if log else (P, alpha)
+        P = sum(alpha[T-1, i] for i in range(self.N))
+        log_P = np.log(P) if P > 0 else float('-inf')
+        if log:
+            return log_P, alpha
+        else:
+            return P, alpha
 
     def forward_scaled(self, observations, is_index=True, log=False):
         """
@@ -191,27 +186,29 @@ class HiddenMarkovModel:
         assert T > 0, "Observation sequence must be non-empty."
 
         # Initialize alpha and scales
-        alpha = torch.zeros((T, self.N), dtype=self.dtype, device=self.device)
-        scales = torch.zeros(T, dtype=self.dtype, device=self.device)
+        alpha = np.zeros((T, self.N))
+        scales = np.zeros(T)
 
         # Base case: t = 0
-        alpha[0] = self.pi * self.B[:, O[0]]
+        for i in range(self.N):
+            alpha[0, i] = self.pi[i] * self.B[i, O[0]]
         scales[0] = alpha[0].sum()
         alpha[0] /= scales[0]
 
         # Recursive case: t > 0
         for t in range(1, T):
-            alpha[t] = torch.matmul(alpha[t-1], self.A) * self.B[:, O[t]]
+            for j in range(self.N):
+                alpha[t, j] = sum(alpha[t-1, i] * self.A[i, j] for i in range(self.N)) * self.B[j, O[t]]
             scales[t] = alpha[t].sum()
             alpha[t] /= scales[t]
 
         # Compute log probability to avoid underflow
-        log_P = torch.sum(torch.log(scales))
-        P = torch.exp(log_P)
-        log_P = log_P.item()
-        P = P.item()
-
-        return (log_P, alpha, scales) if log else (P, alpha, scales)
+        log_P = np.sum(np.log(scales))
+        P = np.exp(log_P)
+        if log:
+            return log_P, alpha, scales
+        else:
+            return P, alpha, scales
 
     def Viterbi(self, observations, is_index=True, ret_tags=False):
         """
@@ -228,32 +225,34 @@ class HiddenMarkovModel:
         assert T > 0, "Observation sequence must be non-empty."
 
         # Initialize delta and phi
-        delta = torch.zeros((T, self.N), dtype=self.dtype, device=self.device)
-        phi = torch.zeros((T, self.N), dtype=torch.int64, device=self.device)
+        delta = np.zeros((T, self.N))
+        phi = np.zeros((T, self.N), dtype=int)
 
         # Base case: t = 0
-        delta[0] = self.pi * self.B[:, O[0]]
-        phi[0] = 0
+        for i in range(self.N):
+            delta[0, i] = self.pi[i] * self.B[i, O[0]]
+            phi[0, i] = 0
 
         # Recursive case: t > 0
         for t in range(1, T):
             for j in range(self.N):
-                values = delta[t-1] * self.A[:, j]
-                max_val, max_state = torch.max(values, dim=0)
+                max_val, max_state = max((delta[t-1, i] * self.A[i, j], i) for i in range(self.N))
                 delta[t, j] = max_val * self.B[j, O[t]]
                 phi[t, j] = max_state
 
         # Termination: find the best path
-        P_star, last_state = torch.max(delta[T-1], dim=0)
+        P_star = max(delta[T-1, i] for i in range(self.N))
+        last_state = np.argmax(delta[T-1, :])
 
         # Backtrack to find the full path
-        Q_star = torch.zeros(T, dtype=torch.int64, device=self.device)
+        Q_star = [0] * T
         Q_star[T-1] = last_state
         for t in range(T-2, -1, -1):
             Q_star[t] = phi[t+1, Q_star[t+1]]
 
-        result_states = [self.H[q.item()] for q in Q_star] if ret_tags else Q_star.tolist()
-        return result_states, delta, phi
+        if ret_tags:
+            return [self.H[i] for i in Q_star], delta, phi
+        return Q_star, delta, phi
 
     def backward(self, observations, is_index=True):
         """
@@ -276,14 +275,15 @@ class HiddenMarkovModel:
         assert T > 0, "Observation sequence must be non-empty."
 
         # Initialize beta, where beta[t, i] = P(O[t+1:T] | Q[t] = i, λ)
-        beta = torch.zeros((T, self.N), dtype=self.dtype, device=self.device)
+        beta = np.zeros((T, self.N))
         # Base case: t = T-1
-        beta[T-1] = 1.0
+        for i in range(self.N):
+            beta[T-1, i] = 1
         
         # Recursive case: t < T-1
         for t in range(T-2, -1, -1):
             for i in range(self.N):
-                beta[t, i] = torch.sum(self.A[i, :] * self.B[:, O[t+1]] * beta[t+1, :])
+                beta[t, i] = sum(self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j] for j in range(self.N))
 
         return beta
     
@@ -314,24 +314,112 @@ class HiddenMarkovModel:
             _, alpha = self.forward(O, is_index=True, scaled=False)
             beta = self.backward(O, is_index=True)
             
-            gamma = torch.zeros((T, self.N), dtype=self.dtype, device=self.device)
-            gamma = alpha * beta
-            gamma = gamma / gamma.sum(dim=1, keepdim=True).clamp(min=1e-12)
+            gamma = np.zeros((T, self.N))
+            xi = np.zeros((T-1, self.N, self.N))
 
+            for t in range(T):
+                denom = sum(alpha[t, i] * beta[t, i] for i in range(self.N))
+                for i in range(self.N):
+                    gamma[t, i] = (alpha[t, i] * beta[t, i]) / denom if denom > 0 else 0
 
-            xi = torch.zeros((T-1, self.N, self.N), dtype=self.dtype, device=self.device)
             for t in range(T-1):
-                numerator = alpha[t, :].unsqueeze(1) * self.A * self.B[:, O[t+1]].unsqueeze(0) * beta[t+1, :].unsqueeze(0)
-                denom = numerator.sum()
-                xi[t, :, :] = numerator / denom.clamp(min=1e-12)
+                denom = sum(alpha[t, i] * self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j] for i in range(self.N) for j in range(self.N))
+                for i in range(self.N):
+                    for j in range(self.N):
+                        xi[t, i, j] = (alpha[t, i] * self.A[i, j] * self.B[j, O[t+1]] * beta[t+1, j]) / denom if denom > 0 else 0
             
             # M-step: re-estimate A, B, pi
-            self.pi = gamma[0, :] / gamma[0, :].sum().clamp(min=1e-12)
             for i in range(self.N):
-                self.A[i, :] = xi[:, i, :].sum(dim=0) / xi[:, i, :].sum().clamp(min=1e-12)
+                self.pi[i] = gamma[0, i]
+                for j in range(self.N):
+                    numer = sum(xi[t, i, j] for t in range(T-1))
+                    denom = sum(gamma[t, i] for t in range(T-1))
+                    self.A[i, j] = numer / denom if denom > 0 else 0
+
                 for k in range(self.M):
-                    mask = (torch.tensor(O) == k).float()
-                    self.B[i, k] = (gamma[:, i] * mask).sum() / gamma[:, i].sum().clamp(min=1e-12)
+                    numer = sum(gamma[t, i] for t in range(T) if O[t] == k)
+                    denom = sum(gamma[t, i] for t in range(T))
+                    self.B[i, k] = numer / denom if denom > 0 else 0
+
+    @staticmethod
+    def get_pseudo_list():
+        """
+        Return a list of predefined pseudo-words for rare word handling.
+        """
+        return [
+            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
+            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
+            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
+            "<ALLCAPS>", "<capPeriod>", "<initCap>",
+            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
+            "<lowercase>", "<other>"
+        ]
+
+    @staticmethod
+    def pseudo_word(token):
+        """
+        Map a raw token (string, original casing) to a pseudo-word class.
+        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...)
+        Order matters: more specific patterns first.
+        """
+        assert token is not None and len(token) > 0, "Token must be a non-empty string."
+        t = token
+
+        # punctuation / punctuation-like
+        if all(ch in ".,;:!?\"'()[]" for ch in t):
+            return "<PUNCT>"
+
+        # digits-only
+        if re.fullmatch(r'\d{4}', t):
+            return "<fourDigitNum>"
+        if re.fullmatch(r'\d{2}', t):
+            return "<twoDigitNum>"
+        if re.fullmatch(r'\d+', t):
+            return "<othernum>"
+
+        # contains both digit and letter
+        if re.search(r'\d', t) and re.search(r'[A-Za-z]', t):
+            return "<containsDigitAndAlpha>"
+
+        # dates / slashes
+        if re.search(r'\d+/\d+(/\d+)?', t):
+            return "<containsDigitAndSlash>"
+
+        # dashed numbers / codes
+        if re.search(r'\d+-\d+', t):
+            return "<containsDigitAndDash>"
+
+        # numbers with commas or periods (1,000 or 1.00)
+        if re.search(r'\d+,\d+', t):
+            return "<containsDigitAndComma>"
+        if re.search(r'\d+\.\d+', t):
+            return "<containsDigitAndPeriod>"
+
+        # capitalized variants
+        if t.isupper():
+            # all-caps (acronyms)
+            return "<ALLCAPS>"
+        if re.fullmatch(r'[A-Z]\.', t):
+            # single capital + period, e.g. "M."
+            return "<capPeriod>"
+        if t[0].isupper() and t[1:].islower():
+            # first cap, rest lower: likely proper noun or sentence-initial
+            return "<initCap>"
+
+        # suffix heuristics (helpful for POS)
+        if len(t) >= 4 and t.lower().endswith("ing"):
+            return "<suffix_ing>"
+        if len(t) >= 3 and t.lower().endswith("ed"):
+            return "<suffix_ed>"
+        if len(t) >= 3 and t.lower().endswith("ly"):
+            return "<suffix_ly>"
+
+        # lowercase words
+        if t.islower():
+            return "<lowercase>"
+
+        # fallback
+        return "<other>"
 
     def train_supervised_MLE(self, state_sequences, observation_sequences):
         """
@@ -352,7 +440,7 @@ class HiddenMarkovModel:
             mapped_seq = []
             for w in obs_seq:
                 if w not in self.V:
-                    w = HMMUtils.pseudo_word(w)
+                    w = HiddenMarkovModel.pseudo_word(w)
                 mapped_seq.append(self.V.index(w))
             mapped_sequences.append(mapped_seq)
 
@@ -365,9 +453,9 @@ class HiddenMarkovModel:
         # Initialize counts
         N = self.N
         M = self.M
-        pi_counts = torch.zeros(N, dtype=self.dtype, device=self.device)
-        A_counts = torch.zeros((N, N), dtype=self.dtype, device=self.device)
-        B_counts = torch.zeros((N, M), dtype=self.dtype, device=self.device)
+        pi_counts = np.zeros(N, dtype=float)
+        A_counts = np.zeros((N, N), dtype=float)
+        B_counts = np.zeros((N, M), dtype=float)
 
         for s_seq, o_seq in zip(state_indices_sequences, mapped_sequences):
             if len(s_seq) == 0:
@@ -383,119 +471,27 @@ class HiddenMarkovModel:
         eps = 1e-12
         self.pi = (pi_counts + eps) / (pi_counts.sum() + eps * N)
 
-        self.A = torch.zeros_like(A_counts)
+        self.A = np.zeros_like(A_counts)
         for i in range(N):
             denom = A_counts[i].sum()
             if denom > 0:
                 self.A[i] = (A_counts[i] + eps) / (denom + eps * N)
             else:
-                self.A[i] = torch.ones(N, dtype=self.dtype, device=self.device) / N
+                self.A[i] = np.ones(N) / N
 
-        self.B = torch.zeros_like(B_counts)
+        self.B = np.zeros_like(B_counts)
         for i in range(N):
             denom = B_counts[i].sum()
             if denom > 0:
                 self.B[i] = (B_counts[i] + eps) / (denom + eps * M)
             else:
-                self.B[i] = torch.ones(M, dtype=self.dtype, device=self.device) / M
+                self.B[i] = np.ones(M) / M
 
-class HMMUtils:
-
-    # Compile regex patterns for efficiency
-    DIGIT_4_RE = re.compile(r'^\d{4}$')
-    DIGIT_2_RE = re.compile(r'^\d{2}$')
-    DIGIT_RE = re.compile(r'^\d+$')
-    DIGIT_ALPHA_RE = re.compile(r'(?=.*\d)(?=.*[A-Za-z])') 
-    SLASH_RE = re.compile(r'\d+/\d+(/\d+)?') # e.g., 12/31 or 12/31/2023
-    DASH_RE = re.compile(r'\d+-\d+')         # e.g., 2023-01
-    COMMA_RE = re.compile(r'\d+,\d+')       # e.g., 1,000
-    PERIOD_RE = re.compile(r'\d+\.\d+')      # e.g., 1.23
-    CAP_PERIOD_RE = re.compile(r'^[A-Z]\.$') # M.
-
-    @staticmethod
-    def pseudo_word(token: str) -> str:
-        """
-        Map a raw token (string, original casing) to a pseudo-word class.
-        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...).
-
-        Order of checks matters: more specific patterns should be checked first.
-
-        Args:
-            token (str): raw token (non-empty string)
-        
-        Returns:
-            str: pseudo-word class corresponding to the token
-        """
-        assert token and isinstance(token, str), "Token must be a non-empty string."
-        t = token
-        t_lower = t.lower()  # for suffix checks
-
-        # Punctuation / special characters
-        if all(ch in ".,;:!?\"'()[]{}" for ch in t):
-            return "<PUNCT>"
-
-        # Number forms / containing numbers
-        if HMMUtils.SLASH_RE.search(t):
-            return "<containsDigitAndSlash>"
-        if HMMUtils.DASH_RE.search(t):
-            return "<containsDigitAndDash>"
-        if HMMUtils.COMMA_RE.search(t):
-            return "<containsDigitAndComma>"
-        if HMMUtils.PERIOD_RE.search(t):
-            return "<containsDigitAndPeriod>"
-        if HMMUtils.DIGIT_ALPHA_RE.search(t):
-            return "<containsDigitAndAlpha>"
-        if HMMUtils.DIGIT_4_RE.fullmatch(t):
-            return "<fourDigitNum>"
-        if HMMUtils.DIGIT_2_RE.fullmatch(t):
-            return "<twoDigitNum>"
-        if HMMUtils.DIGIT_RE.fullmatch(t):
-            return "<othernum>"
-
-        # Capitalized / uppercase patterns
-        if t.isupper():
-            return "<ALLCAPS>"  
-        if HMMUtils.CAP_PERIOD_RE.fullmatch(t):
-            return "<capPeriod>"
-        if t[0].isupper() and t[1:].islower():
-            return "<initCap>"
-
-        # Suffix heuristics
-        if len(t) >= 4 and t_lower.endswith("ing"):
-            return "<suffix_ing>"
-        if len(t) >= 3 and t_lower.endswith("ed"):
-            return "<suffix_ed>"
-        if len(t) >= 3 and t_lower.endswith("ly"):
-            return "<suffix_ly>"
-
-        # Lowercase words
-        if t.islower():
-            return "<lowercase>"
-
-        # Fallback
-        return "<other>"
-
-    @staticmethod
-    def get_pseudo_list():
-        """
-        Return a list of all pseudo-word classes used for rare word handling.
-        """
-        return [
-            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
-            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
-            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
-            "<ALLCAPS>", "<capPeriod>", "<initCap>",
-            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
-            "<lowercase>", "<other>"
-        ]
-    
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
-    def __init__(self, gamma=1, device=DEVICE, dtype=torch.float32):
+    def __init__(self, gamma=1):
         self.hmm = None
         self.gamma = gamma
-        self.device = device
-        self.dtype = dtype
 
     def train(self, X_train, y_train, tagset=None):
         """
@@ -527,7 +523,7 @@ class POS_HMM:
             if count >= self.gamma:
                 vocab.add(word)
 
-        vocab.update(HMMUtils.get_pseudo_list())
+        vocab.update(HiddenMarkovModel.get_pseudo_list())
 
         V = sorted(vocab)
         H = sorted(all_tags)
@@ -536,13 +532,11 @@ class POS_HMM:
 
         print(f"[POS_HMM] Start training HMM for POS tagging...")
         
-        self.hmm = HiddenMarkovModel(N=N, M=M, H=H, V=V, device=self.device, dtype=self.dtype)
+        self.hmm = HiddenMarkovModel(N=N, M=M, H=H, V=V)
 
         state_sequences = y_train
         observation_sequences = X_train
 
-        # Device
-        print(f"[POS_HMM] Using device: {self.device}")
         self.hmm.train_supervised_MLE(
             state_sequences=state_sequences,
             observation_sequences=observation_sequences
@@ -563,7 +557,7 @@ class POS_HMM:
 
         mapped_sentence = []
         for w in sentence:
-            mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
+            mapped_sentence.append(HiddenMarkovModel.pseudo_word(w) if w not in self.hmm.V else w)
 
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
 
@@ -593,8 +587,7 @@ class POS_HMM:
             print("[POS_HMM] Predicting single sentence...")
             return self.predict_sentence(X)
 
-    @staticmethod
-    def accuracy(true_tags, pred_tags):
+    def accuracy(self, true_tags, pred_tags):
         """ 
         Compute accuracy given true and predicted tags
         true_tags: list of true tags of all samples
@@ -609,8 +602,7 @@ class POS_HMM:
 
         return correct / total if total > 0 else 0.0
 
-    @staticmethod
-    def precision_recall_f1(true_tags, pred_tags, average='weighted'):
+    def precision_recall_f1(self, true_tags, pred_tags, average='weighted'):
         """
         Compute precision, recall, and F1 for multi-class tagging.
         Supports 'micro', 'macro', and 'weighted' averaging.
@@ -653,10 +645,11 @@ class POS_HMM:
             f1s.append(f1)
             supports.append(support[label])
 
-        precisions = torch.tensor(precisions)
-        recalls = torch.tensor(recalls)
-        f1s = torch.tensor(f1s)
-        supports = torch.tensor(supports)
+        precisions = np.array(precisions)
+        recalls = np.array(recalls)
+        f1s = np.array(f1s)
+        supports = np.array(supports)
+        total_support = supports.sum()
 
         # Average modes
         if average == 'micro':
@@ -673,9 +666,9 @@ class POS_HMM:
             f1 = f1s.mean()
 
         elif average == 'weighted':
-            precision = torch.sum(precisions * supports) / torch.sum(supports) if torch.sum(supports) > 0 else 0.0
-            recall = torch.sum(recalls * supports) / torch.sum(supports) if torch.sum(supports) > 0 else 0.0
-            f1 = torch.sum(f1s * supports) / torch.sum(supports) if torch.sum(supports) > 0 else 0.0
+            precision = np.average(precisions, weights=supports)
+            recall = np.average(recalls, weights=supports)
+            f1 = np.average(f1s, weights=supports)
 
         else:
             raise ValueError("average must be one of ['micro', 'macro', 'weighted']")
@@ -696,48 +689,6 @@ class POS_HMM:
             true_tags.append(tags)
             pred_tags.append(predicted)
         
-        accuracy = POS_HMM.accuracy(true_tags, pred_tags)
-        precision, recall, f1 = POS_HMM.precision_recall_f1(true_tags, pred_tags, average=average)
+        accuracy = self.accuracy(true_tags, pred_tags)
+        precision, recall, f1 = self.precision_recall_f1(true_tags, pred_tags, average=average)
         return accuracy, precision, recall, f1
-    
-if __name__ == "__main__":
-    import nltk
-    from nltk.corpus import brown
-    # ============================================================
-    # Tải Brown corpus và universal tagset
-    # ============================================================
-    nltk.download('brown')            # Tải Brown corpus
-    nltk.download('universal_tagset') # Tải tagset chuẩn hóa nhãn POS
-
-    # ============================================================
-    # Load toàn bộ Brown corpus với nhãn POS chuẩn
-    # ============================================================
-    nltk_data_full = list(brown.tagged_sents(tagset='universal'))
-    nltk_data_full = nltk_data_full[:5000]  # Giới hạn số câu để tiết kiệm thời gian
-
-        
-    X_train = [[word for word, tag in sent] for sent in nltk_data_full]
-    y_train = [[tag for word, tag in sent] for sent in nltk_data_full]
-
-    # ============================================================
-    # Cấu hình tham số huấn luyện
-    # ============================================================
-    CONFIG = {
-        "GAMMA_LIST": [2, 3, 5, 7],       # danh sách giá trị gamma thử nghiệm
-        "AVERAGE_MODE": "weighted"     # cách tính trung bình precision/recall/F1
-    }
-
-    # ============================================================
-    # Danh sách lưu kết quả
-    # ============================================================
-    results = []
-
-    # ============================================================
-    # Huấn luyện và đánh giá với từng giá trị gamma
-    # ============================================================
-    for gamma in CONFIG["GAMMA_LIST"]:
-        print(f"🔹 Training POS_HMM with gamma={gamma} ...")
-
-        # Khởi tạo và huấn luyện mô hình
-        pos_hmm = POS_HMM(gamma=gamma)
-        pos_hmm.train(X_train, y_train)
