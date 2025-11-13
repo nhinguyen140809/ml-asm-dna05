@@ -574,7 +574,7 @@ class POS_HMM:
         result = []
         for i, sentence in enumerate(sentences):
             if i % 10 == 0 or i == n - 1:
-                print(f"[POS_HMM] Predicting sentence {i+1}/{n}...", end='\r')
+                print(f"[POS_HMM] Predicting sentence {i+1}/{n}...", end='\r', flush=True)
             pred_tags = self.predict_sentence(sentence)
             result.append(pred_tags)
         print(f"[POS_HMM] Completed predicting {n} sentences.")
