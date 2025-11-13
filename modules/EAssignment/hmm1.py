@@ -440,7 +440,7 @@ class HiddenMarkovModel:
             mapped_seq = []
             for w in obs_seq:
                 if w not in self.V:
-                    w = HiddenMarkovModel.pseudo_word(w)
+                    w = HMMUtils.pseudo_word(w)
                 mapped_seq.append(self.V.index(w))
             mapped_sequences.append(mapped_seq)
 
@@ -487,6 +487,96 @@ class HiddenMarkovModel:
             else:
                 self.B[i] = np.ones(M) / M
 
+class HMMUtils:
+
+    # Compile regex patterns for efficiency
+    DIGIT_4_RE = re.compile(r'^\d{4}$')
+    DIGIT_2_RE = re.compile(r'^\d{2}$')
+    DIGIT_RE = re.compile(r'^\d+$')
+    DIGIT_ALPHA_RE = re.compile(r'(?=.*\d)(?=.*[A-Za-z])') 
+    SLASH_RE = re.compile(r'\d+/\d+(/\d+)?') # e.g., 12/31 or 12/31/2023
+    DASH_RE = re.compile(r'\d+-\d+')         # e.g., 2023-01
+    COMMA_RE = re.compile(r'\d+,\d+')       # e.g., 1,000
+    PERIOD_RE = re.compile(r'\d+\.\d+')      # e.g., 1.23
+    CAP_PERIOD_RE = re.compile(r'^[A-Z]\.$') # M.
+
+    @staticmethod
+    def pseudo_word(token: str) -> str:
+        """
+        Map a raw token (string, original casing) to a pseudo-word class.
+        Rules inspired by Jurafsky & Martin lecture notes (initCap, fourDigitNum, ...).
+
+        Order of checks matters: more specific patterns should be checked first.
+
+        Args:
+            token (str): raw token (non-empty string)
+        
+        Returns:
+            str: pseudo-word class corresponding to the token
+        """
+        assert token and isinstance(token, str), "Token must be a non-empty string."
+        t = token
+        t_lower = t.lower()  # for suffix checks
+
+        # Punctuation / special characters
+        if all(ch in ".,;:!?\"'()[]{}" for ch in t):
+            return "<PUNCT>"
+
+        # Number forms / containing numbers
+        if HMMUtils.SLASH_RE.search(t):
+            return "<containsDigitAndSlash>"
+        if HMMUtils.DASH_RE.search(t):
+            return "<containsDigitAndDash>"
+        if HMMUtils.COMMA_RE.search(t):
+            return "<containsDigitAndComma>"
+        if HMMUtils.PERIOD_RE.search(t):
+            return "<containsDigitAndPeriod>"
+        if HMMUtils.DIGIT_ALPHA_RE.search(t):
+            return "<containsDigitAndAlpha>"
+        if HMMUtils.DIGIT_4_RE.fullmatch(t):
+            return "<fourDigitNum>"
+        if HMMUtils.DIGIT_2_RE.fullmatch(t):
+            return "<twoDigitNum>"
+        if HMMUtils.DIGIT_RE.fullmatch(t):
+            return "<othernum>"
+
+        # Capitalized / uppercase patterns
+        if t.isupper():
+            return "<ALLCAPS>"  
+        if HMMUtils.CAP_PERIOD_RE.fullmatch(t):
+            return "<capPeriod>"
+        if t[0].isupper() and t[1:].islower():
+            return "<initCap>"
+
+        # Suffix heuristics
+        if len(t) >= 4 and t_lower.endswith("ing"):
+            return "<suffix_ing>"
+        if len(t) >= 3 and t_lower.endswith("ed"):
+            return "<suffix_ed>"
+        if len(t) >= 3 and t_lower.endswith("ly"):
+            return "<suffix_ly>"
+
+        # Lowercase words
+        if t.islower():
+            return "<lowercase>"
+
+        # Fallback
+        return "<other>"
+
+    @staticmethod
+    def get_pseudo_list():
+        """
+        Return a list of all pseudo-word classes used for rare word handling.
+        """
+        return [
+            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
+            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
+            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
+            "<ALLCAPS>", "<capPeriod>", "<initCap>",
+            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
+            "<lowercase>", "<other>"
+        ]
+    
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
     def __init__(self, gamma=1):
@@ -523,7 +613,7 @@ class POS_HMM:
             if count >= self.gamma:
                 vocab.add(word)
 
-        vocab.update(HiddenMarkovModel.get_pseudo_list())
+        vocab.update(HMMUtils.get_pseudo_list())
 
         V = sorted(vocab)
         H = sorted(all_tags)
@@ -557,7 +647,7 @@ class POS_HMM:
 
         mapped_sentence = []
         for w in sentence:
-            mapped_sentence.append(HiddenMarkovModel.pseudo_word(w) if w not in self.hmm.V else w)
+            mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
 
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
 
