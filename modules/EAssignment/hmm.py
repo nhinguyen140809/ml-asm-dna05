@@ -354,9 +354,14 @@ class HiddenMarkovModel:
         mapped_states = []
         mapped_obs = []
 
+        progress_i = 0
+        progress_total = len(state_sequences)
         for s_seq, o_seq in zip(state_sequences, observation_sequences):
             if len(s_seq) == 0:
                 continue
+            progress_i += 1
+            if progress_i % 100 == 0 or progress_i == progress_total:
+                print(f"[HMM] Processed {progress_i}/{progress_total} raw sequences...", end='\r')
             mapped_s = torch.tensor([state2idx[s] for s in s_seq], device=self.device)
             mapped_o = torch.tensor([obs2idx.get(w, obs2idx[HMMUtils.pseudo_word(w)]) for w in o_seq], device=self.device)
             mapped_states.append(mapped_s)
