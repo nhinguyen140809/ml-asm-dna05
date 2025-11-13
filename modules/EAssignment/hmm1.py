@@ -440,7 +440,10 @@ class HiddenMarkovModel:
             mapped_seq = []
             for w in obs_seq:
                 if w not in self.V:
-                    w = HiddenMarkovModel.pseudo_word(w)
+                    pseudo = HiddenMarkovModel.pseudo_word(w)
+                    if pseudo not in self.V:
+                        raise ValueError(f"Pseudo-word '{pseudo}' for unknown word '{w}' not in observation space V.")
+                    w = pseudo
                 mapped_seq.append(self.V.index(w))
             mapped_sequences.append(mapped_seq)
 
