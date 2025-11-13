@@ -558,9 +558,9 @@ class POS_HMM:
         mapped_sentence = []
         for w in sentence:
             mapped_sentence.append(HMMUtils.pseudo_word(w) if w not in self.hmm.V else w)
-        print(f"[POS_HMM] Predicting for sentence: {' '.join(sentence)}")
+        print(f"[POS_HMM] Predicting for sentence: {' '.join(sentence)}", flush=True)
         predicted_tags, _, _ = self.hmm.Viterbi(mapped_sentence, is_index=False, ret_tags=True)
-        print(f"[POS_HMM] Predicted tags: {' '.join(predicted_tags)}")
+        print(f"[POS_HMM] Predicted tags: {' '.join(predicted_tags)}", flush=True)
         return predicted_tags
     
     def predict_batch(self, sentences):
