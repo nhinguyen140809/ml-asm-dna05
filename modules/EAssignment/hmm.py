@@ -354,16 +354,6 @@ class HiddenMarkovModel:
         mapped_states = []
         mapped_obs = []
 
-        # Map observations to indices (apply pseudo-word mapping)
-        mapped_sequences = []
-        for obs_seq in observation_sequences:
-            mapped_seq = []
-            for w in obs_seq:
-                if w not in self.V:
-                    w = HMMUtils.pseudo_word(w)
-                mapped_seq.append(self.V.index(w))
-            mapped_sequences.append(mapped_seq)
-
         for s_seq, o_seq in zip(state_sequences, observation_sequences):
             if len(s_seq) == 0:
                 continue
@@ -382,8 +372,9 @@ class HiddenMarkovModel:
         progress_total = len(mapped_states)
         for s_seq, o_seq in zip(mapped_states, mapped_obs):
             # Progress display
-            print(f"\r[HMM] Processing sequence {progress_i + 1}...", end='', flush=True)
             progress_i += 1
+            if progress_i % 100 == 0 or progress_i == progress_total:
+                print(f"[HMM] Processed {progress_i}/{progress_total} sequences...", end='\r')
             # Initial state
             pi_counts[s_seq[0]] += 1
             # Transitions
