@@ -347,7 +347,7 @@ class HiddenMarkovModel:
         print("[HMM] Starting supervised MLE training with (N, M)=({}, {})...".format(self.N, self.M))
 
         # Map states and observations to indices using dictionary lookup for speed
-        print("[HMM] Mapping states and observations to indices...")
+        print("[HMM] Mapping states and observations to indices...", flush=True)
         state2idx = {s: i for i, s in enumerate(self.H)}
         obs2idx = {v: i for i, v in enumerate(self.V)}
 
@@ -362,7 +362,7 @@ class HiddenMarkovModel:
                 continue
             progress_i += 1
             if progress_i % 100 == 0 or progress_i == progress_total:
-                print(f"[HMM] Processed {progress_i}/{progress_total} raw sequences...", end='\r')
+                print(f"[HMM] Processed {progress_i}/{progress_total} raw sequences...", end='\r', flush=True)
             mapped_s = torch.tensor([state2idx[s] for s in s_seq], device=self.device)
             mapped_o = torch.tensor([obs2idx.get(w, obs2idx[HMMUtils.pseudo_word(w)]) for w in o_seq], device=self.device)
             mapped_states.append(mapped_s)
@@ -380,7 +380,7 @@ class HiddenMarkovModel:
             # Progress display
             progress_i += 1
             if progress_i % 100 == 0 or progress_i == progress_total:
-                print(f"[HMM] Processed {progress_i}/{progress_total} sequences...", end='\r')
+                print(f"[HMM] Processed {progress_i}/{progress_total} sequences...", end='\r', flush=True)
             # Initial state
             pi_counts[s_seq[0]] += 1
             # Transitions
