@@ -483,6 +483,20 @@ class HMMUtils:
         # Fallback
         return "<other>"
 
+    @staticmethod
+    def get_pseudo_list():
+        """
+        Return a list of all pseudo-word classes used for rare word handling.
+        """
+        return [
+            "<PUNCT>", "<fourDigitNum>", "<twoDigitNum>", "<othernum>",
+            "<containsDigitAndAlpha>", "<containsDigitAndSlash>", "<containsDigitAndDash>",
+            "<containsDigitAndComma>", "<containsDigitAndPeriod>",
+            "<ALLCAPS>", "<capPeriod>", "<initCap>",
+            "<suffix_ing>", "<suffix_ed>", "<suffix_ly>",
+            "<lowercase>", "<other>"
+        ]
+    
 
 class POS_HMM:
     """ Wrapper for creating a POS tagging HMM from training data. """
