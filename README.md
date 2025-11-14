@@ -95,6 +95,7 @@ ml-asm-dna05/
   * [BTL1](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing)
   * [BTL2](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing)
   * [BTL3](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)
+  * [BTMR](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)
 Nhấn **Run all** để thực hiện pipeline trực tuyến mà không cần cài đặt.
 
 ### 2️⃣ Cài đặt Local
@@ -144,10 +145,13 @@ Mở notebook cụ thể (ví dụ `DNA05_BTL1.ipynb`) và chạy.
 
 ## 🕐 BTMR
 
-* Sẽ cập nhật sau...
+* **Dataset:** [Brown Corpus](https://www.nltk.org/howto/corpus.html) (57.340 mẫu)
+* **Báo cáo PDF:** [BTMR Report]([https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTMR_Report.pdf))
+* **Notebook:** [BTMR Colab](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)
 
 ---
 
 ## 📑 Tài liệu tham khảo
 
 * [Heart Disease Prediction Kaggle Notebook](https://www.kaggle.com/code/hossainhedayati/heart-disease-prediction-with-83-8-accuracy)
+* [Tagging Problems, and Hidden Markov Models](https://www.cs.columbia.edu/~mcollins/hmms-spring2013.pdf)
