@@ -40,10 +40,11 @@ Khám phá **4 dự án lớn** trong môn học Học Máy với notebook trự
 
 | Dự án       | Loại dữ liệu        | Trạng thái     | Trang GitHub                                                             | Notebook Colab                                                                                    |
 | ----------- | ------------------- | -------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| **BTL1**    | Dữ liệu bảng        | ✅ Hoàn thành   | [Tabular Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl1.html) | [Mở Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
-| **BTL2**    | Dữ liệu văn bản     | ✅ Hoàn thành   | [Text Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl2.html)    | [Mở Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing) |
-| **BTL3**    | Dữ liệu ảnh         | ✅ Hoàn thành | [Image Data](https://nhinguyen140809.github.io/ml-asm-dna05/btl3.html)  |  [Mở Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)  |
-| **Mở rộng** | Hidden Markov Model | 🕐 Sẽ cập nhật | 🕐 Sẽ cập nhật                                                           | 🕐 Sẽ cập nhật                                                                                    |
+| **BTL1**    | Dữ liệu bảng        | ✅ Hoàn thành   | [BTL1](https://nhinguyen140809.github.io/ml-asm-dna05/btl1.html) | [Mở Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
+| **BTL2**    | Dữ liệu văn bản     | ✅ Hoàn thành   | [BTL2](https://nhinguyen140809.github.io/ml-asm-dna05/btl2.html)    | [Mở Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing) |
+| **BTL3**    | Dữ liệu ảnh         | ✅ Hoàn thành | [BTL3](https://nhinguyen140809.github.io/ml-asm-dna05/btl3.html)  |  [Mở Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)  |
+| **Mở rộng** | Hidden Markov Model | ✅ Hoàn thành | [BTMR](https://nhinguyen140809.github.io/ml-asm-dna05/btmr.html)| 
+[Mở Colab](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)                                                                                    |
 
 ---
 
@@ -139,14 +140,14 @@ Mở notebook cụ thể (ví dụ `DNA05_BTL1.ipynb`) và chạy.
 
 ## 📚 BTL3 - Phân loại hình ảnh động vật biển
 
-* **Dataset:** [Sea Animals – Kaggle](https://www.kaggle.com/datasets/mrutyunjaybiswal/iitjee-neet-aims-students-questions-data](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9)(https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste)) (~13.700 mẫu)
-* **Báo cáo PDF:** [BTL3 Report]([https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf))
+* **Dataset:** [Sea Animals – Kaggle](https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste) (~13.700 mẫu)
+* **Báo cáo PDF:** [BTL3 Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf)
 * **Notebook:** [BTL3 Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)
 
-## 🕐 BTMR
+## 🕐 BTMR - Part-of-Speech Tagging
 
 * **Dataset:** [Brown Corpus](https://www.nltk.org/howto/corpus.html) (57.340 mẫu)
-* **Báo cáo PDF:** [BTMR Report]([https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL2_Report.pdf](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTMR_Report.pdf))
+* **Báo cáo PDF:** [BTMR Report](https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTMR_Report.pdf)
 * **Notebook:** [BTMR Colab](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)
 
 ---
