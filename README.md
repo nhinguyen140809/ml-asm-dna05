@@ -43,9 +43,7 @@ Khám phá **4 dự án lớn** trong môn học Học Máy với notebook trự
 | **BTL1**    | Dữ liệu bảng        | ✅ Hoàn thành   | [BTL1](https://nhinguyen140809.github.io/ml-asm-dna05/btl1.html) | [Mở Colab](https://colab.research.google.com/drive/1Bz4B_MAlvOQ6Acb93SF8WxtnKEEAdTf7?usp=sharing) |
 | **BTL2**    | Dữ liệu văn bản     | ✅ Hoàn thành   | [BTL2](https://nhinguyen140809.github.io/ml-asm-dna05/btl2.html)    | [Mở Colab](https://colab.research.google.com/drive/1V6W7FOQARQ1WcBAhl4ELyyc-sd0L5z54?usp=sharing) |
 | **BTL3**    | Dữ liệu ảnh         | ✅ Hoàn thành | [BTL3](https://nhinguyen140809.github.io/ml-asm-dna05/btl3.html)  |  [Mở Colab](https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9?usp=sharing)  |
-| **Mở rộng** | Hidden Markov Model | ✅ Hoàn thành | [BTMR](https://nhinguyen140809.github.io/ml-asm-dna05/btmr.html)| 
-[Mở Colab](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)                                                                                    |
-
+| **Mở rộng** | Hidden Markov Model | ✅ Hoàn thành | [BTMR](https://nhinguyen140809.github.io/ml-asm-dna05/btmr.html)| [Mở Colab](https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing)|
 ---
 
 ## 🎯 Mục tiêu
