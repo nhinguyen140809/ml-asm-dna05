@@ -448,55 +448,55 @@
                         <table class="w-full text-gray-300 text-lg leading-relaxed whitespace-pre-line">
                             <thead class="border-b border-gray-700 text-gray-200 text-xl font-semibold">
                                 <tr>
-                                    <th class="py-3 text-center">Questions</th>
+                                    <th class="py-3 text-center">Question</th>
                                     <th class="py-3 text-center">Subject</th>
                                 </tr>
                             </thead>
                             <tbody class="align-top">
                                 <tr class="border-b border-gray-800">
                                     <td class="py-3 pr-4 font-medium">
-                                        "A ketone has molar mass \( 86 . \) Which of
+                                        A ketone has molar mass \( 86 . \) Which of
                                         the following cannot be IUPAC name of this ketone?
                                         A. 2 -pentanone
                                         B. 2-methyl butanone
                                         c. 3 -methyl butanone
-                                        D. 3 -pentanone"
+                                        D. 3 -pentanone
                                     </td>
                                     <td class="py-3 text-lg font-semibold">Chemistry</td>
                                 </tr>
 
                                 <tr class="border-b border-gray-800">
                                     <td class="py-3 pr-4 font-medium">
-                                        "According to Stoke's law, the viscous drag force, on an oil drop is
+                                        According to Stoke's law, the viscous drag force, on an oil drop is
                                         proportional
                                         to:
                                         A. \( \sqrt{V} \)
                                         B. \( V^{2} \)
                                         c. \( V^{-1} \)
-                                        D. \( V \)"
+                                        D. \( V \)
                                     </td>
                                     <td class="py-3 text-lg font-semibold">Physics</td>
                                 </tr>
 
                                 <tr class="border-b border-gray-800">
                                     <td class="py-3 pr-4 font-medium">
-                                        "Hemoglobin in the RBCs helps in the
+                                        Hemoglobin in the RBCs helps in the
                                         A. Transport of oxygen
                                         B. Transport of nutrients
                                         C. Transport of carbon dioxide
-                                        D. Both A and C"
+                                        D. Both A and C
                                     </td>
                                     <td class="py-3 text-lg font-semibold">Biology</td>
                                 </tr>
 
                                 <tr class="border-b border-gray-800">
                                     <td class="py-3 pr-4 font-medium">
-                                        "The area of the quadrilateral formed by the points (0,0),(1,0),(1,4) and (0,2)
+                                        The area of the quadrilateral formed by the points (0,0),(1,0),(1,4) and (0,2)
                                         is
                                         A. 3
                                         B. 2
                                         \( c \cdot 4 \)
-                                        D. 5"
+                                        D. 5
                                     </td>
                                     <td class="py-3 text-lg font-semibold">Maths</td>
                                 </tr>
@@ -654,10 +654,90 @@
 
             </div>
 
-
-            <!-- 2. Chia tập dữ liệu -->
+            <!-- 2. Tiền xử lý dữ liệu -->
             <div class="mb-12">
-                <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Chia tập dữ liệu</h3>
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Tiền xử lý dữ liệu</h3>
+
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Trong bước này, dữ liệu văn bản được chuẩn hóa để loại bỏ các yếu tố không cần thiết, đảm bảo chất
+                    lượng input cho mô hình:
+                </p>
+
+                <ul class="list-disc list-inside text-gray-300 mb-4 space-y-2">
+                    <li>Thay <b>newline</b> bằng <b>space</b> để nối các dòng liên tục.</li>
+                    <li>Loại bỏ <b>punctuation</b> (dấu câu, ký tự đặc biệt).</li>
+                    <li>Chuẩn hóa <b>từ nối</b>, <b>bullet points</b>, <b>quotation marks</b>.</li>
+                    <li>Chuẩn hóa <b>whitespace</b> (khoảng trắng thừa).</li>
+                </ul>
+
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    <b>Nhãn môn học</b> được mã hóa số sử dụng <b>LabelEncoder</b>:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 mb-4 space-y-2">
+                    <li>Biology → 0</li>
+                    <li>Chemistry → 1</li>
+                    <li>Maths → 2</li>
+                    <li>Physics → 3</li>
+                </ul>
+
+                <div class="w-full flex justify-center mb-6">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg">
+
+                        <table class="w-full text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                            <thead class="border-b border-gray-700 text-gray-200 text-xl font-semibold">
+                                <tr>
+                                    <th class="py-3 text-center">Question</th>
+                                    <th class="py-3 text-center">Subject</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-top">
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        mathbf 2 boldsymbol x boldsymbol + mathbf 3 boldsymbol z mathbf 1 =
+                                        mathbf 0 mathbf 2 boldsymbol x boldsymbol + mathbf 3 boldsymbol z + mathbf 3 =
+                                        mathbf 0
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Maths</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        among following one gives output 1 gate a=0 b=0 B a=1 b=1 c a=1 b=0 a=0
+                                        b=1
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Physics</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        ozone hole maximum europe b antarctica c india africa
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Biology</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        chemical formula marsh gas methane cdot c 2 h 6 в c h 4 mathbf c cdot c 3 h 8 c
+                                        4 h 10
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Chemistry</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="text-gray-400 text-base italic text-center mt-3">
+                            Minh họa dữ liệu chuẩn hóa
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <!-- 3. Chia tập dữ liệu -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Chia tập dữ liệu</h3>
 
                 <p class="text-gray-300 leading-relaxed mb-6">
                     Bộ dữ liệu được chia thành hai phần: <b>Train</b> và <b>Test</b> với tỉ lệ
@@ -677,84 +757,335 @@
             </div>
 
 
-
-            <!-- 3. Trích xuất đặc trưng -->
+            <!-- 4. Trích xuất đặc trưng -->
             <div class="mb-12">
-                <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất đặc trưng</h3>
+                <h3 class="text-2xl font-bold text-[#facc15] mb-6">4. Trích xuất đặc trưng</h3>
 
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    Chúng tôi kết hợp các phương pháp biểu diễn văn bản truyền thống và hiện đại, bao gồm:
+                <p class="text-gray-300 mb-6">
+                    Sau khi tiền xử lý, dữ liệu văn bản được biến đổi thành các <span
+                        class="font-bold text-[#facc15]">vector số</span>, giữ ngữ nghĩa và ngữ cảnh quan trọng để đưa
+                    vào mô hình học máy.
                 </p>
 
-                <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
-                    <li><b>Bag-of-Words (BoW)</b> – mô tả tần suất xuất hiện từ</li>
-                    <li><b>TF-IDF</b> – giảm nhiễu từ phổ biến</li>
-                    <li><b>Word Embeddings</b> như Word2Vec, FastText</li>
-                    <li><b>Sentence Embeddings</b> từ mô hình hiện đại (SBERT, MPNet)</li>
-                </ul>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                        <p class="text-gray-400 text-sm italic text-center">Trực quan TF-IDF</p>
+                <!-- 4.1 Phương pháp truyền thống -->
+                <div class="mb-6">
+                    <h4 class="text-xl font-semibold text-[#facc15] mb-3">4.1 Truyền thống</h4>
+                    <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                        <p class="text-gray-300 mb-2"><span class="font-bold text-[#facc15]">Feature:
+                                <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                    <li>Bag of Words (BoW)</li>
+                                    <li>TF-IDF</li>
+                                    <li>n-gram (uni/bi/tri-gram)</li>
+                                </ul>
                     </div>
+                </div>
 
-                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                        <p class="text-gray-400 text-sm italic text-center">Biểu diễn từ qua embedding</p>
+                <!-- 4.2 Phương pháp hiện đại / học sâu -->
+                <div>
+                    <h4 class="text-xl font-semibold text-[#facc15] mb-3">4.2 Hiện đại / Học sâu</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300 mb-2"><span class="font-bold text-[#facc15]">GloVe 100d</span></p>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>Word embedding 100 chiều</li>
+                                <li>Vector câu: trung bình các từ (mean pooling)</li>
+                                <li>Giữ thông tin ngữ nghĩa cơ bản của từ</li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300 mb-2"><span class="font-bold text-[#facc15]">DistilBERT</span></p>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>Contextual embeddings từ Transformer nhẹ</li>
+                                <li>Vector câu: trung bình các token</li>
+                                <li>Giữ ngữ cảnh và ngữ nghĩa phong phú hơn GloVe</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-            <!-- 4. Training -->
+            <!-- 5. Huấn luyện mô hình -->
             <div class="mb-12">
-                <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Huấn luyện mô hình</h3>
+                <h3 class="text-2xl font-bold text-[#facc15] mb-6">5. Huấn luyện mô hình</h3>
 
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    Dựa trên các vector đặc trưng ở bước trước, chúng tôi huấn luyện nhiều mô hình từ truyền thống đến
-                    hiện
-                    đại:
-                </p>
-
-                <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
-                    <li><b>Naive Bayes</b></li>
-                    <li><b>SVM</b> với kernel tuyến tính</li>
-                    <li><b>Logistic Regression</b></li>
-                    <li><b>Random Forest</b></li>
-                    <li><b>Mạng nơ-ron đơn giản (DNN)</b></li>
-                </ul>
-
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    Mỗi mô hình được đánh giá trên bộ Test thông qua các chỉ số:
-                    <b>Accuracy, Precision, Recall, F1-score, Confusion Matrix</b>.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                        <p class="text-gray-400 text-sm italic text-center">Confusion Matrix</p>
+                <!-- 5.1 Machine Learning -->
+                <div class="mb-6">
+                    <h4 class="text-xl font-semibold text-[#facc15] mb-3">5.1. Machine Learning</h4>
+                    <p class="text-gray-300 mb-4">
+                        Chọn <span class="font-bold text-[#facc15]">feature/embedding</span> phù hợp để huấn luyện mô
+                        hình:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <h5 class="text-yellow-400 font-semibold mb-2">Truyền thống</h5>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>Bag-of-Words (BoW)</li>
+                                <li>TF-IDF</li>
+                                <li>n-gram (uni/bi/tri-gram)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <h5 class="text-yellow-400 font-semibold mb-2">Embedding hiện đại</h5>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>GloVe 100d</li>
+                                <li>DistilBERT</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                        <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                    <p class="text-gray-300 mb-3"><span class="font-bold text-[#facc15]">Mô hình thử nghiệm:</span></p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Logistic Regression</span>
+                            </p>
+                            <p class="text-gray-400 text-sm">C=0.1, solver=liblinear, max_iter=1000,
+                                class_weight=balanced</p>
+                        </div>
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Random Forest</span></p>
+                            <p class="text-gray-400 text-sm">n_estimators=100, max_depth=10, class_weight=balanced</p>
+                        </div>
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Decision Tree</span></p>
+                            <p class="text-gray-400 text-sm">max_depth=5, class_weight=balanced, random_state=42</p>
+                        </div>
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">MultinomialNB</span></p>
+                            <p class="text-gray-400 text-sm">sử dụng mặc định (Multinomial Naive Bayes)</p>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                        <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                <!-- 5.2 Deep Learning -->
+                <div>
+                    <h4 class="text-xl font-semibold text-[#facc15] mb-3">5.2. Deep Learning</h4>
+                    <p class="text-gray-300 mb-3">
+                        Huấn luyện <span class="font-bold text-[#facc15]">Bidirectional LSTM</span> end-to-end:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Cấu trúc LSTM</span></p>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>embedding_dim = 128</li>
+                                <li>hidden_dim = 128</li>
+                                <li>bidirectional = True</li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Huấn luyện</span></p>
+                            <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                <li>batch_size = 64</li>
+                                <li>learning_rate = 1e-3</li>
+                                <li>epochs = 8</li>
+                                <li>Loss = CrossEntropyLoss, Optimizer = Adam</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-        </div>
+            <!-- 6. Đánh giá mô hình -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-6">6. Đánh giá mô hình</h3>
 
-        <!-- Footer -->
-        <footer class="mt-12 mb-6 text-center text-gray-400">
-            <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
-                    Learning Project</span></p>
-        </footer>
+                <p class="text-gray-300 mb-4">
+                    Chúng tôi so sánh hiệu quả của các mô hình <b>Logistic Regression</b>, <b>Decision Tree</b>,
+                    <b>Random Forest</b> và <b>MultinomialNB</b> trên các feature/embedding khác nhau.
+                    Lưu ý: MultinomialNB chỉ áp dụng cho BoW, TF-IDF và N-gram.
+                </p>
+
+                <!-- 6.1 Machine Learning -->
+                <h4 class="text-xl font-semibold text-[#facc15] mb-3">6.1. Machine Learning</h4>
+                <div class="overflow-x-auto mb-6">
+                    <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                        <thead>
+                            <tr class="bg-[#1e293b]">
+                                <th class="border border-gray-600 px-3 py-2">Feature</th>
+                                <th class="border border-gray-600 px-3 py-2">Model</th>
+                                <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                                <th class="border border-gray-600 px-3 py-2">Precision</th>
+                                <th class="border border-gray-600 px-3 py-2">Recall</th>
+                                <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- BoW (default background) -->
+                            <tr>
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">BoW</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9205 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4175</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5772</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4175</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4332</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7093</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8138</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7093</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7339</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9016</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9027</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9016</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9017</td>
+                            </tr>
+
+                            <!-- TF-IDF (alternate background) -->
+                            <tr class="bg-[#1e293b]">
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">TF-IDF</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8920</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8946</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8920</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8924</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4178</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5791</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4178</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4325</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7151</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8153</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7151</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7383</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9098</td>
+                            </tr>
+
+                            <!-- N-gram -->
+                            <tr>
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">N-gram</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9190</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9204</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9190</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9192</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4173</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4173</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4332</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6648</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8027</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6648</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6954</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8829</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8901</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8829</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8844</td>
+                            </tr>
+
+                            <!-- GloVe 100d -->
+                            <tr class="bg-[#1e293b]">
+                                <td rowspan="3" class="border border-gray-600 px-3 py-1">GloVe 100d</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8451</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6262</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6338</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6262</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6235</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8090</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8111</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8090</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8086</td>
+                            </tr>
+
+                            <!-- DistilBERT -->
+                            <tr>
+                                <td rowspan="3" class="border border-gray-600 px-3 py-1">DistilBERT</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9080</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9079</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9080</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9078</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7391</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7465</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7391</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7389</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8774</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8762</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 6.2 Deep Learning -->
+                <h4 class="text-xl font-semibold text-[#facc15] mb-3">6.2. Deep Learning</h4>
+                <div class="overflow-x-auto">
+                    <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                        <thead>
+                            <tr class="bg-[#1e293b]">
+                                <th class="border border-gray-600 px-3 py-2">Model</th>
+                                <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                                <th class="border border-gray-600 px-3 py-2">Precision</th>
+                                <th class="border border-gray-600 px-3 py-2">Recall</th>
+                                <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">LSTM</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9235</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9245</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9235</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9238</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <!-- Footer -->
+            <footer class="mt-12 mb-6 text-center text-gray-400">
+                <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                        Learning Project</span></p>
+            </footer>
 
 </body>
 
