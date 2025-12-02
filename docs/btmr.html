@@ -1,488 +1,1103 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bài Tập Mở Rộng</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-        <link rel="icon" type="image/png" href="crown.png" />
-    </head>
 
-    <body
-        class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-300"
-    >
-        <canvas id="background-canvas"></canvas>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Mở Rộng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="icon" type="image/png" href="crown.png" />
+</head>
 
-        <style>
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                height: auto;
-                overflow-x: hidden;
-            }
+<body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-300">
+    <canvas id="background-canvas"></canvas>
 
-            #background-canvas {
-                position: fixed;
-                /* luôn phủ full màn hình */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-            }
-        </style>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden;
+        }
 
-        <script>
-            const canvas = document.getElementById("background-canvas");
-            const ctx = canvas.getContext("2d");
+        #background-canvas {
+            position: fixed;
+            /* luôn phủ full màn hình */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener("resize", resizeCanvas);
+    <script>
+        const canvas = document.getElementById("background-canvas");
+        const ctx = canvas.getContext("2d");
 
-            const particles = [];
-            const particleCount = 150;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 1.2 + 0.3,
-                    dx: (Math.random() - 0.5) * 0.3,
-                    dy: (Math.random() - 0.5) * 0.3,
-                });
-            }
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
 
-            const mouse = { x: null, y: null };
-            window.addEventListener("mousemove", (e) => {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
+        const particles = [];
+        const particleCount = 150;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.2 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3,
             });
-            window.addEventListener("mouseleave", () => {
-                mouse.x = null;
-                mouse.y = null;
+        }
+
+        const mouse = { x: null, y: null };
+        window.addEventListener("mousemove", (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener("mouseleave", () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p) => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // wrap-around
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(212,175,55,0.4)";
+                ctx.fill();
             });
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+            // line to mouse
+            if (mouse.x && mouse.y) {
                 particles.forEach((p) => {
-                    p.x += p.dx;
-                    p.y += p.dy;
-
-                    // wrap-around
-                    if (p.x < 0) p.x = canvas.width;
-                    if (p.x > canvas.width) p.x = 0;
-                    if (p.y < 0) p.y = canvas.height;
-                    if (p.y > canvas.height) p.y = 0;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(212,175,55,0.4)";
-                    ctx.fill();
-                });
-
-                // line to mouse
-                if (mouse.x && mouse.y) {
-                    particles.forEach((p) => {
-                        const dx = p.x - mouse.x;
-                        const dy = p.y - mouse.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(p.x, p.y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(212,175,55,${
-                                0.3 * (1 - dist / 120)
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(212,175,55,${0.3 * (1 - dist / 120)
                             })`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                        }
-                    });
-                }
-
-                requestAnimationFrame(animate);
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                });
             }
 
-            animate();
-        </script>
+            requestAnimationFrame(animate);
+        }
 
-        <!-- Keyboard Shortcuts Help Button (PC only) -->
-        <div
-            id="shortcut-help-btn"
-            class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition"
-        >
-            ?
+        animate();
+    </script>
+
+    <!-- Keyboard Shortcuts Help Button (PC only) -->
+    <div id="shortcut-help-btn"
+        class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+        ?
+    </div>
+
+    <!-- Keyboard Shortcuts Popup -->
+    <div id="shortcut-popup"
+        class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+        <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">
+            Keyboard Shortcuts
+        </h3>
+        <ul class="space-y-2">
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span class="text-gray-200 text-sm">Trở về trang chính</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span class="text-gray-200 text-sm">Refresh trang</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span class="text-gray-200 text-sm">Mở repository GitHub</span>
+            </li>
+        </ul>
+
+        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">
+            &times;
+        </button>
+    </div>
+
+    <script>
+        const shortcutBtn = document.getElementById("shortcut-help-btn");
+        const shortcutPopup = document.getElementById("shortcut-popup");
+        const shortcutClose = document.getElementById("shortcut-close");
+
+        // Bật/tắt popup khi bấm nút "?"
+        shortcutBtn.addEventListener("click", () => {
+            shortcutPopup.classList.toggle("hidden");
+        });
+
+        // Đóng popup
+        shortcutClose.addEventListener("click", () => {
+            shortcutPopup.classList.add("hidden");
+        });
+
+        // Keyboard shortcuts chung
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.target.tagName === "INPUT" ||
+                e.target.tagName === "TEXTAREA"
+            )
+                return; // bỏ qua khi gõ input
+            const key = e.key.toLowerCase();
+
+            switch (key) {
+                case "h":
+                    window.location.href = "index.html"; // trang chính
+                    break;
+                case "r":
+                    location.reload(); // reload trang
+                    break;
+                case "g":
+                    window.open(
+                        "https://github.com/nhinguyen140809/ml-asm-dna05",
+                        "_blank"
+                    ); // mở GitHub repo
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">
+        <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">
+            Bài Tập Mở Rộng
+        </h1>
+        <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
+
+        <!-- Icons -->
+        <div class="flex justify-center gap-8 mt-4 text-lg">
+            <a href="https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing"
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fab fa-google"></i> Colab
+            </a>
+            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTMR_Report.pdf"
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fas fa-file-alt"></i> Report
+            </a>
+            <a href="https://www.nltk.org/howto/corpus.html" target="_blank"
+                class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fas fa-database"></i> Dataset
+            </a>
         </div>
+    </div>
 
-        <!-- Keyboard Shortcuts Popup -->
-        <div
-            id="shortcut-popup"
-            class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white"
-        >
-            <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">
-                Keyboard Shortcuts
-            </h3>
-            <ul class="space-y-2">
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >H</span
-                    >
-                    <span class="text-gray-200 text-sm"
-                        >Trở về trang chính</span
-                    >
-                </li>
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >R</span
-                    >
-                    <span class="text-gray-200 text-sm">Refresh trang</span>
-                </li>
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >G</span
-                    >
-                    <span class="text-gray-200 text-sm"
-                        >Mở repository GitHub</span
-                    >
-                </li>
-            </ul>
+    <!-- Floating Back Button (Top-Left) -->
+    <a href="index.html"
+        class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
+        <i class="fas fa-home"></i> Trang chính
+    </a>
 
-            <button
-                id="shortcut-close"
-                class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold"
-            >
-                &times;
-            </button>
-        </div>
-
-        <script>
-            const shortcutBtn = document.getElementById("shortcut-help-btn");
-            const shortcutPopup = document.getElementById("shortcut-popup");
-            const shortcutClose = document.getElementById("shortcut-close");
-
-            // Bật/tắt popup khi bấm nút "?"
-            shortcutBtn.addEventListener("click", () => {
-                shortcutPopup.classList.toggle("hidden");
-            });
-
-            // Đóng popup
-            shortcutClose.addEventListener("click", () => {
-                shortcutPopup.classList.add("hidden");
-            });
-
-            // Keyboard shortcuts chung
-            document.addEventListener("keydown", (e) => {
-                if (
-                    e.target.tagName === "INPUT" ||
-                    e.target.tagName === "TEXTAREA"
-                )
-                    return; // bỏ qua khi gõ input
-                const key = e.key.toLowerCase();
-
-                switch (key) {
-                    case "h":
-                        window.location.href = "index.html"; // trang chính
-                        break;
-                    case "r":
-                        location.reload(); // reload trang
-                        break;
-                    case "g":
-                        window.open(
-                            "https://github.com/nhinguyen140809/ml-asm-dna05",
-                            "_blank"
-                        ); // mở GitHub repo
-                        break;
-                    default:
-                        break;
-                }
-            });
-        </script>
-
-        <!-- Header -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition"
-        >
-            <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">
-                Bài Tập Mở Rộng
-            </h1>
-            <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
-
-            <!-- Icons -->
-            <div class="flex justify-center gap-8 mt-4 text-lg">
-                <a
-                    href="https://colab.research.google.com/drive/1dPMIMx17H0qHOXrU0hMmw9otPImAOxhQ?usp=sharing"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fab fa-google"></i> Colab
-                </a>
-                <a
-                    href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTMR_Report.pdf"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fas fa-file-alt"></i> Report
-                </a>
-                <a
-                    href="https://www.nltk.org/howto/corpus.html"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fas fa-database"></i> Dataset
-                </a>
-            </div>
-        </div>
-
-        <!-- Floating Back Button (Top-Left) -->
-        <a
-            href="index.html"
-            class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl"
-        >
-            <i class="fas fa-home"></i> Trang chính
+    <!-- Stats Section (Assignments) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 w-11/12 md:w-3/4 mx-auto">
+        <a href="btl1.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
         </a>
+        <a href="btl2.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
+        <a href="btl3.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
+    </div>
 
-        <!-- Stats Section (Assignments) -->
-        <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 w-11/12 md:w-3/4 mx-auto"
-        >
-            <a
-                href="btl1.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
+    <!-- Dataset Overview -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4">
+            Tổng quan dataset
+        </h2>
+        <p class="text-gray-300 mb-4">
+            Bộ dữ liệu
+            <span class="font-semibold text-[#d4af37]">Brown Corpus</span>
+            là một trong những bộ ngữ liệu tiếng Anh cổ điển và phổ biến
+            nhất được cung cấp sẵn bởi thư viện NLTK. Bộ corpus này gồm hơn
+            <strong>1 triệu từ</strong> đã được gán nhãn ngữ pháp đầy đủ.
+        </p>
+        <p class="text-gray-300 mb-4">
+            Danh sách đầy đủ các nhãn POS trong bộ dữ liệu:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-box text-yellow-400"></i> Noun
+                <span class="text-gray-400">(Danh từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-running text-blue-300"></i> Verb
+                <span class="text-gray-400">(Động từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-ellipsis-h text-gray-300"></i> Punctuation
+                <span class="text-gray-400">(Dấu câu)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-compass text-indigo-400"></i> Adposition
+                <span class="text-gray-400">(Giới từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-tag text-green-400"></i> Determiner
+                <span class="text-gray-400">(Mạo từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-palette text-pink-400"></i> Adjective
+                <span class="text-gray-400">(Tính từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-wave-square text-cyan-300"></i> Adverb
+                <span class="text-gray-400">(Trạng từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-user text-purple-300"></i> Pronoun
+                <span class="text-gray-400">(Đại từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-link text-amber-300"></i> Conjunction
+                <span class="text-gray-400">(Liên từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-puzzle-piece text-red-300"></i> Particle
+                <span class="text-gray-400">(Tiểu từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-hashtag text-blue-200"></i> Number
+                <span class="text-gray-400">(Số từ)</span>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-question text-white"></i> Other
+                <span class="text-gray-400">(Khác)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pipeline -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6">
+            Pipeline chi tiết
+        </h2>
+        <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Phân tích dữ liệu (EDA)
+                </h3>
+                <p class="text-gray-300">
+                    Thống kê phân bố nhãn POS, số lượng từ và từ hiếm, cũng
+                    như độ dài và cấu trúc câu.
                 </p>
-            </a>
-            <a
-                href="btl2.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Tiền xử lý dữ liệu
+                </h3>
+                <p class="text-gray-300">
+                    Dữ liệu được phân chia theo thư mục
+                    <code>train/</code> và <code>test/</code>.
                 </p>
-            </a>
-            <a
-                href="btl3.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 3</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Huấn luyện mô hình
+                </h3>
+                <p class="text-gray-300">
+                    Huấn luyện HMM trên tập train với các giá trị gamma khác
+                    nhau.
                 </p>
-            </a>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Đánh giá mô hình
+                </h3>
+                <p class="text-gray-300">
+                    Sử dụng Accuracy, Precision, Recall, F1-score.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Trực quan hóa kết quả
+                </h3>
+                <p class="text-gray-300">
+                    Biểu diễn kết quả dưới dạng biểu đồ, so sánh mô hình.
+                </p>
+            </li>
+        </ol>
+    </div>
+
+
+    <!-- =============================== -->
+    <!--      BTL2 — RESULTS SECTION     -->
+    <!-- =============================== -->
+
+    <div
+        class="w-11/12 md:w-3/4 mt-16 mb-20 bg-[#111827]/90 backdrop-blur-md border border-[#d4af37]/30 rounded-2xl shadow-2xl shadow-black/60 p-8">
+
+        <h2 class="text-3xl font-extrabold text-[#d4af37] drop-shadow-lg text-center mb-10">
+            Kết quả và Quy trình Thực hiện
+        </h2>
+        <!-- 1. Triển khai HMM -->
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold text-[#facc15] mb-8">1. Triển khai HMM</h3>
+
+            <!-- 1.1 Mục tiêu bài toán -->
+            <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#facc15]">
+                <h4 class="text-2xl font-semibold text-[#d4af37] mb-4">Mục tiêu bài toán</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Xây dựng mô hình <span class="text-[#facc15] font-semibold">Hidden Markov Model (HMM)</span>
+                    để giải quyết bài toán <span class="text-[#facc15] font-semibold">POS Tagging</span> — gán nhãn từ
+                    loại cho từng từ.
+                </p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><span class="text-[#facc15] font-semibold">Observations:</span> các từ trong câu.</li>
+                    <li><span class="text-[#facc15] font-semibold">Hidden states:</span> nhãn từ loại như NOUN, VERB,
+                        ADJ, ...</li>
+                    <li><span class="text-[#facc15] font-semibold">Bài toán:</span> tìm chuỗi nhãn tối ưu sao cho xác
+                        suất sinh ra chuỗi từ quan sát lớn nhất.</li>
+                    <li><span class="text-[#facc15] font-semibold">Giải pháp:</span> sử dụng thuật toán <b>Viterbi</b>.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 1.2 Thuật toán huấn luyện -->
+            <div class="bg-[#0f172a] p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#d4af37]">
+                <h4 class="text-2xl font-semibold text-[#d4af37] mb-4">Thuật toán huấn luyện</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Với dữ liệu có nhãn, tham số HMM được ước lượng bằng <span
+                        class="text-[#facc15] font-semibold">MLE</span>:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><b>π<sub>i</sub>:</b> tần suất nhãn xuất hiện đầu câu.</li>
+                    <li><b>A<sub>ij</sub>:</b> xác suất nhãn s<sub>j</sub> xuất hiện ngay sau s<sub>i</sub>.</li>
+                    <li><b>B<sub>ik</sub>:</b> xác suất nhãn s<sub>i</sub> sinh ra từ quan sát o<sub>k</sub>.</li>
+                </ul>
+            </div>
+            <!-- 1.3 Xử lý từ chưa xuất hiện -->
+            <div class="bg-[#1e293b] p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#facc15]">
+                <h4 class="text-2xl font-semibold text-[#d4af37] mb-4">Xử lý từ chưa xuất hiện (Pseudo-word)</h4>
+
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    <span class="text-[#facc15] font-semibold">Vấn đề:</span> từ mới sẽ làm xác suất phát xạ bằng
+                    <b>0</b>,
+                    dẫn đến thuật toán <b>Viterbi</b> thất bại.
+                </p>
+
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    <span class="text-[#facc15] font-semibold">Giải pháp:</span> ánh xạ từ hiếm hoặc từ chưa xuất hiện
+                    thành các <b>pseudo-word</b> để "đóng" từ vựng, đảm bảo mọi từ trong dữ liệu kiểm tra
+                    xuất hiện ít nhất dưới dạng pseudo-word.
+                </p>
+
+                <!-- Siêu tham số Gamma -->
+                <div class="bg-[#0f172a] p-4 rounded-lg border border-[#facc15]/50 mb-4">
+                    <p class="text-gray-200 mb-2"><span class="text-[#facc15] font-semibold">Siêu tham số γ:</span></p>
+                    <ul class="list-disc list-inside text-gray-300">
+                        <li>Chọn ngưỡng <b>γ</b> (ví dụ γ = 5).</li>
+                        <li>Mọi từ xuất hiện ít hơn <b>γ lần</b> trong dữ liệu huấn luyện sẽ được thay bằng pseudo-word
+                            tương ứng.</li>
+                        <li>Giúp giữ thông tin về dạng từ (chữ hoa, số, hậu tố...) nhưng tránh xác suất phát xạ bằng 0.
+                        </li>
+                    </ul>
+                </div>
+
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Dưới đây là <b>17 lớp pseudo-word</b> được sử dụng:
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-gray-300">
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">PUNCT</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">fourDigitNum</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">twoDigitNum</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">othernum</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">containsDigitAndAlpha</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">containsDigitAndSlash</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">containsDigitAndDash</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">containsDigitAndComma</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">containsDigitAndPeriod</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">ALLCAPS</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">capPeriod</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">initCap</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">suffix_ing</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">suffix_ed</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">suffix_ly</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">lowercase</span>
+                    <span class="bg-[#0f172a] p-2 rounded border border-[#facc15]">other</span>
+                </div>
+            </div>
+
+
+            <!-- 1.4 Hiện thực tổng quan -->
+            <div class="bg-[#0f172a] p-6 rounded-xl shadow-lg mb-6 border-l-4 border-[#d4af37]">
+                <h4 class="text-2xl font-semibold text-[#d4af37] mb-4">Hiện thực tổng quan</h4>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Mô hình gồm <b>3 thành phần chính</b>:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+                    <div class="bg-[#1e293b] p-5 rounded-xl shadow-inner">
+                        <h5 class="text-lg font-semibold text-[#facc15] mb-2">HiddenMarkovModel</h5>
+                        <p class="text-gray-300">Lớp cơ bản triển khai HMM với <b>ma trận A, B, π</b>, thuật toán
+                            <b>forward, backward, Viterbi</b>, huấn luyện MLE.
+                        </p>
+                    </div>
+                    <div class="bg-[#1e293b] p-5 rounded-xl shadow-inner">
+                        <h5 class="text-lg font-semibold text-[#facc15] mb-2">HMMUtils</h5>
+                        <p class="text-gray-300">Tiện ích xử lý token, ánh xạ từ hiếm hoặc đặc biệt sang pseudo-word
+                            bằng regex.</p>
+                    </div>
+                    <div class="bg-[#1e293b] p-5 rounded-xl shadow-inner">
+                        <h5 class="text-lg font-semibold text-[#facc15] mb-2">POS_HMM</h5>
+                        <p class="text-gray-300">Wrapper POS tagging: tiền xử lý dữ liệu, khởi tạo HMM, huấn luyện, dự
+                            đoán câu/batch, và đánh giá accuracy, precision, recall, F1.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Dataset Overview -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50"
-        >
-            <h2 class="text-2xl font-bold text-[#d4af37] mb-4">
-                Tổng quan dataset
-            </h2>
-            <p class="text-gray-300 mb-4">
-                Bộ dữ liệu
-                <span class="font-semibold text-[#d4af37]">Brown Corpus</span>
-                là một trong những bộ ngữ liệu tiếng Anh cổ điển và phổ biến
-                nhất được cung cấp sẵn bởi thư viện NLTK. Bộ corpus này gồm hơn
-                <strong>1 triệu từ</strong> đã được gán nhãn ngữ pháp đầy đủ.
-            </p>
-            <p class="text-gray-300 mb-4">
-                Danh sách đầy đủ các nhãn POS trong bộ dữ liệu:
+
+        <!-- 2. EDA -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">2. Phân tích dữ liệu (EDA)</h3>
+
+            <!-- 2.1 Tổng quan dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.1. Tổng quan dữ liệu</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dữ liệu sử dụng là <b>Brown Corpus</b> với:
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4"></div>
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#0b1220]/60 border-l-4 border-[#facc15] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Tổng số câu</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#facc15]">57,340</span>
+                    <span class="text-sm text-gray-300">câu</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Tổng số câu trong Brown Corpus</p>
+            </div>
+
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#071022]/60 border-l-4 border-[#60a5fa] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Tổng số từ</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#60a5fa]">1,161,192</span>
+                    <span class="text-sm text-gray-300">từ</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Tổng số token (bao gồm lặp lại)</p>
+            </div>
+
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#0b0f1a]/60 border-l-4 border-[#f87171] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Từ vựng duy nhất</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#f87171]">49,815</span>
+                    <span class="text-sm text-gray-300">từ</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Số từ khác nhau trong corpus</p>
+            </div>
+
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#071028]/60 border-l-4 border-[#a78bfa] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Số nhãn POS</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#a78bfa]">12</span>
+                    <span class="text-sm text-gray-300">nhãn</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Theo chuẩn Universal Tagset</p>
+            </div>
+        </div>
+
+        <p class="text-gray-300 leading-relaxed mb-4">
+            Ví dụ minh họa một câu sau khi gán nhãn POS:
+        </p>
+
+        <pre class="bg-[#0f172a] p-4 rounded text-gray-200 mb-6 overflow-x-auto">
+[('``', '.'), ('There', 'PRT'), ("wasn't", 'VERB'), ('a', 'DET'), ('bit', 'NOUN'), ('of', 'ADP'), ('trouble', 'NOUN'), ("''", '.'), ('.', '.')]
+    </pre>
+
+        <!-- 2.2 Bảng tag POS -->
+        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.2. Bảng nhãn POS</h4>
+
+        <div class="overflow-x-auto mb-6">
+            <table class="min-w-full text-gray-300 border border-[#d4af37]/20 rounded-xl">
+                <thead class="bg-[#1e293b] text-left">
+                    <tr>
+                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Tag</th>
+                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Ý nghĩa</th>
+                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-[#0f172a]">
+                    <tr>
+                        <td class="px-4 py-2">VERB</td>
+                        <td class="px-4 py-2">verbs (all tenses and modes)</td>
+                        <td class="px-4 py-2">go, walk, eat</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">NOUN</td>
+                        <td class="px-4 py-2">nouns (common and proper)</td>
+                        <td class="px-4 py-2">dog, cat, apple</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">PRON</td>
+                        <td class="px-4 py-2">pronouns</td>
+                        <td class="px-4 py-2">I, you, he</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">ADJ</td>
+                        <td class="px-4 py-2">adjectives</td>
+                        <td class="px-4 py-2">happy, big, red</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">ADV</td>
+                        <td class="px-4 py-2">adverbs</td>
+                        <td class="px-4 py-2">quickly, very, well</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">ADP</td>
+                        <td class="px-4 py-2">prepositions/postpositions</td>
+                        <td class="px-4 py-2">in, on, at</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">CONJ</td>
+                        <td class="px-4 py-2">conjunctions</td>
+                        <td class="px-4 py-2">and, but, or</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">DET</td>
+                        <td class="px-4 py-2">determiners</td>
+                        <td class="px-4 py-2">the, a, an</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">NUM</td>
+                        <td class="px-4 py-2">cardinal numbers</td>
+                        <td class="px-4 py-2">one, two, 100</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">PRT</td>
+                        <td class="px-4 py-2">particles/function words</td>
+                        <td class="px-4 py-2">up, off, out</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">X</td>
+                        <td class="px-4 py-2">other: foreign words, typos, abbreviations</td>
+                        <td class="px-4 py-2">etc., N/A</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">.</td>
+                        <td class="px-4 py-2">punctuation</td>
+                        <td class="px-4 py-2">., !, ?</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 2.3 Biểu đồ tròn phân bố nhãn POS -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Phân bố nhãn POS</h4>
+            <div class="flex flex-col items-start gap-6 mb-6 w-full">
+                <!-- Hình minh họa (dòng riêng) -->
+                <img src="images/BTLMR/PhanBoNhan.png" alt="Phân bố nhãn POS"
+                    class="rounded-xl shadow-lg w-full object-contain">
+                <!-- Biểu đồ tròn (dòng riêng) -->
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full">
+                    <div class="w-full h-80 md:h-[700px]"> <!-- tăng chiều cao cho màn hình lớn -->
+                        <canvas id="pieChartPOS" class="w-full h-full"></canvas>
+                    </div>
+                    <p class="text-gray-400 text-sm italic text-center mt-3">
+                        Biểu đồ tròn minh họa tỷ lệ % các nhãn POS
+                    </p>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+            <script>
+                const pieCtx = document.getElementById('pieChartPOS').getContext('2d');
+                new Chart(pieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["NOUN", "VERB", ".", "ADP", "DET", "ADJ", "ADV", "PRON", "CONJ", "PRT", "NUM", "X"],
+                        datasets: [{
+                            data: [23.730615, 15.738138, 12.708062, 12.467017, 11.799857, 7.209919, 4.843213, 4.248565, 3.285503, 2.568826, 1.280925, 0.119360],
+                            backgroundColor: ['#f87171', '#fbbf24', '#34d399', '#60a5fa', '#f472b6', '#facc15', '#a78bfa', '#22d3ee', '#f97316', '#8b5cf6', '#e879f9', '#94a3b8'],
+                            borderColor: '#0f172a',
+                            borderWidth: 2,
+                            hoverOffset: 12,
+                            radius: '85%' // phóng to hình tròn
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: { top: 8, right: 16, bottom: 8, left: 16 }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'left', // chuyển legend ra bên để giảm chồng lấn
+                                labels: {
+                                    color: '#e5e7eb',
+                                    font: { size: 25 },
+                                    boxWidth: 12,
+                                    padding: 10
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const val = context.parsed;
+                                        return context.label + ': ' + val.toFixed(3) + '%';
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                color: '#ffffff',
+                                font: { weight: 'bold', size: 12 },
+                                backgroundColor: 'rgba(0,0,0,0.45)',
+                                borderRadius: 4,
+                                padding: 6,
+                                clamp: true,
+                                // Hiển thị nhãn nhỏ ra ngoài hoặc ẩn nếu quá nhỏ để tránh chồng lấn
+                                anchor: 'end',
+                                align: 'end',
+                                offset: -8,
+                                formatter: function (value, ctx) {
+                                    // chỉ hiện % nếu >= 1% để tránh chồng lấn; với các phần rất nhỏ, dùng tooltip để xem
+                                    return value >= 1 ? value.toFixed(1) + '%' : '';
+                                }
+                            }
+                        }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+            </script>
+
+            <!-- 2.4 Chiều dài câu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.4. Chiều dài câu</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                 <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-box text-yellow-400"></i> Noun
-                    <span class="text-gray-400">(Danh từ)</span>
+                    class="flex flex-col items-center p-4 rounded-2xl bg-[#0b1220]/60 border-l-4 border-[#facc15] shadow-md">
+                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu trung bình</div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-4xl md:text-5xl font-extrabold text-[#facc15]">20.25</span>
+                        <span class="text-sm text-gray-300">từ</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2 text-center">Giá trị trung bình — thể hiện độ dài câu phổ
+                        biến</p>
                 </div>
 
                 <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-running text-blue-300"></i> Verb
-                    <span class="text-gray-400">(Động từ)</span>
+                    class="flex flex-col items-center p-4 rounded-2xl bg-[#071022]/60 border-l-4 border-[#60a5fa] shadow-md">
+                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu ngắn nhất</div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-4xl md:text-5xl font-extrabold text-[#60a5fa]">1</span>
+                        <span class="text-sm text-gray-300">từ</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2 text-center">Câu ngắn nhất trong corpus</p>
                 </div>
 
                 <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-ellipsis-h text-gray-300"></i> Punctuation
-                    <span class="text-gray-400">(Dấu câu)</span>
+                    class="flex flex-col items-center p-4 rounded-2xl bg-[#0b0f1a]/60 border-l-4 border-[#f87171] shadow-md">
+                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu dài nhất</div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-4xl md:text-5xl font-extrabold text-[#f87171]">180</span>
+                        <span class="text-sm text-gray-300">từ</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2 text-center">Câu dài nhất (cần lưu ý khi tiền xử lý)</p>
+                </div>
+            </div>
+            <div class="flex justify-center mb-6">
+                <img src="images/BTLMR/ChieuDaiCau.png" alt="Chiều dài câu"
+                    class="rounded-xl shadow-lg w-full max-w-4xl object-contain">
+            </div>
+
+            <!-- 2.5 Top 5 từ phổ biến theo nhãn -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.5. Top 5 từ phổ biến theo từng nhãn POS
+            </h4>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-gray-300 border border-[#d4af37]/20 rounded-xl">
+                    <thead class="bg-[#1e293b]">
+                        <tr>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">POS</th>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top1</th>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top2</th>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top3</th>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top4</th>
+                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top5</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-[#0f172a]">
+                        <tr>
+                            <td class="px-3 py-2">ADJ</td>
+                            <td>other</td>
+                            <td>new</td>
+                            <td>first</td>
+                            <td>more</td>
+                            <td>such</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">DET</td>
+                            <td>the</td>
+                            <td>a</td>
+                            <td>The</td>
+                            <td>his</td>
+                            <td>this</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">PRT</td>
+                            <td>to</td>
+                            <td>all</td>
+                            <td>up</td>
+                            <td>out</td>
+                            <td>there</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">X</td>
+                            <td>de</td>
+                            <td>et</td>
+                            <td>La</td>
+                            <td>De</td>
+                            <td>Comedie</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">NUM</td>
+                            <td>one</td>
+                            <td>two</td>
+                            <td>three</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">.</td>
+                            <td>,</td>
+                            <td>.</td>
+                            <td>``</td>
+                            <td>''</td>
+                            <td>;</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">ADP</td>
+                            <td>of</td>
+                            <td>in</td>
+                            <td>to</td>
+                            <td>for</td>
+                            <td>with</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">CONJ</td>
+                            <td>and</td>
+                            <td>or</td>
+                            <td>but</td>
+                            <td>But</td>
+                            <td>And</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">VERB</td>
+                            <td>is</td>
+                            <td>was</td>
+                            <td>be</td>
+                            <td>had</td>
+                            <td>are</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">PRON</td>
+                            <td>it</td>
+                            <td>he</td>
+                            <td>I</td>
+                            <td>He</td>
+                            <td>they</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">ADV</td>
+                            <td>not</td>
+                            <td>when</td>
+                            <td>so</td>
+                            <td>only</td>
+                            <td>more</td>
+                        </tr>
+                        <tr>
+                            <td class="px-3 py-2">NOUN</td>
+                            <td>time</td>
+                            <td>man</td>
+                            <td>Af</td>
+                            <td>years</td>
+                            <td>way</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. Chia tập dữ liệu -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Chia tập dữ liệu</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Bộ dữ liệu được chia thành hai phần: <b>Train</b> và <b>Test</b> với tỉ lệ
+                <b>80 : 20</b>.
+            </p>
+
+            <!-- Trực quan đơn giản -->
+            <div class="w-full md:w-2/3 h-6 bg-[#1e293b] rounded-full overflow-hidden mx-auto mb-4">
+                <div class="h-6 bg-[#d4af37]" style="width: 80%;"></div>
+                <div class="h-6 bg-[#374151]" style="width: 20%; margin-left:-20%;"></div>
+            </div>
+            <div class="flex justify-between w-full md:w-2/3 mx-auto text-gray-400 text-sm mb-6">
+                <span>Train 80%</span>
+                <span>Test 20%</span>
+            </div>
+        </div>
+
+        <!-- 4. Huấn luyện và đánh giá -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">4. Huấn luyện và đánh giá POS_HMM</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Trong bước này, chúng ta huấn luyện mô hình <b>POS_HMM</b> trên tập <b>train</b> với các giá trị
+                <span class="text-[#facc15] font-semibold">gamma</span> khác nhau, sau đó dự đoán nhãn POS cho tập
+                <b>test</b>
+                và đánh giá các chỉ số <b>Accuracy</b>, <b>Precision (weighted)</b>, <b>Recall (weighted)</b>, <b>F1
+                    (weighted)</b>.
+            </p>
+
+            <!-- Bảng kết quả -->
+            <div class="overflow-x-auto bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg mb-6">
+                <table class="min-w-full text-gray-300 border-collapse">
+                    <thead>
+                        <tr class="bg-[#1e293b] text-[#facc15]">
+                            <th class="px-4 py-2 border border-[#d4af37]/30">Gamma</th>
+                            <th class="px-4 py-2 border border-[#d4af37]/30">Accuracy</th>
+                            <th class="px-4 py-2 border border-[#d4af37]/30">Precision (weighted)</th>
+                            <th class="px-4 py-2 border border-[#d4af37]/30">Recall (weighted)</th>
+                            <th class="px-4 py-2 border border-[#d4af37]/30">F1 (weighted)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="px-4 py-2 border border-[#d4af37]/30">1</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9539</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9572</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9539</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9551</td>
+                        </tr>
+                        <tr class="bg-[#facc15]/25 font-bold hover:bg-[#facc15]/35">
+                            <td class="px-4 py-2 border border-[#d4af37]/30">2</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9641</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9643</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9641</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9642</td>
+                        </tr>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="px-4 py-2 border border-[#d4af37]/30">3</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9613</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9617</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9613</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9615</td>
+                        </tr>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="px-4 py-2 border border-[#d4af37]/30">5</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9576</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9579</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9576</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9577</td>
+                        </tr>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="px-4 py-2 border border-[#d4af37]/30">7</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9551</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
+                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-gray-400 text-sm italic mt-3">
+                    <b>Lưu ý:</b> Precision, Recall và F1 được tính theo <b>weighted</b> để phản ánh đúng tầm quan
+                    trọng của các nhãn POS phổ biến và hiếm.
+                </p>
+            </div>
+
+            <!-- Nhận xét nổi bật -->
+            <div class="bg-[#1e293b] p-5 rounded-xl shadow-lg border-l-4 border-[#facc15]">
+                <p class="text-[#facc15] font-semibold text-lg mb-3">Nhận xét chính:</p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>Gamma = 2 mang lại <span class="text-[#facc15] font-bold">hiệu năng tốt nhất</span> với
+                        <b>Accuracy 96.41%</b> và các chỉ số weighted Precision, Recall, F1 cao nhất.
+                    </li>
+                    <li>Gamma nhỏ (1) khiến mô hình nhạy cảm với từ hiếm → giảm độ chính xác.</li>
+                    <li>Gamma lớn (5,7) làm phân phối xác suất "phẳng" → khó phân biệt các nhãn → độ chính xác giảm.
+                    </li>
+                    <li>Những nhãn ít phổ biến như <b>NUM</b> và <b>X</b> chiếm tỉ trọng nhỏ, dễ gây sai số hơn.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. Baseline Most Frequent Tag (MFT) -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">4. Baseline: Most Frequent Tag (MFT)</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Trước khi so sánh các mô hình, chúng ta xây dựng <b>Baseline</b> đơn giản nhất:
+                <span class="text-[#facc15] font-semibold">Most Frequent Tag (MFT)</span>.
+                Đây là phương pháp gán <b>mọi từ</b> trong tập test bằng nhãn xuất hiện nhiều nhất trong toàn bộ tập
+                train.
+            </p>
+
+            <!-- Khối thông tin baseline -->
+            <div class="bg-[#1e293b] p-5 rounded-xl shadow-lg border-l-4 border-[#d4af37] mb-6">
+                <p class="text-gray-300 mb-3">
+                    <b>Nhãn phổ biến nhất (fallback):</b>
+                    <span class="text-[#facc15] font-bold">NOUN</span>
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-300">
+                    <div class="bg-[#0f172a] p-3 rounded text-center">
+                        <p class="text-sm text-gray-400">Accuracy</p>
+                        <p class="text-lg font-semibold">0.9453</p>
+                    </div>
+                    <div class="bg-[#0f172a] p-3 rounded text-center">
+                        <p class="text-sm text-gray-400">Precision</p>
+                        <p class="text-lg font-semibold">0.9480</p>
+                    </div>
+                    <div class="bg-[#0f172a] p-3 rounded text-center">
+                        <p class="text-sm text-gray-400">Recall</p>
+                        <p class="text-lg font-semibold">0.9453</p>
+                    </div>
+                    <div class="bg-[#0f172a] p-3 rounded text-center">
+                        <p class="text-sm text-gray-400">F1-score</p>
+                        <p class="text-lg font-semibold">0.9457</p>
+                    </div>
                 </div>
 
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-compass text-indigo-400"></i> Adposition
-                    <span class="text-gray-400">(Giới từ)</span>
-                </div>
+                <p class="text-gray-400 text-sm italic mt-3">
+                    Precision, Recall, F1 đều được tính theo <b>weighted</b>.
+                </p>
+            </div>
 
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-tag text-green-400"></i> Determiner
-                    <span class="text-gray-400">(Mạo từ)</span>
-                </div>
+            <!-- Khối so sánh nổi bật -->
+            <div class="bg-[#0f172a] p-5 rounded-xl shadow-lg border border-[#facc15]/40">
+                <p class="text-[#facc15] font-semibold text-xl mb-4">So sánh: MFT vs. POS_HMM</p>
 
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-palette text-pink-400"></i> Adjective
-                    <span class="text-gray-400">(Tính từ)</span>
-                </div>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>
+                        Baseline MFT đạt
+                        <span class="text-[#facc15] font-semibold">Accuracy ≈ 94.5%</span>.
+                    </li>
+                    <li>
+                        Mô hình <b>POS_HMM (Gamma = 2)</b> đạt
+                        <span class="text-[#facc15] font-bold">Accuracy = 96.41%</span>,
+                        cao hơn đáng kể so với MFT.
+                    </li>
+                    <li>
+                        HMM khai thác được <b>ngữ cảnh (bigram tag)</b> và <b>xác suất phát xạ</b> — điều mà MFT không
+                        có.
+                    </li>
+                    <li>
+                        MFT chỉ phù hợp như một baseline đơn giản, nhưng <b>không đủ mạnh</b> cho bài toán gán nhãn POS.
+                    </li>
+                    <li>
+                        HMM thể hiện vượt trội nhất khi áp dụng chiến lược xử lý từ hiếm
+                        bằng <b>pseudo-word + gamma</b>.
+                    </li>
+                </ul>
 
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-wave-square text-cyan-300"></i> Adverb
-                    <span class="text-gray-400">(Trạng từ)</span>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-user text-purple-300"></i> Pronoun
-                    <span class="text-gray-400">(Đại từ)</span>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-link text-amber-300"></i> Conjunction
-                    <span class="text-gray-400">(Liên từ)</span>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-puzzle-piece text-red-300"></i> Particle
-                    <span class="text-gray-400">(Tiểu từ)</span>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-hashtag text-blue-200"></i> Number
-                    <span class="text-gray-400">(Số từ)</span>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-question text-white"></i> Other
-                    <span class="text-gray-400">(Khác)</span>
+                <div class="mt-4 p-4 bg-[#1e293b] rounded-lg border border-[#facc15]/30">
+                    <p class="text-gray-300 text-lg">
+                        👉 <span class="text-[#facc15] font-bold">Kết luận:</span>
+                        POS_HMM không chỉ vượt qua MFT về độ chính xác mà còn ổn định hơn cho toàn bộ bộ nhãn POS, đặc
+                        biệt trên các nhãn hiếm.
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Pipeline -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50"
-        >
-            <h2 class="text-2xl font-bold text-[#d4af37] mb-6">
-                Pipeline chi tiết
-            </h2>
-            <ol class="relative border-l border-[#d4af37]/50 space-y-6 ml-3">
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >1</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Phân tích dữ liệu (EDA)
-                    </h3>
-                    <p class="text-gray-300">
-                        Thống kê phân bố nhãn POS, số lượng từ và từ hiếm, cũng
-                        như độ dài và cấu trúc câu.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >2</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Tiền xử lý dữ liệu
-                    </h3>
-                    <p class="text-gray-300">
-                        Dữ liệu được phân chia theo thư mục
-                        <code>train/</code> và <code>test/</code>.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >3</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Huấn luyện mô hình
-                    </h3>
-                    <p class="text-gray-300">
-                        Huấn luyện HMM trên tập train với các giá trị gamma khác
-                        nhau.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >4</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Đánh giá mô hình
-                    </h3>
-                    <p class="text-gray-300">
-                        Sử dụng Accuracy, Precision, Recall, F1-score.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >5</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Trực quan hóa kết quả
-                    </h3>
-                    <p class="text-gray-300">
-                        Biểu diễn kết quả dưới dạng biểu đồ, so sánh mô hình.
-                    </p>
-                </li>
-            </ol>
-        </div>
 
-        <!-- Footer -->
-        <footer class="mt-12 mb-6 text-center text-gray-400">
-            <p>
-                © 2025
-                <span class="font-bold text-[#d4af37]">Team DNA05</span> -
-                Machine Learning Project
-            </p>
-        </footer>
-    </body>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 mb-6 text-center text-gray-400">
+        <p>
+            © 2025
+            <span class="font-bold text-[#d4af37]">Team DNA05</span> -
+            Machine Learning Project
+        </p>
+    </footer>
+</body>
+
 </html>
