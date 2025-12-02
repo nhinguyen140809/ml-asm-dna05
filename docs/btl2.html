@@ -772,11 +772,11 @@
                     <h4 class="text-xl font-semibold text-[#facc15] mb-3">4.1 Truyền thống</h4>
                     <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
                         <p class="text-gray-300 mb-2"><span class="font-bold text-[#facc15]">Feature:
-                        <ul class="text-gray-300 list-disc list-inside space-y-1">
-                            <li>Bag of Words (BoW)</li>
-                            <li>TF-IDF</li>
-                            <li>n-gram (uni/bi/tri-gram)</li>
-                        </ul>
+                                <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                    <li>Bag of Words (BoW)</li>
+                                    <li>TF-IDF</li>
+                                    <li>n-gram (uni/bi/tri-gram)</li>
+                                </ul>
                     </div>
                 </div>
 
@@ -803,7 +803,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- 5. Huấn luyện mô hình -->
             <div class="mb-12">
@@ -834,10 +833,8 @@
                         </div>
                     </div>
 
-                    <p class="text-gray-300 mb-3">
-                        <span class="font-bold text-[#facc15]">Mô hình thử nghiệm:</span>
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p class="text-gray-300 mb-3"><span class="font-bold text-[#facc15]">Mô hình thử nghiệm:</span></p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
                         <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
                             <p class="text-gray-300"><span class="font-bold text-[#facc15]">Logistic Regression</span>
                             </p>
@@ -847,6 +844,14 @@
                         <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
                             <p class="text-gray-300"><span class="font-bold text-[#facc15]">Random Forest</span></p>
                             <p class="text-gray-400 text-sm">n_estimators=100, max_depth=10, class_weight=balanced</p>
+                        </div>
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Decision Tree</span></p>
+                            <p class="text-gray-400 text-sm">max_depth=5, class_weight=balanced, random_state=42</p>
+                        </div>
+                        <div class="bg-[#0f172a] p-3 rounded-lg border border-[#d4af37]/20 shadow">
+                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">MultinomialNB</span></p>
+                            <p class="text-gray-400 text-sm">sử dụng mặc định (Multinomial Naive Bayes)</p>
                         </div>
                     </div>
                 </div>
@@ -878,6 +883,202 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 6. Đánh giá mô hình -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-6">6. Đánh giá mô hình</h3>
+
+                <p class="text-gray-300 mb-4">
+                    Chúng tôi so sánh hiệu quả của các mô hình <b>Logistic Regression</b>, <b>Decision Tree</b>,
+                    <b>Random Forest</b> và <b>MultinomialNB</b> trên các feature/embedding khác nhau.
+                    Lưu ý: MultinomialNB chỉ áp dụng cho BoW, TF-IDF và N-gram.
+                </p>
+
+                <!-- 6.1 Machine Learning -->
+                <h4 class="text-xl font-semibold text-[#facc15] mb-3">6.1. Machine Learning</h4>
+                <div class="overflow-x-auto mb-6">
+                    <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                        <thead>
+                            <tr class="bg-[#1e293b]">
+                                <th class="border border-gray-600 px-3 py-2">Feature</th>
+                                <th class="border border-gray-600 px-3 py-2">Model</th>
+                                <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                                <th class="border border-gray-600 px-3 py-2">Precision</th>
+                                <th class="border border-gray-600 px-3 py-2">Recall</th>
+                                <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- BoW (default background) -->
+                            <tr>
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">BoW</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9205 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9197 👑</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4175</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5772</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4175</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4332</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7093</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8138</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7093</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7339</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9016</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9027</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9016</td>
+                                <td class="border border-gray-600 px-3 py-1">0.9017</td>
+                            </tr>
+
+                            <!-- TF-IDF (alternate background) -->
+                            <tr class="bg-[#1e293b]">
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">TF-IDF</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8920</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8946</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8920</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8924</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4178</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5791</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4178</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4325</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7151</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8153</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7151</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7383</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9099</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9098</td>
+                            </tr>
+
+                            <!-- N-gram -->
+                            <tr>
+                                <td rowspan="4" class="border border-gray-600 px-3 py-1">N-gram</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9190</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9204</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9190</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9192</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4173</td>
+                                <td class="border border-gray-600 px-3 py-1">0.5766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4173</td>
+                                <td class="border border-gray-600 px-3 py-1">0.4332</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6648</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8027</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6648</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6954</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">MultinomialNB</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8829</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8901</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8829</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8844</td>
+                            </tr>
+
+                            <!-- GloVe 100d -->
+                            <tr class="bg-[#1e293b]">
+                                <td rowspan="3" class="border border-gray-600 px-3 py-1">GloVe 100d</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8455</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8451</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6262</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6338</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6262</td>
+                                <td class="border border-gray-600 px-3 py-1">0.6235</td>
+                            </tr>
+                            <tr class="bg-[#1e293b]">
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8090</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8111</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8090</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8086</td>
+                            </tr>
+
+                            <!-- DistilBERT -->
+                            <tr>
+                                <td rowspan="3" class="border border-gray-600 px-3 py-1">DistilBERT</td>
+                                <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9080</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9079</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9080</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9078</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7391</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7465</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7391</td>
+                                <td class="border border-gray-600 px-3 py-1">0.7389</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8774</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8766</td>
+                                <td class="border border-gray-600 px-3 py-1">0.8762</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 6.2 Deep Learning -->
+                <h4 class="text-xl font-semibold text-[#facc15] mb-3">6.2. Deep Learning</h4>
+                <div class="overflow-x-auto">
+                    <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                        <thead>
+                            <tr class="bg-[#1e293b]">
+                                <th class="border border-gray-600 px-3 py-2">Model</th>
+                                <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                                <th class="border border-gray-600 px-3 py-2">Precision</th>
+                                <th class="border border-gray-600 px-3 py-2">Recall</th>
+                                <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-600 px-3 py-1">LSTM</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9235</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9245</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9235</td>
+                                <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.9238</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
 
             <!-- Footer -->
