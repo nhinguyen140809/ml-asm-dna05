@@ -415,6 +415,132 @@
     </div>
 
 
+
+    <!-- =============================== -->
+    <!--      BTL2 — RESULTS SECTION     -->
+    <!-- =============================== -->
+
+    <div
+        class="w-11/12 md:w-3/4 mt-16 mb-20 bg-[#111827]/90 backdrop-blur-md border border-[#d4af37]/30 rounded-2xl shadow-2xl shadow-black/60 p-8">
+
+        <h2 class="text-3xl font-extrabold text-[#d4af37] drop-shadow-lg text-center mb-10">
+            Kết quả và Quy trình Thực hiện
+        </h2>
+
+        <!-- 1. EDA -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">1. Phân tích dữ liệu (EDA)</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Chúng tôi tiến hành phân tích mô tả dữ liệu gồm: phân bố câu hỏi theo môn học, thống kê độ dài văn bản,
+                nhận diện tần suất từ phổ biến và trực quan hóa bằng WordCloud. Việc này giúp hiểu sâu hơn về cấu trúc
+                dữ liệu,
+                mức độ mất cân bằng giữa các lớp và đánh giá sơ bộ chất lượng văn bản đầu vào.
+            </p>
+
+            <!-- Sample Images -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân bố câu hỏi theo môn học</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud từ tập câu hỏi</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 2. Chia tập dữ liệu -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Chia tập dữ liệu</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Dữ liệu được chia theo tỉ lệ <b>Train – Validation – Test</b> nhằm đảm bảo mô hình có khả năng khái quát
+                tốt.
+                Chúng tôi sử dụng phương pháp phân tầng (Stratified Split) để giữ nguyên phân bố lớp trong từng tập.
+            </p>
+
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full md:w-1/2 mx-auto">
+                <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Tỉ lệ chia dữ liệu</p>
+            </div>
+        </div>
+
+
+        <!-- 3. Trích xuất đặc trưng -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất đặc trưng</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Chúng tôi kết hợp các phương pháp biểu diễn văn bản truyền thống và hiện đại, bao gồm:
+            </p>
+
+            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                <li><b>Bag-of-Words (BoW)</b> – mô tả tần suất xuất hiện từ</li>
+                <li><b>TF-IDF</b> – giảm nhiễu từ phổ biến</li>
+                <li><b>Word Embeddings</b> như Word2Vec, FastText</li>
+                <li><b>Sentence Embeddings</b> từ mô hình hiện đại (SBERT, MPNet)</li>
+            </ul>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Trực quan TF-IDF</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Biểu diễn từ qua embedding</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 4. Training -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Huấn luyện mô hình</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Dựa trên các vector đặc trưng ở bước trước, chúng tôi huấn luyện nhiều mô hình từ truyền thống đến hiện
+                đại:
+            </p>
+
+            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                <li><b>Naive Bayes</b></li>
+                <li><b>SVM</b> với kernel tuyến tính</li>
+                <li><b>Logistic Regression</b></li>
+                <li><b>Random Forest</b></li>
+                <li><b>Mạng nơ-ron đơn giản (DNN)</b></li>
+            </ul>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Mỗi mô hình được đánh giá trên bộ Test thông qua các chỉ số:
+                <b>Accuracy, Precision, Recall, F1-score, Confusion Matrix</b>.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Confusion Matrix</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <!-- Footer -->
     <footer class="mt-12 mb-6 text-center text-gray-400">
         <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
