@@ -429,123 +429,332 @@
 
         <!-- 1. EDA -->
         <div class="mb-12">
-            <h3 class="text-2xl font-bold text-[#facc15] mb-4">1. Phân tích dữ liệu (EDA)</h3>
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">1. Phân tích dữ liệu (EDA)</h3>
 
-            <p class="text-gray-300 leading-relaxed mb-6">
-                Chúng tôi tiến hành phân tích mô tả dữ liệu gồm: phân bố câu hỏi theo môn học, thống kê độ dài văn bản,
-                nhận diện tần suất từ phổ biến và trực quan hóa bằng WordCloud. Việc này giúp hiểu sâu hơn về cấu trúc
-                dữ liệu,
-                mức độ mất cân bằng giữa các lớp và đánh giá sơ bộ chất lượng văn bản đầu vào.
+            <!-- 1.1 Tổng quan dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.1. Tổng quan dữ liệu</h4>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Bộ dữ liệu <b>student_questions.csv</b> gồm tổng cộng
+                <b>122.519 mẫu</b> với 2 cột, tương ứng với hơn một trăm hai mươi nghìn câu hỏi
+                học sinh sử dụng để chuẩn bị cho các kỳ thi <b>IIT-JEE, NEET và AIIMS</b> —
+                những kỳ thi đầu vào quan trọng nhất tại Ấn Độ.
             </p>
 
-            <!-- Sample Images -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="w-full flex justify-center">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-6 mb-6 max-w-5xl">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg">
+
+                        <table class="w-full text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                            <thead class="border-b border-gray-700 text-gray-200 text-xl font-semibold">
+                                <tr>
+                                    <th class="py-3 text-center">Questions</th>
+                                    <th class="py-3 text-center">Subject</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-top">
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        "A ketone has molar mass \( 86 . \) Which of
+                                        the following cannot be IUPAC name of this ketone?
+                                        A. 2 -pentanone
+                                        B. 2-methyl butanone
+                                        c. 3 -methyl butanone
+                                        D. 3 -pentanone"
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Chemistry</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        "According to Stoke's law, the viscous drag force, on an oil drop is
+                                        proportional
+                                        to:
+                                        A. \( \sqrt{V} \)
+                                        B. \( V^{2} \)
+                                        c. \( V^{-1} \)
+                                        D. \( V \)"
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Physics</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        "Hemoglobin in the RBCs helps in the
+                                        A. Transport of oxygen
+                                        B. Transport of nutrients
+                                        C. Transport of carbon dioxide
+                                        D. Both A and C"
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Biology</td>
+                                </tr>
+
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">
+                                        "The area of the quadrilateral formed by the points (0,0),(1,0),(1,4) and (0,2)
+                                        is
+                                        A. 3
+                                        B. 2
+                                        \( c \cdot 4 \)
+                                        D. 5"
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Maths</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="py-3 pr-4 font-medium">
+                                        Write an essay on growth regulation in plants.
+                                    </td>
+                                    <td class="py-3 text-lg font-semibold">Biology</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="text-gray-400 text-base italic text-center mt-3">Phân bố câu hỏi theo môn học</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <p class="text-gray-300 leading-relaxed mb-10">
+                Bộ dữ liệu <b>không chứa Missing Values</b>, đảm bảo chất lượng tốt cho quá trình xử lý và huấn luyện mô
+                hình.
+            </p>
+
+
+            <!-- 1.2 Phân bố câu hỏi theo môn học -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.2. Phân bố câu hỏi theo môn học</h4>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dữ liệu bao gồm 4 môn học chính: Physics, Chemistry, Maths và Biology.
+                Phân bố phần trăm số lượng câu hỏi của từng môn như sau:
+            </p>
+
+            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                <li>Physics — <b>31.37%</b></li>
+                <li>Chemistry — <b>30.83%</b></li>
+                <li>Maths — <b>27.09%</b></li>
+                <li>Biology — <b>10.71%</b></li>
+            </ul>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                    <img src="images/BTL2/PhanBoCacMon.png" class="rounded-lg w-full mb-3">
                     <p class="text-gray-400 text-sm italic text-center">Phân bố câu hỏi theo môn học</p>
                 </div>
 
-                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">WordCloud từ tập câu hỏi</p>
+                <!-- Biểu đồ tròn -->
+                <div
+                    class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg flex flex-col justify-center">
+
+                    <canvas id="pieChartSubjects" class="w-full h-full mb-3"></canvas>
+
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Biểu đồ tròn minh họa phân bố % các môn
+                    </p>
                 </div>
+
+                <!-- Chart.js và plugin datalabels -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+                <script>
+                    const pieCtx = document.getElementById('pieChartSubjects').getContext('2d');
+
+                    new Chart(pieCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Physics", "Chemistry", "Maths", "Biology"],
+                            datasets: [{
+                                data: [31.373093, 30.825423, 27.089676, 10.711808],
+                                backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0'],
+                                borderColor: '#0f172a',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: '#e5e7eb',
+                                        font: { size: 18 }
+                                    }
+                                },
+                                datalabels: {
+                                    color: '#ffffff',
+                                    font: { weight: 'bold', size: 18 },
+                                    formatter: (value, ctx) => {
+                                        let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                        let percentage = (value / sum * 100).toFixed(1) + '%';
+                                        return percentage;
+                                    }
+                                }
+                            }
+                        },
+                        plugins: [ChartDataLabels]
+                    });
+                </script>
+
+
             </div>
-        </div>
 
 
-        <!-- 2. Chia tập dữ liệu -->
-        <div class="mb-12">
-            <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Chia tập dữ liệu</h3>
+            <!-- 1.3 Phân tích mô tả dữ liệu văn bản -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.3. Phân tích mô tả dữ liệu văn bản</h4>
 
             <p class="text-gray-300 leading-relaxed mb-6">
-                Dữ liệu được chia theo tỉ lệ <b>Train – Validation – Test</b> nhằm đảm bảo mô hình có khả năng khái quát
-                tốt.
-                Chúng tôi sử dụng phương pháp phân tầng (Stratified Split) để giữ nguyên phân bố lớp trong từng tập.
+                Chúng tôi phân tích đặc trưng văn bản bao gồm phân phối số từ, độ dài ký tự,
+                và trực quan hóa WordCloud cho toàn bộ dữ liệu và từng môn học.
             </p>
 
-            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full md:w-1/2 mx-auto">
-                <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                <p class="text-gray-400 text-sm italic text-center">Tỉ lệ chia dữ liệu</p>
+            <!-- Phân phối số từ -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL2/PhanPhoiSoTu.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Phân phối số từ trong câu hỏi</p>
             </div>
-        </div>
 
-
-        <!-- 3. Trích xuất đặc trưng -->
-        <div class="mb-12">
-            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất đặc trưng</h3>
-
-            <p class="text-gray-300 leading-relaxed mb-6">
-                Chúng tôi kết hợp các phương pháp biểu diễn văn bản truyền thống và hiện đại, bao gồm:
-            </p>
-
-            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
-                <li><b>Bag-of-Words (BoW)</b> – mô tả tần suất xuất hiện từ</li>
-                <li><b>TF-IDF</b> – giảm nhiễu từ phổ biến</li>
-                <li><b>Word Embeddings</b> như Word2Vec, FastText</li>
-                <li><b>Sentence Embeddings</b> từ mô hình hiện đại (SBERT, MPNet)</li>
-            </ul>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">Trực quan TF-IDF</p>
-                </div>
-
-                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">Biểu diễn từ qua embedding</p>
-                </div>
+            <!-- Độ dài ký tự -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-10">
+                <img src="images/BTL2/SoKyTu.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Độ dài ký tự theo môn học</p>
             </div>
-        </div>
 
+            <!-- WordCloud -->
+            <h5 class="text-lg font-semibold text-[#facc15] mb-4">WordCloud</h5>
 
-        <!-- 4. Training -->
-        <div class="mb-12">
-            <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Huấn luyện mô hình</h3>
+            <div class="grid grid-cols-1 gap-6">
 
-            <p class="text-gray-300 leading-relaxed mb-6">
-                Dựa trên các vector đặc trưng ở bước trước, chúng tôi huấn luyện nhiều mô hình từ truyền thống đến hiện
-                đại:
-            </p>
-
-            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
-                <li><b>Naive Bayes</b></li>
-                <li><b>SVM</b> với kernel tuyến tính</li>
-                <li><b>Logistic Regression</b></li>
-                <li><b>Random Forest</b></li>
-                <li><b>Mạng nơ-ron đơn giản (DNN)</b></li>
-            </ul>
-
-            <p class="text-gray-300 leading-relaxed mb-6">
-                Mỗi mô hình được đánh giá trên bộ Test thông qua các chỉ số:
-                <b>Accuracy, Precision, Recall, F1-score, Confusion Matrix</b>.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">Confusion Matrix</p>
+                    <img src="images/BTL2/WordCloud.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud toàn bộ dữ liệu</p>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL2/WordCloudPhysics.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud môn Physics</p>
                 </div>
 
                 <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                    <img src="images/BTL2/WordCloudChemistry.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud môn Chemistry</p>
                 </div>
 
                 <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                    <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
-                    <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                    <img src="images/BTL2/WordCloudMaths.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud môn Maths</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL2/WordCloudBiology.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">WordCloud môn Biology</p>
+                </div>
+
+            </div>
+
+
+            <!-- 2. Chia tập dữ liệu -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Chia tập dữ liệu</h3>
+
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Bộ dữ liệu được chia thành hai phần: <b>Train</b> và <b>Test</b> với tỉ lệ
+                    <b>80 : 20</b>. Chúng tôi sử dụng <b>Stratified Split</b> để đảm bảo
+                    phân bố các môn học trong mỗi tập vẫn giữ nguyên, tránh lệch lớp.
+                </p>
+
+                <!-- Trực quan đơn giản -->
+                <div class="w-full md:w-2/3 h-6 bg-[#1e293b] rounded-full overflow-hidden mx-auto mb-4">
+                    <div class="h-6 bg-[#d4af37]" style="width: 80%;"></div>
+                    <div class="h-6 bg-[#374151]" style="width: 20%; margin-left:-20%;"></div>
+                </div>
+                <div class="flex justify-between w-full md:w-2/3 mx-auto text-gray-400 text-sm mb-6">
+                    <span>Train 80%</span>
+                    <span>Test 20%</span>
                 </div>
             </div>
+
+
+
+            <!-- 3. Trích xuất đặc trưng -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất đặc trưng</h3>
+
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Chúng tôi kết hợp các phương pháp biểu diễn văn bản truyền thống và hiện đại, bao gồm:
+                </p>
+
+                <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                    <li><b>Bag-of-Words (BoW)</b> – mô tả tần suất xuất hiện từ</li>
+                    <li><b>TF-IDF</b> – giảm nhiễu từ phổ biến</li>
+                    <li><b>Word Embeddings</b> như Word2Vec, FastText</li>
+                    <li><b>Sentence Embeddings</b> từ mô hình hiện đại (SBERT, MPNet)</li>
+                </ul>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                        <p class="text-gray-400 text-sm italic text-center">Trực quan TF-IDF</p>
+                    </div>
+
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                        <p class="text-gray-400 text-sm italic text-center">Biểu diễn từ qua embedding</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 4. Training -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Huấn luyện mô hình</h3>
+
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Dựa trên các vector đặc trưng ở bước trước, chúng tôi huấn luyện nhiều mô hình từ truyền thống đến
+                    hiện
+                    đại:
+                </p>
+
+                <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                    <li><b>Naive Bayes</b></li>
+                    <li><b>SVM</b> với kernel tuyến tính</li>
+                    <li><b>Logistic Regression</b></li>
+                    <li><b>Random Forest</b></li>
+                    <li><b>Mạng nơ-ron đơn giản (DNN)</b></li>
+                </ul>
+
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Mỗi mô hình được đánh giá trên bộ Test thông qua các chỉ số:
+                    <b>Accuracy, Precision, Recall, F1-score, Confusion Matrix</b>.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                        <p class="text-gray-400 text-sm italic text-center">Confusion Matrix</p>
+                    </div>
+
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                        <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                    </div>
+
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <img src="images/sample_image.png" class="rounded-lg w-full mb-3">
+                        <p class="text-gray-400 text-sm italic text-center">So sánh hiệu năng các mô hình</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
-
-    <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-400">
-        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
-                Learning Project</span></p>
-    </footer>
+        <!-- Footer -->
+        <footer class="mt-12 mb-6 text-center text-gray-400">
+            <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                    Learning Project</span></p>
+        </footer>
 
 </body>
 
