@@ -859,26 +859,87 @@
                 <!-- 5.2 Deep Learning -->
                 <div>
                     <h4 class="text-xl font-semibold text-[#facc15] mb-3">5.2. Deep Learning</h4>
-                    <p class="text-gray-300 mb-3">
-                        Huấn luyện <span class="font-bold text-[#facc15]">Bidirectional LSTM</span> end-to-end:
+                    <p class="text-gray-300 mb-4"></p>
+                        Huấn luyện <span class="font-bold text-[#facc15]">Bidirectional LSTM</span> end-to-end .
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
-                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Cấu trúc LSTM</span></p>
-                            <ul class="text-gray-300 list-disc list-inside space-y-1">
-                                <li>embedding_dim = 128</li>
-                                <li>hidden_dim = 128</li>
-                                <li>bidirectional = True</li>
+                    
+                    <div class="my-4"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Architecture Card -->
+                        <div
+                            class="bg-gradient-to-br from-[#071024] to-[#071730] border-l-4 border-[#60a5fa] p-5 rounded-xl shadow-lg hover:scale-[1.01] transition transform">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fa-solid fa-network-wired text-[#60a5fa] text-2xl"></i>
+                                <div>
+                                    <div class="text-sm text-[#60a5fa] font-bold">CẤU TRÚC LSTM</div>
+                                    <div class="text-gray-400 text-xs">Mô tả nhanh các layer & kích thước</div>
+                                </div>
+                            </div>
+
+                            <ul class="text-gray-200 space-y-3">
+                                <li class="flex items-center gap-3">
+                                    <span class="inline-block bg-[#0b1224]/60 text-[#7dd3fc] px-2 py-0.5 rounded-md text-sm font-semibold">embedding_dim</span>
+                                    <code class="bg-[#081024] text-[#c7f9ff] text-sm px-2 py-0.5 rounded">128</code>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="inline-block bg-[#0b1224]/60 text-[#7dd3fc] px-2 py-0.5 rounded-md text-sm font-semibold">hidden_dim</span>
+                                    <code class="bg-[#081024] text-[#c7f9ff] text-sm px-2 py-0.5 rounded">128</code>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="inline-block bg-[#0b1224]/60 text-[#7dd3fc] px-2 py-0.5 rounded-md text-sm font-semibold">bidirectional</span>
+                                    <span class="inline-block bg-[#7dd3fc]/10 text-[#7dd3fc] px-2 py-0.5 rounded text-sm font-medium">True</span>
+                                </li>
                             </ul>
                         </div>
-                        <div class="bg-[#1e293b] p-4 rounded-lg border border-[#d4af37]/20 shadow">
-                            <p class="text-gray-300"><span class="font-bold text-[#facc15]">Huấn luyện</span></p>
-                            <ul class="text-gray-300 list-disc list-inside space-y-1">
-                                <li>batch_size = 64</li>
-                                <li>learning_rate = 1e-3</li>
-                                <li>epochs = 8</li>
-                                <li>Loss = CrossEntropyLoss, Optimizer = Adam</li>
-                            </ul>
+
+                        <!-- Training Card -->
+                        <div
+                            class="bg-gradient-to-br from-[#100b00] to-[#2a1600] border-l-4 border-[#facc15] p-5 rounded-xl shadow-lg hover:scale-[1.01] transition transform">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fa-solid fa-cogs text-[#facc15] text-2xl"></i>
+                                <div>
+                                    <div class="text-sm text-[#facc15] font-bold">HUẤN LUYỆN</div>
+                                    <div class="text-gray-400 text-xs">Hyper-parameters & lưu ý</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="flex flex-col gap-2">
+                                    <div class="text-gray-300 text-sm">Batch size</div>
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="bg-[#27272a] text-[#facc15] px-3 py-1 rounded font-semibold">64</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <div class="text-gray-300 text-sm">Learning rate</div>
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="bg-[#27272a] text-[#facc15] px-3 py-1 rounded font-semibold">1e-3</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <div class="text-gray-300 text-sm">Epochs</div>
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="bg-[#27272a] text-[#facc15] px-3 py-1 rounded font-semibold">8</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <div class="text-gray-300 text-sm">Optimizer / Loss</div>
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="bg-[#27272a] text-[#111827] px-3 py-1 rounded font-semibold bg-yellow-300">Adam</span>
+                                        <span class="bg-[#27272a] text-[#facc15] px-3 py-1 rounded font-semibold">CrossEntropy</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 flex gap-2 flex-wrap">
+                                <span class="text-xs bg-white/5 text-gray-200 px-2 py-1 rounded-full">batch=64</span>
+                                <span class="text-xs bg-white/5 text-gray-200 px-2 py-1 rounded-full">lr=1e-3</span>
+                                <span class="text-xs bg-white/5 text-gray-200 px-2 py-1 rounded-full">epochs=8</span>
+                                <span class="text-xs bg-white/5 text-gray-200 px-2 py-1 rounded-full">Adam</span>
+                            </div>
                         </div>
                     </div>
                 </div>
