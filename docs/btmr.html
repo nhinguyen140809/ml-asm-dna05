@@ -1007,6 +1007,57 @@
                 </ul>
             </div>
         </div>
+        <div
+            class="mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#0b1220]/40 to-[#071028]/30 border border-[#facc15]/30 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition">
+            <h3 class="flex items-center gap-3 text-2xl font-bold text-[#facc15] mb-4">
+                <i class="fa-solid fa-brain"></i>
+                HMM POS Tagger - Kết quả tốt nhất (Gamma = 2)
+            </h3>
+
+            <div class="p-4 bg-[#0f172a] border border-[#facc15]/40 rounded-xl shadow-lg relative">
+                <div
+                    class="absolute -top-3 -right-3 bg-[#facc15] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                    <i class="fa-solid fa-award"></i> Top
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div
+                        class="flex flex-col items-center justify-center p-4 rounded-lg border border-yellow-400/20 bg-gradient-to-br from-yellow-400/5 to-yellow-400/2">
+                        <div class="text-xs font-semibold text-yellow-300 uppercase tracking-wide">Accuracy</div>
+                        <div class="mt-2 text-3xl md:text-4xl font-extrabold text-[#facc15]">0.9641</div>
+                        <div class="text-xs text-gray-400 mt-1">overall</div>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center p-4 rounded-lg border border-green-400/20 bg-gradient-to-br from-green-400/5 to-green-400/2">
+                        <div class="text-xs font-semibold text-green-300 uppercase tracking-wide">Precision</div>
+                        <div class="mt-2 text-3xl md:text-4xl font-extrabold text-green-300">0.9643</div>
+                        <div class="text-xs text-gray-400 mt-1">macro</div>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center p-4 rounded-lg border border-sky-400/20 bg-gradient-to-br from-sky-400/5 to-sky-400/2">
+                        <div class="text-xs font-semibold text-sky-300 uppercase tracking-wide">Recall</div>
+                        <div class="mt-2 text-3xl md:text-4xl font-extrabold text-sky-300">0.9641</div>
+                        <div class="text-xs text-gray-400 mt-1">macro</div>
+                    </div>
+
+                    <div
+                        class="flex flex-col items-center justify-center p-4 rounded-lg border border-purple-400/20 bg-gradient-to-br from-purple-400/5 to-purple-400/2">
+                        <div class="text-xs font-semibold text-purple-300 uppercase tracking-wide">F1-score</div>
+                        <div class="mt-2 text-3xl md:text-4xl font-extrabold text-purple-300">0.9642</div>
+                        <div class="text-xs text-gray-400 mt-1">macro</div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-400 mt-4 text-center">Precision, Recall, F1 đều được tính theo weighted.</p>
+            </div>
+        </div>
+
+
+        <div class="my-12"></div>
+
+
 
         <!-- 5. Baseline Most Frequent Tag (MFT) -->
         <div class="mb-12">
@@ -1020,34 +1071,53 @@
             </p>
 
             <!-- Khối thông tin baseline -->
-            <div class="bg-[#1e293b] p-5 rounded-xl shadow-lg border-l-4 border-[#d4af37] mb-6">
+
+            <div
+                class="mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#0b1220]/40 to-[#071028]/30 border border-[#facc15]/30 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition">
                 <p class="text-gray-300 mb-3">
                     <b>Nhãn phổ biến nhất (fallback):</b>
                     <span class="text-[#facc15] font-bold">NOUN</span>
                 </p>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-gray-300">
-                    <div class="bg-[#0f172a] p-3 rounded text-center">
-                        <p class="text-sm text-gray-400">Accuracy</p>
-                        <p class="text-lg font-semibold">0.9453</p>
+                <div class="p-4 bg-[#0f172a] border border-[#facc15]/40 rounded-xl shadow-lg relative">
+                    <div
+                        class="absolute -top-3 -right-3 bg-[#facc15] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                        <i class="fa-solid fa-award"></i> Top
                     </div>
-                    <div class="bg-[#0f172a] p-3 rounded text-center">
-                        <p class="text-sm text-gray-400">Precision</p>
-                        <p class="text-lg font-semibold">0.9480</p>
-                    </div>
-                    <div class="bg-[#0f172a] p-3 rounded text-center">
-                        <p class="text-sm text-gray-400">Recall</p>
-                        <p class="text-lg font-semibold">0.9453</p>
-                    </div>
-                    <div class="bg-[#0f172a] p-3 rounded text-center">
-                        <p class="text-sm text-gray-400">F1-score</p>
-                        <p class="text-lg font-semibold">0.9457</p>
-                    </div>
-                </div>
 
-                <p class="text-gray-400 text-sm italic mt-3">
-                    Precision, Recall, F1 đều được tính theo <b>weighted</b>.
-                </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div
+                            class="flex flex-col items-center justify-center p-4 rounded-lg border border-yellow-400/20 bg-gradient-to-br from-yellow-400/5 to-yellow-400/2">
+                            <div class="text-xs font-semibold text-yellow-300 uppercase tracking-wide">Accuracy</div>
+                            <div class="mt-2 text-3xl md:text-4xl font-extrabold text-[#facc15]">0.9453</div>
+                            <div class="text-xs text-gray-400 mt-1">overall</div>
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center p-4 rounded-lg border border-green-400/20 bg-gradient-to-br from-green-400/5 to-green-400/2">
+                            <div class="text-xs font-semibold text-green-300 uppercase tracking-wide">Precision</div>
+                            <div class="mt-2 text-3xl md:text-4xl font-extrabold text-green-300">0.9480</div>
+                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center p-4 rounded-lg border border-sky-400/20 bg-gradient-to-br from-sky-400/5 to-sky-400/2">
+                            <div class="text-xs font-semibold text-sky-300 uppercase tracking-wide">Recall</div>
+                            <div class="mt-2 text-3xl md:text-4xl font-extrabold text-sky-300">0.9453</div>
+                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center p-4 rounded-lg border border-purple-400/20 bg-gradient-to-br from-purple-400/5 to-purple-400/2">
+                            <div class="text-xs font-semibold text-purple-300 uppercase tracking-wide">F1-score</div>
+                            <div class="mt-2 text-3xl md:text-4xl font-extrabold text-purple-300">0.9457</div>
+                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-400 mt-4 text-center">Precision, Recall, F1 đều được tính theo weighted.
+                    </p>
+                </div>
             </div>
 
             <!-- Khối so sánh nổi bật -->
