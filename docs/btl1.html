@@ -840,7 +840,7 @@
             <!-- 2.5 Xử lý mất cân bằng -->
             <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.5. Xử lý mất cân bằng dữ
                 liệu
-                với SMOTE</h4>
+                với SMOTE (Synthetic Minority Over-sampling Technique)</h4>
             <p class="text-gray-300 leading-relaxed mb-4">
                 Dữ liệu biến mục tiêu <b>Heart Disease Status</b> ban đầu bị mất cân
                 bằng
@@ -1202,6 +1202,170 @@
                 </div>
             </div>
 
+            <div class="overflow-x-auto mt-6 mb-6">
+                <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                    <thead>
+                        <tr class="bg-[#1e293b]">
+                            <th class="border border-gray-600 px-3 py-2">Model</th>
+                            <th class="border border-gray-600 px-3 py-2">PCA</th>
+                            <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                            <th class="border border-gray-600 px-3 py-2">Precision</th>
+                            <th class="border border-gray-600 px-3 py-2">Recall</th>
+                            <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.718000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.200730</td>
+                            <td class="border border-gray-600 px-3 py-1">0.137500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.163205</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">SVM</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.576000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.197297</td>
+                            <td class="border border-gray-600 px-3 py-1">0.365000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.256140</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.512000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.194915</td>
+                            <td class="border border-gray-600 px-3 py-1">0.460000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.273810</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">KNN</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.687000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.221675</td>
+                            <td class="border border-gray-600 px-3 py-1">0.225000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.223325</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.800000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.520500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.201708</td>
+                            <td class="border border-gray-600 px-3 py-1">0.472500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.282723</td>
+                        </tr>
+
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.742500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.185792</td>
+                            <td class="border border-gray-600 px-3 py-1">0.085000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.116638</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">SVM</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.607000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.206687</td>
+                            <td class="border border-gray-600 px-3 py-1">0.340000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.257089</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.513000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.197895</td>
+                            <td class="border border-gray-600 px-3 py-1">0.470000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.278519</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">KNN</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.674500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.225383</td>
+                            <td class="border border-gray-600 px-3 py-1">0.257500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.240373</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.800000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.405000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.206538</td>
+                            <td class="border border-gray-600 px-3 py-1">0.695000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.318442</td>
+                        </tr>
+
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.753000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.178082</td>
+                            <td class="border border-gray-600 px-3 py-1">0.065000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.095238</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">SVM</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.649500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.224863</td>
+                            <td class="border border-gray-600 px-3 py-1">0.307500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.259768</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.512500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.193823</td>
+                            <td class="border border-gray-600 px-3 py-1">0.455000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.271845</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">KNN</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.650000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.204724</td>
+                            <td class="border border-gray-600 px-3 py-1">0.260000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.229075</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.799500</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.000000</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.412000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.207831</td>
+                            <td class="border border-gray-600 px-3 py-1">0.690000</td>
+                            <td class="border border-gray-600 px-3 py-1">0.319444</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
             <!-- Nhận xét -->
             <h4 class="text-xl font-semibold text-[#d4af37] mt-6 mb-3">Nhận xét</h4>
             <ul class="list-disc list-inside text-gray-300 mb-4">
@@ -1281,6 +1445,8 @@
                         80/20). Values show best model, PCA level and score per metric.</p>
                 </div>
             </div>
+
+
 
             <!-- Nhận xét -->
             <div class="my-12"></div>
