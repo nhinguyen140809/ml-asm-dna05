@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Machine Learning Project</title>
+    <title>Bài tập lớn 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -334,19 +334,19 @@
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-dumbbell text-green-500 mt-1"></i>
-                <p class="text-gray-300">Exercise Habits: mức độ tập luyện</p>
+                <p class="text-gray-300">Exercise Habits (High/Low): mức độ tập luyện</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-smoking text-gray-500 mt-1"></i>
-                <p class="text-gray-300">Smoking: tình trạng hút thuốc</p>
+                <p class="text-gray-300">Smoking (Yes/No): tình trạng hút thuốc</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-users text-purple-500 mt-1"></i>
-                <p class="text-gray-300">Family Heart Disease: tiền sử gia đình</p>
+                <p class="text-gray-300">Family Heart Disease (Yes/No): tiền sử gia đình</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-syringe text-red-400 mt-1"></i>
-                <p class="text-gray-300">Diabetes: tình trạng tiểu đường</p>
+                <p class="text-gray-300">Diabetes (Yes/No): tình trạng tiểu đường</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-weight text-orange-500 mt-1"></i>
@@ -357,28 +357,32 @@
                 <p class="text-gray-300">High Blood Pressure (Yes/No): tình trạng tăng huyết áp</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
+                <i class="fas fa-wine-bottle text-pink-500 mt-1"></i>
+                <p class="text-gray-300">Low HDL Cholesterol (Yes/No): mức HDL (“cholesterol tốt”) thấp bất thường</p>
+            </div>
+            <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-vial text-yellow-600 mt-1"></i>
-                <p class="text-gray-300">High LDL Cholesterol (Yes/No): mức LDL cao</p>
+                <p class="text-gray-300">High LDL Cholesterol (Yes/No): mức LDL (“cholesterol xấu”) cao bất thường</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-wine-bottle text-pink-500 mt-1"></i>
-                <p class="text-gray-300">Alcohol Consumption (None/Low/Medium/High)</p>
+                <p class="text-gray-300">Alcohol Consumption (None/Low/Medium/High): mức độ tiêu thụ rượu bia</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-brain text-indigo-500 mt-1"></i>
-                <p class="text-gray-300">Stress Level (Low/Medium/High)</p>
+                <p class="text-gray-300">Stress Level (Low/Medium/High): mức độ căng thẳng</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-bed text-blue-400 mt-1"></i>
-                <p class="text-gray-300">Sleep Hours (float): số giờ ngủ trung bình/ngày</p>
+                <p class="text-gray-300">Sleep Hours (float): số giờ ngủ trung bình mỗi ngày</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-candy-cane text-red-400 mt-1"></i>
-                <p class="text-gray-300">Sugar Consumption (Low/Medium/High)</p>
+                <p class="text-gray-300">Sugar Consumption (Low/Medium/High): mức độ tiêu thụ đường</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-flask text-teal-500 mt-1"></i>
-                <p class="text-gray-300">Triglyceride Level (float): nồng độ triglyceride</p>
+                <p class="text-gray-300">Triglyceride Level (float): nồng độ triglyceride (mỡ) trong máu (mg/dL)</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-tint text-indigo-500 mt-1"></i>
@@ -386,11 +390,12 @@
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-vial-circle-check text-green-500 mt-1"></i>
-                <p class="text-gray-300">CRP Level (float): nồng độ protein phản ứng C</p>
+                <p class="text-gray-300">CRP Level (float): nồng độ protein phản ứng C (C-reactive protein) – chỉ số
+                    viêm.</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-dna text-purple-400 mt-1"></i>
-                <p class="text-gray-300">Homocysteine Level (float)</p>
+                <p class="text-gray-300">Homocysteine Level (float): nồng độ axit amin homocysteine trong máu.</p>
             </div>
             <div class="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-3 flex items-start gap-2">
                 <i class="fas fa-heart text-red-600 mt-1"></i>
@@ -398,7 +403,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!-- Pipeline (timeline) -->
@@ -446,11 +450,722 @@
         </ol>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-400">
-        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
-                Learning Project</span></p>
-    </footer>
+    <!-- =============================== -->
+    <!--      BTL1 — RESULTS SECTION     -->
+    <!-- =============================== -->
+
+    <div
+        class="w-11/12 md:w-3/4 mt-16 mb-20 bg-[#111827]/90 backdrop-blur-md border border-[#d4af37]/30 rounded-2xl shadow-2xl shadow-black/60 p-8">
+
+        <h2 class="text-3xl font-extrabold text-[#d4af37] drop-shadow-lg text-center mb-10">
+            Kết quả và Quy trình Thực hiện
+        </h2>
+
+        <!-- 1. EDA -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">1. Phân tích dữ liệu (EDA)</h3>
+
+            <!-- 1.1 Tổng quan dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.1. Tổng quan dữ liệu</h4>
+
+            <p class="text-gray-300 leading-relaxed mb-4"> Bộ dữ liệu <b class="text-[#d4af37]">Heart Disease Dataset –
+                    Oktay Rdeki</b> gồm tổng cộng <b>10.000 mẫu</b>, mỗi mẫu tương ứng với một bệnh nhân khác nhau. Dữ
+                liệu ghi lại các thông tin sức khỏe, chỉ số sinh học, thói quen sinh hoạt và đặc biệt là nhãn cho biết
+                người đó <b>có mắc bệnh tim mạch hay không</b>. Tổng cộng có <b>21 thuộc tính</b>, bao gồm <b>9 cột
+                    Numeric</b> và <b>12 cột Categorical</b>, trong đó <b>Heart Disease Status</b> là biến mục tiêu của
+                bài toán dự đoán. </p>
+
+
+            <div class="w-full flex justify-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 max-w-5xl">
+
+                    <!-- Bảng nửa đầu -->
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg">
+                        <table class="w-full text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                            <thead class="border-b border-gray-700 text-gray-200 text-xl font-semibold">
+                                <tr>
+                                    <th class="py-3 text-center">Feature</th>
+                                    <th class="py-3 text-center">Missing Values</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-top">
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Alcohol Consumption</td>
+                                    <td class="py-3 text-lg font-semibold text-center">32</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Diabetes</td>
+                                    <td class="py-3 text-lg font-semibold text-center">30</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Sugar Consumption</td>
+                                    <td class="py-3 text-lg font-semibold text-center">30</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Cholesterol Level</td>
+                                    <td class="py-3 text-lg font-semibold text-center">30</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Age</td>
+                                    <td class="py-3 text-lg font-semibold text-center">29</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Triglyceride Level</td>
+                                    <td class="py-3 text-lg font-semibold text-center">26</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">CRP Level</td>
+                                    <td class="py-3 text-lg font-semibold text-center">26</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">High LDL Cholesterol</td>
+                                    <td class="py-3 text-lg font-semibold text-center">26</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">High Blood Pressure</td>
+                                    <td class="py-3 text-lg font-semibold text-center">26</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Low HDL Cholesterol</td>
+                                    <td class="py-3 text-lg font-semibold text-center">25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-400 text-base italic text-center mt-3"> Bảng thống kê Missing Values theo
+                            từng cột </p>
+                    </div>
+
+                    <!-- Bảng nửa sau -->
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg">
+                        <table class="w-full text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                            <thead class="border-b border-gray-700 text-gray-200 text-xl font-semibold">
+                                <tr>
+                                    <th class="py-3 text-center">Feature</th>
+                                    <th class="py-3 text-center">Missing Values</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-top">
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Sleep Hours</td>
+                                    <td class="py-3 text-lg font-semibold text-center">25</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Exercise Habits</td>
+                                    <td class="py-3 text-lg font-semibold text-center">25</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Smoking</td>
+                                    <td class="py-3 text-lg font-semibold text-center">25</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Fasting Blood Sugar</td>
+                                    <td class="py-3 text-lg font-semibold text-center">22</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">BMI</td>
+                                    <td class="py-3 text-lg font-semibold text-center">22</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Stress Level</td>
+                                    <td class="py-3 text-lg font-semibold text-center">22</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Family Heart Disease</td>
+                                    <td class="py-3 text-lg font-semibold text-center">21</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Homocysteine Level</td>
+                                    <td class="py-3 text-lg font-semibold text-center">20</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="py-3 pr-4 font-medium">Blood Pressure</td>
+                                    <td class="py-3 text-lg font-semibold text-center">19</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-medium text-[#d4af37]">Heart Disease Status (Target)</td>
+                                    <td class="py-3 text-lg font-semibold text-center text-[#d4af37]">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-400 text-base italic text-center mt-3"> Bảng thống kê Missing Values theo
+                            từng cột </p>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- 1.2 Thống kê tần suất nhãn -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.2. Thống kê tần suất nhãn</h4>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dữ liệu bao gồm 10.000 mẫu của biến mục tiêu Heart Disease Status.
+                Phân bố số lượng mẫu của từng nhãn như sau:
+            </p>
+
+            <ul class="list-disc ml-6 text-gray-300 mb-6 leading-relaxed">
+                <li>No — <b>8.000 mẫu (80%)</b></li>
+                <li>Yes — <b>2.000 mẫu (20%)</b></li>
+            </ul>
+
+            <!-- Thống kê tần suất nhãn -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/label_freq.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Thống kê tần suất nhãn</p>
+            </div>
+
+            <!-- 1.3 Thống kê mô tả cho Numeric Columns -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">1.3. Thống kê mô tả cho Numeric Columns</h4>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Chúng tôi thống kê mô tả cho 9 Numeric Columns trong bộ dữ liệu:
+            </p>
+
+            <!-- Thống kê Numeric Columns -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/numeric.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Thống kê Numeric Columns</p>
+            </div>
+
+            <!-- Numeric -->
+            <h5 class="text-lg font-semibold text-[#facc15] mb-4">Numeric</h5>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/age.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Age</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/bloodPressure.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Blood Pressure</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/cholesterol_level.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Cholesterol Level</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/bmi.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối BMI</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/sleep_hours.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Sleep Hours</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/Triglyceride.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Triglyceride Level</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTl1/Fasting_Blood_sugar.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Fasting Blood Sugar</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/CRP.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối CRP Level</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/Homocysteine.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Phân phối Homocysteine Level</p>
+                </div>
+
+            </div>
+
+            <!-- 1.4 Thống kê mô tả cho Categorical Columns -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mt-3 mb-3">1.4. Thống kê mô tả Categorical Columns</h4>
+
+            <p class="text-gray-300 leading-relaxed mt-6 mb-6">
+                Chúng tôi thống kê mô tả cho 12 Categorical Columns trong bộ dữ liệu:
+            </p>
+
+            <!-- Thống kê Categorical Columns -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mt-6 mb-6">
+                <img src="images/BTL1/categorical.png" class="rounded-lg w-1/2 mx-auto mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Thống kê mô tả Categorical Columns</p>
+            </div>
+
+            <!-- Categorical -->
+            <h5 class="text-lg font-semibold text-[#facc15] mb-4">Categorical</h5>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/chart1.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Cơ cấu Gender, Exercise Habits</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/chart2.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Cơ cấu Smoking, Family Heart Disease</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/chart3.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Cơ cấu Diabetes, High Blood Pressure</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/chart4.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">Cơ cấu Low HDL Cholesterol, High LDL
+                        Cholesterol
+                    </p>
+                </div>
+            </div>
+
+            <h5 class="text-lg font-semibold text-[#facc15] mb-4"></h5>
+
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/chart5.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Cơ cấu Alcohol Consumption, Stress Level,
+                    Sugar
+                    Consumption</p>
+            </div>
+
+            <!-- Nhận xét -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">Nhận xét</h4>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Các chỉ số numeric như huyết áp, cholesterol, đường huyết, triglyceride và BMI đều cao hơn ngưỡng
+                    khuyến nghị, với độ lệch chuẩn lớn, phản ánh sự biến thiên rõ rệt. Trong khi đó, thời gian ngủ và
+                    homocysteine phân bố đồng đều hơn.</li>
+                <li>Ở nhóm categorical, dữ liệu phân bố cân đối giữa giới tính, bệnh nền và thói quen sinh hoạt, với tỷ
+                    lệ hút thuốc, rối loạn mỡ máu và huyết áp cao khá đáng kể.</li>
+            </ul>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Nhìn chung, các biến trong tập dữ liệu thể hiện sự đa dạng và phân bố khá đồng đều, phản ánh đầy đủ các
+                đặc trưng sức khỏe và lối sống của đối tượng khảo sát. Tuy nhiên, biến mục tiêu lại có sự mất cân bằng
+                đáng kể, tạo ra thách thức trong quá trình xử lý dữ liệu và huấn luyện mô hình dự đoán.
+            </p>
+
+
+
+            <!-- 2. Tiền xử lý dữ liệu -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Tiền xử lý dữ liệu</h3>
+
+            <!-- 2.1 Mã hóa dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.1. Mã hóa dữ liệu (Encoding)</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dataset có nhiều feature <b>categorical</b>. Các biến ordinal như <b>Exercise Habits,
+                    Stress
+                    Level,
+                    Sugar Consumption, Alcohol Consumption</b> được định nghĩa thứ tự. Biến
+                <b>Gender</b> và các
+                biến
+                nhị phân khác được mã hóa 0/1. Biến mục tiêu <b>Heart Disease Status</b> được chuyển
+                thành 0/1.
+            </p>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Việc mã hóa giữ thông tin thứ tự cho các feature ordinal, tất cả feature categorical đều
+                được
+                chuyển
+                về
+                dạng numeric, sẵn sàng cho các bước xử lý tiếp theo.
+            </p>
+
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/encoding.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Thông tin dữ liệu sau khi encoding
+                </p>
+            </div>
+
+
+            <!-- 2.2 Chia tập dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.2. Chia tập dữ liệu (Splitting)</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dataset được chia thành tập đặc trưng <b>X</b> và biến mục tiêu <b>y</b>. Sử dụng tỷ
+                lệ
+                <b>80/20</b>
+                cho
+                train/test với phương pháp <b>stratified split</b> giữ nguyên tỷ lệ nhãn.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Tách trước các bước xử lý missing value, scaling và cân bằng dữ liệu giúp đảm bảo
+                tập test
+                hoàn toàn
+                mới, tránh data leakage.
+            </p>
+
+            <!-- Trực quan đơn giản -->
+            <div class="w-full md:w-2/3 h-6 bg-[#1e293b] rounded-full overflow-hidden mx-auto mb-4">
+                <div class="h-6 bg-[#d4af37]" style="width: 80%;"></div>
+                <div class="h-6 bg-[#374151]" style="width: 20%; margin-left:-20%;"></div>
+            </div>
+            <div class="flex justify-between w-full md:w-2/3 mx-auto text-gray-400 text-sm mb-6">
+                <span>Train 80%</span>
+                <span>Test 20%</span>
+            </div>
+
+
+
+            <!-- 2.3 Xử lý missing value -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Xử lý missing value với KNN
+                Imputer
+            </h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sử dụng <b>KNN Imputer</b> (k=5) để điền giá trị missing. Imputer được fit trên
+                tập
+                train, sau đó áp
+                dụng cho tập test. Các biến categorical được làm tròn về integer sau khi
+                imputation.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sau khi xử lý, train và test không còn missing value, đảm bảo dữ liệu đầy đủ để
+                huấn
+                luyện mô hình.
+            </p>
+
+            <!-- 2.4 Chuẩn hóa dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.4. Chuẩn hóa dữ liệu
+                (Scaling)</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Áp dụng <b>Min-Max Scaling</b> để đưa các feature về khoảng <b>[0,1]</b>.
+                Fit trên
+                tập train,
+                transform
+                trên test để tránh rò rỉ dữ liệu. Giúp các feature có cùng thang đo, cải
+                thiện tốc
+                độ và hiệu suất
+                huấn
+                luyện.
+            </p>
+
+            <!-- 2.5 Xử lý mất cân bằng -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.5. Xử lý mất cân bằng dữ
+                liệu
+                với SMOTE</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dữ liệu biến mục tiêu <b>Heart Disease Status</b> ban đầu bị mất cân
+                bằng
+                (No:Yes = 4:1). Sử dụng
+                <b>SMOTE</b> trên tập train để tạo mẫu tổng hợp cho lớp thiểu số (Yes).
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sau khi SMOTE, tỷ lệ lớp trong train cân bằng hơn (No:Yes ≈ 2:1), giúp
+                cải thiện
+                hiệu quả dự đoán
+                cho
+                lớp thiểu số, tăng recall và F1-score.
+            </p>
+
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/train_1.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Dữ liệu tập huấn luyện sau các bước tiền xử lý
+                </p>
+            </div>
+
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <img src="images/BTL1/train_2.png" class="rounded-lg w-full mb-3">
+                <p class="text-gray-400 text-sm italic text-center">Dữ liệu tập huấn luyện sau các bước tiền xử lý
+                </p>
+            </div>
+
+            <!-- 3. Trích xuất và lựa chọn đặc trưng với PCA -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất và lựa chọn đặc trưng với PCA</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dataset chẩn đoán bệnh tim mạch chứa <b>20 features</b> liên quan đến lối sống, chỉ số sinh học và tiền
+                sử bệnh.
+                Do số lượng feature lớn và có thể tương quan cao, áp dụng <b>Principal Component Analysis (PCA)</b> giúp
+                giảm chiều dữ liệu
+                và giữ lại thông tin quan trọng.
+            </p>
+
+            <!-- 3.1 Chuẩn hóa dữ liệu trước PCA -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.1. Chuẩn hóa dữ liệu trước PCA</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Các feature đã được chuẩn hóa về khoảng <b>[0,1]</b> nhờ Min-Max Scaling, đảm bảo mỗi feature đóng góp
+                tương đương vào PCA.
+            </p>
+
+            <!-- 3.2 Áp dụng PCA -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.2. Áp dụng PCA</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                PCA được huấn luyện trên tập train để tìm các thành phần chính. Các thử nghiệm được thực hiện với các
+                mức phương sai giữ lại:
+                <b>99%, 90%, 80%, 70%</b>. Việc này giúp so sánh hiệu quả mô hình khi sử dụng số lượng components khác
+                nhau và đánh giá mức mất mát thông tin.
+            </p>
+
+
+            <!-- 3.3 Lựa chọn đặc trưng -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.3. Lựa chọn đặc trưng</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Các principal components giữ lại ở từng mức phương sai sẽ thay thế tập feature gốc làm input cho mô
+                hình.
+                Giúp giảm <b>overfitting</b>, tăng tốc độ huấn luyện và loại bỏ các feature có tương quan cao.
+            </p>
+
+            <!-- 3. Học máy -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Học máy</h3>
+
+            <!-- 3.1 Huấn luyện và tìm tham số tối ưu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.1. Huấn luyện và tìm tham số tối ưu</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sử dụng <b>GridSearchCV</b> để tìm các tham số tối ưu cho từng mô hình, kết hợp <b>K-fold
+                    cross-validation (k=5)</b> và metric <b>Recall</b> để phù hợp với bài toán chẩn đoán bệnh tim.
+            </p>
+
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li><b>Random Forest:</b> max_depth, min_samples_split, n_estimators, class_weight</li>
+                <li><b>SVM:</b> C, kernel, class_weight</li>
+                <li><b>Logistic Regression:</b> C, penalty, solver, class_weight</li>
+                <li><b>KNN:</b> n_neighbors, metric, p, weights</li>
+                <li><b>Decision Tree:</b> criterion, max_depth, min_samples_split, min_samples_leaf, class_weight,
+                    ccp_alpha</li>
+                <li><b>Naive Bayes:</b> var_smoothing</li>
+            </ul>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                GridSearchCV thử tất cả tổ hợp tham số, chọn giá trị tối ưu dựa trên hiệu suất trên tập validation và áp
+                dụng trên tập test.
+            </p>
+
+            <!-- 3.2 Bảng tham số tối ưu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.2. Tham số tối ưu của các mô hình</h4>
+
+
+            <div class="overflow-x-auto mb-6">
+                <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                    <thead>
+                        <tr class="bg-[#1e293b]">
+                            <th class="border border-gray-600 px-3 py-2">Mô hình</th>
+                            <th class="border border-gray-600 px-3 py-2">Tham số</th>
+                            <th class="border border-gray-600 px-3 py-2">Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="4" class="border border-gray-600 px-3 py-1">Random Forest</td>
+                            <td class="border border-gray-600 px-3 py-1">max_depth</td>
+                            <td class="border border-gray-600 px-3 py-1">20</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">min_samples_split</td>
+                            <td class="border border-gray-600 px-3 py-1">2</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">n_estimators</td>
+                            <td class="border border-gray-600 px-3 py-1">200</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">class_weight</td>
+                            <td class="border border-gray-600 px-3 py-1">balanced</td>
+                        </tr>
+
+                        <tr class="bg-[#1e293b]">
+                            <td rowspan="3" class="border border-gray-600 px-3 py-1">SVM</td>
+                            <td class="border border-gray-600 px-3 py-1">C</td>
+                            <td class="border border-gray-600 px-3 py-1">10</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">kernel</td>
+                            <td class="border border-gray-600 px-3 py-1">rbf</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">class_weight</td>
+                            <td class="border border-gray-600 px-3 py-1">balanced</td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="4" class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                            <td class="border border-gray-600 px-3 py-1">C</td>
+                            <td class="border border-gray-600 px-3 py-1">0.1</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">penalty</td>
+                            <td class="border border-gray-600 px-3 py-1">l1</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">solver</td>
+                            <td class="border border-gray-600 px-3 py-1">liblinear</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">class_weight</td>
+                            <td class="border border-gray-600 px-3 py-1">balanced</td>
+                        </tr>
+
+                        <tr class="bg-[#1e293b]">
+                            <td rowspan="4" class="border border-gray-600 px-3 py-1">KNN</td>
+                            <td class="border border-gray-600 px-3 py-1">n_neighbors</td>
+                            <td class="border border-gray-600 px-3 py-1">3</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">metric</td>
+                            <td class="border border-gray-600 px-3 py-1">minkowski</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">p</td>
+                            <td class="border border-gray-600 px-3 py-1">1</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">weights</td>
+                            <td class="border border-gray-600 px-3 py-1">distance</td>
+                        </tr>
+
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
+                            <td class="border border-gray-600 px-3 py-1">var_smoothing</td>
+                            <td class="border border-gray-600 px-3 py-1">1e-09</td>
+                        </tr>
+
+                        <tr class="bg-[#1e293b]">
+                            <td rowspan="5" class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">criterion</td>
+                            <td class="border border-gray-600 px-3 py-1">gini</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">max_depth</td>
+                            <td class="border border-gray-600 px-3 py-1">5</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">min_samples_split</td>
+                            <td class="border border-gray-600 px-3 py-1">2</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">ccp_alpha</td>
+                            <td class="border border-gray-600 px-3 py-1">0.0</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">class_weight</td>
+                            <td class="border border-gray-600 px-3 py-1">balanced</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <!-- 4. Đánh giá mô hình -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Đánh giá mô hình</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sử dụng các tham số tối ưu của từng mô hình, đánh giá hiệu quả trên tập test với các giá trị PCA:
+                <b>99%, 90%, 80%, 70%</b> dựa trên các chỉ số
+                <b>Accuracy</b>, <b>Precision</b>, <b>Recall</b> và <b>F1-score</b>.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/PCA_99.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">PCA = 99%</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/PCA_90.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">PCA = 90%</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/PCA_80.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">PCA = 80%</p>
+                </div>
+
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL1/PCA_70.png" class="rounded-lg w-full mb-3">
+                    <p class="text-gray-400 text-sm italic text-center">PCA = 70%
+                    </p>
+                </div>
+            </div>
+
+            <!-- Nhận xét -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mt-6 mb-3">Nhận xét</h4>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Giảm số thành phần PCA giúp các mô hình như Random Forest, SVM, Logistic Regression và KNN cải thiện
+                    Precision, Recall và F1-score, trong khi Accuracy gần như không đổi. Điều này cho thấy tập trung vào
+                    các đặc trưng quan trọng giúp mô hình học hiệu quả hơn.</li>
+                <li>Mô hình Naive Bayes đạt Accuracy cao nhưng Precision, Recall và F1-score thấp, cho thấy mô hình chủ
+                    yếu dự đoán nhãn chiếm ưu thế, không khai thác tốt đặc trưng dữ liệu.</li>
+                <li>Mô hình Decision Tree có Recall nổi bật (~69%), thể hiện khả năng học tập đáng kể cho nhiệm vụ chẩn
+                    đoán bệnh tim mạch, mặc dù các chỉ số khác không cao.</li>
+            </ul>
+
+            <!-- Lưu ý quan trọng -->
+            <p class="text-gray-300 leading-relaxed mb-4">
+                <b>Lưu ý:</b> Trong y tế, Recall đặc biệt quan trọng, vì bỏ sót bệnh (False Negative) có thể gây hậu quả
+                nghiêm trọng. Do đó, kết quả Recall của Decision Tree được coi là phù hợp với mục tiêu phân tích dữ liệu
+                bệnh tim.
+            </p>
+
+            <!-- 5. Kết luận -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">5. Kết luận</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Kết quả mô hình có hiệu suất cao nhất theo từng chỉ số được tổng hợp và đánh giá trên tập test.
+            </p>
+
+            <!-- Bảng mô hình tốt nhất theo metrics -->
+            <div class="overflow-x-auto mb-6">
+                <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                    <thead>
+                        <tr class="bg-[#1e293b]">
+                            <th class="border border-gray-600 px-3 py-2">Metric</th>
+                            <th class="border border-gray-600 px-3 py-2">Best Model</th>
+                            <th class="border border-gray-600 px-3 py-2">Best PCA</th>
+                            <th class="border border-gray-600 px-3 py-2">Best Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Accuracy</td>
+                            <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
+                            <td class="border border-gray-600 px-3 py-1">70%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.800000</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">Precision</td>
+                            <td class="border border-gray-600 px-3 py-1">KNN</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.225383</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-600 px-3 py-1">Recall</td>
+                            <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">80%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.695000</td>
+                        </tr>
+                        <tr class="bg-[#1e293b]">
+                            <td class="border border-gray-600 px-3 py-1">F1-score</td>
+                            <td class="border border-gray-600 px-3 py-1">Decision Tree</td>
+                            <td class="border border-gray-600 px-3 py-1">90%</td>
+                            <td class="border border-gray-600 px-3 py-1">0.319444</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Nhận xét -->
+
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">Nhận xét</h4>
+            <ul class="list-disc list-inside text-gray-300 mb-4">
+                <li>Naive Bayes đạt Accuracy cao nhất với PCA = 70%, nhưng Precision, Recall và F1-score đều không nổi
+                    bật, phản ánh xu hướng dự đoán lệch về lớp chiếm đa số.</li>
+                <li>KNN đạt Precision cao nhất với PCA = 80%, tuy nhiên Recall và F1-score còn thấp.</li>
+                <li>Decision Tree nổi bật về Recall và F1-score, đặc biệt quan trọng trong y tế khi mục tiêu là hạn chế
+                    bỏ sót ca bệnh.</li>
+            </ul>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Như vậy, <b>Decision Tree</b> được xem là mô hình phù hợp nhất cho bài toán chẩn đoán bệnh tim trong tập
+                dữ liệu này.
+            </p>
+
+
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="mt-12 mb-6 text-center text-gray-400">
+            <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                    Learning Project</span></p>
+        </footer>
 
 </body>
 
