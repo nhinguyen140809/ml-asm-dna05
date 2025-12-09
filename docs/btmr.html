@@ -595,312 +595,334 @@
         <!-- 2.2 Bảng tag POS -->
         <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.2. Bảng nhãn POS</h4>
 
+        <table class="min-w-full text-gray-300 border border-[#d4af37]/30 rounded-xl shadow-lg overflow-hidden">
+            <thead class="bg-gradient-to-r from-[#1e293b] to-[#0f172a]">
+                <tr>
+                    <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#facc15] font-bold text-left">Tag</th>
+                    <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#facc15] font-bold text-left">Ý nghĩa</th>
+                    <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#facc15] font-bold text-left">Ví dụ</th>
+                </tr>
+            </thead>
+            <tbody class="bg-[#0f172a]">
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">NOUN</td>
+                    <td class="px-4 py-3 text-gray-300">nouns (common and proper)</td>
+                    <td class="px-4 py-3 text-gray-200">dog, cat, apple, time, man</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">VERB</td>
+                    <td class="px-4 py-3 text-gray-300">verbs (all tenses and modes)</td>
+                    <td class="px-4 py-3 text-gray-200">go, walk, eat, is, was, be</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition"></tr>
+                <td class="px-4 py-3 font-semibold text-[#facc15]">.</td>
+                <td class="px-4 py-3 text-gray-300">punctuation</td>
+                <td class="px-4 py-3 text-gray-200">. , ! ? ; : `` ''</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">ADP</td>
+                    <td class="px-4 py-3 text-gray-300">prepositions/postpositions</td>
+                    <td class="px-4 py-3 text-gray-200">in, on, at, of, to, for</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">DET</td>
+                    <td class="px-4 py-3 text-gray-300">determiners/articles</td>
+                    <td class="px-4 py-3 text-gray-200">the, a, an, this, his</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">ADJ</td>
+                    <td class="px-4 py-3 text-gray-300">adjectives</td>
+                    <td class="px-4 py-3 text-gray-200">happy, big, red, new, first</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">ADV</td>
+                    <td class="px-4 py-3 text-gray-300">adverbs</td>
+                    <td class="px-4 py-3 text-gray-200">quickly, very, well, not, when</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">PRON</td>
+                    <td class="px-4 py-3 text-gray-300">pronouns</td>
+                    <td class="px-4 py-3 text-gray-200">I, you, he, it, they</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">CONJ</td>
+                    <td class="px-4 py-3 text-gray-300">conjunctions</td>
+                    <td class="px-4 py-3 text-gray-200">and, but, or, And, But</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">PRT</td>
+                    <td class="px-4 py-3 text-gray-300">particles/function words</td>
+                    <td class="px-4 py-3 text-gray-200">up, off, out, to, all</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">NUM</td>
+                    <td class="px-4 py-3 text-gray-300">cardinal numbers</td>
+                    <td class="px-4 py-3 text-gray-200">one, two, three, 1, 2, 100</td>
+                </tr>
+                <tr class="hover:bg-[#1e293b]/50 transition">
+                    <td class="px-4 py-3 font-semibold text-[#facc15]">X</td>
+                    <td class="px-4 py-3 text-gray-300">other: foreign words, typos, abbreviations</td>
+                    <td class="px-4 py-3 text-gray-200">de, et, La, De, Comedie</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-gray-400 text-sm italic text-center mt-3">
+            Bảng phân loại đầy đủ các nhãn POS theo chuẩn Universal Tagset
+        </p>
+        <!-- 2.3 Biểu đồ tròn phân bố nhãn POS -->
+        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Phân bố nhãn POS</h4>
+        <div class="flex flex-col items-start gap-6 mb-6 w-full">
+            <!-- Hình minh họa (dòng riêng) -->
+            <img src="images/BTLMR/PhanBoNhan.png" alt="Phân bố nhãn POS"
+                class="rounded-xl shadow-lg w-full object-contain">
+            <!-- Biểu đồ tròn (dòng riêng) -->
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full">
+                <div class="w-full h-80 md:h-[700px]"> <!-- tăng chiều cao cho màn hình lớn -->
+                    <canvas id="pieChartPOS" class="w-full h-full"></canvas>
+                </div>
+                <p class="text-gray-400 text-sm italic text-center mt-3">
+                    Biểu đồ tròn minh họa tỷ lệ % các nhãn POS
+                </p>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+        <script>
+            const pieCtx = document.getElementById('pieChartPOS').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ["NOUN", "VERB", ".", "ADP", "DET", "ADJ", "ADV", "PRON", "CONJ", "PRT", "NUM", "X"],
+                    datasets: [{
+                        data: [23.730615, 15.738138, 12.708062, 12.467017, 11.799857, 7.209919, 4.843213, 4.248565, 3.285503, 2.568826, 1.280925, 0.119360],
+                        backgroundColor: ['#f87171', '#fbbf24', '#34d399', '#60a5fa', '#f472b6', '#facc15', '#a78bfa', '#22d3ee', '#f97316', '#8b5cf6', '#e879f9', '#94a3b8'],
+                        borderColor: '#0f172a',
+                        borderWidth: 2,
+                        hoverOffset: 12,
+                        radius: '85%' // phóng to hình tròn
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: { top: 8, right: 16, bottom: 8, left: 16 }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'left', // chuyển legend ra bên để giảm chồng lấn
+                            labels: {
+                                color: '#e5e7eb',
+                                font: { size: 25 },
+                                boxWidth: 12,
+                                padding: 10
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const val = context.parsed;
+                                    return context.label + ': ' + val.toFixed(3) + '%';
+                                }
+                            }
+                        },
+                        datalabels: {
+                            color: '#ffffff',
+                            font: { weight: 'bold', size: 15 },
+                            backgroundColor: 'rgba(0,0,0,0.45)',
+                            borderRadius: 4,
+                            padding: 6,
+                            clamp: true,
+                            // Hiển thị nhãn nhỏ ra ngoài hoặc ẩn nếu quá nhỏ để tránh chồng lấn
+                            anchor: 'end',
+                            align: 'end',
+                            offset: -8,
+                            formatter: function (value, ctx) {
+                                // chỉ hiện % nếu >= 1% để tránh chồng lấn; với các phần rất nhỏ, dùng tooltip để xem
+                                return value >= 1 ? value.toFixed(1) + '%' : '';
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        </script>
+
+        <!-- 2.4 Chiều dài câu -->
+        <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.4. Chiều dài câu</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#0b1220]/60 border-l-4 border-[#facc15] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu trung bình</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#facc15]">20.25</span>
+                    <span class="text-sm text-gray-300">từ</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Giá trị trung bình — thể hiện độ dài câu phổ
+                    biến</p>
+            </div>
+
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#071022]/60 border-l-4 border-[#60a5fa] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu ngắn nhất</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#60a5fa]">1</span>
+                    <span class="text-sm text-gray-300">từ</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Câu ngắn nhất trong corpus</p>
+            </div>
+
+            <div
+                class="flex flex-col items-center p-4 rounded-2xl bg-[#0b0f1a]/60 border-l-4 border-[#f87171] shadow-md">
+                <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu dài nhất</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-4xl md:text-5xl font-extrabold text-[#f87171]">180</span>
+                    <span class="text-sm text-gray-300">từ</span>
+                </div>
+                <p class="text-gray-400 text-sm mt-2 text-center">Câu dài nhất (cần lưu ý khi tiền xử lý)</p>
+            </div>
+        </div>
+        <div class="flex justify-center mb-6">
+            <img src="images/BTLMR/ChieuDaiCau.png" alt="Chiều dài câu"
+                class="rounded-xl shadow-lg w-full max-w-4xl object-contain">
+        </div>
+
+        <!-- 2.5 Top 5 từ phổ biến theo nhãn -->
+        <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.5. Top 5 từ phổ biến theo từng nhãn POS
+        </h4>
         <div class="overflow-x-auto mb-6">
-            <table class="min-w-full text-gray-300 border border-[#d4af37]/20 rounded-xl">
-                <thead class="bg-[#1e293b] text-left">
+            <table class="min-w-full text-gray-300 border border-[#d4af37]/30 rounded-xl shadow-lg">
+                <thead class="bg-gradient-to-r from-[#1e293b] to-[#0f172a]">
                     <tr>
-                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Tag</th>
-                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Ý nghĩa</th>
-                        <th class="px-4 py-2 border-b border-[#d4af37]/20">Ví dụ</th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#facc15] font-bold text-center">POS Tag
+                        </th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#facc15] font-bold text-center">🥇 Top 1
+                        </th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#d4af37] font-semibold text-center">🥈
+                            Top 2</th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-[#d4af37] font-semibold text-center">🥉
+                            Top 3</th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-gray-300 font-medium text-center">Top 4
+                        </th>
+                        <th class="px-4 py-3 border-b border-[#d4af37]/40 text-gray-300 font-medium text-center">Top 5
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-[#0f172a]">
-                    <tr>
-                        <td class="px-4 py-2">VERB</td>
-                        <td class="px-4 py-2">verbs (all tenses and modes)</td>
-                        <td class="px-4 py-2">go, walk, eat</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">NOUN</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">time</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">man</td>
+                        <td class="px-4 py-3 text-center text-gray-200">year</td>
+                        <td class="px-4 py-3 text-center text-gray-300">way</td>
+                        <td class="px-4 py-3 text-center text-gray-300">day</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">NOUN</td>
-                        <td class="px-4 py-2">nouns (common and proper)</td>
-                        <td class="px-4 py-2">dog, cat, apple</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">VERB</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">is</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">was</td>
+                        <td class="px-4 py-3 text-center text-gray-200">be</td>
+                        <td class="px-4 py-3 text-center text-gray-300">had</td>
+                        <td class="px-4 py-3 text-center text-gray-300">are</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">PRON</td>
-                        <td class="px-4 py-2">pronouns</td>
-                        <td class="px-4 py-2">I, you, he</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">.</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">.</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">,</td>
+                        <td class="px-4 py-3 text-center text-gray-200">``</td>
+                        <td class="px-4 py-3 text-center text-gray-300">''</td>
+                        <td class="px-4 py-3 text-center text-gray-300">;</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">ADJ</td>
-                        <td class="px-4 py-2">adjectives</td>
-                        <td class="px-4 py-2">happy, big, red</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">ADP</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">of</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">in</td>
+                        <td class="px-4 py-3 text-center text-gray-200">to</td>
+                        <td class="px-4 py-3 text-center text-gray-300">for</td>
+                        <td class="px-4 py-3 text-center text-gray-300">with</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">ADV</td>
-                        <td class="px-4 py-2">adverbs</td>
-                        <td class="px-4 py-2">quickly, very, well</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">DET</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">the</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">a</td>
+                        <td class="px-4 py-3 text-center text-gray-200">The</td>
+                        <td class="px-4 py-3 text-center text-gray-300">his</td>
+                        <td class="px-4 py-3 text-center text-gray-300">this</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">ADP</td>
-                        <td class="px-4 py-2">prepositions/postpositions</td>
-                        <td class="px-4 py-2">in, on, at</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">ADJ</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">other</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">new</td>
+                        <td class="px-4 py-3 text-center text-gray-200">first</td>
+                        <td class="px-4 py-3 text-center text-gray-300">more</td>
+                        <td class="px-4 py-3 text-center text-gray-300">such</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">CONJ</td>
-                        <td class="px-4 py-2">conjunctions</td>
-                        <td class="px-4 py-2">and, but, or</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">ADV</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">not</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">when</td>
+                        <td class="px-4 py-3 text-center text-gray-200">so</td>
+                        <td class="px-4 py-3 text-center text-gray-300">only</td>
+                        <td class="px-4 py-3 text-center text-gray-300">more</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">DET</td>
-                        <td class="px-4 py-2">determiners</td>
-                        <td class="px-4 py-2">the, a, an</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">PRON</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">it</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">he</td>
+                        <td class="px-4 py-3 text-center text-gray-200">I</td>
+                        <td class="px-4 py-3 text-center text-gray-300">He</td>
+                        <td class="px-4 py-3 text-center text-gray-300">they</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">NUM</td>
-                        <td class="px-4 py-2">cardinal numbers</td>
-                        <td class="px-4 py-2">one, two, 100</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">CONJ</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">and</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">or</td>
+                        <td class="px-4 py-3 text-center text-gray-200">but</td>
+                        <td class="px-4 py-3 text-center text-gray-300">But</td>
+                        <td class="px-4 py-3 text-center text-gray-300">And</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">PRT</td>
-                        <td class="px-4 py-2">particles/function words</td>
-                        <td class="px-4 py-2">up, off, out</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">PRT</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">to</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">all</td>
+                        <td class="px-4 py-3 text-center text-gray-200">up</td>
+                        <td class="px-4 py-3 text-center text-gray-300">out</td>
+                        <td class="px-4 py-3 text-center text-gray-300">there</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">X</td>
-                        <td class="px-4 py-2">other: foreign words, typos, abbreviations</td>
-                        <td class="px-4 py-2">etc., N/A</td>
+                    <tr class="hover:bg-[#1e293b]/50 border-b border-[#d4af37]/10 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">NUM</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">one</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">two</td>
+                        <td class="px-4 py-3 text-center text-gray-200">three</td>
+                        <td class="px-4 py-3 text-center text-gray-300">1</td>
+                        <td class="px-4 py-3 text-center text-gray-300">2</td>
                     </tr>
-                    <tr>
-                        <td class="px-4 py-2">.</td>
-                        <td class="px-4 py-2">punctuation</td>
-                        <td class="px-4 py-2">., !, ?</td>
+                    <tr class="hover:bg-[#1e293b]/50 transition">
+                        <td class="px-4 py-3 font-semibold text-[#facc15]">X</td>
+                        <td class="px-4 py-3 text-center"><span
+                                class="bg-[#facc15]/20 text-[#facc15] px-3 py-1 rounded-lg font-bold">de</span></td>
+                        <td class="px-4 py-3 text-center text-gray-200">et</td>
+                        <td class="px-4 py-3 text-center text-gray-200">La</td>
+                        <td class="px-4 py-3 text-center text-gray-300">De</td>
+                        <td class="px-4 py-3 text-center text-gray-300">Comedie</td>
                     </tr>
                 </tbody>
             </table>
-            <!-- 2.3 Biểu đồ tròn phân bố nhãn POS -->
-            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Phân bố nhãn POS</h4>
-            <div class="flex flex-col items-start gap-6 mb-6 w-full">
-                <!-- Hình minh họa (dòng riêng) -->
-                <img src="images/BTLMR/PhanBoNhan.png" alt="Phân bố nhãn POS"
-                    class="rounded-xl shadow-lg w-full object-contain">
-                <!-- Biểu đồ tròn (dòng riêng) -->
-                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full">
-                    <div class="w-full h-80 md:h-[700px]"> <!-- tăng chiều cao cho màn hình lớn -->
-                        <canvas id="pieChartPOS" class="w-full h-full"></canvas>
-                    </div>
-                    <p class="text-gray-400 text-sm italic text-center mt-3">
-                        Biểu đồ tròn minh họa tỷ lệ % các nhãn POS
-                    </p>
-                </div>
-            </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-            <script>
-                const pieCtx = document.getElementById('pieChartPOS').getContext('2d');
-                new Chart(pieCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ["NOUN", "VERB", ".", "ADP", "DET", "ADJ", "ADV", "PRON", "CONJ", "PRT", "NUM", "X"],
-                        datasets: [{
-                            data: [23.730615, 15.738138, 12.708062, 12.467017, 11.799857, 7.209919, 4.843213, 4.248565, 3.285503, 2.568826, 1.280925, 0.119360],
-                            backgroundColor: ['#f87171', '#fbbf24', '#34d399', '#60a5fa', '#f472b6', '#facc15', '#a78bfa', '#22d3ee', '#f97316', '#8b5cf6', '#e879f9', '#94a3b8'],
-                            borderColor: '#0f172a',
-                            borderWidth: 2,
-                            hoverOffset: 12,
-                            radius: '85%' // phóng to hình tròn
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        layout: {
-                            padding: { top: 8, right: 16, bottom: 8, left: 16 }
-                        },
-                        plugins: {
-                            legend: {
-                                position: 'left', // chuyển legend ra bên để giảm chồng lấn
-                                labels: {
-                                    color: '#e5e7eb',
-                                    font: { size: 25 },
-                                    boxWidth: 12,
-                                    padding: 10
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        const val = context.parsed;
-                                        return context.label + ': ' + val.toFixed(3) + '%';
-                                    }
-                                }
-                            },
-                            datalabels: {
-                                color: '#ffffff',
-                                font: { weight: 'bold', size: 12 },
-                                backgroundColor: 'rgba(0,0,0,0.45)',
-                                borderRadius: 4,
-                                padding: 6,
-                                clamp: true,
-                                // Hiển thị nhãn nhỏ ra ngoài hoặc ẩn nếu quá nhỏ để tránh chồng lấn
-                                anchor: 'end',
-                                align: 'end',
-                                offset: -8,
-                                formatter: function (value, ctx) {
-                                    // chỉ hiện % nếu >= 1% để tránh chồng lấn; với các phần rất nhỏ, dùng tooltip để xem
-                                    return value >= 1 ? value.toFixed(1) + '%' : '';
-                                }
-                            }
-                        }
-                    },
-                    plugins: [ChartDataLabels]
-                });
-            </script>
-
-            <!-- 2.4 Chiều dài câu -->
-            <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.4. Chiều dài câu</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                <div
-                    class="flex flex-col items-center p-4 rounded-2xl bg-[#0b1220]/60 border-l-4 border-[#facc15] shadow-md">
-                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu trung bình</div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl md:text-5xl font-extrabold text-[#facc15]">20.25</span>
-                        <span class="text-sm text-gray-300">từ</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mt-2 text-center">Giá trị trung bình — thể hiện độ dài câu phổ
-                        biến</p>
-                </div>
-
-                <div
-                    class="flex flex-col items-center p-4 rounded-2xl bg-[#071022]/60 border-l-4 border-[#60a5fa] shadow-md">
-                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu ngắn nhất</div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl md:text-5xl font-extrabold text-[#60a5fa]">1</span>
-                        <span class="text-sm text-gray-300">từ</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mt-2 text-center">Câu ngắn nhất trong corpus</p>
-                </div>
-
-                <div
-                    class="flex flex-col items-center p-4 rounded-2xl bg-[#0b0f1a]/60 border-l-4 border-[#f87171] shadow-md">
-                    <div class="text-xs text-gray-400 uppercase mb-2">Chiều dài câu dài nhất</div>
-                    <div class="flex items-baseline gap-2">
-                        <span class="text-4xl md:text-5xl font-extrabold text-[#f87171]">180</span>
-                        <span class="text-sm text-gray-300">từ</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mt-2 text-center">Câu dài nhất (cần lưu ý khi tiền xử lý)</p>
-                </div>
-            </div>
-            <div class="flex justify-center mb-6">
-                <img src="images/BTLMR/ChieuDaiCau.png" alt="Chiều dài câu"
-                    class="rounded-xl shadow-lg w-full max-w-4xl object-contain">
-            </div>
-
-            <!-- 2.5 Top 5 từ phổ biến theo nhãn -->
-            <h4 class="text-xl font-semibold text-[#d4af37] mb-3 mt-6">2.5. Top 5 từ phổ biến theo từng nhãn POS
-            </h4>
-            <div class="overflow-x-auto">
-                <table class="min-w-full text-gray-300 border border-[#d4af37]/20 rounded-xl">
-                    <thead class="bg-[#1e293b]">
-                        <tr>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">POS</th>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top1</th>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top2</th>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top3</th>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top4</th>
-                            <th class="px-3 py-2 border-b border-[#d4af37]/20">Top5</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-[#0f172a]">
-                        <tr>
-                            <td class="px-3 py-2">ADJ</td>
-                            <td>other</td>
-                            <td>new</td>
-                            <td>first</td>
-                            <td>more</td>
-                            <td>such</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">DET</td>
-                            <td>the</td>
-                            <td>a</td>
-                            <td>The</td>
-                            <td>his</td>
-                            <td>this</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">PRT</td>
-                            <td>to</td>
-                            <td>all</td>
-                            <td>up</td>
-                            <td>out</td>
-                            <td>there</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">X</td>
-                            <td>de</td>
-                            <td>et</td>
-                            <td>La</td>
-                            <td>De</td>
-                            <td>Comedie</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">NUM</td>
-                            <td>one</td>
-                            <td>two</td>
-                            <td>three</td>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">.</td>
-                            <td>,</td>
-                            <td>.</td>
-                            <td>``</td>
-                            <td>''</td>
-                            <td>;</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">ADP</td>
-                            <td>of</td>
-                            <td>in</td>
-                            <td>to</td>
-                            <td>for</td>
-                            <td>with</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">CONJ</td>
-                            <td>and</td>
-                            <td>or</td>
-                            <td>but</td>
-                            <td>But</td>
-                            <td>And</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">VERB</td>
-                            <td>is</td>
-                            <td>was</td>
-                            <td>be</td>
-                            <td>had</td>
-                            <td>are</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">PRON</td>
-                            <td>it</td>
-                            <td>he</td>
-                            <td>I</td>
-                            <td>He</td>
-                            <td>they</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">ADV</td>
-                            <td>not</td>
-                            <td>when</td>
-                            <td>so</td>
-                            <td>only</td>
-                            <td>more</td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-2">NOUN</td>
-                            <td>time</td>
-                            <td>man</td>
-                            <td>Af</td>
-                            <td>years</td>
-                            <td>way</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <p class="text-gray-400 text-sm italic text-center mt-3">
+                Bảng Top 5 từ phổ biến nhất theo từng loại từ POS trong Brown Corpus
+            </p>
         </div>
 
         <!-- 3. Chia tập dữ liệu -->
@@ -926,83 +948,103 @@
         <!-- 4. Huấn luyện và đánh giá -->
         <div class="mb-12">
             <h3 class="text-2xl font-bold text-[#facc15] mb-6">4. Huấn luyện và đánh giá POS_HMM</h3>
-
+            <p class="text-gray-300 leading-relaxed mb-6"></p>
             <p class="text-gray-300 leading-relaxed mb-4">
                 Trong bước này, chúng ta huấn luyện mô hình <b>POS_HMM</b> trên tập <b>train</b> với các giá trị
-                <span class="text-[#facc15] font-semibold">gamma</span> khác nhau, sau đó dự đoán nhãn POS cho tập
+                <span class="bg-[#facc15] text-black px-2 py-1 rounded font-bold mx-1">gamma</span> khác nhau, sau đó dự
+                đoán nhãn POS cho tập
                 <b>test</b>
-                và đánh giá các chỉ số <b>Accuracy</b>, <b>Precision (weighted)</b>, <b>Recall (weighted)</b>, <b>F1
-                    (weighted)</b>.
+                và đánh giá các chỉ số <b>Accuracy</b>, <b>Precision </b>, <b>Recall </b>, <b>F1
+                </b>.
             </p>
-
-            <!-- Bảng kết quả -->
-            <div class="overflow-x-auto bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg mb-6">
-                <table class="min-w-full text-gray-300 border-collapse">
+            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg mb-6">
+                <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
                     <thead>
-                        <tr class="bg-[#1e293b] text-[#facc15]">
-                            <th class="px-4 py-2 border border-[#d4af37]/30">Gamma</th>
-                            <th class="px-4 py-2 border border-[#d4af37]/30">Accuracy</th>
-                            <th class="px-4 py-2 border border-[#d4af37]/30">Precision (weighted)</th>
-                            <th class="px-4 py-2 border border-[#d4af37]/30">Recall (weighted)</th>
-                            <th class="px-4 py-2 border border-[#d4af37]/30">F1 (weighted)</th>
+                        <tr class="bg-[#1e293b]">
+                            <th class="border border-gray-600 px-3 py-2 text-[#facc15]">Gamma</th>
+                            <th class="border border-gray-600 px-3 py-2 text-[#facc15]">Accuracy</th>
+                            <th class="border border-gray-600 px-3 py-2 text-[#facc15]">Precision</th>
+                            <th class="border border-gray-600 px-3 py-2 text-[#facc15]">Recall</th>
+                            <th class="border border-gray-600 px-3 py-2 text-[#facc15]">F1</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="hover:bg-[#1e293b]/50">
-                            <td class="px-4 py-2 border border-[#d4af37]/30">1</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9539</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9572</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9539</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9551</td>
+                            <td class="border border-gray-600 px-3 py-2">1</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9539</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9572</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9539</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9551</td>
                         </tr>
-                        <tr class="bg-[#facc15]/25 font-bold hover:bg-[#facc15]/35">
-                            <td class="px-4 py-2 border border-[#d4af37]/30">2</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9641</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9643</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9641</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9642</td>
-                        </tr>
-                        <tr class="hover:bg-[#1e293b]/50">
-                            <td class="px-4 py-2 border border-[#d4af37]/30">3</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9613</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9617</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9613</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9615</td>
-                        </tr>
-                        <tr class="hover:bg-[#1e293b]/50">
-                            <td class="px-4 py-2 border border-[#d4af37]/30">5</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9576</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9579</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9576</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9577</td>
+                        <tr class="bg-[#facc15]/25 hover:bg-[#facc15]/35">
+                            <td class="border border-gray-600 px-3 py-2 font-bold text-[#facc15]">2</td>
+                            <td class="border border-gray-600 px-3 py-2 font-bold text-[#facc15]">0.9641
+                                <span
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                            </td>
+                            <td class="border border-gray-600 px-3 py-2 font-bold text-[#facc15]">0.9643 <span
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                            </td>
+                            <td class="border border-gray-600 px-3 py-2 font-bold text-[#facc15]">0.9641 <span
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                            </td>
+                            <td class="border border-gray-600 px-3 py-2 font-bold text-[#facc15]">0.9642 <span
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                            </td>
                         </tr>
                         <tr class="hover:bg-[#1e293b]/50">
-                            <td class="px-4 py-2 border border-[#d4af37]/30">7</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9551</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
-                            <td class="px-4 py-2 border border-[#d4af37]/30">0.9549</td>
+                            <td class="border border-gray-600 px-3 py-2">3</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9613</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9617</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9613 </td>
+                            <td class="border border-gray-600 px-3 py-2">0.9615</td>
+                        </tr>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="border border-gray-600 px-3 py-2">5</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9576</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9579</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9576</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9577</td>
+                        </tr>
+                        <tr class="hover:bg-[#1e293b]/50">
+                            <td class="border border-gray-600 px-3 py-2">7</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9549</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9551</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9549</td>
+                            <td class="border border-gray-600 px-3 py-2">0.9549</td>
                         </tr>
                     </tbody>
                 </table>
-
-                <p class="text-gray-400 text-sm italic mt-3">
-                    <b>Lưu ý:</b> Precision, Recall và F1 được tính theo <b>weighted</b> để phản ánh đúng tầm quan
-                    trọng của các nhãn POS phổ biến và hiếm.
+                <p class="text-gray-400 text-sm italic text-center mt-3">
+                    Bảng so sánh hiệu năng POS_HMM với các giá trị gamma khác nhau
                 </p>
             </div>
 
+            <p class="text-gray-400 text-sm italic mt-3">
+                <b>Lưu ý:</b> Precision, Recall và F1 được tính theo <b>weighted</b> để phản ánh đúng tầm quan
+                trọng của các nhãn POS phổ biến và hiếm.
+            </p>
             <!-- Nhận xét nổi bật -->
-            <div class="bg-[#1e293b] p-5 rounded-xl shadow-lg border-l-4 border-[#facc15]">
-                <p class="text-[#facc15] font-semibold text-lg mb-3">Nhận xét chính:</p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li>Gamma = 2 mang lại <span class="text-[#facc15] font-bold">hiệu năng tốt nhất</span> với
-                        <b>Accuracy 96.41%</b> và các chỉ số weighted Precision, Recall, F1 cao nhất.
+            <div
+                class="mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#0b1220]/40 to-[#071028]/30 border border-[#facc15]/30 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition">
+                <h3 class="flex items-center gap-3 text-2xl font-bold text-[#facc15] mb-4">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    Nhận xét chính
+                </h3>
+                <ul class="list-none space-y-3 text-gray-300">
+                    <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                        <span class="flex-shrink-0 text-[#facc15] font-bold">✓</span>
+                        <span>Gamma = 2 mang lại <span class="text-[#facc15] font-bold">hiệu năng tốt nhất</span> với
+                            <b>Accuracy 96.41%</b> và các chỉ số weighted Precision, Recall, F1 cao nhất.</span>
                     </li>
-                    <li>Gamma nhỏ (1) khiến mô hình nhạy cảm với từ hiếm → giảm độ chính xác.</li>
-                    <li>Gamma lớn (5,7) làm phân phối xác suất "phẳng" → khó phân biệt các nhãn → độ chính xác giảm.
+                    <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                        <span class="flex-shrink-0 text-[#facc15] font-bold">⚠</span>
+                        <span>Gamma nhỏ (1) khiến mô hình nhạy cảm với từ hiếm → giảm độ chính xác.</span>
                     </li>
-                    <li>Những nhãn ít phổ biến như <b>NUM</b> và <b>X</b> chiếm tỉ trọng nhỏ, dễ gây sai số hơn.
+                    <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                        <span class="flex-shrink-0 text-[#facc15] font-bold">⚠</span>
+                        <span>Gamma lớn (5,7) làm phân phối xác suất "phẳng" → khó phân biệt các nhãn → độ chính xác
+                            giảm.</span>
                     </li>
                 </ul>
             </div>
@@ -1061,7 +1103,7 @@
 
         <!-- 5. Baseline Most Frequent Tag (MFT) -->
         <div class="mb-12">
-            <h3 class="text-2xl font-bold text-[#facc15] mb-6">4. Baseline: Most Frequent Tag (MFT)</h3>
+            <h3 class="text-2xl font-bold text-[#facc15] mb-6">5. Baseline: Most Frequent Tag (MFT)</h3>
 
             <p class="text-gray-300 leading-relaxed mb-4">
                 Trước khi so sánh các mô hình, chúng ta xây dựng <b>Baseline</b> đơn giản nhất:
@@ -1097,77 +1139,90 @@
                             class="flex flex-col items-center justify-center p-4 rounded-lg border border-green-400/20 bg-gradient-to-br from-green-400/5 to-green-400/2">
                             <div class="text-xs font-semibold text-green-300 uppercase tracking-wide">Precision</div>
                             <div class="mt-2 text-3xl md:text-4xl font-extrabold text-green-300">0.9480</div>
-                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                            <div class="text-xs text-gray-400 mt-1">weighted</div>
                         </div>
 
                         <div
                             class="flex flex-col items-center justify-center p-4 rounded-lg border border-sky-400/20 bg-gradient-to-br from-sky-400/5 to-sky-400/2">
                             <div class="text-xs font-semibold text-sky-300 uppercase tracking-wide">Recall</div>
                             <div class="mt-2 text-3xl md:text-4xl font-extrabold text-sky-300">0.9453</div>
-                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                            <div class="text-xs text-gray-400 mt-1">weighted</div>
                         </div>
 
                         <div
                             class="flex flex-col items-center justify-center p-4 rounded-lg border border-purple-400/20 bg-gradient-to-br from-purple-400/5 to-purple-400/2">
                             <div class="text-xs font-semibold text-purple-300 uppercase tracking-wide">F1-score</div>
                             <div class="mt-2 text-3xl md:text-4xl font-extrabold text-purple-300">0.9457</div>
-                            <div class="text-xs text-gray-400 mt-1">macro</div>
+                            <div class="text-xs text-gray-400 mt-1">weighted</div>
                         </div>
                     </div>
 
                     <p class="text-xs text-gray-400 mt-4 text-center">Precision, Recall, F1 đều được tính theo weighted.
                     </p>
+
                 </div>
             </div>
 
-            <!-- Khối so sánh nổi bật -->
-            <div class="bg-[#0f172a] p-5 rounded-xl shadow-lg border border-[#facc15]/40">
-                <p class="text-[#facc15] font-semibold text-xl mb-4">So sánh: MFT vs. POS_HMM</p>
+            <!-- So sánh MFT vs HMM -->
+            <div class="mt-12"> 
 
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li>
-                        Baseline MFT đạt
-                        <span class="text-[#facc15] font-semibold">Accuracy ≈ 94.5%</span>.
-                    </li>
-                    <li>
-                        Mô hình <b>POS_HMM (Gamma = 2)</b> đạt
-                        <span class="text-[#facc15] font-bold">Accuracy = 96.41%</span>,
-                        cao hơn đáng kể so với MFT.
-                    </li>
-                    <li>
-                        HMM khai thác được <b>ngữ cảnh (bigram tag)</b> và <b>xác suất phát xạ</b> — điều mà MFT không
-                        có.
-                    </li>
-                    <li>
-                        MFT chỉ phù hợp như một baseline đơn giản, nhưng <b>không đủ mạnh</b> cho bài toán gán nhãn POS.
-                    </li>
-                    <li>
-                        HMM thể hiện vượt trội nhất khi áp dụng chiến lược xử lý từ hiếm
-                        bằng <b>pseudo-word + gamma</b>.
-                    </li>
-                </ul>
+                <!-- Khối so sánh nổi bật -->
+                <div
+                    class="mt-6 p-6 rounded-2xl bg-gradient-to-br from-[#0b1220]/40 to-[#071028]/30 border border-[#facc15]/30 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition">
+                    <h3 class="flex items-center gap-3 text-2xl font-bold text-[#facc15] mb-6">
+                        <i class="fa-solid fa-chart-column"></i>
+                        So sánh: MFT vs. POS_HMM
+                    </h3>
 
-                <div class="mt-4 p-4 bg-[#1e293b] rounded-lg border border-[#facc15]/30">
-                    <p class="text-gray-300 text-lg">
-                        👉 <span class="text-[#facc15] font-bold">Kết luận:</span>
-                        POS_HMM không chỉ vượt qua MFT về độ chính xác mà còn ổn định hơn cho toàn bộ bộ nhãn POS, đặc
-                        biệt trên các nhãn hiếm.
-                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- MFT Card -->
+                        <div class="bg-[#1e293b] p-5 rounded-xl border-l-4 border-[#ef4444] shadow-lg">
+                            <p class="text-[#ef4444] font-bold text-lg mb-3">Baseline MFT</p>
+                            <p class="text-gray-300 text-sm mb-2">Accuracy: <span
+                                    class="text-[#ef4444] font-bold">94.53%</span></p>
+                            <p class="text-gray-400 text-xs">Gán tất cả từ bằng nhãn phổ biến nhất (NOUN)</p>
+                        </div>
+
+                        <!-- HMM Card -->
+                        <div class="bg-[#0f172a] p-5 rounded-xl border-l-4 border-[#22c55e] shadow-lg">
+                            <p class="text-[#22c55e] font-bold text-lg mb-3">POS_HMM (γ=2)</p>
+                            <p class="text-gray-300 text-sm mb-2">Accuracy: <span
+                                    class="text-[#22c55e] font-bold">96.41%</span></p>
+                            <p class="text-gray-400 text-xs">Sử dụng context + emission probability</p>
+                        </div>
+                    </div>
+
+                    <ul class="list-none space-y-3 text-gray-300">
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                            <span class="flex-shrink-0 text-[#facc15] font-bold">→</span>
+                            <span><b>HMM vượt trội</b> <span class="text-[#22c55e] font-bold">+1.88%</span> so với
+                                baseline MFT nhờ khai thác ngữ cảnh và xác suất phát xạ.</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                            <span class="flex-shrink-0 text-[#facc15] font-bold">→</span>
+                            <span>MFT chỉ phù hợp như một <b>baseline đơn giản</b>, không đủ mạnh cho bài toán POS
+                                tagging thực tế.</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 rounded-lg bg-[#1e293b]/50 border border-[#facc15]/20">
+                            <span class="flex-shrink-0 text-[#facc15] font-bold">→</span>
+                            <span>Chiến lược xử lý từ hiếm bằng <b>pseudo-word + gamma</b> là chìa khóa giúp HMM đạt
+                                hiệu năng cao.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
 
-
+        </div>  
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-12 mb-6 text-center text-gray-400">
-        <p>
-            © 2025
-            <span class="font-bold text-[#d4af37]">Team DNA05</span> -
-            Machine Learning Project
-        </p>
-    </footer>
+        <!-- Footer -->
+        <footer class="mt-12 mb-6 text-center text-gray-400">
+            <p>
+                © 2025
+                <span class="font-bold text-[#d4af37]">Team DNA05</span> -
+                Machine Learning Project
+            </p>
+        </footer>
 </body>
 
 </html>
