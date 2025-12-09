@@ -565,32 +565,228 @@
                 <h4 class="text-xl font-bold text-gray-200 mb-3">
                     Đặc điểm dữ liệu
                 </h4>
-                <div class="ml-8">
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        <strong>Kích thước:</strong> Trung bình khoảng 300x222
-                        pixel, nhưng có biến động.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        <strong>Tỷ lệ khung hình:</strong> Đa số ổn định ở mức
-                        4:3 hoặc 3:2, ít ảnh bị méo.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        <strong>Độ sáng & tương phản:</strong> Đa dạng, gần với
-                        phân phối chuẩn.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mb-6">
-                        <strong>Màu sắc:</strong> Phân bố màu đa dạng, phản ánh
-                        đúng môi trường biển.
-                    </p>
-                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Bộ dữ liệu
+                    <b class="text-[#d4af37]">Sea Animals Image Dataset</b> gồm
+                    tổng cộng
+                    <span
+                        class="inline-block px-3 py-1 bg-[#facc15]/20 border border-[#facc15] rounded-lg text-[#facc15] font-bold"
+                    >
+                        13.711 ảnh</span
+                    >
+                    ở định dạng <b class="text-[#d4af37]">.jpg</b> và
+                    <b class="text-[#d4af37]">.png</b>, mỗi ảnh thuộc về một
+                    trong
+                    <span
+                        class="inline-block px-3 py-1 bg-blue-400/20 border border-blue-400 rounded-lg text-blue-400 font-bold"
+                        >23 lớp sinh vật biển</span
+                    >
+                    phục vụ cho bài toán nhận dạng và phân loại sinh vật biển.
+                </p>
 
+                <h4 class="text-xl font-bold text-gray-200 mb-3">
+                    Phân tích kích thước ảnh
+                </h4>
+
+                <div
+                    class="flex flex-col xl:flex-row gap-4 items-center mb-6 justify-between px-2"
+                >
+                    <div class="grid grid-cols-1 gap-6 mb-6">
+                        <div
+                            class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg overflow-x-auto"
+                        >
+                            <table
+                                class="w-full text-gray-300 text-md font-semibold"
+                            >
+                                <thead>
+                                    <tr class="border-b border-[#d4af37]/30">
+                                        <th
+                                            class="px-4 py-3 text-left text-[#d4af37] font-bold"
+                                        >
+                                            Thông số
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            Count
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            Mean
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            Std
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            Min
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            25%
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            50%
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            75%
+                                        </th>
+                                        <th
+                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
+                                        >
+                                            Max
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition"
+                                    >
+                                        <td
+                                            class="px-4 py-3 font-semibold text-gray-200"
+                                        >
+                                            Width
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            13.711
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            293,07
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            55,04
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            131
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            300
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            300
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            300
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 text-right font-bold text-yellow-400"
+                                        >
+                                            5120
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition"
+                                    >
+                                        <td
+                                            class="px-4 py-3 font-semibold text-gray-200"
+                                        >
+                                            Height
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            13.711
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            222,41
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            49,81
+                                        </td>
+                                        <td class="px-4 py-3 text-right">63</td>
+                                        <td class="px-4 py-3 text-right">
+                                            200
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            218
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            225
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 text-right font-bold text-yellow-400"
+                                        >
+                                            3840
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-[#d4af37]/5 transition">
+                                        <td
+                                            class="px-4 py-3 font-semibold text-gray-200"
+                                        >
+                                            Channels
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            13.711
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            3,00
+                                        </td>
+                                        <td class="px-4 py-3 text-right">
+                                            0,05
+                                        </td>
+                                        <td class="px-4 py-3 text-right">1</td>
+                                        <td class="px-4 py-3 text-right">3</td>
+                                        <td class="px-4 py-3 text-right">3</td>
+                                        <td class="px-4 py-3 text-right">3</td>
+                                        <td
+                                            class="px-4 py-3 text-right font-bold text-yellow-400"
+                                        >
+                                            4
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 xl:grid-cols-1 gap-4 mb-6">
+                        <div
+                            class="bg-gradient-to-br from-orange-900/20 to-amber-900/20 border border-orange-400/40 rounded-xl p-5 shadow-lg"
+                        >
+                            <div class="flex items-center gap-3 mb-3">
+                                <i
+                                    class="fas fa-exclamation-triangle text-orange-400 text-xl"
+                                ></i>
+                                <h5 class="text-lg font-bold text-orange-300">
+                                    5 Outliers
+                                </h5>
+                            </div>
+                            <p class="text-gray-300 text-md">
+                                Kích thước
+                                <strong> ≥1000×1000px</strong>
+                            </p>
+                        </div>
+                        <div
+                            class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg"
+                        >
+                            <div class="flex items-center gap-3 mb-3">
+                                <i
+                                    class="fas fa-images text-blue-400 text-xl"
+                                ></i>
+                                <h5 class="text-lg font-bold text-blue-300">
+                                    13,706 ảnh thích hợp
+                                </h5>
+                            </div>
+                            <p class="text-gray-300 text-md">
+                                Dùng cho trực quan hóa phân bố kích thước
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <!-- Sample Images -->
-                <div class="grid grid-cols-1 gap-6 px-32">
+                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
                     <div
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_image_size_distribution.png"
+                            src="images/BTL3/asm3_image_size_distribution.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -601,7 +797,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_aspect_ratio_distribution.png"
+                            src="images/BTL3/asm3_aspect_ratio_distribution.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -610,20 +806,111 @@
                     </div>
                 </div>
 
+                <div
+                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
+                >
+                    <p class="text-gray-300 leading-relaxed">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <b>Nhận xét:</b> Hầu hết ảnh có kích thước phổ biến từ
+                        <strong>200x200</strong> đến <strong>300x300</strong>.
+                        Tỷ lệ khung hình chủ yếu tập trung quanh
+                        <strong>1.3 - 1.6</strong>. Số kênh màu chủ yếu là
+                        <strong>3 (RGB)</strong>, với một vài ảnh kênh đơn
+                        (grayscale).
+                    </p>
+                </div>
+
                 <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Vấn đề chính
+                    Phân tích đặc trưng hình ảnh
                 </h4>
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    <strong> Mất cân bằng dữ liệu (Imbalance):</strong> Lớp
-                    nhiều nhất (Turtle_Tortoise) có hơn 1.800 ảnh, trong khi các
-                    lớp ít nhất chỉ khoảng 400 ảnh (tỷ lệ chênh lệch ~4.6 lần).
-                </p>
-                <div class="grid grid-cols-1 gap-6 px-32">
+
+                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
                     <div
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_class_distribution.png"
+                            src="images/BTL3/asm3_brightness.png"
+                            class="rounded-lg w-full mb-3"
+                        />
+                        <p class="text-gray-400 text-sm italic text-center">
+                            Phân bố độ sáng ảnh
+                        </p>
+                    </div>
+                    <div
+                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
+                    >
+                        <img
+                            src="images/BTL3/asm3_constrast.png"
+                            class="rounded-lg w-full mb-3"
+                        />
+                        <p class="text-gray-400 text-sm italic text-center">
+                            Phân bố độ tương phản ảnh
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
+                >
+                    <p class="text-gray-300 leading-relaxed">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <b>Nhận xét:</b> Tập dữ liệu có
+                        <strong>cân bằng ánh sáng tốt</strong>, không cần tăng
+                        cường mạnh các kỹ thuật như "brightness augmentation"
+                        trong giai đoạn tiền xử lý. Tập dữ liệu cũng có mức độ
+                        <strong>tương phản ổn định</strong>, phù hợp cho việc
+                        trích xuất đặc trưng.
+                    </p>
+                </div>
+
+                <h4 class="text-xl font-bold text-gray-200 mb-3">
+                    Phân bố màu
+                </h4>
+                <div class="grid grid-cols-1 gap-6 px-36 mb-6">
+                    <div
+                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
+                    >
+                        <img
+                            src="images/BTL3/asm3_color_distribution.png"
+                            class="rounded-lg w-full mb-3"
+                        />
+                        <p class="text-gray-400 text-sm italic text-center">
+                            Phân bố màu sắc ảnh
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
+                >
+                    <p class="text-gray-300 leading-relaxed">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <b>Nhận xét:</b>
+                        <strong class="text-green-400">Kênh Green (G)</strong>
+                        có phân bố lệch phải nhẹ, cho thấy màu xanh lá thường
+                        chiếm ưu thế trong hình ảnh sinh vật biển, có thể do ảnh
+                        hưởng của ánh sáng môi trường nước biển hoặc đặc điểm
+                        sinh học của sinh vật.
+                        <strong class="text-blue-400">Kênh Blue (B)</strong> có
+                        giá trị trung bình cao hơn hai kênh còn lại, phản ánh rõ
+                        đặc trưng môi trường biển với sắc xanh đặc trưng. Nhìn
+                        chung, mức độ phân tán vẫn khá lớn, chứng tỏ tập dữ liệu
+                        có
+                        <strong class="text-[#d4af37]"
+                            >độ đa dạng màu sắc cao</strong
+                        >
+                    </p>
+                </div>
+
+                <h4 class="text-xl font-bold text-gray-200 mb-3">
+                    Phân bố số lượng ảnh theo lớp
+                </h4>
+                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
+                    <div
+                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
+                    >
+                        <img
+                            src="images/BTL3/asm3_class_distribution.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -631,8 +918,21 @@
                         </p>
                     </div>
                 </div>
+                <div
+                    class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 border-l-4 border-yellow-400 rounded-lg p-4 shadow-md mb-6 mx-2"
+                >
+                    <p class="text-gray-300 leading-relaxed">
+                        <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                        <b>Nhận xét:</b>
+                        Tập dữ liệu <strong> không cân bằng </strong>, tỉ lệ
+                        giữa lớp lớn nhất và nhỏ nhất lên tới
+                        <strong> 4.6 lần </strong>. Vì vậy cần áp dụng các kỹ
+                        thuật như "data augmentation" hoặc "class weighting" trong
+                        giai đoạn huấn luyện mô hình
+                    </p>
+                </div>
             </div>
-
+            
             <!-- 2. Chia tập dữ liệu -->
             <div class="mb-12">
                 <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
@@ -654,7 +954,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto"
                     >
                         <img
-                            src="images/asm3_preprocess.png"
+                            src="images/BTL3/asm3_preprocess.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -680,7 +980,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto"
                     >
                         <img
-                            src="images/asm3_augmentation.png"
+                            src="images/BTL3/asm3_augmentation.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -736,7 +1036,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_comparison.png"
+                            src="images/BTL3/asm3_comparison.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -747,7 +1047,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_metrics.png"
+                            src="images/BTL3/asm3_metrics.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
@@ -758,7 +1058,7 @@
                         class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
                     >
                         <img
-                            src="images/asm3_confusion_matrix.png"
+                            src="images/BTL3/asm3_confusion_matrix.png"
                             class="rounded-lg w-full mb-3"
                         />
                         <p class="text-gray-400 text-sm italic text-center">
