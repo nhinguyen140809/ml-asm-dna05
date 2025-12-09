@@ -1,1071 +1,1200 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bài Tập Lớn 3</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-        <link rel="icon" type="image/png" href="crown.png" />
-    </head>
 
-    <body
-        class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-300"
-    >
-        <canvas id="background-canvas"></canvas>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Tập Lớn 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="icon" type="image/png" href="crown.png" />
+</head>
 
-        <style>
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                height: auto;
-                overflow-x: hidden;
-            }
+<body class="bg-[#0f172a] min-h-screen flex flex-col items-center text-gray-300">
+    <canvas id="background-canvas"></canvas>
 
-            #background-canvas {
-                position: fixed;
-                /* luôn phủ full màn hình */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-            }
-        </style>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow-x: hidden;
+        }
 
-        <script>
-            const canvas = document.getElementById("background-canvas");
-            const ctx = canvas.getContext("2d");
+        #background-canvas {
+            position: fixed;
+            /* luôn phủ full màn hình */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener("resize", resizeCanvas);
+    <script>
+        const canvas = document.getElementById("background-canvas");
+        const ctx = canvas.getContext("2d");
 
-            const particles = [];
-            const particleCount = 150;
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 1.2 + 0.3,
-                    dx: (Math.random() - 0.5) * 0.3,
-                    dy: (Math.random() - 0.5) * 0.3,
-                });
-            }
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
 
-            const mouse = { x: null, y: null };
-            window.addEventListener("mousemove", (e) => {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
+        const particles = [];
+        const particleCount = 150;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.2 + 0.3,
+                dx: (Math.random() - 0.5) * 0.3,
+                dy: (Math.random() - 0.5) * 0.3,
             });
-            window.addEventListener("mouseleave", () => {
-                mouse.x = null;
-                mouse.y = null;
+        }
+
+        const mouse = { x: null, y: null };
+        window.addEventListener("mousemove", (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener("mouseleave", () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p) => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // wrap-around
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(212,175,55,0.4)";
+                ctx.fill();
             });
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+            // line to mouse
+            if (mouse.x && mouse.y) {
                 particles.forEach((p) => {
-                    p.x += p.dx;
-                    p.y += p.dy;
-
-                    // wrap-around
-                    if (p.x < 0) p.x = canvas.width;
-                    if (p.x > canvas.width) p.x = 0;
-                    if (p.y < 0) p.y = canvas.height;
-                    if (p.y > canvas.height) p.y = 0;
-
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(212,175,55,0.4)";
-                    ctx.fill();
-                });
-
-                // line to mouse
-                if (mouse.x && mouse.y) {
-                    particles.forEach((p) => {
-                        const dx = p.x - mouse.x;
-                        const dy = p.y - mouse.y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(p.x, p.y);
-                            ctx.lineTo(mouse.x, mouse.y);
-                            ctx.strokeStyle = `rgba(212,175,55,${
-                                0.3 * (1 - dist / 120)
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(212,175,55,${0.3 * (1 - dist / 120)
                             })`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
-                        }
-                    });
-                }
-
-                requestAnimationFrame(animate);
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                });
             }
 
-            animate();
-        </script>
+            requestAnimationFrame(animate);
+        }
 
-        <!-- Keyboard Shortcuts Help Button (PC only) -->
-        <div
-            id="shortcut-help-btn"
-            class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition"
-        >
-            ?
+        animate();
+    </script>
+
+    <!-- Keyboard Shortcuts Help Button (PC only) -->
+    <div id="shortcut-help-btn"
+        class="hidden sm:flex fixed bottom-6 left-6 z-50 cursor-pointer bg-[#d4af37] text-[#111827] font-bold w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 hover:bg-yellow-400 transition">
+        ?
+    </div>
+
+    <!-- Keyboard Shortcuts Popup -->
+    <div id="shortcut-popup"
+        class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white">
+        <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">
+            Keyboard Shortcuts
+        </h3>
+        <ul class="space-y-2">
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">H</span>
+                <span class="text-gray-200 text-sm">Trở về trang chính</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">R</span>
+                <span class="text-gray-200 text-sm">Refresh trang</span>
+            </li>
+            <li class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition">
+                <span
+                    class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md">G</span>
+                <span class="text-gray-200 text-sm">Mở repository GitHub</span>
+            </li>
+        </ul>
+
+        <button id="shortcut-close" class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold">
+            &times;
+        </button>
+    </div>
+
+    <script>
+        const shortcutBtn = document.getElementById("shortcut-help-btn");
+        const shortcutPopup = document.getElementById("shortcut-popup");
+        const shortcutClose = document.getElementById("shortcut-close");
+
+        // Bật/tắt popup khi bấm nút "?"
+        shortcutBtn.addEventListener("click", () => {
+            shortcutPopup.classList.toggle("hidden");
+        });
+
+        // Đóng popup
+        shortcutClose.addEventListener("click", () => {
+            shortcutPopup.classList.add("hidden");
+        });
+
+        // Keyboard shortcuts chung
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.target.tagName === "INPUT" ||
+                e.target.tagName === "TEXTAREA"
+            )
+                return; // bỏ qua khi gõ input
+            const key = e.key.toLowerCase();
+
+            switch (key) {
+                case "h":
+                    window.location.href = "index.html"; // trang chính
+                    break;
+                case "r":
+                    location.reload(); // reload trang
+                    break;
+                case "g":
+                    window.open(
+                        "https://github.com/nhinguyen140809/ml-asm-dna05",
+                        "_blank"
+                    ); // mở GitHub repo
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition">
+        <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">
+            Bài Tập Lớn 3
+        </h1>
+        <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
+
+        <!-- Icons -->
+        <div class="flex justify-center gap-8 mt-4 text-lg">
+            <a href="https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9" target="_blank"
+                class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fab fa-google"></i> Colab
+            </a>
+            <a href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf"
+                target="_blank" class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fas fa-file-alt"></i> Report
+            </a>
+            <a href="https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste" target="_blank"
+                class="text-gray-300 hover:text-[#d4af37] transition">
+                <i class="fas fa-database"></i> Dataset
+            </a>
         </div>
+    </div>
 
-        <!-- Keyboard Shortcuts Popup -->
-        <div
-            id="shortcut-popup"
-            class="hidden fixed bottom-16 left-6 z-50 bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/60 p-4 w-64 text-white"
-        >
-            <h3 class="text-lg font-bold text-[#d4af37] mb-3 drop-shadow-md">
-                Keyboard Shortcuts
-            </h3>
-            <ul class="space-y-2">
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >H</span
-                    >
-                    <span class="text-gray-200 text-sm"
-                        >Trở về trang chính</span
-                    >
-                </li>
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >R</span
-                    >
-                    <span class="text-gray-200 text-sm">Refresh trang</span>
-                </li>
-                <li
-                    class="flex items-center gap-3 p-2 rounded-md hover:bg-[#d4af37]/10 transition"
-                >
-                    <span
-                        class="w-6 h-6 flex items-center justify-center bg-yellow-400 text-[#111827] font-bold rounded-full text-sm shadow-md"
-                        >G</span
-                    >
-                    <span class="text-gray-200 text-sm"
-                        >Mở repository GitHub</span
-                    >
-                </li>
-            </ul>
+    <!-- Floating Back Button (Top-Left) -->
+    <a href="index.html"
+        class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl">
+        <i class="fas fa-home"></i> Trang chính
+    </a>
 
-            <button
-                id="shortcut-close"
-                class="absolute top-2 right-2 text-[#d4af37] hover:text-yellow-400 font-bold"
-            >
-                &times;
-            </button>
-        </div>
-
-        <script>
-            const shortcutBtn = document.getElementById("shortcut-help-btn");
-            const shortcutPopup = document.getElementById("shortcut-popup");
-            const shortcutClose = document.getElementById("shortcut-close");
-
-            // Bật/tắt popup khi bấm nút "?"
-            shortcutBtn.addEventListener("click", () => {
-                shortcutPopup.classList.toggle("hidden");
-            });
-
-            // Đóng popup
-            shortcutClose.addEventListener("click", () => {
-                shortcutPopup.classList.add("hidden");
-            });
-
-            // Keyboard shortcuts chung
-            document.addEventListener("keydown", (e) => {
-                if (
-                    e.target.tagName === "INPUT" ||
-                    e.target.tagName === "TEXTAREA"
-                )
-                    return; // bỏ qua khi gõ input
-                const key = e.key.toLowerCase();
-
-                switch (key) {
-                    case "h":
-                        window.location.href = "index.html"; // trang chính
-                        break;
-                    case "r":
-                        location.reload(); // reload trang
-                        break;
-                    case "g":
-                        window.open(
-                            "https://github.com/nhinguyen140809/ml-asm-dna05",
-                            "_blank"
-                        ); // mở GitHub repo
-                        break;
-                    default:
-                        break;
-                }
-            });
-        </script>
-
-        <!-- Header -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 text-center border border-[#d4af37]/50 transition"
-        >
-            <h1 class="text-4xl font-extrabold text-[#d4af37] drop-shadow-lg">
-                Bài Tập Lớn 3
-            </h1>
-            <p class="text-gray-300 mt-2 text-lg font-semibold">Team DNA05</p>
-
-            <!-- Icons -->
-            <div class="flex justify-center gap-8 mt-4 text-lg">
-                <a
-                    href="https://colab.research.google.com/drive/1S9hYn1IWOhDuVNFKk2GLGIKCFjbHYUp9"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fab fa-google"></i> Colab
-                </a>
-                <a
-                    href="https://github.com/nhinguyen140809/ml-asm-dna05/blob/main/reports/DNA05_BTL3_Report.pdf"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fas fa-file-alt"></i> Report
-                </a>
-                <a
-                    href="https://www.kaggle.com/datasets/vencerlanz09/sea-animals-image-dataste"
-                    target="_blank"
-                    class="text-gray-300 hover:text-[#d4af37] transition"
-                >
-                    <i class="fas fa-database"></i> Dataset
-                </a>
-            </div>
-        </div>
-
-        <!-- Floating Back Button (Top-Left) -->
-        <a
-            href="index.html"
-            class="fixed top-6 right-6 bg-[#d4af37]/60 backdrop-blur-sm text-[#111827] font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs z-50 transition-all duration-200 hover:bg-[#d4af37]/90 hover:scale-102 hover:shadow-xl"
-        >
-            <i class="fas fa-home"></i> Trang chính
+    <!-- Stats Section (Assignments) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 w-11/12 md:w-3/4 mx-auto">
+        <a href="btl1.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
         </a>
+        <a href="btl2.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
+        <a href="btmr.html"
+            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20">
+            <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
+            <p
+                class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md">
+                <i class="fas fa-check-circle"></i> Completed
+            </p>
+        </a>
+    </div>
 
-        <!-- Stats Section (Assignments) -->
-        <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 w-11/12 md:w-3/4 mx-auto"
-        >
-            <a
-                href="btl1.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 1</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
-                </p>
-            </a>
-            <a
-                href="btl2.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập lớn 2</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
-                </p>
-            </a>
-            <a
-                href="btmr.html"
-                class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-xl shadow-black/50 p-6 text-center hover:shadow-[#d4af37]/10 hover:-translate-y-1 hover:scale-[1.02] transition border border-[#d4af37]/20"
-            >
-                <p class="text-xl font-bold text-[#d4af37]">Bài tập mở rộng</p>
-                <p
-                    class="inline-flex items-center gap-2 px-3 py-1 mt-3 rounded-full text-sm font-semibold bg-green-100 text-green-800 shadow-md"
-                >
-                    <i class="fas fa-check-circle"></i> Completed
-                </p>
-            </a>
+    <!-- Tổng quan dataset BTL3 -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">
+            Tổng quan dataset
+        </h2>
+        <p class="text-gray-300 mb-4">
+            Bộ dữ liệu
+            <span class="font-semibold text-[#d4af37]">Sea Animals Image Dataset</span>
+            gồm <strong>23 lớp sinh vật biển</strong> với hàng nghìn hình
+            ảnh chất lượng cao được thu thập từ nhiều nguồn khác nhau. Mỗi
+            ảnh thể hiện một loài sinh vật biển cụ thể trong điều kiện ánh
+            sáng, góc chụp, và môi trường đa dạng — giúp mô hình học được
+            các đặc trưng tự nhiên và tổng quát hơn.
+        </p>
+
+        <p class="text-gray-300 mb-4">
+            Danh sách đầy đủ các lớp trong bộ dữ liệu:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-hat-cowboy-side text-blue-400"></i> Clams
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-seedling text-green-400"></i> Corals
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-drumstick-bite text-yellow-500"></i> Crabs
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-fish text-cyan-400"></i> Dolphin
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-water text-indigo-400"></i> Eel
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-fish text-sky-400"></i> Fish
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-jedi text-pink-400"></i> Jelly Fish
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-drumstick-bite text-red-400"></i> Lobster
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-bug text-yellow-400"></i> Nudibranchs
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fa fa-splotch text-purple-400"></i> Octopus
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-otter text-amber-400"></i> Otter
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-crow text-white"></i> Penguin
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-fish text-green-400"></i> Puffers
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-water text-cyan-500"></i> Sea Rays
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-sun text-yellow-300"></i> Sea Urchins
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-horse-head text-blue-300"></i> Seahorse
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-paw text-sky-400"></i> Seal
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-fish text-indigo-300"></i> Sharks
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-drumstick-bite text-pink-300"></i> Shrimp
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-splotch text-blue-300"></i> Squid
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-star text-yellow-400"></i> Starfish
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-bug text-emerald-400"></i> Turtle Tortoise
+            </div>
+            <div
+                class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300">
+                <i class="fas fa-fish text-cyan-300"></i> Whale
+            </div>
         </div>
 
-        <!-- Tổng quan dataset BTL3 -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm rounded-2xl shadow-2xl shadow-black/60 mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition"
-        >
-            <h2 class="text-2xl font-bold text-[#d4af37] mb-4 drop-shadow-md">
-                Tổng quan dataset
-            </h2>
-            <p class="text-gray-300 mb-4">
+        <p class="text-gray-300 mb-4">
+            Bộ dữ liệu không có giá trị thiếu (<em>missing values</em>) và
+            được phân bố đồng đều giữa các lớp. Các ảnh được chuẩn hóa về
+            kích thước, tăng cường nhẹ độ sáng – tương phản, và lưu trữ theo
+            cấu trúc thư mục tương thích với
+            <code>torchvision.datasets.ImageFolder</code>.
+        </p>
+    </div>
+
+    <!-- Pipeline (timeline) BTL3 -->
+    <div
+        class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition">
+        <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">
+            Pipeline chi tiết
+        </h2>
+        <ol class="relative border-l border-[#38bdf8]/50 space-y-6 ml-3">
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">1</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Thu thập & tổ chức dữ liệu
+                </h3>
+                <p class="text-gray-300">
+                    Tập hợp hơn 20 loài sinh vật biển, mỗi lớp chứa hàng
+                    trăm ảnh; dữ liệu được phân chia theo thư mục
+                    <code>train/</code> và <code>test/</code> tương ứng với
+                    từng lớp.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">2</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Tiền xử lý hình ảnh
+                </h3>
+                <p class="text-gray-300">
+                    Chuẩn hóa kích thước, chuyển về định dạng RGB, tăng
+                    cường độ sáng – tương phản, và chuẩn hóa giá trị pixel
+                    theo thống kê của ImageNet (mean/std) nhằm đồng nhất đầu
+                    vào cho mô hình.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">3</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Tăng cường dữ liệu (Augmentation)
+                </h3>
+                <p class="text-gray-300">
+                    Áp dụng các phép biến đổi ngẫu nhiên như lật ngang, xoay
+                    ±15°, cắt ngẫu nhiên, và thay đổi màu sắc nhẹ để mô
+                    phỏng đa dạng tự nhiên và giảm overfitting.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">4</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Huấn luyện mô hình
+                </h3>
+                <p class="text-gray-300">
+                    Sử dụng các mô hình CNN hiện đại như ResNet,
+                    EfficientNet hoặc MobileNet để phân loại 23 lớp sinh vật
+                    biển. Quá trình huấn luyện được tối ưu với
+                    <code>Adam</code> và <code>CrossEntropyLoss</code>.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">5</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Đánh giá & kiểm thử
+                </h3>
+                <p class="text-gray-300">
+                    Đánh giá mô hình bằng Accuracy, Precision, Recall,
+                    F1-score; trực quan hóa kết quả bằng confusion matrix để
+                    xác định lớp dễ nhầm lẫn.
+                </p>
+            </li>
+            <li class="ml-6">
+                <span
+                    class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black">6</span>
+                <h3 class="font-semibold text-[#d4af37]">
+                    Trực quan hóa kết quả
+                </h3>
+                <p class="text-gray-300">
+                    Biểu diễn phân bố lớp, ví dụ ảnh dự đoán đúng/sai, và so
+                    sánh hiệu năng các mô hình CNN khác nhau trên cùng bộ dữ
+                    liệu.
+                </p>
+            </li>
+        </ol>
+    </div>
+    <!-- =============================== -->
+    <!--      BTL2 — RESULTS SECTION     -->
+    <!-- =============================== -->
+
+    <div
+        class="w-11/12 md:w-3/4 mt-16 mb-20 bg-[#111827]/90 backdrop-blur-md border border-[#d4af37]/30 rounded-2xl shadow-2xl shadow-black/60 p-8">
+        <h2 class="text-3xl font-extrabold text-[#d4af37] drop-shadow-lg text-center mb-10">
+            Kết quả và Quy trình Thực hiện
+        </h2>
+
+        <!-- 1. EDA -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
+                1. Phân tích dữ liệu (EDA)
+            </h3>
+
+            <h4 class="text-xl font-bold text-gray-200 mb-3">
+                Đặc điểm dữ liệu
+            </h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
                 Bộ dữ liệu
-                <span class="font-semibold text-[#d4af37]"
-                    >Sea Animals Image Dataset</span
-                >
-                gồm <strong>23 lớp sinh vật biển</strong> với hàng nghìn hình
-                ảnh chất lượng cao được thu thập từ nhiều nguồn khác nhau. Mỗi
-                ảnh thể hiện một loài sinh vật biển cụ thể trong điều kiện ánh
-                sáng, góc chụp, và môi trường đa dạng — giúp mô hình học được
-                các đặc trưng tự nhiên và tổng quát hơn.
+                <b class="text-[#d4af37]">Sea Animals Image Dataset</b> gồm
+                tổng cộng
+                <span
+                    class="inline-block px-3 py-1 bg-[#facc15]/20 border border-[#facc15] rounded-lg text-[#facc15] font-bold">
+                    13.711 ảnh</span>
+                ở định dạng <b class="text-[#d4af37]">.jpg</b> và
+                <b class="text-[#d4af37]">.png</b>, mỗi ảnh thuộc về một
+                trong
+                <span
+                    class="inline-block px-3 py-1 bg-blue-400/20 border border-blue-400 rounded-lg text-blue-400 font-bold">23
+                    lớp sinh vật biển</span>
+                phục vụ cho bài toán nhận dạng và phân loại sinh vật biển.
             </p>
 
-            <p class="text-gray-300 mb-4">
-                Danh sách đầy đủ các lớp trong bộ dữ liệu:
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-hat-cowboy-side text-blue-400"></i> Clams
+            <h4 class="text-xl font-bold text-gray-200 mb-3">
+                Phân tích kích thước ảnh
+            </h4>
+
+            <div class="flex flex-col xl:flex-row gap-4 items-center mb-6 justify-between px-2">
+                <div class="grid grid-cols-1 gap-6 mb-6">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg overflow-x-auto">
+                        <table class="w-full text-gray-300 text-md font-semibold">
+                            <thead>
+                                <tr class="border-b border-[#d4af37]/30">
+                                    <th class="px-4 py-3 text-left text-[#d4af37] font-bold">
+                                        Thông số
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        Count
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        Mean
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        Std
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        Min
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        25%
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        50%
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        75%
+                                    </th>
+                                    <th class="px-4 py-3 text-right text-[#d4af37] font-bold">
+                                        Max
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition">
+                                    <td class="px-4 py-3 font-semibold text-gray-200">
+                                        Width
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        13.711
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        293,07
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        55,04
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        131
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        300
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        300
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        300
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-yellow-400">
+                                        5120
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition">
+                                    <td class="px-4 py-3 font-semibold text-gray-200">
+                                        Height
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        13.711
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        222,41
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        49,81
+                                    </td>
+                                    <td class="px-4 py-3 text-right">63</td>
+                                    <td class="px-4 py-3 text-right">
+                                        200
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        218
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        225
+                                    </td>
+                                    <td class="px-4 py-3 text-right font-bold text-yellow-400">
+                                        3840
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-[#d4af37]/5 transition">
+                                    <td class="px-4 py-3 font-semibold text-gray-200">
+                                        Channels
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        13.711
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        3,00
+                                    </td>
+                                    <td class="px-4 py-3 text-right">
+                                        0,05
+                                    </td>
+                                    <td class="px-4 py-3 text-right">1</td>
+                                    <td class="px-4 py-3 text-right">3</td>
+                                    <td class="px-4 py-3 text-right">3</td>
+                                    <td class="px-4 py-3 text-right">3</td>
+                                    <td class="px-4 py-3 text-right font-bold text-yellow-400">
+                                        4
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-seedling text-green-400"></i> Corals
+
+                <div class="grid grid-cols-2 xl:grid-cols-1 gap-4 mb-6">
+                    <div
+                        class="bg-gradient-to-br from-orange-900/20 to-amber-900/20 border border-orange-400/40 rounded-xl p-5 shadow-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-exclamation-triangle text-orange-400 text-xl"></i>
+                            <h5 class="text-lg font-bold text-orange-300">
+                                5 Outliers
+                            </h5>
+                        </div>
+                        <p class="text-gray-300 text-md">
+                            Kích thước
+                            <strong> ≥1000×1000px</strong>
+                        </p>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-images text-blue-400 text-xl"></i>
+                            <h5 class="text-lg font-bold text-blue-300">
+                                13,706 ảnh thích hợp
+                            </h5>
+                        </div>
+                        <p class="text-gray-300 text-md">
+                            Dùng cho trực quan hóa phân bố kích thước
+                        </p>
+                    </div>
                 </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-drumstick-bite text-yellow-500"></i> Crabs
+            </div>
+            <!-- Sample Images -->
+            <div class="grid grid-cols-1 gap-6 px-32 mb-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_image_size_distribution.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố kích thước ảnh (đã loại bỏ outliers)
+                    </p>
                 </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-fish text-cyan-400"></i> Dolphin
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-water text-indigo-400"></i> Eel
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-fish text-sky-400"></i> Fish
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-jedi text-pink-400"></i> Jelly Fish
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-drumstick-bite text-red-400"></i> Lobster
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-bug text-yellow-400"></i> Nudibranchs
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fa fa-splotch text-purple-400"></i> Octopus
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-otter text-amber-400"></i> Otter
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-crow text-white"></i> Penguin
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-fish text-green-400"></i> Puffers
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-water text-cyan-500"></i> Sea Rays
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-sun text-yellow-300"></i> Sea Urchins
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-horse-head text-blue-300"></i> Seahorse
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-paw text-sky-400"></i> Seal
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-fish text-indigo-300"></i> Sharks
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-drumstick-bite text-pink-300"></i> Shrimp
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-splotch text-blue-300"></i> Squid
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-star text-yellow-400"></i> Starfish
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-bug text-emerald-400"></i> Turtle Tortoise
-                </div>
-                <div
-                    class="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-xl p-3 flex items-center gap-2 text-gray-300"
-                >
-                    <i class="fas fa-fish text-cyan-300"></i> Whale
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_aspect_ratio_distribution.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố tỷ lệ khung hình ảnh
+                    </p>
                 </div>
             </div>
 
-            <p class="text-gray-300 mb-4">
-                Bộ dữ liệu không có giá trị thiếu (<em>missing values</em>) và
-                được phân bố đồng đều giữa các lớp. Các ảnh được chuẩn hóa về
-                kích thước, tăng cường nhẹ độ sáng – tương phản, và lưu trữ theo
-                cấu trúc thư mục tương thích với
-                <code>torchvision.datasets.ImageFolder</code>.
-            </p>
-        </div>
-
-        <!-- Pipeline (timeline) BTL3 -->
-        <div
-            class="bg-[#111827]/95 backdrop-blur-sm shadow-2xl shadow-black/60 rounded-2xl mt-8 p-6 w-11/12 md:w-3/4 border border-[#d4af37]/50 transition"
-        >
-            <h2 class="text-2xl font-bold text-[#d4af37] mb-6 drop-shadow-md">
-                Pipeline chi tiết
-            </h2>
-            <ol class="relative border-l border-[#38bdf8]/50 space-y-6 ml-3">
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >1</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Thu thập & tổ chức dữ liệu
-                    </h3>
-                    <p class="text-gray-300">
-                        Tập hợp hơn 20 loài sinh vật biển, mỗi lớp chứa hàng
-                        trăm ảnh; dữ liệu được phân chia theo thư mục
-                        <code>train/</code> và <code>test/</code> tương ứng với
-                        từng lớp.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >2</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Tiền xử lý hình ảnh
-                    </h3>
-                    <p class="text-gray-300">
-                        Chuẩn hóa kích thước, chuyển về định dạng RGB, tăng
-                        cường độ sáng – tương phản, và chuẩn hóa giá trị pixel
-                        theo thống kê của ImageNet (mean/std) nhằm đồng nhất đầu
-                        vào cho mô hình.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >3</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Tăng cường dữ liệu (Augmentation)
-                    </h3>
-                    <p class="text-gray-300">
-                        Áp dụng các phép biến đổi ngẫu nhiên như lật ngang, xoay
-                        ±15°, cắt ngẫu nhiên, và thay đổi màu sắc nhẹ để mô
-                        phỏng đa dạng tự nhiên và giảm overfitting.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >4</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Huấn luyện mô hình
-                    </h3>
-                    <p class="text-gray-300">
-                        Sử dụng các mô hình CNN hiện đại như ResNet,
-                        EfficientNet hoặc MobileNet để phân loại 23 lớp sinh vật
-                        biển. Quá trình huấn luyện được tối ưu với
-                        <code>Adam</code> và <code>CrossEntropyLoss</code>.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >5</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Đánh giá & kiểm thử
-                    </h3>
-                    <p class="text-gray-300">
-                        Đánh giá mô hình bằng Accuracy, Precision, Recall,
-                        F1-score; trực quan hóa kết quả bằng confusion matrix để
-                        xác định lớp dễ nhầm lẫn.
-                    </p>
-                </li>
-                <li class="ml-6">
-                    <span
-                        class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-[#d4af37] rounded-full text-black"
-                        >6</span
-                    >
-                    <h3 class="font-semibold text-[#d4af37]">
-                        Trực quan hóa kết quả
-                    </h3>
-                    <p class="text-gray-300">
-                        Biểu diễn phân bố lớp, ví dụ ảnh dự đoán đúng/sai, và so
-                        sánh hiệu năng các mô hình CNN khác nhau trên cùng bộ dữ
-                        liệu.
-                    </p>
-                </li>
-            </ol>
-        </div>
-        <!-- =============================== -->
-        <!--      BTL2 — RESULTS SECTION     -->
-        <!-- =============================== -->
-
-        <div
-            class="w-11/12 md:w-3/4 mt-16 mb-20 bg-[#111827]/90 backdrop-blur-md border border-[#d4af37]/30 rounded-2xl shadow-2xl shadow-black/60 p-8"
-        >
-            <h2
-                class="text-3xl font-extrabold text-[#d4af37] drop-shadow-lg text-center mb-10"
-            >
-                Kết quả và Quy trình Thực hiện
-            </h2>
-
-            <!-- 1. EDA -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
-                    1. Phân tích dữ liệu (EDA)
-                </h3>
-
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Đặc điểm dữ liệu
-                </h4>
-                <p class="text-gray-300 leading-relaxed mb-4">
-                    Bộ dữ liệu
-                    <b class="text-[#d4af37]">Sea Animals Image Dataset</b> gồm
-                    tổng cộng
-                    <span
-                        class="inline-block px-3 py-1 bg-[#facc15]/20 border border-[#facc15] rounded-lg text-[#facc15] font-bold"
-                    >
-                        13.711 ảnh</span
-                    >
-                    ở định dạng <b class="text-[#d4af37]">.jpg</b> và
-                    <b class="text-[#d4af37]">.png</b>, mỗi ảnh thuộc về một
-                    trong
-                    <span
-                        class="inline-block px-3 py-1 bg-blue-400/20 border border-blue-400 rounded-lg text-blue-400 font-bold"
-                        >23 lớp sinh vật biển</span
-                    >
-                    phục vụ cho bài toán nhận dạng và phân loại sinh vật biển.
+            <div
+                class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2">
+                <p class="text-gray-300 leading-relaxed">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <b>Nhận xét:</b> Hầu hết ảnh có kích thước phổ biến từ
+                    <strong>200x200</strong> đến <strong>300x300</strong>.
+                    Tỷ lệ khung hình chủ yếu tập trung quanh
+                    <strong>1.3 - 1.6</strong>. Số kênh màu chủ yếu là
+                    <strong>3 (RGB)</strong>, với một vài ảnh kênh đơn
+                    (grayscale).
                 </p>
+            </div>
 
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Phân tích kích thước ảnh
+            <h4 class="text-xl font-bold text-gray-200 mb-3">
+                Phân tích đặc trưng hình ảnh
+            </h4>
+
+            <div class="grid grid-cols-1 gap-6 px-32 mb-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_brightness.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố độ sáng ảnh
+                    </p>
+                </div>
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_constrast.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố độ tương phản ảnh
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2">
+                <p class="text-gray-300 leading-relaxed">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <b>Nhận xét:</b> Tập dữ liệu có
+                    <strong>cân bằng ánh sáng tốt</strong>, không cần tăng
+                    cường mạnh các kỹ thuật như "brightness augmentation"
+                    trong giai đoạn tiền xử lý. Tập dữ liệu cũng có mức độ
+                    <strong>tương phản ổn định</strong>, phù hợp cho việc
+                    trích xuất đặc trưng.
+                </p>
+            </div>
+
+            <h4 class="text-xl font-bold text-gray-200 mb-3">
+                Phân bố màu
+            </h4>
+            <div class="grid grid-cols-1 gap-6 px-36 mb-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_color_distribution.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố màu sắc ảnh
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2">
+                <p class="text-gray-300 leading-relaxed">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <b>Nhận xét:</b>
+                    <strong class="text-green-400">Kênh Green (G)</strong>
+                    có phân bố lệch phải nhẹ, cho thấy màu xanh lá thường
+                    chiếm ưu thế trong hình ảnh sinh vật biển, có thể do ảnh
+                    hưởng của ánh sáng môi trường nước biển hoặc đặc điểm
+                    sinh học của sinh vật.
+                    <strong class="text-blue-400">Kênh Blue (B)</strong> có
+                    giá trị trung bình cao hơn hai kênh còn lại, phản ánh rõ
+                    đặc trưng môi trường biển với sắc xanh đặc trưng. Nhìn
+                    chung, mức độ phân tán vẫn khá lớn, chứng tỏ tập dữ liệu
+                    có
+                    <strong class="text-[#d4af37]">độ đa dạng màu sắc cao</strong>
+                </p>
+            </div>
+
+            <h4 class="text-xl font-bold text-gray-200 mb-3">
+                Phân bố số lượng ảnh theo lớp
+            </h4>
+            <div class="grid grid-cols-1 gap-6 px-32 mb-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                    <img src="images/BTL3/asm3_class_distribution.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        Phân bố số lượng ảnh theo lớp
+                    </p>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 border-l-4 border-yellow-400 rounded-lg p-4 shadow-md mb-6 mx-2">
+                <p class="text-gray-300 leading-relaxed">
+                    <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                    <b>Nhận xét:</b>
+                    Tập dữ liệu <strong> không cân bằng </strong>, tỉ lệ
+                    giữa lớp lớn nhất và nhỏ nhất lên tới
+                    <strong> 4.6 lần </strong>. Vì vậy cần áp dụng các kỹ
+                    thuật như "data augmentation" hoặc "class weighting" trong
+                    giai đoạn huấn luyện mô hình
+                </p>
+            </div>
+        </div>
+
+
+        <!-- 3. Chia tập dữ liệu -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Chia tập dữ liệu</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Bộ dữ liệu được chia thành hai phần: <b>Train</b> và <b>Test</b> với tỉ lệ
+                <b>80 : 20</b>. Chúng tôi sử dụng <b>Stratified Split</b> để đảm bảo
+                phân bố các môn học trong mỗi tập vẫn giữ nguyên, tránh lệch lớp.
+            </p>
+
+            <!-- Trực quan đơn giản -->
+            <div class="w-full md:w-2/3 h-6 bg-[#1e293b] rounded-full overflow-hidden mx-auto mb-4">
+                <div class="h-6 bg-[#d4af37]" style="width: 80%;"></div>
+                <div class="h-6 bg-[#374151]" style="width: 20%; margin-left:-20%;"></div>
+            </div>
+            <div class="flex justify-between w-full md:w-2/3 mx-auto text-gray-400 text-sm mb-6">
+                <span>Train 80%</span>
+                <span>Test 20%</span>
+            </div>
+        </div>
+        <!-- 3. Tiền xử lý dữ liệu -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
+                3. Tiền xử lý dữ liệu (Preprocessing)
+            </h3>
+
+            <div class="space-y-4 mb-6">
+                <div
+                    class="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border-l-4 border-blue-400 rounded-xl p-5 shadow-lg flex items-start gap-4">
+                    <i class="fas fa-expand text-blue-400 text-2xl mt-1"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-blue-300 mb-1">Padding & Resize</h5>
+                        <p class="text-gray-300 text-md">
+                            Thay vì resize trực tiếp gây méo hình, nhóm đã <span
+                                class="text-[#d4af37] font-semibold">thêm viền đen (padding)</span> để ảnh thành hình
+                            vuông, sau đó mới resize về kích thước chuẩn <span
+                                class="font-bold text-[#d4af37]">224×224px</span>.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="bg-gradient-to-r from-amber-900/30 to-orange-900/30 border-l-4 border-amber-400 rounded-xl p-5 shadow-lg flex items-start gap-4">
+                    <i class="fas fa-sun text-amber-400 text-2xl mt-1"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-amber-300 mb-1">Độ sáng & Độ tương phản</h5>
+                        <p class="text-gray-300 text-md">
+                            <span class="text-[#d4af37] font-semibold">Tăng nhẹ 10%</span> để cải thiện khả năng trích
+                            xuất đặc trưng mà không làm ảnh quá sáng hay quá tối.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 px-32 mb-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto">
+                    <img src="images/BTL3/asm3_preprocess.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        <span class="text-[#d4af37] font-semibold">Ảnh trước và sau khi tiền xử lý</span>
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2">
+                <p class="text-gray-300 leading-relaxed">
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <b>Kết quả:</b> Phương pháp này <span class="text-[#d4af37] font-semibold">bảo toàn tỉ lệ khung hình
+                        gốc</span> của ảnh, giữ nguyên đặc trưng hình học của sinh vật biển, đồng thời đảm bảo đầu vào
+                    đồng nhất cho các mô hình deep learning.
+                </p>
+            </div>
+
+            <div class="space-y-4 mb-6">
+                <div
+                    class="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border-l-4 border-cyan-400 rounded-xl p-5 shadow-lg flex items-start gap-4">
+                    <i class="fas fa-random text-cyan-400 text-2xl mt-1"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-cyan-300 mb-1">Tăng cường ảnh (Augmentation)</h5>
+                        <p class="text-gray-300 text-md">
+                            Áp dụng <span class="text-[#d4af37] font-semibold">Lật ngang</span>, <span
+                                class="text-[#d4af37] font-semibold">Xoay nhẹ</span>, và <span
+                                class="text-[#d4af37] font-semibold">Chỉnh độ sáng/tương phản</span> để làm phong phú dữ
+                            liệu huấn luyện, giúp mô hình tổng quát tốt hơn.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 border-l-4 border-yellow-400 rounded-xl p-5 shadow-lg flex items-start gap-4">
+                    <i class="fas fa-equals text-yellow-400 text-2xl mt-1"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-yellow-300 mb-1">Chuẩn hóa (Normalization)</h5>
+                        <p class="text-gray-300 text-md">
+                            Đưa giá trị pixel về <span class="text-[#d4af37] font-semibold">phân phối chuẩn của
+                                ImageNet</span> để tận dụng tối đa sức mạnh các mô hình Pretrained.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 px-32">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto">
+                    <img src="images/BTL3/asm3_augmentation.png" class="rounded-lg w-full mb-3" />
+                    <p class="text-gray-400 text-sm italic text-center">
+                        <span class="text-[#d4af37] font-semibold">Ảnh sau khi tăng cường</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Trích xuất đặc trưng -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
+                4. Trích xuất đặc trưng (Feature Extraction)
+            </h3>
+
+            <p class="text-gray-300 leading-relaxed mb-6"></p>
+            Trong bước này, chúng ta trích xuất <span class="text-[#d4af37] font-semibold">đặc trưng (features)</span>
+            từ ảnh bằng các mô hình học sâu đã huấn luyện trước trên <span
+                class="font-bold text-[#d4af37]">ImageNet</span>, giúp mô hình nắm bắt được thông tin hình học và ngữ
+            nghĩa của sinh vật biển một cách hiệu quả.
+            </p>
+
+
+            <div class="mt-6">
+
+
+                <h4 class="text-xl font-bold text-gray-200 mb-4">
+                    Hai hướng tiếp cận chính:
                 </h4>
 
-                <div
-                    class="flex flex-col xl:flex-row gap-4 items-center mb-6 justify-between px-2"
-                >
-                    <div class="grid grid-cols-1 gap-6 mb-6">
-                        <div
-                            class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg overflow-x-auto"
-                        >
-                            <table
-                                class="w-full text-gray-300 text-md font-semibold"
-                            >
-                                <thead>
-                                    <tr class="border-b border-[#d4af37]/30">
-                                        <th
-                                            class="px-4 py-3 text-left text-[#d4af37] font-bold"
-                                        >
-                                            Thông số
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            Count
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            Mean
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            Std
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            Min
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            25%
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            50%
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            75%
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-right text-[#d4af37] font-bold"
-                                        >
-                                            Max
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition"
-                                    >
-                                        <td
-                                            class="px-4 py-3 font-semibold text-gray-200"
-                                        >
-                                            Width
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            13.711
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            293,07
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            55,04
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            131
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            300
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            300
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            300
-                                        </td>
-                                        <td
-                                            class="px-4 py-3 text-right font-bold text-yellow-400"
-                                        >
-                                            5120
-                                        </td>
-                                    </tr>
-                                    <tr
-                                        class="border-b border-[#d4af37]/10 hover:bg-[#d4af37]/5 transition"
-                                    >
-                                        <td
-                                            class="px-4 py-3 font-semibold text-gray-200"
-                                        >
-                                            Height
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            13.711
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            222,41
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            49,81
-                                        </td>
-                                        <td class="px-4 py-3 text-right">63</td>
-                                        <td class="px-4 py-3 text-right">
-                                            200
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            218
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            225
-                                        </td>
-                                        <td
-                                            class="px-4 py-3 text-right font-bold text-yellow-400"
-                                        >
-                                            3840
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-[#d4af37]/5 transition">
-                                        <td
-                                            class="px-4 py-3 font-semibold text-gray-200"
-                                        >
-                                            Channels
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            13.711
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            3,00
-                                        </td>
-                                        <td class="px-4 py-3 text-right">
-                                            0,05
-                                        </td>
-                                        <td class="px-4 py-3 text-right">1</td>
-                                        <td class="px-4 py-3 text-right">3</td>
-                                        <td class="px-4 py-3 text-right">3</td>
-                                        <td class="px-4 py-3 text-right">3</td>
-                                        <td
-                                            class="px-4 py-3 text-right font-bold text-yellow-400"
-                                        >
-                                            4
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <!-- CNN-based Models -->
+                <div class="space-y-4 mb-8">
+                    <div
+                        class="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border-l-4 border-blue-400 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-cube text-blue-400 text-2xl"></i>
+                            <h5 class="text-xl font-bold text-blue-300">CNN-based Models</h5>
+                        </div>
+                        <div class="ml-8 space-y-2">
+                            <p class="text-gray-300">
+                                <span class="text-[#d4af37] font-semibold">ResNet50</span> — Kiến trúc sâu với residual
+                                connections, tốt cho việc trích xuất đặc trưng phức tạp.
+                            </p>
+                            <p class="text-gray-300">
+                                <span class="text-[#d4af37] font-semibold">EfficientNetB0</span> — Mô hình cân bằng giữa
+                                độ chính xác và hiệu suất, tiết kiệm bộ nhớ và thời gian tính toán.
+                            </p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 xl:grid-cols-1 gap-4 mb-6">
-                        <div
-                            class="bg-gradient-to-br from-orange-900/20 to-amber-900/20 border border-orange-400/40 rounded-xl p-5 shadow-lg"
-                        >
-                            <div class="flex items-center gap-3 mb-3">
-                                <i
-                                    class="fas fa-exclamation-triangle text-orange-400 text-xl"
-                                ></i>
-                                <h5 class="text-lg font-bold text-orange-300">
-                                    5 Outliers
-                                </h5>
-                            </div>
-                            <p class="text-gray-300 text-md">
-                                Kích thước
-                                <strong> ≥1000×1000px</strong>
-                            </p>
+                    <div
+                        class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 border-l-4 border-purple-400 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-sitemap text-purple-400 text-2xl"></i>
+                            <h5 class="text-xl font-bold text-purple-300">Transformer-based Models</h5>
                         </div>
-                        <div
-                            class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg"
-                        >
-                            <div class="flex items-center gap-3 mb-3">
-                                <i
-                                    class="fas fa-images text-blue-400 text-xl"
-                                ></i>
-                                <h5 class="text-lg font-bold text-blue-300">
-                                    13,706 ảnh thích hợp
-                                </h5>
-                            </div>
-                            <p class="text-gray-300 text-md">
-                                Dùng cho trực quan hóa phân bố kích thước
+                        <div class="ml-8 space-y-2">
+                            <p class="text-gray-300">
+                                <span class="text-[#d4af37] font-semibold">ViT (Vision Transformer)</span> — Mô hình
+                                Transformer áp dụng cho thị giác máy, xử lý ảnh dưới dạng chuỗi các patch.
                             </p>
                         </div>
                     </div>
                 </div>
-                <!-- Sample Images -->
-                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_image_size_distribution.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố kích thước ảnh (đã loại bỏ outliers)
-                        </p>
-                    </div>
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_aspect_ratio_distribution.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố tỷ lệ khung hình ảnh
-                        </p>
-                    </div>
-                </div>
 
                 <div
-                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
-                >
+                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mx-2">
                     <p class="text-gray-300 leading-relaxed">
                         <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                        <b>Nhận xét:</b> Hầu hết ảnh có kích thước phổ biến từ
-                        <strong>200x200</strong> đến <strong>300x300</strong>.
-                        Tỷ lệ khung hình chủ yếu tập trung quanh
-                        <strong>1.3 - 1.6</strong>. Số kênh màu chủ yếu là
-                        <strong>3 (RGB)</strong>, với một vài ảnh kênh đơn
-                        (grayscale).
-                    </p>
-                </div>
-
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Phân tích đặc trưng hình ảnh
-                </h4>
-
-                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_brightness.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố độ sáng ảnh
-                        </p>
-                    </div>
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_constrast.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố độ tương phản ảnh
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
-                >
-                    <p class="text-gray-300 leading-relaxed">
-                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                        <b>Nhận xét:</b> Tập dữ liệu có
-                        <strong>cân bằng ánh sáng tốt</strong>, không cần tăng
-                        cường mạnh các kỹ thuật như "brightness augmentation"
-                        trong giai đoạn tiền xử lý. Tập dữ liệu cũng có mức độ
-                        <strong>tương phản ổn định</strong>, phù hợp cho việc
-                        trích xuất đặc trưng.
-                    </p>
-                </div>
-
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Phân bố màu
-                </h4>
-                <div class="grid grid-cols-1 gap-6 px-36 mb-6">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_color_distribution.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố màu sắc ảnh
-                        </p>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md mb-6 mx-2"
-                >
-                    <p class="text-gray-300 leading-relaxed">
-                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                        <b>Nhận xét:</b>
-                        <strong class="text-green-400">Kênh Green (G)</strong>
-                        có phân bố lệch phải nhẹ, cho thấy màu xanh lá thường
-                        chiếm ưu thế trong hình ảnh sinh vật biển, có thể do ảnh
-                        hưởng của ánh sáng môi trường nước biển hoặc đặc điểm
-                        sinh học của sinh vật.
-                        <strong class="text-blue-400">Kênh Blue (B)</strong> có
-                        giá trị trung bình cao hơn hai kênh còn lại, phản ánh rõ
-                        đặc trưng môi trường biển với sắc xanh đặc trưng. Nhìn
-                        chung, mức độ phân tán vẫn khá lớn, chứng tỏ tập dữ liệu
-                        có
-                        <strong class="text-[#d4af37]"
-                            >độ đa dạng màu sắc cao</strong
-                        >
-                    </p>
-                </div>
-
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Phân bố số lượng ảnh theo lớp
-                </h4>
-                <div class="grid grid-cols-1 gap-6 px-32 mb-6">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_class_distribution.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Phân bố số lượng ảnh theo lớp
-                        </p>
-                    </div>
-                </div>
-                <div
-                    class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 border-l-4 border-yellow-400 rounded-lg p-4 shadow-md mb-6 mx-2"
-                >
-                    <p class="text-gray-300 leading-relaxed">
-                        <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
-                        <b>Nhận xét:</b>
-                        Tập dữ liệu <strong> không cân bằng </strong>, tỉ lệ
-                        giữa lớp lớn nhất và nhỏ nhất lên tới
-                        <strong> 4.6 lần </strong>. Vì vậy cần áp dụng các kỹ
-                        thuật như "data augmentation" hoặc "class weighting" trong
-                        giai đoạn huấn luyện mô hình
+                        <b>Chiến lược:</b> Bằng cách kết hợp cả hai hướng tiếp cận (<span
+                            class="text-[#d4af37] font-semibold">CNN và Transformer</span>), chúng ta có thể so sánh ưu
+                        điểm của từng kiến trúc và chọn ra mô hình phù hợp nhất cho bài toán phân loại sinh vật biển.
                     </p>
                 </div>
             </div>
-            
-            <!-- 2. Chia tập dữ liệu -->
+
+            <div class="mt-6"></div>
+
+            <!-- 5. Pipeline & Huấn luyện (Modeling) -->
             <div class="mb-12">
                 <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
-                    2. Tiền xử lý dữ liệu
-                </h3>
+                    5. Huấn luyện và Đánh giá Mô hình
+                    <h4 class="text-xl font-bold text-gray-200 mb-4">
+                        Kiến trúc và Mô hình Huấn luyện
+                    </h4>
 
-                <p class="text-gray-300 leading-relaxed mb-2">
-                    <strong> Padding & Resize:</strong> Thay vì resize trực tiếp
-                    gây méo hình, nhóm đã thêm viền đen (padding) để ảnh thành
-                    hình vuông, sau đó mới resize về kích thước chuẩn 224x224.
-                </p>
+                    <div class="space-y-4 mb-8">
+                        <div
+                            class="bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border-l-4 border-blue-400 rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fas fa-cube text-blue-400 text-2xl"></i>
+                                <h5 class="text-lg font-bold text-blue-300">Feature Extractors</h5>
+                            </div>
+                            <div class="ml-8 space-y-2">
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">ResNet50</span> — Kiến trúc sâu với
+                                    residual connections.
+                                </p>
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">EfficientNetB0</span> — Mô hình cân bằng
+                                    độ chính xác và hiệu suất.
+                                </p>
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">Vision Transformer (ViT)</span> — Xử lý
+                                    ảnh dưới dạng chuỗi patch.
+                                </p>
+                            </div>
+                        </div>
 
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    <strong> Độ sáng & Độ tương phản: </strong> tăng nhẹ 10%.
-                </p>
+                        <div
+                            class="bg-gradient-to-r from-amber-900/30 to-orange-900/30 border-l-4 border-amber-400 rounded-xl p-6 shadow-lg">
+                            <div class="flex items-center gap-3 mb-3">
+                                <i class="fas fa-sitemap text-amber-400 text-2xl"></i>
+                                <h5 class="text-lg font-bold text-amber-300">Classifiers (Phân loại)</h5>
+                            </div>
+                            <div class="ml-8 space-y-2">
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">Logistic Regression</span> — Đơn giản
+                                    nhưng hiệu quả.
+                                </p>
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">SVM</span> — Hỗ trợ vector machine với
+                                    kernel phi tuyến.
+                                </p>
+                                <p class="text-gray-300">
+                                    <span class="text-[#d4af37] font-semibold">Random Forest</span> — Ensemble learning
+                                    từ nhiều cây quyết định.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="grid grid-cols-1 gap-6 px-32">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto"
-                    >
-                        <img
-                            src="images/BTL3/asm3_preprocess.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Ảnh trước và sau khi tiền xử lý
+                    <h4 class="text-xl font-bold text-gray-200 mb-4">
+                        Kết quả Huấn luyện
+                    </h4>
+
+                    <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                        <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
+                            <thead>
+                                <tr class="bg-[#1e293b]">
+                                    <th class="border border-gray-600 px-3 py-2">Feature</th>
+                                    <th class="border border-gray-600 px-3 py-2">Model</th>
+                                    <th class="border border-gray-600 px-3 py-2">Accuracy</th>
+                                    <th class="border border-gray-600 px-3 py-2">Precision</th>
+                                    <th class="border border-gray-600 px-3 py-2">Recall</th>
+                                    <th class="border border-gray-600 px-3 py-2">F1-score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ResNet50 -->
+                                <tr>
+                                    <td rowspan="3" class="border border-gray-600 px-3 py-1">ResNet50</td>
+                                    <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8181
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8180
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8181
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">0.8174
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-600 px-3 py-1">Linear SVM</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7926</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7952</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7926</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7922</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7244</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7313</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7244</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7161</td>
+                                </tr>
+
+                                <!-- EfficientNetB0 -->
+                                <tr class="bg-[#1e293b]">
+                                    <td rowspan="3" class="border border-gray-600 px-3 py-1">EfficientNetB0</td>
+                                    <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#d4af37] font-bold">0.8451
+                                        <span
+                                            class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#d4af37] font-bold">0.8464
+                                        <span
+                                            class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#d4af37] font-bold">0.8451
+                                        <span
+                                            class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    </td>
+                                    <td class="border border-gray-600 px-3 py-1 text-[#d4af37] font-bold">0.8445
+                                        <span
+                                            class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    </td>
+                                </tr>
+                                <tr class="bg-[#1e293b]">
+                                    <td class="border border-gray-600 px-3 py-1">Linear SVM</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.8246</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.8256</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.8246</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.8239</td>
+                                </tr>
+                                <tr class="bg-[#1e293b]">
+                                    <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7630</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7659</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7630</td>
+                                    <td class="border border-gray-600 px-3 py-1">0.7603</td>
+                                </tr>
+
+                                <!-- Vision Transformer -->
+                                <tr>
+                                    <td rowspan="3" class="border border-gray-600 px-3 py-1">ViT-Base-Patch16</td>
+                                    <td class="border border-gray-600 px-3 py-1">Logistic Regression</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0314</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0275</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0314</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0257</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-600 px-3 py-1">Linear SVM</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0868</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0616</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0868</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0362</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-600 px-3 py-1">Random Forest</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.1382</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0319</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.1382</td>
+                                    <td class="border border-gray-600 px-3 py-1 text-red-400">0.0400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-400 text-sm italic text-center mt-3">
+                            Bảng so sánh hiệu năng các mô hình CNN và Transformer với các classifier khác nhau
                         </p>
                     </div>
-                </div>
 
-                <p class="text-gray-300 leading-relaxed mt-6 mb-2">
-                    <strong>Tăng cường ảnh (Augmentation):</strong> Áp dụng Lật
-                    ngang, Xoay nhẹ, và Chỉnh độ sáng/tương phản để làm phong
-                    phú dữ liệu huấn luyện.
-                </p>
 
-                <p class="text-gray-300 leading-relaxed mb-6">
-                    <strong>Chuẩn hóa (Normalization):</strong> Đưa giá trị
-                    pixel về phân phối chuẩn của ImageNet để tận dụng tốt các mô
-                    hình Pretrained.
-                </p>
 
-                <div class="grid grid-cols-1 gap-6 px-32">
                     <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg w-full mx-auto"
-                    >
-                        <img
-                            src="images/BTL3/asm3_augmentation.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Ảnh sau khi tăng cường
-                        </p>
-                    </div>
-                </div>
-            </div>
+                        class="bg-[#1e293b]/40 border border-[#d4af37]/30 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#d4af37] transition mt-6">
+                        <h3 class="text-2xl font-bold text-[#d4af37] mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group"></i> EfficientNetB0 + Logistic Regression
+                        </h3>
 
-            <!-- 3. Pipeline & Huấn luyện (Modeling) -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-[#d4af37] mb-4">
-                    3. Pipeline & Huấn luyện (Modeling)
-                </h3>
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Kiến trúc trích xuất:
-                </h4>
-                <div class="ml-8">
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        <strong>CNN:</strong> ResNet50, EfficientNetB0.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mb-6">
-                        <strong>Transformer:</strong> ViT (Vision Transformer).
-                    </p>
-                </div>
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Mô hình phân loại:
-                </h4>
-                <div class="ml-8">
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        Logistic Regression, SVM, Random Forest.
-                    </p>
-                </div>
+                        <div class="p-4 bg-[#0f172a] border border-[#d4af37] rounded-xl shadow-lg relative">
+                            <div
+                                class="absolute -top-3 -right-3 bg-[#d4af37] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                                <i class="fa-solid fa-crown"></i> Best
+                            </div>
 
-                <h4 class="text-xl font-bold text-gray-200 mb-3">
-                    Kết quả huấn luyện:
-                </h4>
-                <div class="ml-8">
-                    <p class="text-gray-300 leading-relaxed mb-2">
-                        Đặc trưng từ <strong> EfficientNetB0 </strong> kết hợp
-                        với <strong>Logistic Regression</strong> cho kết quả tốt
-                        nhất. Accuracy khoảng 85%.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mb-6">
-                        Mô hình Transformer (ViT) hoạt động kém trên tập dữ liệu
-                        này nếu không được fine-tune, trong khi CNN
-                        (EfficientNet) rất hiệu quả.
-                    </p>
-                </div>
+                            <!-- Prominent metrics grid (BoW theme) -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <!-- Accuracy -->
+                                <div
+                                    class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-lg">
+                                    <div class="text-sm text-yellow-300 font-semibold uppercase tracking-wide">Accuracy
+                                    </div>
+                                    <div class="text-3xl md:text-4xl font-extrabold text-[#facc15] mt-2">0.8451</div>
+                                    <div class="text-xs text-gray-400 mt-1">overall</div>
+                                </div>
 
-                <div class="grid grid-cols-1 gap-6 px-48">
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_comparison.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            So sánh hiệu năng các mô hình
-                        </p>
+                                <!-- Precision -->
+                                <div
+                                    class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-400/10 to-green-400/5 border border-green-400/30 rounded-lg">
+                                    <div class="text-sm text-green-300 font-semibold uppercase tracking-wide">Precision
+                                    </div>
+                                    <div class="text-3xl md:text-4xl font-extrabold text-green-300 mt-2">0.8464</div>
+                                    <div class="text-xs text-gray-400 mt-1">macro</div>
+                                </div>
+
+                                <!-- Recall -->
+                                <div
+                                    class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/30 rounded-lg">
+                                    <div class="text-sm text-sky-300 font-semibold uppercase tracking-wide">Recall</div>
+                                    <div class="text-3xl md:text-4xl font-extrabold text-sky-300 mt-2">0.8451</div>
+                                    <div class="text-xs text-gray-400 mt-1">macro</div>
+                                </div>
+
+                                <!-- F1-score -->
+                                <div
+                                    class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/30 rounded-lg">
+                                    <div class="text-sm text-purple-300 font-semibold uppercase tracking-wide">F1-score
+                                    </div>
+                                    <div class="text-3xl md:text-4xl font-extrabold text-purple-300 mt-2">0.8445</div>
+                                    <div class="text-xs text-gray-400 mt-1">macro</div>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-gray-400 mt-4 text-center">Metrics reported on the test split
+                                (Stratified
+                                80/20)</p>
+                        </div>
                     </div>
-                    <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_metrics.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Model tốt nhất trong các metrics đánh giá
-                        </p>
+
+
+                    <div class="grid grid-cols-1 gap-6 px-48">
+                        <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
+                            <img src="images/BTL3/asm3_confusion_matrix.png" class="rounded-lg w-full mb-3" />
+                            <p class="text-gray-400 text-sm italic text-center">
+                                Confusion Matrix cho mô hình tốt nhất
+                            </p>
+                        </div>
                     </div>
+
+
                     <div
-                        class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg"
-                    >
-                        <img
-                            src="images/BTL3/asm3_confusion_matrix.png"
-                            class="rounded-lg w-full mb-3"
-                        />
-                        <p class="text-gray-400 text-sm italic text-center">
-                            Confusion Matrix cho mô hình tốt nhất
+                        class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 border-l-4 border-yellow-400 rounded-lg p-6 shadow-md mb-6 mx-2">
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <b class="text-lg">Nhận xét chi tiết:</b>
                         </p>
+                        <ul class="text-gray-300 space-y-3 ml-6">
+                            <li class="text-base">
+                                <span class="text-[#d4af37] font-semibold text-lg">• EfficientNetB0 + Logistic Regression</span>
+                                là tổ hợp tối ưu nhất với accuracy <span class="text-yellow-300 font-bold text-lg">84.51%</span>, đạt cân bằng tốt giữa độ chính xác và tốc độ
+                                tính toán.
+                            </li>
+                            <li class="text-base">
+                                <span class="text-[#d4af37] font-semibold text-lg">• ResNet50</span> cũng cho kết quả tốt
+                                <span class="text-yellow-300 font-bold text-lg">(81.81%)</span> nhưng không vượt qua EfficientNetB0, do cấu trúc phức tạp hơn.
+                            </li>
+                            <li class="text-base">
+                                <span class="text-[#d4af37] font-semibold text-lg">• Logistic Regression</span> luôn vượt trội
+                                hơn SVM và Random Forest trong tất cả các trường hợp, chứng tỏ features từ CNN đã rất
+                                tốt.
+                            </li>
+                            <li class="text-base">
+                                <span class="text-red-400 font-semibold text-lg">• Vision Transformer (ViT)</span> cho kết quả
+                                kém <span class="text-red-300 font-bold text-lg">(3-14%)</span>, có thể do thiếu fine-tuning hoặc không thích hợp với dataset nhỏ.
+                            </li>
+                        </ul>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -1077,5 +1206,6 @@
                 Machine Learning Project
             </p>
         </footer>
-    </body>
+</body>
+
 </html>
