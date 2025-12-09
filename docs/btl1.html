@@ -757,62 +757,6 @@
                     Sugar
                     Consumption</p>
             </div>
-            <!-- Nhận xét - Enhanced Visual Section -->
-            <h4 class="text-xl font-semibold text-[#d4af37] mb-6">Nhận xét</h4>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- Numeric Features Insight -->
-                <div
-                    class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/30 rounded-xl p-6 shadow-lg hover:shadow-blue-500/20 transition">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fas fa-chart-line text-blue-400 text-2xl"></i>
-                        <h5 class="text-lg font-bold text-blue-300">Dữ liệu Numeric</h5>
-                    </div>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Huyết áp, cholesterol, đường huyết, triglyceride và BMI <b
-                                    class="text-red-400">vượt ngưỡng</b> khuyến nghị</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Độ lệch chuẩn <b class="text-yellow-400">lớn</b> → Biến thiên rõ
-                                rệt giữa các mẫu</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Ngủ và homocysteine phân bố <b class="text-green-400">đồng
-                                    đều</b> hơn</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Categorical Features Insight -->
-                <div
-                    class="bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-400/30 rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition">
-                    <div class="flex items-center gap-3 mb-4">
-                        <i class="fas fa-th text-purple-400 text-2xl"></i>
-                        <h5 class="text-lg font-bold text-purple-300">Dữ liệu Categorical</h5>
-                    </div>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <span class="text-purple-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Giới tính, bệnh nền, thói quen phân bố <b
-                                    class="text-green-400">cân đối</b></span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-purple-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Hút thuốc, rối loạn mỡ máu, tăng huyết áp <b
-                                    class="text-orange-400">đáng kể</b></span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-purple-400 font-bold mt-1">•</span>
-                            <span class="text-gray-300">Thể hiện <b class="text-green-400">đa dạng</b> đặc trưng sức
-                                khỏe</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
             <!-- Overall Assessment Card -->
             <div
@@ -1083,605 +1027,1039 @@
         </p>
         <!-- 2.3 Xử lý missing value -->
         <h4 class="text-xl font-semibold text-[#d4af37] mb-3 flex items-center gap-2">
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Xử lý missing value với KNN
-            Imputer
-        </h4>
-        <!-- KNN Imputer Explanation -->
-        <div class="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border border-cyan-400/40 rounded-xl p-6 shadow-lg hover:shadow-cyan-500/20 transition mb-6">
-            <div class="flex items-start gap-4">
-            <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-cyan-500/20 border border-cyan-400">
-                <i class="fas fa-fill-drip text-cyan-400 text-lg"></i>
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.3. Xử lý missing value với KNN
+                Imputer
+            </h4>
+            <!-- KNN Imputer Explanation -->
+            <div
+                class="bg-gradient-to-br from-cyan-900/20 to-blue-900/20 border border-cyan-400/40 rounded-xl p-6 shadow-lg hover:shadow-cyan-500/20 transition mb-6">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div
+                            class="flex items-center justify-center h-12 w-12 rounded-md bg-cyan-500/20 border border-cyan-400">
+                            <i class="fas fa-fill-drip text-cyan-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h5 class="text-lg font-bold text-cyan-300 mb-2">KNN Imputer (k=5)</h5>
+                        <p class="text-gray-300 leading-relaxed">
+                            Sử dụng <b class="text-cyan-300">KNN Imputer</b> với <b>k=5</b> để điền các giá trị missing
+                            dựa trên 5 mẫu gần nhất.
+                            <span class="block mt-2 text-gray-400 text-sm">→ Imputer được fit trên tập <b>train</b>, sau
+                                đó áp dụng cho tập <b>test</b></span>
+                            <span class="block text-gray-400 text-sm">→ Các biến categorical được làm tròn về integer
+                                sau imputation</span>
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="flex-1">
-                <h5 class="text-lg font-bold text-cyan-300 mb-2">KNN Imputer (k=5)</h5>
+            <!-- Result Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div
+                    class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
+                        <h5 class="text-lg font-bold text-blue-300">Tập Train</h5>
+                    </div>
+                    <p class="text-gray-300 text-sm">Imputer fit trên dữ liệu train để tìm tham số KNN</p>
+                    <p class="text-gray-400 text-xs mt-2">→ Giữ tính độc lập dữ liệu</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-400/40 rounded-xl p-5 shadow-lg">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-flask text-green-400 text-xl"></i>
+                        <h5 class="text-lg font-bold text-green-300">Tập Test</h5>
+                    </div>
+                    <p class="text-gray-300 text-sm">Imputer áp dụng với tham số từ train</p>
+                    <p class="text-gray-400 text-xs mt-2">→ Tránh data leakage</p>
+                </div>
+            </div>
+
+            <!-- Final Status -->
+            <div
+                class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md">
                 <p class="text-gray-300 leading-relaxed">
-                Sử dụng <b class="text-cyan-300">KNN Imputer</b> với <b>k=5</b> để điền các giá trị missing dựa trên 5 mẫu gần nhất.
-                <span class="block mt-2 text-gray-400 text-sm">→ Imputer được fit trên tập <b>train</b>, sau đó áp dụng cho tập <b>test</b></span>
-                <span class="block text-gray-400 text-sm">→ Các biến categorical được làm tròn về integer sau imputation</span>
+                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                    <b>Kết quả:</b> Sau xử lý, cả tập <b>train</b> và <b>test</b> không còn missing value, đảm bảo dữ
+                    liệu đầy đủ và sạch sẽ cho giai đoạn huấn luyện mô hình.
                 </p>
             </div>
-            </div>
-        </div>
-        <!-- Result Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg">
-                <div class="flex items-center gap-3 mb-3">
-                    <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
-                    <h5 class="text-lg font-bold text-blue-300">Tập Train</h5>
-                </div>
-                <p class="text-gray-300 text-sm">Imputer fit trên dữ liệu train để tìm tham số KNN</p>
-                <p class="text-gray-400 text-xs mt-2">→ Giữ tính độc lập dữ liệu</p>
-            </div>
 
-            <div class="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-400/40 rounded-xl p-5 shadow-lg">
-                <div class="flex items-center gap-3 mb-3">
-                    <i class="fas fa-flask text-green-400 text-xl"></i>
-                    <h5 class="text-lg font-bold text-green-300">Tập Test</h5>
-                </div>
-                <p class="text-gray-300 text-sm">Imputer áp dụng với tham số từ train</p>
-                <p class="text-gray-400 text-xs mt-2">→ Tránh data leakage</p>
-            </div>
-        </div>
+            <!-- Space -->
+            <div class="my-6"></div>
 
-        <!-- Final Status -->
-        <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 border-l-4 border-green-400 rounded-lg p-4 shadow-md">
-            <p class="text-gray-300 leading-relaxed">
-            <i class="fas fa-check-circle text-green-400 mr-2"></i>
-            <b>Kết quả:</b> Sau xử lý, cả tập <b>train</b> và <b>test</b> không còn missing value, đảm bảo dữ liệu đầy đủ và sạch sẽ cho giai đoạn huấn luyện mô hình.
+            <!-- 2.4 Chuẩn hóa dữ liệu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.4. Chuẩn hóa dữ liệu
+                (Scaling)</h4>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Áp dụng <b class="text-[#facc15]">Min-Max Scaling</b> để đưa các feature về khoảng <b>[0,1]</b>, đảm bảo
+                tất cả đặc trưng có cùng thang đo.
             </p>
-        </div>
 
-        <!-- Space -->
-        <div class="my-6"></div>
+            <!-- Scaling Strategy -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div
+                    class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
+                        <h5 class="text-lg font-bold text-blue-300">Tập Train</h5>
+                    </div>
+                    <p class="text-gray-300 text-sm">Fit scaler trên dữ liệu train để tìm min/max</p>
+                    <p class="text-gray-400 text-xs mt-2">→ Ghi nhớ tham số Min/Max</p>
+                </div>
 
-        <!-- 2.4 Chuẩn hóa dữ liệu -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.4. Chuẩn hóa dữ liệu
-            (Scaling)</h4>
-        <p class="text-gray-300 leading-relaxed mb-6">
-            Áp dụng <b class="text-[#facc15]">Min-Max Scaling</b> để đưa các feature về khoảng <b>[0,1]</b>, đảm bảo tất cả đặc trưng có cùng thang đo.
-        </p>
-
-        <!-- Scaling Strategy -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div class="bg-gradient-to-br from-blue-900/20 to-cyan-900/20 border border-blue-400/40 rounded-xl p-5 shadow-lg">
-            <div class="flex items-center gap-3 mb-3">
-                <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
-                <h5 class="text-lg font-bold text-blue-300">Tập Train</h5>
-            </div>
-            <p class="text-gray-300 text-sm">Fit scaler trên dữ liệu train để tìm min/max</p>
-            <p class="text-gray-400 text-xs mt-2">→ Ghi nhớ tham số Min/Max</p>
-            </div>
-
-            <div class="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-400/40 rounded-xl p-5 shadow-lg">
-            <div class="flex items-center gap-3 mb-3">
-                <i class="fas fa-flask text-green-400 text-xl"></i>
-                <h5 class="text-lg font-bold text-green-300">Tập Test</h5>
-            </div>
-            <p class="text-gray-300 text-sm">Transform dữ liệu test với tham số từ train</p>
-            <p class="text-gray-400 text-xs mt-2">→ Tránh data leakage</p>
-            </div>
-        </div>
-
-        <!-- Benefits -->
-        <div class="bg-[#1e293b]/60 border border-[#d4af37]/30 rounded-xl p-4 mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="flex items-start gap-3">
-                <i class="fas fa-bolt text-yellow-400 text-lg mt-1"></i>
-                <div>
-                <p class="text-yellow-300 font-semibold text-sm">Tốc độ huấn luyện</p>
-                <p class="text-gray-400 text-xs">Tính toán nhanh hơn</p>
+                <div
+                    class="bg-gradient-to-br from-green-900/20 to-emerald-900/20 border border-green-400/40 rounded-xl p-5 shadow-lg">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-flask text-green-400 text-xl"></i>
+                        <h5 class="text-lg font-bold text-green-300">Tập Test</h5>
+                    </div>
+                    <p class="text-gray-300 text-sm">Transform dữ liệu test với tham số từ train</p>
+                    <p class="text-gray-400 text-xs mt-2">→ Tránh data leakage</p>
                 </div>
             </div>
-            <div class="flex items-start gap-3">
-                <i class="fas fa-balance-scale text-purple-400 text-lg mt-1"></i>
-                <div>
-                <p class="text-purple-300 font-semibold text-sm">Cân bằng đặc trưng</p>
-                <p class="text-gray-400 text-xs">Mỗi feature có trọng số tương đương</p>
+
+            <!-- Benefits -->
+            <div class="bg-[#1e293b]/60 border border-[#d4af37]/30 rounded-xl p-4 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-bolt text-yellow-400 text-lg mt-1"></i>
+                        <div>
+                            <p class="text-yellow-300 font-semibold text-sm">Tốc độ huấn luyện</p>
+                            <p class="text-gray-400 text-xs">Tính toán nhanh hơn</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-balance-scale text-purple-400 text-lg mt-1"></i>
+                        <div>
+                            <p class="text-purple-300 font-semibold text-sm">Cân bằng đặc trưng</p>
+                            <p class="text-gray-400 text-xs">Mỗi feature có trọng số tương đương</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-chart-line text-green-400 text-lg mt-1"></i>
+                        <div>
+                            <p class="text-green-300 font-semibold text-sm">Hiệu suất mô hình</p>
+                            <p class="text-gray-400 text-xs">Cải thiện độ chính xác dự đoán</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="flex items-start gap-3">
-                <i class="fas fa-chart-line text-green-400 text-lg mt-1"></i>
-                <div>
-                <p class="text-green-300 font-semibold text-sm">Hiệu suất mô hình</p>
-                <p class="text-gray-400 text-xs">Cải thiện độ chính xác dự đoán</p>
+
+            <!-- 2.5 Xử lý mất cân bằng -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.5. Xử lý mất cân bằng dữ
+                liệu
+                với SMOTE</h4>
+            <!-- SMOTE Explanation Card -->
+            <div
+                class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-400/40 rounded-xl p-6 shadow-lg mb-6">
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-balance-scale-right text-orange-300 text-3xl"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-orange-300 mb-2">SMOTE</h5>
+                        <p class="text-gray-200">
+                            <b class="text-orange-300">SMOTE</b> giúp cân bằng lại dữ liệu bằng cách tạo thêm mẫu cho
+                            lớp thiểu số (<b class="text-green-400">Yes</b>).
+                            <br>
+                            <span class="text-gray-400 text-sm">Áp dụng trên tập <b>train</b> để cải thiện hiệu quả dự
+                                đoán.</span>
+                        </p>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
 
-        <!-- 2.5 Xử lý mất cân bằng -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">2.5. Xử lý mất cân bằng dữ
-            liệu
-            với SMOTE</h4>
-        <!-- SMOTE Explanation Card -->
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-400/40 rounded-xl p-6 shadow-lg mb-6">
-            <div class="flex items-center gap-4">
-                <i class="fas fa-balance-scale-right text-orange-300 text-3xl"></i>
-                <div>
-                    <h5 class="text-lg font-bold text-orange-300 mb-2">SMOTE</h5>
-                    <p class="text-gray-200">
-                        <b class="text-orange-300">SMOTE</b> giúp cân bằng lại dữ liệu bằng cách tạo thêm mẫu cho lớp thiểu số (<b class="text-green-400">Yes</b>).
-                        <br>
-                        <span class="text-gray-400 text-sm">Áp dụng trên tập <b>train</b> để cải thiện hiệu quả dự đoán.</span>
-                    </p>
+            <!-- Before & After Comparison -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Before SMOTE -->
+                <div
+                    class="bg-gradient-to-br from-red-900/30 to-pink-900/30 border-2 border-red-400/50 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                        <h5 class="text-lg font-bold text-red-300">Trước SMOTE</h5>
+                    </div>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-red-600/30">
+                            <span class="text-gray-300">Class <b>No</b></span>
+                            <span class="text-2xl font-extrabold text-red-400">6.400</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-orange-600/30">
+                            <span class="text-gray-300">Class <b>Yes</b></span>
+                            <span class="text-2xl font-extrabold text-orange-400">1.600</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-red-600/40">
+                            <p class="text-gray-400 text-sm text-center">Tỷ lệ: <span
+                                    class="text-red-400 font-bold">4:1</span></p>
+                            <p class="text-gray-500 text-xs text-center mt-1">⚠️ Mất cân bằng</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- After SMOTE -->
+                <div
+                    class="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-400/50 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+                        <h5 class="text-lg font-bold text-green-300">Sau SMOTE</h5>
+                    </div>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-green-600/30">
+                            <span class="text-gray-300">Class <b>No</b></span>
+                            <span class="text-2xl font-extrabold text-green-400">6.400</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-emerald-600/30">
+                            <span class="text-gray-300">Class <b>Yes</b></span>
+                            <span class="text-2xl font-extrabold text-emerald-400">3.200</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-green-600/40">
+                            <p class="text-gray-400 text-sm text-center">Tỷ lệ: <span
+                                    class="text-green-400 font-bold">2:1</span></p>
+                            <p class="text-gray-500 text-xs text-center mt-1">✓ Cân bằng</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Before & After Comparison -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <!-- Before SMOTE -->
-            <div class="bg-gradient-to-br from-red-900/30 to-pink-900/30 border-2 border-red-400/50 rounded-xl p-6 shadow-lg">
-            <div class="flex items-center gap-3 mb-4">
-                <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
-                <h5 class="text-lg font-bold text-red-300">Trước SMOTE</h5>
-            </div>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-red-600/30">
-                <span class="text-gray-300">Class <b>No</b></span>
-                <span class="text-2xl font-extrabold text-red-400">6.400</span>
+
+            <!-- 3. Trích xuất và lựa chọn đặc trưng với PCA -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất và lựa chọn đặc trưng với PCA</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Dataset chẩn đoán bệnh tim mạch chứa <b>20 features</b> liên quan đến lối sống, chỉ số sinh học và tiền
+                sử bệnh.
+                Do số lượng feature lớn và có thể tương quan cao, áp dụng <b>Principal Component Analysis (PCA)</b> giúp
+                giảm chiều dữ liệu
+                và giữ lại thông tin quan trọng.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                PCA được huấn luyện trên tập train để tìm các thành phần chính. Các thử nghiệm được thực hiện với các
+                mức phương sai giữ lại khác nhau:
+            </p>
+
+            <!-- PCA Variance Options -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+                <!-- Không dùng PCA -->
+                <div
+                    class="bg-gradient-to-br from-gray-900/40 to-gray-800/40 border-2 border-gray-500/40 rounded-xl p-5 text-center shadow-lg hover:border-gray-400/60 transition">
+                    <div class="text-4xl font-extrabold text-gray-300 mb-2">-</div>
+                    <p class="text-sm font-bold text-gray-300 mb-2">Không dùng PCA</p>
+                    <p class="text-xs text-gray-400">(20 features gốc)</p>
                 </div>
-                <div class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-orange-600/30">
-                <span class="text-gray-300">Class <b>Yes</b></span>
-                <span class="text-2xl font-extrabold text-orange-400">1.600</span>
+
+                <!-- PCA 70% -->
+                <div
+                    class="bg-gradient-to-br from-orange-900/40 to-amber-900/40 border-2 border-orange-500/50 rounded-xl p-5 text-center shadow-lg hover:shadow-orange-500/20 transition">
+                    <div class="text-4xl font-extrabold text-orange-300 mb-2">70%</div>
+                    <p class="text-sm font-bold text-orange-300 mb-2">PCA 70%</p>
+                    <p class="text-xs text-gray-400">10 components</p>
                 </div>
-                <div class="mt-4 pt-4 border-t border-red-600/40">
-                <p class="text-gray-400 text-sm text-center">Tỷ lệ: <span class="text-red-400 font-bold">4:1</span></p>
-                <p class="text-gray-500 text-xs text-center mt-1">⚠️ Mất cân bằng</p>
+
+                <!-- PCA 80% -->
+                <div
+                    class="bg-gradient-to-br from-yellow-900/40 to-amber-900/40 border-2 border-yellow-500/50 rounded-xl p-5 text-center shadow-lg hover:shadow-yellow-500/20 transition">
+                    <div class="text-4xl font-extrabold text-yellow-300 mb-2">80%</div>
+                    <p class="text-sm font-bold text-yellow-300 mb-2">PCA 80%</p>
+                    <p class="text-xs text-gray-400">13 components</p>
+                </div>
+
+                <!-- PCA 90% -->
+                <div
+                    class="bg-gradient-to-br from-green-900/40 to-emerald-900/40 border-2 border-green-500/50 rounded-xl p-5 text-center shadow-lg hover:shadow-green-500/20 transition">
+                    <div class="text-4xl font-extrabold text-green-300 mb-2">90%</div>
+                    <p class="text-sm font-bold text-green-300 mb-2">PCA 90%</p>
+                    <p class="text-xs text-gray-400">17 components</p>
+                </div>
+
+                <!-- PCA 95% -->
+                <div
+                    class="bg-gradient-to-br from-blue-900/40 to-cyan-900/40 border-2 border-blue-500/50 rounded-xl p-5 text-center shadow-lg hover:shadow-blue-500/20 transition">
+                    <div class="text-4xl font-extrabold text-blue-300 mb-2">95%</div>
+                    <p class="text-sm font-bold text-blue-300 mb-2">PCA 95%</p>
+                    <p class="text-xs text-gray-400">18 components</p>
                 </div>
             </div>
-            </div>
 
-            <!-- After SMOTE -->
-            <div class="bg-gradient-to-br from-green-900/30 to-emerald-900/30 border-2 border-green-400/50 rounded-xl p-6 shadow-lg">
-            <div class="flex items-center gap-3 mb-4">
-                <i class="fas fa-check-circle text-green-400 text-2xl"></i>
-                <h5 class="text-lg font-bold text-green-300">Sau SMOTE</h5>
-            </div>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-green-600/30">
-                <span class="text-gray-300">Class <b>No</b></span>
-                <span class="text-2xl font-extrabold text-green-400">6.400</span>
+
+            <!-- 3. Học máy -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Học máy</h3>
+
+            <!-- 3.1 Huấn luyện và tìm tham số tối ưu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.1. Huấn luyện và tìm tham số tối ưu</h4>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Sử dụng <b>GridSearchCV</b> để tìm các tham số tối ưu cho từng mô hình, kết hợp <b>K-fold
+                    cross-validation (k=5)</b> và metric <b>Recall</b> để phù hợp với bài toán chẩn đoán bệnh tim.
+            </p>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Random Forest -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#d4af37] text-black">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#d4af37]">Random Forest</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">max_depth</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_split</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">n_estimators</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
+                    </div>
                 </div>
-                <div class="flex items-center justify-between bg-[#0f172a] rounded-lg p-3 border border-emerald-600/30">
-                <span class="text-gray-300">Class <b>Yes</b></span>
-                <span class="text-2xl font-extrabold text-emerald-400">3.200</span>
+
+                <!-- SVM -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#3b82f6] text-black">
+                                <i class="fas fa-wave-square"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#3b82f6]">SVM</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">C</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">kernel</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
+                    </div>
                 </div>
-                <div class="mt-4 pt-4 border-t border-green-600/40">
-                <p class="text-gray-400 text-sm text-center">Tỷ lệ: <span class="text-green-400 font-bold">2:1</span></p>
-                <p class="text-gray-500 text-xs text-center mt-1">✓ Cân bằng</p>
+
+                <!-- Logistic Regression -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#ef4444] text-black">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#ef4444]">Logistic Regression</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">C</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">penalty</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">solver</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
+                    </div>
+                </div>
+
+                <!-- KNN -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#10b981] text-black">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#10b981]">KNN</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">n_neighbors</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">metric</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">p</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">weights</span>
+                    </div>
+                </div>
+
+                <!-- Decision Tree -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#8b5cf6] text-black">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#8b5cf6]">Decision Tree</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">criterion</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">max_depth</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_split</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_leaf</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">ccp_alpha</span>
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
+                    </div>
+                </div>
+
+                <!-- Naive Bayes -->
+                <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#f97316] text-black">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-[#f97316]">Naive Bayes</h5>
+                        </div>
+                        <span class="text-xs text-gray-400">Grid search</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">var_smoothing</span>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
 
+            <p class="text-gray-300 leading-relaxed mb-4">
+                GridSearchCV thử tất cả tổ hợp tham số, chọn giá trị tối ưu dựa trên hiệu suất trên tập validation và áp
+                dụng trên tập test.
+            </p>
+            <!-- 3.2 Bảng tham số tối ưu -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.2. Tham số tối ưu của các mô hình</h4>
 
-        <!-- 3. Trích xuất và lựa chọn đặc trưng với PCA -->
-        <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Trích xuất và lựa chọn đặc trưng với PCA</h3>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Sau khi thực hiện GridSearchCV, các tham số tối ưu được chọn cho từng mô hình như sau:
+            </p>
 
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Dataset chẩn đoán bệnh tim mạch chứa <b>20 features</b> liên quan đến lối sống, chỉ số sinh học và tiền
-            sử bệnh.
-            Do số lượng feature lớn và có thể tương quan cao, áp dụng <b>Principal Component Analysis (PCA)</b> giúp
-            giảm chiều dữ liệu
-            và giữ lại thông tin quan trọng.
-        </p>
-
-        <!-- 3.1 Áp dụng PCA -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.1. Áp dụng PCA</h4>
-        <p class="text-gray-300 leading-relaxed mb-4">
-            PCA được huấn luyện trên tập train để tìm các thành phần chính. Các thử nghiệm được thực hiện với các
-            mức phương sai giữ lại:
-            <b>99%, 90%, 80%, 70%</b>. Việc này giúp so sánh hiệu quả mô hình khi sử dụng số lượng components khác
-            nhau và đánh giá mức mất mát thông tin.
-        </p>
-
-
-        <!-- 3.2 Lựa chọn đặc trưng -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.2. Lựa chọn đặc trưng</h4>
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Các principal components giữ lại ở từng mức phương sai sẽ thay thế tập feature gốc làm input cho mô
-            hình.
-            Giúp giảm <b>overfitting</b>, tăng tốc độ huấn luyện và loại bỏ các feature có tương quan cao.
-        </p>
-
-        <!-- 3. Học máy -->
-        <h3 class="text-2xl font-bold text-[#facc15] mb-4">3. Học máy</h3>
-
-        <!-- 3.1 Huấn luyện và tìm tham số tối ưu -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.1. Huấn luyện và tìm tham số tối ưu</h4>
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Sử dụng <b>GridSearchCV</b> để tìm các tham số tối ưu cho từng mô hình, kết hợp <b>K-fold
-                cross-validation (k=5)</b> và metric <b>Recall</b> để phù hợp với bài toán chẩn đoán bệnh tim.
-        </p>
-
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Random Forest -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#d4af37] text-black">
-                            <i class="fas fa-tree"></i>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Random Forest -->
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-5 shadow-lg hover:shadow-[#d4af37]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#d4af37]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#d4af37]/20 flex items-center justify-center">
+                            <i class="fas fa-tree text-[#d4af37] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#d4af37]">Random Forest</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">max_depth</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#facc15]">20</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">min_samples_split</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#facc15]">2</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">n_estimators</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#facc15]">200</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">class_weight</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-green-300">balanced</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">max_depth</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_split</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">n_estimators</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
-                </div>
-            </div>
 
-            <!-- SVM -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#3b82f6] text-black">
-                            <i class="fas fa-wave-square"></i>
+                <!-- SVM -->
+                <div class="bg-[#0f172a] border border-[#3b82f6]/20 rounded-xl p-5 shadow-lg hover:shadow-[#3b82f6]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#3b82f6]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#3b82f6]/20 flex items-center justify-center">
+                            <i class="fas fa-wave-square text-[#3b82f6] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#3b82f6]">SVM</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">C</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#60a5fa]">10</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">kernel</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#60a5fa]">rbf</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">class_weight</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-green-300">balanced</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">C</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">kernel</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
-                </div>
-            </div>
 
-            <!-- Logistic Regression -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#ef4444] text-black">
-                            <i class="fas fa-project-diagram"></i>
+                <!-- Logistic Regression -->
+                <div class="bg-[#0f172a] border border-[#ef4444]/20 rounded-xl p-5 shadow-lg hover:shadow-[#ef4444]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#ef4444]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#ef4444]/20 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-[#ef4444] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#ef4444]">Logistic Regression</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">C</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#fca5a5]">0.1</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">penalty</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#fca5a5]">l1</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">solver</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#fca5a5]">liblinear</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">class_weight</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-green-300">balanced</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">C</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">penalty</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">solver</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
-                </div>
-            </div>
 
-            <!-- KNN -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#10b981] text-black">
-                            <i class="fas fa-user-friends"></i>
+                <!-- KNN -->
+                <div class="bg-[#0f172a] border border-[#10b981]/20 rounded-xl p-5 shadow-lg hover:shadow-[#10b981]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#10b981]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#10b981]/20 flex items-center justify-center">
+                            <i class="fas fa-user-friends text-[#10b981] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#10b981]">KNN</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">n_neighbors</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#6ee7b7]">3</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">metric</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#6ee7b7]">minkowski</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">p</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#6ee7b7]">1</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">weights</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#6ee7b7]">distance</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">n_neighbors</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">metric</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">p</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">weights</span>
-                </div>
-            </div>
 
-            <!-- Decision Tree -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#8b5cf6] text-black">
-                            <i class="fas fa-sitemap"></i>
+
+                <!-- Decision Tree -->
+                <div class="bg-[#0f172a] border border-[#8b5cf6]/20 rounded-xl p-5 shadow-lg hover:shadow-[#8b5cf6]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#8b5cf6]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#8b5cf6]/20 flex items-center justify-center">
+                            <i class="fas fa-sitemap text-[#8b5cf6] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#8b5cf6]">Decision Tree</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">criterion</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#d8b4fe]">gini</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">max_depth</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#d8b4fe]">5</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">min_samples_split</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#d8b4fe]">2</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">ccp_alpha</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#d8b4fe]">0.0</span>
+                        </li>
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">class_weight</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-green-300">balanced</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">criterion</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">max_depth</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_split</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">min_samples_leaf</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">ccp_alpha</span>
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">class_weight</span>
-                </div>
-            </div>
 
-            <!-- Naive Bayes -->
-            <div class="bg-[#071024] border border-[#d4af37]/10 rounded-lg p-4 shadow-md">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 flex items-center justify-center rounded-md bg-[#f97316] text-black">
-                            <i class="fas fa-balance-scale"></i>
+                
+                <!-- Naive Bayes -->
+                <div class="bg-[#0f172a] border border-[#f97316]/20 rounded-xl p-5 shadow-lg hover:shadow-[#f97316]/20 transition">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#f97316]/30">
+                        <div class="w-10 h-10 rounded-lg bg-[#f97316]/20 flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-[#f97316] text-lg"></i>
                         </div>
                         <h5 class="text-lg font-bold text-[#f97316]">Naive Bayes</h5>
                     </div>
-                    <span class="text-xs text-gray-400">Grid search</span>
+                    <ul class="space-y-2">
+                        <li class="flex items-center justify-between text-sm text-gray-300">
+                            <span class="font-medium">var_smoothing</span>
+                            <span class="bg-[#1e293b] px-3 py-1 rounded-full text-[#fed7aa]">1e-09</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="px-2 py-1 bg-[#11202e] text-gray-300 text-sm rounded-full border border-[#27414f]">var_smoothing</span>
+            </div>
+
+
+
+            <!-- 4. Đánh giá mô hình -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Đánh giá mô hình</h3>
+
+            <div
+                class="bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border-l-4 border-[#facc15] rounded-xl p-5 mb-6 shadow-lg">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-chart-bar text-[#facc15] text-2xl"></i>
+                    <h4 class="text-lg font-bold text-[#facc15]">Đánh giá mô hình trên tập test</h4>
                 </div>
-            </div>
-        </div>
-
-        <p class="text-gray-300 leading-relaxed mb-4">
-            GridSearchCV thử tất cả tổ hợp tham số, chọn giá trị tối ưu dựa trên hiệu suất trên tập validation và áp
-            dụng trên tập test.
-        </p>
-
-        <!-- 3.2 Bảng tham số tối ưu -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">3.2. Tham số tối ưu của các mô hình</h4>
-
-
-        <div class="overflow-x-auto mb-6">
-            <table class="table-auto border-collapse border border-gray-700 w-full text-gray-300">
-                <thead>
-                    <tr class="bg-[#1e293b]">
-                        <th class="border border-gray-600 px-3 py-2">Mô hình</th>
-                        <th class="border border-gray-600 px-3 py-2">Tham số</th>
-                        <th class="border border-gray-600 px-3 py-2">Giá trị</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td rowspan="4" class="border border-gray-600 px-3 py-1">Random Forest</td>
-                        <td class="border border-gray-600 px-3 py-1">max_depth</td>
-                        <td class="border border-gray-600 px-3 py-1">20</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">min_samples_split</td>
-                        <td class="border border-gray-600 px-3 py-1">2</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">n_estimators</td>
-                        <td class="border border-gray-600 px-3 py-1">200</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">class_weight</td>
-                        <td class="border border-gray-600 px-3 py-1">balanced</td>
-                    </tr>
-
-                    <tr class="bg-[#1e293b]">
-                        <td rowspan="3" class="border border-gray-600 px-3 py-1">SVM</td>
-                        <td class="border border-gray-600 px-3 py-1">C</td>
-                        <td class="border border-gray-600 px-3 py-1">10</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">kernel</td>
-                        <td class="border border-gray-600 px-3 py-1">rbf</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">class_weight</td>
-                        <td class="border border-gray-600 px-3 py-1">balanced</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="4" class="border border-gray-600 px-3 py-1">Logistic Regression</td>
-                        <td class="border border-gray-600 px-3 py-1">C</td>
-                        <td class="border border-gray-600 px-3 py-1">0.1</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">penalty</td>
-                        <td class="border border-gray-600 px-3 py-1">l1</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">solver</td>
-                        <td class="border border-gray-600 px-3 py-1">liblinear</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">class_weight</td>
-                        <td class="border border-gray-600 px-3 py-1">balanced</td>
-                    </tr>
-
-                    <tr class="bg-[#1e293b]">
-                        <td rowspan="4" class="border border-gray-600 px-3 py-1">KNN</td>
-                        <td class="border border-gray-600 px-3 py-1">n_neighbors</td>
-                        <td class="border border-gray-600 px-3 py-1">3</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">metric</td>
-                        <td class="border border-gray-600 px-3 py-1">minkowski</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">p</td>
-                        <td class="border border-gray-600 px-3 py-1">1</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">weights</td>
-                        <td class="border border-gray-600 px-3 py-1">distance</td>
-                    </tr>
-
-                    <tr>
-                        <td class="border border-gray-600 px-3 py-1">Naive Bayes</td>
-                        <td class="border border-gray-600 px-3 py-1">var_smoothing</td>
-                        <td class="border border-gray-600 px-3 py-1">1e-09</td>
-                    </tr>
-
-                    <tr class="bg-[#1e293b]">
-                        <td rowspan="5" class="border border-gray-600 px-3 py-1">Decision Tree</td>
-                        <td class="border border-gray-600 px-3 py-1">criterion</td>
-                        <td class="border border-gray-600 px-3 py-1">gini</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">max_depth</td>
-                        <td class="border border-gray-600 px-3 py-1">5</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">min_samples_split</td>
-                        <td class="border border-gray-600 px-3 py-1">2</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">ccp_alpha</td>
-                        <td class="border border-gray-600 px-3 py-1">0.0</td>
-                    </tr>
-                    <tr class="bg-[#1e293b]">
-                        <td class="border border-gray-600 px-3 py-1">class_weight</td>
-                        <td class="border border-gray-600 px-3 py-1">balanced</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-
-        <!-- 4. Đánh giá mô hình -->
-        <h3 class="text-2xl font-bold text-[#facc15] mb-4">4. Đánh giá mô hình</h3>
-
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Sử dụng các tham số tối ưu của từng mô hình, đánh giá hiệu quả trên tập test với các giá trị PCA:
-            <b>99%, 90%, 80%, 70%</b> dựa trên các chỉ số
-            <b>Accuracy</b>, <b>Precision</b>, <b>Recall</b> và <b>F1-score</b>.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                <img src="images/BTL1/PCA_99.png" class="rounded-lg w-full mb-3">
-                <p class="text-gray-400 text-sm italic text-center">PCA = 99%</p>
-            </div>
-
-            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                <img src="images/BTL1/PCA_90.png" class="rounded-lg w-full mb-3">
-                <p class="text-gray-400 text-sm italic text-center">PCA = 90%</p>
-            </div>
-
-            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                <img src="images/BTL1/PCA_80.png" class="rounded-lg w-full mb-3">
-                <p class="text-gray-400 text-sm italic text-center">PCA = 80%</p>
-            </div>
-
-            <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-4 shadow-lg">
-                <img src="images/BTL1/PCA_70.png" class="rounded-lg w-full mb-3">
-                <p class="text-gray-400 text-sm italic text-center">PCA = 70%
+                <p class="text-gray-200 text-base mt-2">
+                    Sử dụng các <span class="font-semibold text-[#facc15]">tham số tối ưu</span> của từng mô hình, đánh
+                    giá hiệu quả trên tập test với các mức PCA:
+                    <span class="font-bold text-yellow-300">95%, 90%, 80%, 70%</span> và <span
+                        class="font-bold text-yellow-300">không dùng PCA</span>.
+                    <br>
+                    Các chỉ số gồm: <span class="font-bold text-[#facc15]">Accuracy</span>, <span
+                        class="font-bold text-green-300">Precision</span>, <span
+                        class="font-bold text-blue-300">Recall</span> và <span
+                        class="font-bold text-purple-300">F1-score</span>.
                 </p>
             </div>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 mb-8">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-6 shadow-lg hover:shadow-[#d4af37]/20 transition">
+                    <img src="images/BTL1/PCA_95.png" class="rounded-lg w-full mb-4">
+                    <p class="text-gray-300 text-base font-semibold text-center">PCA = 95%</p>
+                    <p class="text-gray-400 text-sm text-center mt-1">(18 components)</p>
+                </div>
 
-        <!-- Nhận xét -->
-        <h4 class="text-xl font-semibold text-[#d4af37] mt-6 mb-3">Nhận xét</h4>
-        <ul class="list-disc list-inside text-gray-300 mb-4">
-            <li>Giảm số thành phần PCA giúp các mô hình như Random Forest, SVM, Logistic Regression và KNN cải thiện
-                Precision, Recall và F1-score, trong khi Accuracy gần như không đổi. Điều này cho thấy tập trung vào
-                các đặc trưng quan trọng giúp mô hình học hiệu quả hơn.</li>
-            <li>Mô hình Naive Bayes đạt Accuracy cao nhưng Precision, Recall và F1-score thấp, cho thấy mô hình chủ
-                yếu dự đoán nhãn chiếm ưu thế, không khai thác tốt đặc trưng dữ liệu.</li>
-            <li>Mô hình Decision Tree có Recall nổi bật (~69%), thể hiện khả năng học tập đáng kể cho nhiệm vụ chẩn
-                đoán bệnh tim mạch, mặc dù các chỉ số khác không cao.</li>
-        </ul>
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-6 shadow-lg hover:shadow-[#d4af37]/20 transition">
+                    <img src="images/BTL1/PCA_90.png" class="rounded-lg w-full mb-4">
+                    <p class="text-gray-300 text-base font-semibold text-center">PCA = 90%</p>
+                    <p class="text-gray-400 text-sm text-center mt-1">(17 components)</p>
+                </div>
 
-        <!-- Lưu ý quan trọng -->
-        <p class="text-gray-300 leading-relaxed mb-4">
-            <b>Lưu ý:</b> Trong y tế, Recall đặc biệt quan trọng, vì bỏ sót bệnh (False Negative) có thể gây hậu quả
-            nghiêm trọng. Do đó, kết quả Recall của Decision Tree được coi là phù hợp với mục tiêu phân tích dữ liệu
-            bệnh tim.
-        </p>
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-6 shadow-lg hover:shadow-[#d4af37]/20 transition">
+                    <img src="images/BTL1/PCA_80.png" class="rounded-lg w-full mb-4">
+                    <p class="text-gray-300 text-base font-semibold text-center">PCA = 80%</p>
+                    <p class="text-gray-400 text-sm text-center mt-1">(13 components)</p>
+                </div>
 
-        <!-- 5. Kết luận -->
-        <h3 class="text-2xl font-bold text-[#facc15] mb-4">5. Kết luận</h3>
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-6 shadow-lg hover:shadow-[#d4af37]/20 transition">
+                    <img src="images/BTL1/PCA_70.png" class="rounded-lg w-full mb-4">
+                    <p class="text-gray-300 text-base font-semibold text-center">PCA = 70%</p>
+                    <p class="text-gray-400 text-sm text-center mt-1">(10 components)</p>
+                </div>
 
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Kết quả mô hình có hiệu suất cao nhất theo từng chỉ số được tổng hợp và đánh giá trên tập test.
-        </p>
-        <!-- ===== Best models (prominent metrics) ===== -->
-        <div
-            class="bg-[#1e293b]/40 border border-[#facc15]/30 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition mt-6">
+                <div class="bg-[#0f172a] border border-[#d4af37]/20 rounded-xl p-6 shadow-lg hover:shadow-[#d4af37]/20 transition md:col-span-2 max-w-2xl mx-auto">
+                    <img src="images/BTL1/NoPCA.png" class="rounded-lg w-full mb-4">
+                    <p class="text-gray-300 text-base font-semibold text-center">No PCA</p>
+                    <p class="text-gray-400 text-sm text-center mt-1">(20 features)</p>
+                </div>
+            </div>
+                
+            <div class="p-4 bg-[#1e293b] rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold text-[#d4af37] mb-4">Đánh giá mô hình trên tập test theo PCA
+                </h4>
 
-            <h3 class="text-2xl font-bold text-[#facc15] mb-4 flex items-center gap-2">
-                <i class="fas fa-trophy"></i> Best Models (by Metric)
-            </h3>
+                <table class="table-auto w-full text-gray-200 border border-gray-500">
+                    <thead class="text-yellow-300 font-semibold border-b border-gray-500">
+                        <tr>
+                            <th class="px-2 py-1 text-center">PCA</th>
+                            <th class="px-2 py-1 text-center">Model</th>
+                            <th class="px-2 py-1 text-center">Accuracy</th>
+                            <th class="px-2 py-1 text-center">Precision</th>
+                            <th class="px-2 py-1 text-center">Recall</th>
+                            <th class="px-2 py-1 text-center">F1-score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- PCA 70% -->
+                        <tr class="border-t-4 border-[#d4af37]/50">
+                            <td rowspan="6" class="px-2 py-1 font-semibold text-[#facc15] bg-[#0f172a] text-center">70%</td>
+                            <td class="text-center">Random Forest</td>
+                            <td class="text-center" >0.7155</td>
+                            <td class="text-center">0.1993</td>
+                            <td class="text-center">0.1400</td>
+                            <td class="text-center">0.1645</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">SVM</td>
+                            <td class="text-center">0.5760</td>
+                            <td class="text-center">0.1973</td>
+                            <td class="text-center">0.3650</td>
+                            <td class="text-center">0.2561</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Logistic Regression</td>
+                            <td class="text-center">0.5120</td>
+                            <td class="text-center">0.1949</td>
+                            <td class="text-center">0.4600</td>
+                            <td class="text-center">0.2738</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">KNN</td>
+                            <td class="text-center">0.6870</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2217</u></td>
+                            <td class="text-center">0.2250</td>
+                            <td class="text-center">0.2233</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Naive Bayes</td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.8000</u></td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Decision Tree</td>
+                            <td class="text-center">0.5205</td>
+                            <td class="text-center">0.2017</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.4725</u></td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2827</u></td>
+                        </tr>
 
-            <div class="p-4 bg-[#0f172a] border border-[#facc15] rounded-xl shadow-lg relative">
+                        <!-- PCA 80% -->
+                        <tr class="border-t-4 border-[#d4af37]/50">
+                            <td rowspan="6" class="px-2 py-1 font-semibold text-[#facc15] bg-[#0f172a] text-center">80%</td>
+                            <td class="text-center">Random Forest</td>
+                            <td class="text-center">0.7470</td>
+                            <td class="text-center">0.1919</td>
+                            <td class="text-center">0.0825</td>
+                            <td class="text-center">0.1154</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">SVM</td>
+                            <td class="text-center">0.6070</td>
+                            <td class="text-center">0.2067</td>
+                            <td class="text-center">0.3400</td>
+                            <td class="text-center">0.2571</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Logistic Regression</td>
+                            <td class="text-center">0.5130</td>
+                            <td class="text-center">0.1979</td>
+                            <td class="text-center">0.4700</td>
+                            <td class="text-center">0.2785</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">KNN</td>
+                            <td class="text-center">0.6745</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2254</u></td>
+                            <td class="text-center">0.2575</td>
+                            <td class="text-center">0.2404</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Naive Bayes</td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.8000</u></td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Decision Tree</td>
+                            <td class="text-center">0.4050</td>
+                            <td class="text-center">0.2061</td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.6925</u></td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.3177</u></td>
+                        </tr>
 
-                <!-- Prominent metrics grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <!-- Accuracy -->
-                    <div
-                        class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-lg">
-                        <div class="text-sm text-yellow-300 font-semibold uppercase tracking-wide">Accuracy</div>
-                        <div class="text-lg text-gray-300 mt-1">Naive Bayes</div>
-                        <div class="text-2xl md:text-3xl font-extrabold text-[#facc15] mt-2">0.8000</div>
-                        <div class="text-xs text-gray-400 mt-1">PCA: 70%</div>
-                    </div>
+                        <!-- PCA 90% -->
+                        <tr class="border-t-4 border-[#d4af37]/50">
+                            <td rowspan="6" class="px-2 py-1 font-semibold text-[#facc15] bg-[#0f172a] text-center">90%</td>
+                            <td class="text-center">Random Forest</td>
+                            <td class="text-center">0.7490</td>
+                            <td class="text-center">0.1645</td>
+                            <td class="text-center">0.0625</td>
+                            <td class="text-center">0.0906</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">SVM</td>
+                            <td class="text-center">0.6495</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2249</u></td>
+                            <td class="text-center">0.3075</td>
+                            <td class="text-center">0.2598</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Logistic Regression</td>
+                            <td class="text-center">0.5125</td>
+                            <td class="text-center">0.1938</td>
+                            <td class="text-center">0.4550</td>
+                            <td class="text-center">0.2718</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">KNN</td>
+                            <td class="text-center">0.6500</td>
+                            <td class="text-center">0.2047</td>
+                            <td class="text-center">0.2600</td>
+                            <td class="text-center">0.2291</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Naive Bayes</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.7995</u></td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Decision Tree</td>
+                            <td class="text-center">0.4125</td>
+                            <td class="text-center">0.2080</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.6900</u></td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.3196</u></td>
+                        </tr>
 
-                    <!-- Precision -->
-                    <div
-                        class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-400/10 to-green-400/5 border border-green-400/30 rounded-lg">
-                        <div class="text-sm text-green-300 font-semibold uppercase tracking-wide">Precision</div>
-                        <div class="text-lg text-gray-300 mt-1">KNN</div>
-                        <div class="text-2xl md:text-3xl font-extrabold text-green-300 mt-2">0.2254</div>
-                        <div class="text-xs text-gray-400 mt-1">PCA: 80%</div>
-                    </div>
+                        <!-- PCA 95% -->
+                        <tr class="border-t-4 border-[#d4af37]/50">
+                            <td rowspan="6" class="px-2 py-1 font-semibold text-[#facc15] bg-[#0f172a] text-center">95%</td>
+                            <td class="text-center">Random Forest</td>
+                            <td class="text-center">0.7565</td>
+                            <td class="text-center">0.1871</td>
+                            <td class="text-center">0.0650</td>
+                            <td class="text-center">0.0965</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">SVM</td>
+                            <td class="text-center">0.6475</td>
+                            <td class="text-center">0.1894</td>
+                            <td class="text-center">0.2325</td>
+                            <td class="text-center">0.2088</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Logistic Regression</td>
+                            <td class="text-center">0.5125</td>
+                            <td class="text-center">0.1938</td>
+                            <td class="text-center">0.4550</td>
+                            <td class="text-center">0.2718</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">KNN</td>
+                            <td class="text-center">0.6425</td>
+                            <td class="text-center">0.1965</td>
+                            <td class="text-center">0.2550</td>
+                            <td class="text-center">0.2220</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Naive Bayes</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.7990</u></td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                            <td class="text-center">0.0000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Decision Tree</td>
+                            <td class="text-center">0.4125</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2080</u></td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.6900</u></td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.3196</u></td>
+                        </tr>
 
-                    <!-- Recall -->
-                    <div
-                        class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/30 rounded-lg">
-                        <div class="text-sm text-sky-300 font-semibold uppercase tracking-wide">Recall</div>
-                        <div class="text-lg text-gray-300 mt-1">Decision Tree</div>
-                        <div class="text-2xl md:text-3xl font-extrabold text-sky-300 mt-2">0.6950</div>
-                        <div class="text-xs text-gray-400 mt-1">PCA: 80%</div>
-                    </div>
+                        <!-- No PCA -->
+                        <tr class="border-t-4 border-[#d4af37]/50">
+                            <td rowspan="6" class="px-2 py-1 font-semibold text-[#facc15] bg-[#0f172a] text-center">No PCA</td>
+                            <td class="text-center">Random Forest</td>
+                            <td class="text-center">0.7950</td>
+                            <td class="text-center">0.0833</td>
+                            <td class="text-center">0.0025</td>
+                            <td class="text-center">0.0049</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">SVM</td>
+                            <td class="text-center">0.6630</td>
+                            <td class="text-center">0.1829</td>
+                            <td class="text-center">0.1975</td>
+                            <td class="text-center">0.1899</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Logistic Regression</td>
+                            <td class="text-center">0.5080</td>
+                            <td class="text-center">0.1833</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.4225</u></td>
+                            <td class="text-center">0.2557</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">KNN</td>
+                            <td class="text-center">0.6630</td>
+                            <td class="text-center">0.2146</td>
+                            <td class="text-center">0.2575</td>
+                            <td class="text-center">0.2341</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Naive Bayes</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.7995</u></td>
+                            <td class="text-center bg-gradient-to-r from-yellow-900/30 to-yellow-800/30 border border-yellow-500/50"><u class="text-[#facc15] font-bold">0.3333</u></td>
+                            <td class="text-center">0.0025</td>
+                            <td class="text-center">0.0050</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Decision Tree</td>
+                            <td class="text-center">0.5635</td>
+                            <td class="text-center">0.2033</td>
+                            <td class="text-center">0.4050</td>
+                            <td class="text-center"><u class="text-[#facc15] font-bold">0.2707</u></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Nhận xét Chi Tiết -->
+            <h4 class="text-xl font-semibold text-[#d4af37] mt-6 mb-4">Nhận xét chi Tiết</h4>
 
-                    <!-- F1-score -->
-                    <div
-                        class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/30 rounded-lg">
-                        <div class="text-sm text-purple-300 font-semibold uppercase tracking-wide">F1-score</div>
-                        <div class="text-lg text-gray-300 mt-1">Decision Tree</div>
-                        <div class="text-2xl md:text-3xl font-extrabold text-purple-300 mt-2">0.3194</div>
-                        <div class="text-xs text-gray-400 mt-1">PCA: 90%</div>
+            <div class="space-y-4">
+                <!-- Insight 1 -->
+                <div class="bg-[#1e293b]/60 border-l-4 border-[#d4af37]/50 rounded-lg p-5 shadow-md hover:shadow-[#d4af37]/10 transition">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-chart-line text-[#d4af37] text-xl mt-1"></i>
+                        <div>
+                            <h5 class="font-bold text-[#facc15] mb-2">PCA tối ưu hóa hiệu suất</h5>
+                            <p class="text-gray-300 leading-relaxed">Giảm số thành phần PCA từ 20 xuống ~10-13 components giúp các mô hình như <b>Random Forest, SVM, Logistic Regression và KNN</b> cải thiện đáng kể <b class="text-gray-200">Precision, Recall và F1-score</b>, trong khi <b class="text-gray-400">Accuracy</b> gần như không đổi.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Optional small note -->
-                <p class="text-xs text-gray-400 mt-4 text-center">Metrics reported on the test split (Stratified
-                    80/20). Values show best model, PCA level and score per metric.</p>
+                <!-- Insight 2 -->
+                <div class="bg-[#1e293b]/60 border-l-4 border-[#d4af37]/50 rounded-lg p-5 shadow-md hover:shadow-[#d4af37]/10 transition">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-circle text-[#d4af37] text-xl mt-1"></i>
+                        <div>
+                            <h5 class="font-bold text-[#facc15] mb-2">Naive Bayes: Accuracy cao nhưng không hiệu quả</h5>
+                            <p class="text-gray-300 leading-relaxed"><b>Naive Bayes</b> đạt Accuracy cao (~80%), nhưng <b class="text-gray-200">Recall và F1-score</b> lại rất thấp, cho thấy mô hình <span class="text-gray-400 font-semibold">chủ yếu dự đoán nhãn chiếu ưu thế (No)</span>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insight 3 -->
+                <div class="bg-[#1e293b]/60 border-l-4 border-[#d4af37]/50 rounded-lg p-5 shadow-md hover:shadow-[#d4af37]/10 transition">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-star text-[#d4af37] text-xl mt-1"></i>
+                        <div>
+                            <h5 class="font-bold text-[#facc15] mb-2">Decision Tree: Mô hình tối ưu cho chẩn đoán</h5>
+                            <p class="text-gray-300 leading-relaxed"><b>Decision Tree</b> có <b class="text-gray-200">Recall nổi bật (~69%)</b> với PCA=80%, thể hiện khả năng phát hiện ca bệnh hiệu quả. Trong lĩnh vực y tế, <span class="text-gray-300 font-semibold">giảm tối thiểu bỏ sót bệnh nhân là ưu tiên hàng đầu</span>.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Nhận xét -->
-        <div class="my-12"></div>
+            <!-- Lưu ý Y Tế Quan Trọng -->
+            <div class="mt-6 p-5 bg-[#1e293b]/60 border-l-4 border-[#d4af37]/50 rounded-xl shadow-md">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-heartbeat text-[#d4af37] text-2xl mt-1"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-[#facc15] mb-2">Lưu ý Quan Trọng: Recall trong Y Tế</h5>
+                        <p class="text-gray-200 leading-relaxed">
+                            Trong ứng dụng y tế, <b class="text-[#facc15]">Recall (Độ nhạy)</b> là chỉ số sống còn vì:
+                            <br>
+                            <span class="inline-block mt-2 text-gray-300">→ <b>False Negative</b> (bỏ sót bệnh) có hậu quả nghiêm trọng</span>
+                            <br>
+                            <span class="inline-block mt-1 text-gray-300">→ <b>False Positive</b> (cảnh báo sai) chỉ gây khó chịu</span>
+                            <br>
+                            <span class="inline-block mt-2 font-semibold text-gray-200">✓ Decision Tree (Recall=69.25%) là lựa chọn phù hợp nhất.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        <h4 class="text-xl font-semibold text-[#d4af37] mb-3">Nhận xét</h4>
-        <ul class="list-disc list-inside text-gray-300 mb-4">
-            <li>Naive Bayes đạt Accuracy cao nhất với PCA = 70%, nhưng Precision, Recall và F1-score đều không nổi
-                bật, phản ánh xu hướng dự đoán lệch về lớp chiếm đa số.</li>
-            <li>KNN đạt Precision cao nhất với PCA = 80%, tuy nhiên Recall và F1-score còn thấp.</li>
-            <li>Decision Tree nổi bật về Recall và F1-score, đặc biệt quan trọng trong y tế khi mục tiêu là hạn chế
-                bỏ sót ca bệnh.</li>
-        </ul>
+            <div class="my-12"></div>
 
-        <p class="text-gray-300 leading-relaxed mb-4">
-            Như vậy, <b>Decision Tree</b> được xem là mô hình phù hợp nhất cho bài toán chẩn đoán bệnh tim trong tập
-            dữ liệu này.
-        </p>
+            <!-- 5. Kết luận -->
+            <h3 class="text-2xl font-bold text-[#facc15] mb-4">5. Kết luận</h3>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Kết quả mô hình có hiệu suất cao nhất theo từng chỉ số được tổng hợp và đánh giá trên tập test.
+            </p>
+            <!-- ===== Best models (prominent metrics) ===== -->
+            <div
+                class="bg-[#1e293b]/40 border border-[#facc15]/30 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition mt-6">
+
+                <h3 class="text-2xl font-bold text-[#facc15] mb-4 flex items-center gap-2">
+                    <i class="fas fa-trophy"></i> Best Models (by Metric)
+                </h3>
+
+                <div class="p-4 bg-[#0f172a] border border-[#facc15] rounded-xl shadow-lg relative">
+
+                    <!-- Prominent metrics grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <!-- Accuracy -->
+                        <div
+                            class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-yellow-400/10 to-yellow-400/5 border border-yellow-400/30 rounded-lg">
+                            <div class="text-sm text-yellow-300 font-semibold uppercase tracking-wide">Accuracy</div>
+                            <div class="text-lg text-gray-300 mt-1">Naive Bayes</div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-[#facc15] mt-2">0.8000</div>
+                            <div class="text-xs text-gray-400 mt-1">PCA: 70%</div>
+                        </div>
+
+                        <!-- Precision -->
+                        <div
+                            class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-green-400/10 to-green-400/5 border border-green-400/30 rounded-lg">
+                            <div class="text-sm text-green-300 font-semibold uppercase tracking-wide">Precision</div>
+                            <div class="text-lg text-gray-300 mt-1">Naive Bayes</div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-green-300 mt-2">0.3333</div>
+                            <div class="text-xs text-gray-400 mt-1">no PCA</div>
+                        </div>
+
+                        <!-- Recall -->
+                        <div
+                            class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/30 rounded-lg">
+                            <div class="text-sm text-sky-300 font-semibold uppercase tracking-wide">Recall</div>
+                            <div class="text-lg text-gray-300 mt-1">Decision Tree</div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-sky-300 mt-2">0.6925</div>
+                            <div class="text-xs text-gray-400 mt-1">PCA: 80%</div>
+                        </div>
+
+                        <!-- F1-score -->
+                        <div
+                            class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-purple-400/10 to-purple-400/5 border border-purple-400/30 rounded-lg">
+                            <div class="text-sm text-purple-300 font-semibold uppercase tracking-wide">F1-score</div>
+                            <div class="text-lg text-gray-300 mt-1">Decision Tree</div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-purple-300 mt-2">0.3196</div>
+                            <div class="text-xs text-gray-400 mt-1">PCA: 90%</div>
+                        </div>
+                    </div>
+
+                    <!-- Optional small note -->
+                    <p class="text-xs text-gray-400 mt-4 text-center">Metrics reported on the test split (Stratified
+                        80/20). Values show best model, PCA level and score per metric.</p>
+                </div>
+            </div>
+
+            <!-- Nhận xét -->
+            <div class="my-12"></div>
+
+            <h4 class="text-xl font-semibold text-[#d4af37] mb-4">Nhận xét và Đánh giá</h4>
+            
+            <div class="space-y-4">
+                <!-- Naive Bayes Analysis -->
+                <div class="bg-[#1e293b]/50 border-l-4 border-orange-400/60 rounded-lg p-5 shadow-md">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-chart-pie text-orange-400 text-lg mt-1"></i>
+                        <div>
+                            <p class="text-gray-200 leading-relaxed">
+                                <span class="font-semibold text-orange-300">Naive Bayes</span> đạt <b>Accuracy cao nhất (0.80)</b> với PCA=70%, và <b>Precision cao (0.3333)</b> nhưng lại có <b>Recall=0</b>. Điều này cho thấy mô hình chủ yếu dự đoán lớp chiếu ưu thế (No), <span class="text-gray-400">bỏ sót hầu hết các trường hợp bệnh</span> — không phù hợp cho chẩn đoán y tế.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Tree Analysis -->
+                <div class="bg-[#1e293b]/50 border-l-4 border-green-400/60 rounded-lg p-5 shadow-md">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-star text-green-400 text-lg mt-1"></i>
+                        <div>
+                            <p class="text-gray-200 leading-relaxed">
+                                <span class="font-semibold text-green-300">Decision Tree</span> nổi bật với <b>Recall=0.6925</b> (PCA=80%), phát hiện được hơn 69% ca bệnh. Kết hợp <b>F1-score=0.3196</b>, đây là mô hình đạt cân bằng tốt nhất giữa phát hiện bệnh và độ tin cậy dự đoán.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-5 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border-l-4 border-green-400 rounded-lg shadow-md">
+                <h5 class="font-bold text-green-300 mb-2 flex items-center gap-2">
+                    <i class="fas fa-check-circle"></i> Kết luận
+                </h5>
+                <p class="text-gray-200 leading-relaxed">
+                    <b>Decision Tree</b> là mô hình tối ưu nhất cho bài toán này. Với <b>Recall cao</b>, nó giúp phát hiện hiệu quả ca bệnh tim mạch, giảm tối thiểu rủi ro bỏ sót bệnh nhân — yếu tố sống còn trong lĩnh vực chẩn đoán y tế.
+                </p>
+            </div>
 
 
     </div>
