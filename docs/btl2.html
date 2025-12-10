@@ -738,7 +738,6 @@
                     </ul>
                 </div>
             </div>
-
             <div
                 class="bg-gradient-to-r from-emerald-900/20 to-teal-900/20 rounded-xl p-5 mb-6 border-l-4 border-[#4bc0c0] shadow-lg">
                 <div class="flex items-start gap-3">
@@ -764,9 +763,124 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Phát hiện và xử lý trùng lặp -->
+            <div
+                class="bg-gradient-to-r from-orange-900/20 to-red-900/20 rounded-xl p-5 mb-6 border-l-4 border-orange-400 shadow-lg">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-exclamation-circle text-orange-400 text-2xl mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-orange-300 mb-2">Phát hiện Câu hỏi Trùng lặp</h5>
+                        <p class="text-gray-200 leading-relaxed font-medium">
+                            Tổng số câu hỏi trùng lặp: <span
+                                class="inline-block bg-orange-400/20 text-orange-300 px-3 py-1 rounded-full mx-1 font-semibold">1,577</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-center mb-6">
+                <div class="max-w-5xl w-full grid grid-cols-1 gap-6">
+                    <div class="bg-[#0f172a] border border-[#d4af37]/30 rounded-xl p-6 shadow-lg overflow-x-auto">
+                        <h5 class="text-lg font-bold text-[#facc15] mb-4">Top 5 câu hỏi trùng lặp nhiều nhất</h5>
+                        <table class="w-full text-gray-100 text-sm leading-relaxed">
+                            <thead class="bg-[#1e293b] text-[#facc15] font-bold border-b border-gray-600">
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Nội dung câu hỏi</th>
+                                    <th class="py-3 px-4 text-center">Số lần lặp</th>
+                                    <th class="py-3 px-4 text-left">Các môn học</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-700">
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-200">Match the column.</td>
+                                    <td class="py-3 px-4 text-center font-semibold text-[#facc15]">12</td>
+                                    <td class="py-3 px-4 text-gray-300">Chemistry</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-200">Match the following</td>
+                                    <td class="py-3 px-4 text-center font-semibold text-[#facc15]">9</td>
+                                    <td class="py-3 px-4 text-gray-300">Biology, Chemistry, Maths, Physics</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-200">Match the column</td>
+                                    <td class="py-3 px-4 text-center font-semibold text-[#facc15]">7</td>
+                                    <td class="py-3 px-4 text-gray-300">Chemistry, Maths, Physics</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-200">\( \frac{k}{k} \)</td>
+                                    <td class="py-3 px-4 text-center font-semibold text-[#facc15]">7</td>
+                                    <td class="py-3 px-4 text-gray-300">Physics</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium text-gray-200">8\n8\n8\n8</td>
+                                    <td class="py-3 px-4 text-center font-semibold text-[#facc15]">7</td>
+                                    <td class="py-3 px-4 text-gray-300">Chemistry</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-emerald-900/20 to-teal-900/20 rounded-xl p-5 mb-8 border-l-4 border-[#4bc0c0] shadow-lg">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-trash text-[#4bc0c0] text-2xl mt-1 flex-shrink-0"></i>
+                    <div>
+                        <h5 class="text-lg font-bold text-[#4bc0c0] mb-2">Hành động Xử lý</h5>
+                        <p class="text-gray-200 leading-relaxed font-medium">
+                            Các câu hỏi trùng lặp này không mang giá trị thông tin thực sự (ví dụ: "Match the column",
+                            "Match the following", "\( \frac{k}{k} \)", "8\n8\n8\n8"), nên chúng tôi <b
+                                class="text-[#4bc0c0]">loại bỏ tất cả các bản sao trùng lặp</b> trong bước tiền xử lý để
+                            đảm bảo chất lượng dữ liệu và tránh bias trong quá trình huấn luyện mô hình.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <!-- 2. Tiền xử lý dữ liệu -->
             <div class="mb-12">
                 <h3 class="text-2xl font-bold text-[#facc15] mb-4">2. Tiền xử lý dữ liệu</h3>
+
+                <div class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-xl p-6 mb-6 border-l-4 border-[#facc15] shadow-lg">
+                    <h5 class="text-lg font-bold text-[#facc15] mb-4 flex items-center gap-2">
+                        <i class="fas fa-filter text-[#d4af37]"></i> Loại bỏ Outliers và Duplicates
+                    </h5>
+                    <p class="text-gray-200 leading-relaxed font-medium mb-4">
+                        Sau khi phân tích dữ liệu, chúng tôi thực hiện các bước làm sạch dữ liệu:
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Remove Outliers -->
+                        <div class="bg-[#0f172a]/60 border border-orange-400/30 rounded-lg p-4 space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-exclamation-triangle text-orange-400 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-300 font-semibold">Loại bỏ Outliers</span>
+                                    <p class="text-gray-400 text-sm mt-1">Câu hỏi có số từ vượt quá ngưỡng (> Q3 + 1.5×IQR)</p>
+                                    <div class="text-[#facc15] font-bold text-lg mt-2">2,533 dòng xoá</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Remove Duplicates -->
+                        <div class="bg-[#0f172a]/60 border border-red-400/30 rounded-lg p-4 space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-copy text-red-400 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <span class="text-gray-300 font-semibold">Loại bỏ Duplicates</span>
+                                    <p class="text-gray-400 text-sm mt-1">Câu hỏi trùng lặp hoàn toàn (bản sao lại)</p>
+                                    <div class="text-[#facc15] font-bold text-lg mt-2">1,577 dòng xoá</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-[#1e293b] rounded-lg border border-[#d4af37]/40">
+                        <p class="text-gray-200 text-sm"><span class="text-[#facc15] font-bold">Kết quả:</span> Dữ liệu từ 122,519 → <span class="text-[#d4af37] font-bold">118,409 mẫu</span> (loại bỏ 4,110 dòng)</p>
+                    </div>
+                </div>
+
                 <div
                     class="bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-xl p-6 mb-6 border-l-4 border-[#facc15] shadow-lg">
                     <h5 class="text-lg font-bold text-[#facc15] mb-4 flex items-center gap-2">
@@ -1302,22 +1416,26 @@
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9205
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    2</span>
                             </td>
                         </tr>
                         <tr>
@@ -1453,15 +1571,20 @@
                         </tr>
                         <!-- LSTM -->
                         <tr class="bg-[#1e293b]">
-                            <td colspan="2" class="border border-gray-600 px-3 py-1 font-bold text-[#60a5fa]"><i class="fa-solid fa-brain mr-2"></i>LSTM</td>
+                            <td colspan="2" class="border border-gray-600 px-3 py-1 font-bold text-[#60a5fa]"><i
+                                    class="fa-solid fa-brain mr-2"></i>LSTM</td>
                             <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9235 <span
-                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    1</span></td>
                             <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9245 <span
-                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    1</span></td>
                             <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9235 <span
-                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    1</span></td>
                             <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9238 <span
-                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top
+                                    1</span></td>
                         </tr>
 
                     </tbody>
@@ -1516,7 +1639,7 @@
                                 <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
                         </div>
-                        
+
                         <p class="text-xs text-gray-400 mt-4 text-center">Metrics reported on the test split (Stratified
                             80/20)</p>
                     </div>
@@ -1584,18 +1707,24 @@
                             80/20)</p>
                     </div>
                 </div>
-                <div class="mt-8 mb-12 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-6 border-l-4 border-[#facc15] shadow-lg">
+                <div
+                    class="mt-8 mb-12 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-6 border-l-4 border-[#facc15] shadow-lg">
                     <h4 class="text-lg font-bold text-[#facc15] mb-4 flex items-center gap-2">
-                        <i class="fas fa-chart-bar text-[#d4af37]"></i> Nhận xét So sánh Deep Learning vs Machine Learning
+                        <i class="fas fa-chart-bar text-[#d4af37]"></i> Nhận xét So sánh Deep Learning vs Machine
+                        Learning
                     </h4>
                     <div class="space-y-3 text-gray-200">
                         <div class="flex items-start gap-3">
                             <span class="text-[#facc15] font-bold flex-shrink-0">✓</span>
-                            <p><b>LSTM (Deep Learning)</b> đạt <b class="text-[#facc15]">Accuracy 0.9235</b>, vượt hơn BoW + Logistic Regression (0.9197), cho thấy mô hình học sâu có khả năng nắm bắt các mối quan hệ phức tạp trong dữ liệu văn bản tốt hơn.</p>
+                            <p><b>LSTM (Deep Learning)</b> đạt <b class="text-[#facc15]">Accuracy 0.9235</b>, vượt hơn
+                                BoW + Logistic Regression (0.9197), cho thấy mô hình học sâu có khả năng nắm bắt các mối
+                                quan hệ phức tạp trong dữ liệu văn bản tốt hơn.</p>
                         </div>
                         <div class="flex items-start gap-3">
                             <span class="text-[#facc15] font-bold flex-shrink-0">✓</span>
-                            <p><b>BoW + Logistic Regression</b> vẫn là lựa chọn <b class="text-[#facc15]">tối ưu về hiệu năng và tốc độ</b>, với độ chính xác gần như ngang bằng LSTM nhưng huấn luyện nhanh hơn rất nhiều.</p>
+                            <p><b>BoW + Logistic Regression</b> vẫn là lựa chọn <b class="text-[#facc15]">tối ưu về hiệu
+                                    năng và tốc độ</b>, với độ chính xác gần như ngang bằng LSTM nhưng huấn luyện nhanh
+                                hơn rất nhiều.</p>
                         </div>
                     </div>
                 </div>
@@ -1604,11 +1733,11 @@
         </div>
 
     </div>
-        <!-- Footer -->
-        <footer class="mt-12 mb-6 text-center text-gray-400">
-            <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
-                    Learning Project</span></p>
-        </footer>
+    <!-- Footer -->
+    <footer class="mt-12 mb-6 text-center text-gray-400">
+        <p>© 2025 <span class="font-bold text-[#d4af37]">Team DNA05</span> - <span class="text-gray-200">Machine
+                Learning Project</span></p>
+    </footer>
 
 </body>
 
