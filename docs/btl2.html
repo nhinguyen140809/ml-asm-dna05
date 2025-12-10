@@ -1302,22 +1302,22 @@
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9205
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
                             </td>
                             <td class="border border-gray-600 px-3 py-1 text-[#facc15] font-semibold">
                                 0.9197
                                 <span
-                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Best</span>
+                                    class="ml-2 inline-block bg-[#d4af37] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 2</span>
                             </td>
                         </tr>
                         <tr>
@@ -1451,6 +1451,19 @@
                             <td class="border border-gray-600 px-3 py-1">0.8766</td>
                             <td class="border border-gray-600 px-3 py-1">0.8762</td>
                         </tr>
+                        <!-- LSTM -->
+                        <tr class="bg-[#1e293b]">
+                            <td colspan="2" class="border border-gray-600 px-3 py-1 font-bold text-[#60a5fa]"><i class="fa-solid fa-brain mr-2"></i>LSTM</td>
+                            <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9235 <span
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                            <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9245 <span
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                            <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9235 <span
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                            <td class="border border-gray-600 px-3 py-1 text-[#60a5fa] font-semibold">0.9238 <span
+                                    class="ml-2 inline-block bg-[#60a5fa] text-black px-2 py-0.5 rounded-full text-xs font-semibold">Top 1</span></td>
+                        </tr>
+
                     </tbody>
                 </table>
 
@@ -1463,7 +1476,7 @@
                     <div class="p-4 bg-[#0f172a] border border-[#d4af37] rounded-xl shadow-lg relative">
                         <div
                             class="absolute -top-3 -right-3 bg-[#d4af37] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
-                            <i class="fa-solid fa-crown"></i> Best
+                            <i class="fa-solid fa-crown"></i> Top 2
                         </div>
 
                         <!-- Prominent metrics grid (BoW theme) -->
@@ -1483,7 +1496,7 @@
                                 <div class="text-sm text-green-300 font-semibold uppercase tracking-wide">Precision
                                 </div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-green-300 mt-2">0.9205</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
 
                             <!-- Recall -->
@@ -1491,7 +1504,7 @@
                                 class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/30 rounded-lg">
                                 <div class="text-sm text-sky-300 font-semibold uppercase tracking-wide">Recall</div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-sky-300 mt-2">0.9197</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
 
                             <!-- F1-score -->
@@ -1500,10 +1513,10 @@
                                 <div class="text-sm text-purple-300 font-semibold uppercase tracking-wide">F1-score
                                 </div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-purple-300 mt-2">0.9197</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
                         </div>
-
+                        
                         <p class="text-xs text-gray-400 mt-4 text-center">Metrics reported on the test split (Stratified
                             80/20)</p>
                     </div>
@@ -1516,15 +1529,15 @@
 
                 <!-- ===== LSTM Model Performance (prominent metrics) ===== -->
                 <div
-                    class="bg-[#1e293b]/40 border border-[#facc15]/30 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#facc15] transition mt-6">
+                    class="bg-[#1e293b]/40 border border-[#60a5fa]/30 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:shadow-[0_0_25px_#60a5fa] transition mt-6">
 
-                    <h3 class="text-2xl font-bold text-[#facc15] mb-4 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-[#60a5fa] mb-4 flex items-center gap-2">
                         <i class="fa-solid fa-brain"></i> LSTM Model
                     </h3>
 
-                    <div class="p-4 bg-[#0f172a] border border-[#facc15] rounded-xl shadow-lg relative">
+                    <div class="p-4 bg-[#0f172a] border border-[#60a5fa] rounded-xl shadow-lg relative">
                         <div
-                            class="absolute -top-3 -right-3 bg-[#facc15] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                            class="absolute -top-3 -right-3 bg-[#60a5fa] text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
                             <i class="fa-solid fa-crown"></i> Best
                         </div>
 
@@ -1545,7 +1558,7 @@
                                 <div class="text-sm text-green-300 font-semibold uppercase tracking-wide">Precision
                                 </div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-green-300 mt-2">0.9245</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
 
                             <!-- Recall -->
@@ -1553,7 +1566,7 @@
                                 class="flex flex-col items-center justify-center p-4 bg-gradient-to-br from-blue-400/10 to-blue-400/5 border border-blue-400/30 rounded-lg">
                                 <div class="text-sm text-sky-300 font-semibold uppercase tracking-wide">Recall</div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-sky-300 mt-2">0.9235</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
 
                             <!-- F1-score -->
@@ -1562,7 +1575,7 @@
                                 <div class="text-sm text-purple-300 font-semibold uppercase tracking-wide">F1-score
                                 </div>
                                 <div class="text-3xl md:text-4xl font-extrabold text-purple-300 mt-2">0.9238</div>
-                                <div class="text-xs text-gray-400 mt-1">macro</div>
+                                <div class="text-xs text-gray-400 mt-1">weighted</div>
                             </div>
                         </div>
 
